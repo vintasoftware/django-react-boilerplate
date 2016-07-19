@@ -1,0 +1,37 @@
+*.pyc
+db.sqlite3
+.DS_Store
+.env
+env
+*/settings/local.py
+staticfiles/*
+mediafiles/*
+
+# pycharm
+.idea
+
+# data
+*.dump
+
+# npm
+node_modules/
+npm-debug.log
+
+#Folders
+.DS_Store
+
+# Webpack
+assets/bundles/*
+webpack-stats.json
+
+# Sass
+.sass-cache
+*.map
+
+# Css
+*.css
+
+# General
+env/
+output/
+cache/

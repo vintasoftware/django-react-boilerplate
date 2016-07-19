@@ -1,0 +1,26 @@
+
+from .base import *  # noqa
+
+
+DEBUG = True
+
+HOST = 'http://localhost:8000'
+
+SECRET_KEY = 'secret'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': base_dir_join('db.sqlite3'),
+    }
+}
+
+# Fix My Django
+INSTALLED_APPS += ('fixmydjango',)
+FIX_MY_DJANGO_ADMIN_MODE = True
+
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = 'mediafiles'
+MEDIA_URL = '/media/'

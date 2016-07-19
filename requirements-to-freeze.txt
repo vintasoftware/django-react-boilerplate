@@ -1,0 +1,7 @@
+# see http://www.kennethreitz.org/essays/a-better-pip-workflow
+Django
+fixmydjango
+django-webpack-loader
+django-log-request-id
+python-decouple<=4.0
+gunicorn

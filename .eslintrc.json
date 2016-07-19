@@ -1,0 +1,6 @@
+{
+    "extends": "airbnb",
+    "rules": {
+      "jsx-a11y/": 0
+    }
+}
