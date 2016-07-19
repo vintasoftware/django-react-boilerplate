@@ -91,3 +91,5 @@ LOGGING = {
         },
     }
 }
+
+WEBPACK_LOADER['DEFAULT']['CACHE'] = False
