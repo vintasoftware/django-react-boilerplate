@@ -24,3 +24,5 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = 'mediafiles'
 MEDIA_URL = '/media/'
+
+AUTH_PASSWORD_VALIDATORS = []  # allow easy passwords only on local
