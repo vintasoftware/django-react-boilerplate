@@ -3,5 +3,6 @@ Django
 fixmydjango
 django-webpack-loader
 django-log-request-id
+django-model-utils
 python-decouple<=4.0
 gunicorn
