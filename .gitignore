@@ -4,8 +4,8 @@ db.sqlite3
 .env
 env
 */settings/local.py
-staticfiles/*
-mediafiles/*
+/staticfiles/*
+/mediafiles/*
 
 # pycharm
 .idea
@@ -21,7 +21,7 @@ npm-debug.log
 .DS_Store
 
 # Webpack
-assets/bundles/*
+/assets/bundles/*
 webpack-stats.json
 
 # Sass
@@ -32,6 +32,6 @@ webpack-stats.json
 *.css
 
 # General
-env/
-output/
-cache/
+/env/
+/output/
+/cache/
