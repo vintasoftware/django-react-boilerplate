@@ -20,36 +20,44 @@ module.exports = {
     filename: '[name]-[hash].js',
   },
   module: {
-    loaders: [{
-      test: /\.css$/,
-      loaders: [
-        'style',
-        'css',
-        'postcss',
-      ],
-    },
-    {
-      test: /\.scss$/,
-      loaders: [
-        'style',
-        'css',
-        'postcss',
-        'sass',
-      ],
-    },
-    {
-      test: /bootstrap\/dist\/js\/umd\//,
-      loader: 'imports?jQuery=jquery'
-    },
-    {
-      test: /\.jsx?$/,
-      exclude: [node_modules_dir],
-      loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
-    },
-    {
-      test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-      loader: 'url-loader?limit=100000'
-    }]
+    loaders: [
+      {
+        test: /\.css$/,
+        loaders: [
+          'style',
+          'css',
+          'postcss',
+        ],
+      },
+      {
+        test: /\.scss$/,
+        loaders: [
+          'style',
+          'css',
+          'postcss',
+          'sass',
+        ],
+      },
+      {
+        test: /bootstrap\/dist\/js\/umd\//,
+        loader: 'imports?jQuery=jquery'
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: [node_modules_dir],
+        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=100000'
+      },
+      {
+        test: /\.(jpg|png)?$/,
+        loaders: [
+          'file?name=i-[hash].[ext]'
+        ]
+      }
+    ]
   },
   postcss: [autoprefixer],
   plugins: [
