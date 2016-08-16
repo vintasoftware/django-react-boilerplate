@@ -38,7 +38,8 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-bundle-tracker": "0.0.93",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "webpack-spritesmith": "^0.2.6"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",

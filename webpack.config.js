@@ -5,6 +5,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
 var autoprefixer = require('autoprefixer');
+var SpritesmithPlugin = require('webpack-spritesmith');
 
 module.exports = {
   context: __dirname,
@@ -63,6 +64,17 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(), // don't reload if there is an error
+    new SpritesmithPlugin({
+        src: {
+          cwd: path.resolve(__dirname, 'assets/images/'),
+          glob: '*.png'
+        },
+        target: {
+          image: path.resolve(__dirname, 'assets/images/spritesmith-generated/sprite.png'),
+          css: path.resolve(__dirname, 'assets/sass/vendor/spritesmith.scss')
+        },
+        retina: '@2x'
+    }),
     new ExtractTextPlugin('bundle.css',{allChunks: true}),
     new BundleTracker({
       filename: './webpack-stats.json'
