@@ -1,10 +1,11 @@
 // Main Style
 
+// Vendor
+// @import "vendor/spritesmith";
+
 // General
 @import "variables";
-@import "helpers/functions";
-@import "helpers/helpers";
-@import "helpers/mixins";
-@import "helpers/placeholders";
-@import "helpers/typography";
+@import "helpers/all";
 @import "global";
+@import "components/all";
+@import "pages/all";
