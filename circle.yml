@@ -1,0 +1,17 @@
+machine:  # remeber to update those!
+  python:
+    version: 3.5.2
+  node:
+    version: 5.11.1
+
+test:
+  override:
+    - npm install
+    - npm run build
+    - flake8
+    - >
+        DJANGO_SETTINGS_MODULE={{project_name}}.settings.local
+            python manage.py has_missing_migrations --ignore authtools;
+    - coverage run manage.py test
+  post:
+    - coverage html -d $CIRCLE_ARTIFACTS

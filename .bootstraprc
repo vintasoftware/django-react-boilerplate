@@ -20,7 +20,6 @@ styleLoaders:
 # It depends on value of NODE_ENV environment variable
 # This param can also be set in webpack config:
 #   entry: 'bootstrap-loader/extractStyles'
-extractStyles: false 
 # env:
 #   development:
 #     extractStyles: false

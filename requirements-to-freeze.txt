@@ -1,8 +1,26 @@
 # see http://www.kennethreitz.org/essays/a-better-pip-workflow
+
+# app
 Django
-fixmydjango
-django-webpack-loader
-django-log-request-id
+celery[redis]
 django-model-utils
+django-webpack-loader
+django.js-vinta
 python-decouple<=4.0
+psycopg2
+
+# heroku
+brotlipy
+django-log-request-id
+dj-database-url
 gunicorn
+opbeat
+whitenoise
+
+# local
+coverage
+django-naomi
+fixmydjango
+flake8
+ipython
+model-mommy

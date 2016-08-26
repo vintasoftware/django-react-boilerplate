@@ -1,4 +1,6 @@
 {% load render_bundle from webpack_loader %}
+{% load js %}
+
 <!doctype html>
 <html class="no-js" lang="en">
   <head>
@@ -13,9 +15,11 @@
   </head>
 
   <body>
-
     <!-- Body Content -->
     {% block body %}{% endblock %}
+
+    <!-- django.js -->
+    {% django_js jquery=false csrf=false %}
 
     <!-- Webpack rendered Javascript -->
     {% render_bundle 'main' 'js' %}
@@ -30,6 +34,5 @@
     })(window,document,'script','dataLayer','GTM-XXXXX');</script>
     <!-- End Google Tag Manager -->
     {% block scripts %}{% endblock %}
-
   </body>
 </html>

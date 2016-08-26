@@ -1,11 +1,14 @@
 *.pyc
-db.sqlite3
+/db.sqlite3
 .DS_Store
 .env
-env
 */settings/local.py
 /staticfiles/*
 /mediafiles/*
+__pycache__/
+
+# coverage result
+.coverage
 
 # pycharm
 .idea
@@ -22,16 +25,14 @@ npm-debug.log
 
 # Webpack
 /assets/bundles/*
-webpack-stats.json
+/webpack-stats.json
 
 # Sass
 .sass-cache
 *.map
 
-# Css
-*.css
-
 # General
+/venv/
 /env/
 /output/
 /cache/

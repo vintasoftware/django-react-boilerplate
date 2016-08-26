@@ -1,11 +1,33 @@
-# Django and React Boilerplate
+# Vinta Boilerplate
 
-## Project bootsrap
+## About this boilerplate
+
+A Django 1.10 project boilerplate/template with lots of state of the art libraries and tools like:
+- React, for interactive UI development
+- django.js, for generating URLs on JS
+- Bootstrap 4, for responsive styling
+- Webpack, for bundling static assets
+- Celery, for background worker tasks
+- WhiteNoise with brotlipy, for efficient static files serving
+
+For continuous integration, a [CircleCI](https://circleci.com/) configuration `circle.yml` is included.
+
+Also, includes a Heroku `app.json` and a working Django `production.py` settings, enabling easy deployments with ['Deploy to Heroku' button](https://devcenter.heroku.com/articles/heroku-button). Those Heroku plugins are included in `app.json`:
+- PostgreSQL, for DB
+- Redis, for Celery
+- Sendgrid, for e-mail sending
+- Papertrail, for logs
+- Opbeat, for performance monitoring
+
+This should be enough as a starting point for any modern web project.
+
+## Project bootstrap
 
 - [ ] Start your project using: 
 ```
-django-admin startproject theprojectname --template=https://github.com/vintasoftware/boilerplate/archive/master.zip
+django-admin startproject theprojectname --extension py,yml --name app.json --name Procfile --template=https://github.com/vintasoftware/boilerplate/archive/master.zip
 ```
+- [ ] Above: don't forget the `--extension` and `--name` params!
 - [ ] `pip install -r requirements-to-freeze.txt`
 - [ ] `pip freeze > requirements.txt`
 - [ ] `npm update --save`
@@ -13,9 +35,12 @@ django-admin startproject theprojectname --template=https://github.com/vintasoft
 - [ ] Change the first line of README to the name of the project
 - [ ] Create a Google Group to receive 500 errors and forward to your email. It should be a private group, but remember to change settings to allow posting from any email
 - [ ] Add the Google Group email address to the `ADMINS` settings variable
-- [ ] Create a [Sendgrid](https://sendgrid.com/) account and remember to configure your production environment so you can receive the error emails
 
 After completing ALL of the above, remove this `Project bootstrap` section from the project README.
+
+### How to test `django-admin startproject`
+
+If you made changes to this boilerplate and want to test them, commit your changes and use `git archive -o boilerplate.zip HEAD` to create the template zip.
 
 ## Developing
 
@@ -39,7 +64,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 ### Adding new pypi libs
 
-Add high level dependecies to `requirements-to-freeze.txt` and `pip freeze > requirements.txt`. [A Better Pip Workflow](http://www.kennethreitz.org/essays/a-better-pip-workflow)
+Add high level dependecies to `requirements-to-freeze.txt` and `pip freeze > requirements.txt`. This is [A Better Pip Workflow](http://www.kennethreitz.org/essays/a-better-pip-workflow).
 
 ## Checking lint
 
