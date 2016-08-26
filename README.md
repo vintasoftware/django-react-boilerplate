@@ -42,6 +42,14 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 If you made changes to this boilerplate and want to test them, commit your changes and use `git archive -o boilerplate.zip HEAD` to create the template zip.
 
+### How to test Heroku deployment
+
+Push your changes to a branch and visit `https://dashboard.heroku.com/new?template=https://github.com/fill-org-or-user/fill-project-repo-name/tree/fill-branch` (replace all `fill`).
+
+### How to add a 'Deploy to Heroku' button
+
+Read [this](https://devcenter.heroku.com/articles/heroku-button#adding-the-heroku-button).
+
 ## Developing
 
 ### Quickstart
