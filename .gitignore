@@ -38,5 +38,5 @@ npm-debug.log
 /cache/
 
 # Spritesmith
-/spritesmith-generated/
-/spritesmith.scss
+spritesmith-generated/
+spritesmith.scss
