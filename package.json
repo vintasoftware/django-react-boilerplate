@@ -1,8 +1,8 @@
 {
-  "name": "frontend-boilerplate",
-  "version": "1.0.0",
+  "name": "{{project_name}}-frontend",
+  "version": "0.0.1",
   "private": true,
-  "description": "A simple boilerplate to start the frontend of projects using webpack and Bootstrap 4",
+  "description": "{{project_name}} frontend assets.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,6 @@
     "build": "NODE_ENV=production webpack -p --progress --colors --config webpack.prod.config.js",
     "lint": "eslint assets"
   },
-  "license": "MIT",
   "dependencies": {
     "autoprefixer": "^6.3.6",
     "babel-cli": "^6.9.0",
