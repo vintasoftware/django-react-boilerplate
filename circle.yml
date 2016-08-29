@@ -12,6 +12,14 @@ test:
     - >
         DJANGO_SETTINGS_MODULE={{project_name}}.settings.local
             python manage.py has_missing_migrations --ignore authtools;
+    - >
+        SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')
+        DATABASE_URL='sqlite:///'
+        ALLOWED_HOSTS='.example.org'
+        SENDGRID_USERNAME='test'
+        SENDGRID_PASSWORD='test'
+        REDIS_URL='redis://'
+            python manage.py check --deploy --settings={{project_name}}.settings.production
     - coverage run manage.py test
   post:
     - coverage html -d $CIRCLE_ARTIFACTS
