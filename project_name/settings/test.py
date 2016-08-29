@@ -1,7 +1,7 @@
-
 from .base import *  # noqa
 
-SECRET_KEY = 'a'
+
+SECRET_KEY = 'test'
 
 DATABASES = {
     'default': {
@@ -15,3 +15,9 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = 'mediafiles'
 MEDIA_URL = '/media/'
+
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+# Celery
+CELERY_ALWAYS_EAGER = True

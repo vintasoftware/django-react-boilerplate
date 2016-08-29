@@ -1,0 +1,67 @@
+{
+  "name": "{{project_name}}",
+  "description": "{{project_name|title}} Heroku app.",
+  "scripts": {
+    "postdeploy": "python manage.py migrate"
+  },
+  "env": {
+    "ALLOWED_HOSTS": {
+      "description": "Django ALLOWED_HOSTS setting, e.g.: .appname.herokuapp.com"
+    },
+    "DISABLE_COLLECTSTATIC": {
+      "description": "Heroku setting to disable Django collectstatic (it is run by bin/post_compile)",
+      "value": "1"
+    },
+    "DJANGO_SETTINGS_MODULE": {
+      "description": "Django settings Python import path",
+      "value": "{{project_name}}.settings.production"
+    },
+    "SECRET_KEY": {
+      "description": "Django SECRET_KEY setting",
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev",
+      "options": {
+        "version": "9.5"
+      },
+      "as": "DATABASE"
+    },
+    {
+      "plan": "heroku-redis:hobby-dev",
+      "options": {
+        "version": "3.2"
+      },
+      "as": "REDIS"
+    },
+    {
+      "plan": "sendgrid:starter"
+    },
+    {
+      "plan": "papertrail:choklad"
+    },
+    {
+      "plan": "opbeat:test"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}

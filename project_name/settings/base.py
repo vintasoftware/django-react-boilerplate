@@ -1,3 +1,4 @@
+# https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 from decouple import config  # noqa
@@ -10,10 +11,12 @@ def base_dir_join(*args):
     return os.path.join(BASE_DIR, *args)
 
 
-DEBUG = False
+SITE_ID = 1
+
+DEBUG = True
 
 ADMINS = (
-    ('Admin', '{{project_name}}@vinta.com.br'),)
+    ('Admin', 'admin@vinta.com.br'),)
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -27,8 +30,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'djangojs',
     'webpack_loader',
 
+    'common',
     'users',
 ]
 
@@ -95,10 +100,15 @@ STATICFILES_DIRS = (
 # Webpack
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'CACHE': True,
+        'CACHE': False,  # on DEBUG should be False
         'BUNDLE_DIR_NAME': 'bundles/',  # must end with slash
         'STATS_FILE': base_dir_join('webpack-stats.json'),
         'POLL_INTERVAL': 0.1,
         'IGNORE': ['.+\.hot-update.js', '.+\.map']
     }
 }
+
+# Celery
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

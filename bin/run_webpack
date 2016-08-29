@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+if [ ! -f webpack-stats.json ]; then
+    touch webpack-stats.json
+    chmod 777 webpack-stats.json
+    echo "webpack-stats.json created"
+fi
+npm run build

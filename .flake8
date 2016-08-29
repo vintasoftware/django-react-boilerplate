@@ -1,3 +1,4 @@
 [flake8]
 max-line-length = 100
-exclude = node_modules/*,*/migrations/*,*/tests/*,./venv/*,./env/*
+ignore = D100,D101,D102,D103,D105,D205,D400
+exclude = node_modules/*,*/migrations/*,*/settings/*,./venv/*,./env/*

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+echo "----->Post-compile hook"
+
+if [ -f bin/run_collectstatic ]; then
+    echo "-----> Running run_collectstatic"
+    chmod +x bin/run_collectstatic
+    bin/run_collectstatic
+fi
+
+echo "-----> Post-compile done"
