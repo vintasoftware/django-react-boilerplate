@@ -9,3 +9,5 @@ const HomePageReactTitle = ({ title }) => {
 HomePageReactTitle.propTypes = {
   title: PropTypes.string.isRequired,
 };
+
+export default HomePageReactTitle;
