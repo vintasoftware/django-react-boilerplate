@@ -18,6 +18,7 @@
     <!-- Body Content -->
     {% block body %}{% endblock %}
 
+    {% render_bundle 'main' 'js' 'JQUERY' %}
     <!-- django.js -->
     {% django_js jquery=false csrf=false %}
 
