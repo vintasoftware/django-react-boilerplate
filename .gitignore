@@ -26,6 +26,7 @@ npm-debug.log
 # Webpack
 /assets/bundles/*
 /webpack-stats.json
+/jquery-webpack-stats.json
 
 # Sass
 .sass-cache

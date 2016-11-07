@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+if [ ! -f jquery-webpack-stats.json ]; then
+    touch jquery-webpack-stats.json
+    chmod 777 jquery-webpack-stats.json
+    echo "jquery-webpack-stats.json created"
+fi
+
 if [ ! -f webpack-stats.json ]; then
     touch webpack-stats.json
     chmod 777 webpack-stats.json

@@ -1,6 +1,38 @@
 var autoprefixer = require('autoprefixer');
+var path = require('path');
+var nodeModulesDir = path.resolve(__dirname, 'node_modules');
+var BundleTracker = require('webpack-bundle-tracker');
 
-module.exports = {
+module.exports = [{
+  entry: [
+    './assets/js/jquery-index.js',
+  ],
+  output: {
+    path: path.resolve('./assets/bundles/'),
+    filename: 'bundle-jquery.js',
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: [nodeModulesDir],
+        loader: 'babel?presets[]=es2015',
+      },
+      {
+        test: /jquery\/dist\/jquery\.js$/,
+        loader: 'expose?$',
+      },
+      {
+        test: /jquery\/dist\/jquery\.js$/,
+        loader: 'expose?jQuery',
+      }],
+  },
+  plugins: [
+    new BundleTracker({
+      filename: './jquery-webpack-stats.json',
+    }),
+  ],
+}, {
   context: __dirname,
   entry: [
     // defined in local or prod
@@ -28,20 +60,16 @@ module.exports = {
         ],
       },
       {
-        test: /bootstrap\/dist\/js\/umd\//,
-        loader: 'imports?jQuery=jquery'
-      },
-      {
         test: /\.(woff(2)?|eot|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=100000'
+        loader: 'url-loader?limit=100000',
       },
       {
         test: /\.(jpg|png)?$/,
         loaders: [
-          'file?name=i-[hash].[ext]'
-        ]
-      }
-    ]
+          'file?name=i-[hash].[ext]',
+        ],
+      },
+    ],
   },
   postcss: [autoprefixer],
   plugins: [
@@ -49,6 +77,6 @@ module.exports = {
   ],
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
-    extensions: ['', '.js', '.jsx']
-  }
-};
+    extensions: ['', '.js', '.jsx'],
+  },
+}];

@@ -4,26 +4,26 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var SpritesmithPlugin = require('webpack-spritesmith');
 var BundleTracker = require('webpack-bundle-tracker');
 var path = require('path');
-var node_modules_dir = path.resolve(__dirname, 'node_modules');
+var nodeModulesDir = path.resolve(__dirname, 'node_modules');
 
-baseConfig.entry = [
+baseConfig[1].entry = [
   'bootstrap-loader/extractStyles',
   './assets/js/index.js',
 ]
 
-baseConfig.output = {
+baseConfig[1].output = {
   path: path.resolve('./assets/bundles/'),
   publicPath: '',
   filename: '[name]-[hash].js',
 }
 
-baseConfig.module.loaders.push({
+baseConfig[1].module.loaders.push({
   test: /\.jsx?$/,
   exclude: [node_modules_dir],
   loaders: ['babel?presets[]=react,presets[]=es2015']
 });
 
-baseConfig.plugins = [
+baseConfig[1].plugins = [
   new webpack.DefinePlugin({  // removes React warnings
     'process.env':{
       'NODE_ENV': JSON.stringify('production')
