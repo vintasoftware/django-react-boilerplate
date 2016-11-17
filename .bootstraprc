@@ -45,6 +45,7 @@ styleLoaders:
 # Usually this endpoint-file contains list of @imports of your application styles
 #
 # appStyles: ./path/to/your/app/styles/endpoint.scss
+appStyles: ./assets/sass/style.scss
 
 
 ### Bootstrap styles
