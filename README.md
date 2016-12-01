@@ -70,7 +70,6 @@ Read [this](https://devcenter.heroku.com/articles/heroku-button#adding-the-herok
 - `make bundle`
 - `python manage.py runserver`
 
-
 ### Testing
 
 `$ make test`
