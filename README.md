@@ -72,11 +72,11 @@ Read [this](https://devcenter.heroku.com/articles/heroku-button#adding-the-herok
 
 ### Testing
 
-`$ make test`
+`make test`
 
-Will run django tests using `--keepdb` and `--parallel`. You may pass a path to the desired test module in the make command. Eg.:
+Will run django tests using `--keepdb` and `--parallel`. You may pass a path to the desired test module in the make command. E.g.:
 
-`$ make test someapp.tests.test_views`
+`make test someapp.tests.test_views`
 
 ### Adding new pypi libs
 
