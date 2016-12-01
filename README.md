@@ -67,8 +67,16 @@ Read [this](https://devcenter.heroku.com/articles/heroku-button#adding-the-herok
 
 - `pip install -r requirements.txt`
 - `npm install`
-- `npm start`
+- `make bundle`
 - `python manage.py runserver`
+
+### Testing
+
+`make test`
+
+Will run django tests using `--keepdb` and `--parallel`. You may pass a path to the desired test module in the make command. E.g.:
+
+`make test someapp.tests.test_views`
 
 ### Adding new pypi libs
 
