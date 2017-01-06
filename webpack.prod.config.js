@@ -19,7 +19,7 @@ baseConfig[1].output = {
 
 baseConfig[1].module.loaders.push({
   test: /\.jsx?$/,
-  exclude: [node_modules_dir],
+  exclude: [nodeModulesDir],
   loaders: ['babel?presets[]=react,presets[]=es2015']
 });
 
