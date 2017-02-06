@@ -86,3 +86,6 @@ Add high level dependecies to `requirements-to-freeze.txt` and `pip freeze > req
 
 - Manually with `flake8` and `npm run lint` on project root.
 - During development with an editor compatible with flake8 and ESLint.
+
+## Commercial Support
+This project, as other Vinta open-source projects, is used in products of Vinta clients. We are always looking for exciting work, so if you need any commercial support, feel free to get in touch: contact@vinta.com.br
