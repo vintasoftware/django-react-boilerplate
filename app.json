@@ -53,7 +53,7 @@
       "plan": "papertrail:choklad"
     },
     {
-      "plan": "opbeat:test"
+      "plan": "opbeat:free"
     }
   ],
   "buildpacks": [
