@@ -87,7 +87,7 @@ Add high level dependecies to `requirements-to-freeze.txt` and `pip freeze > req
 - Manually with `flake8` and `npm run lint` on project root.
 - During development with an editor compatible with flake8 and ESLint.
 
-## Pre-commit hook to flake8
+## Pre-commit hooks
 
 - Run `pre-commit install` to enable the hook into your git repo. The hook will run automatically for each commit.
 - Run `git commit -m "Your message" -n` to skip the hook if you need.
