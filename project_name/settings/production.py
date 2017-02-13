@@ -1,7 +1,7 @@
-from .base import *  # noqa
-
-from decouple import config, Csv
+from decouple import Csv, config
 from dj_database_url import parse as db_url
+
+from .base import *  # noqa
 
 
 DEBUG = False

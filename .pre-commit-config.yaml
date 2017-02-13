@@ -1,0 +1,25 @@
+- repo: git://github.com/vintasoftware/pre-commit-hooks
+  sha: v0.6.1
+  hooks:
+    - id: check-added-large-files
+      args: ['--maxkb=500']
+    - id: check-byte-order-marker
+    - id: check-case-conflict
+    - id: check-merge-conflict
+    - id: check-symlinks
+    - id: debug-statements
+    - id: detect-private-key
+
+- repo: local
+  hooks:
+  - id: flake8
+    name: flake8-local
+    entry: python -m flake8
+    language: system
+    files: \.py$
+  - id: isort
+    name: isort-local
+    entry: isort -rc .
+    language: system
+    always_run: true
+    files: \$
