@@ -8,7 +8,12 @@ test:
   override:
     - npm install
     - npm run build
+    # style check
     - flake8
+    # imports check
+    - isort **/*.py --check-only
+    # pre-commit additional checks
+    - SKIP=flake8,isort pre-commit run --all-files
     - >
         DJANGO_SETTINGS_MODULE={{project_name}}.settings.local
             python manage.py has_missing_migrations --ignore authtools;
