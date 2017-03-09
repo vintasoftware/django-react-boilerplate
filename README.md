@@ -50,7 +50,7 @@ Push your changes to a branch and visit `https://dashboard.heroku.com/new?templa
 
 Read [this](https://devcenter.heroku.com/articles/heroku-button#adding-the-heroku-button).
 
-p.s. if you want to deploy in a different way please take a look at the `envs` inside the `app.json` file.
+p.s. if you want to deploy in a different way please take a look the `app.json` file for what needs to be configured.
 
 ## Developing
 
