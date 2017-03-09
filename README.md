@@ -31,6 +31,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] `pip install -r requirements-to-freeze.txt`
 - [ ] `pip freeze > requirements.txt`
 - [ ] `npm update --save`
+- [ ] Remove the `^` from `"bootstrap": "^4.0.0-alpha.4"` in the package.json file. While bootstrap is in alpha we have decided to lock the version to alpha4 to avoid breakage
 - [ ] Check for outdated npm dependencies with `npm outdated` and update them
 - [ ] Change the first line of README to the name of the project
 - [ ] Create a Google Group to receive 500 errors and forward to your email. It should be a private group, but remember to change settings to allow posting from any email
