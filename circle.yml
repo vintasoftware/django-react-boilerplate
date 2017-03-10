@@ -46,5 +46,6 @@ deployment:
       - mv proj_circle.yml circle.yml
       - git checkout -b release
       - git add circle.yml
-      - git commit -m "Replacing circle.yml"
+      - git rm proj_circle.yml
+      - git commit -m "Replacing circle.yml" --author "Vinta Software <contact@vinta.com.br>"
       - git push origin release --force
