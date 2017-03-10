@@ -10,6 +10,8 @@ test:
     - npm run build
     # style check
     - flake8
+    # safety check
+    - cat requirements.txt | safety check --stdin
     # imports check
     - isort **/*.py --check-only
     # pre-commit additional checks
