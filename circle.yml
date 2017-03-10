@@ -4,6 +4,11 @@ machine:
   node:
     version: 6.1.0
 
+general:
+  branches:
+    ignore:
+      - release
+
 dependencies:
   post:
     - pip install django
@@ -33,3 +38,13 @@ test:
         pwd: testproject
     - npm run build:
         pwd: testproject
+
+deployment:
+  release:
+    branch: master
+    commands:
+      - mv proj_circle.yml circle.yml
+      - git checkout -b release
+      - git add circle.yml
+      - git commit -m "Replacing circle.yml"
+      - git push origin release --force
