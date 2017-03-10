@@ -7,7 +7,20 @@ machine:
 dependencies:
   pre:
     - pip install django
-
+    - pip install virtualenv
 test:
   override:
     - django-admin --version
+    - django-admin startproject testproject --extension py,yml,json --name Procfile --template=.
+    - virtualenv testproject/venv
+    - source testproject/venv/bin/activate
+    - cd testproject
+    - pip install -r requirements-to-freeze.txt
+    - npm update --save
+    - cp testproject/settings/local.py.example testproject/settings/local.py
+    - python manage.py makemigrations
+    - python manage.py migrate
+    - python manage.py test
+    - python manage.py flake8
+    - python manage.py has_missing_migrations
+    - SECRET_KEY="$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")" SENDGRID_USERNAME='foo' SENDGRID_PASSWORD='password' DJANGO_SETTINGS_MODULE='testproject.settings.production' DATABASE_URL='sqlite:///' ALLOWED_HOSTS='.example.org' REDIS_URL='redis://' python manage.py check --deploy --fail-level WARNING
