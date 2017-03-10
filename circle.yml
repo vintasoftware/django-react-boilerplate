@@ -47,5 +47,5 @@ deployment:
       - git checkout -b release
       - git add circle.yml
       - git rm proj_circle.yml
-      - git commit -m "Replacing circle.yml" --author "Vinta Software <contact@vinta.com.br>"
+      - GIT_COMMITTER_NAME="Vinta Software" GIT_COMMITTER_EMAIL="contact@vinta.com.br" git commit -m "Replacing circle.yml" --author "Vinta Software <contact@vinta.com.br>"
       - git push origin release --force
