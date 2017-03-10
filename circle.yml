@@ -1,30 +1,13 @@
-machine:  # remeber to update those!
+machine:
   python:
-    version: 3.5.2
+    version: 3.6.0
   node:
-    version: 5.11.1
+    version: 6.1.0
+
+dependencies:
+  pre:
+    - pip install django
 
 test:
   override:
-    - npm install
-    - npm run build
-    # style check
-    - flake8
-    # imports check
-    - isort **/*.py --check-only
-    # pre-commit additional checks
-    - SKIP=flake8,isort pre-commit run --all-files
-    - >
-        DJANGO_SETTINGS_MODULE={{project_name}}.settings.local
-            python manage.py has_missing_migrations --ignore authtools;
-    - >
-        SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')
-        DATABASE_URL='sqlite:///'
-        ALLOWED_HOSTS='.example.org'
-        SENDGRID_USERNAME='test'
-        SENDGRID_PASSWORD='test'
-        REDIS_URL='redis://'
-            python manage.py check --deploy --settings={{project_name}}.settings.production
-    - coverage run manage.py test
-  post:
-    - coverage html -d $CIRCLE_ARTIFACTS
+    - django-admin --version
