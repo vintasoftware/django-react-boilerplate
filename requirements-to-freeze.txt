@@ -17,12 +17,17 @@ gunicorn
 opbeat
 whitenoise
 
-# local
+# test
+bandit
 coverage
+flake8<3
+flake8-putty
+isort
+safety
+
+# local
 django-naomi
 fixmydjango
-flake8
 ipython
 model-mommy
 pre-commit
-isort
