@@ -1,8 +1,8 @@
 machine:  # remeber to update those!
   python:
-    version: 3.5.2
+    version: 3.6.0
   node:
-    version: 5.11.1
+    version: 6.1.0
 
 test:
   override:
@@ -28,3 +28,9 @@ test:
     - coverage run manage.py test
   post:
     - coverage html -d $CIRCLE_ARTIFACTS
+
+# This is necessary for the boilerplate's CI. You can remove this lines
+general:
+  branches:
+    ignore:
+      - boilerplate-release

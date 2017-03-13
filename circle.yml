@@ -1,13 +1,12 @@
+# This circle.yml file does some basic testing on CI for the boilerplate itself.
+# When using the boilerplate this file will not be used, prof_circle.yml is used
+# instead.
+
 machine:
   python:
     version: 3.6.0
   node:
     version: 6.1.0
-
-general:
-  branches:
-    ignore:
-      - release
 
 dependencies:
   post:
@@ -44,8 +43,8 @@ deployment:
     branch: master
     commands:
       - mv proj_circle.yml circle.yml
-      - git checkout -b release
+      - git checkout -b boilerplate-release
       - git add circle.yml
       - git rm proj_circle.yml
       - GIT_COMMITTER_NAME="Vinta Software" GIT_COMMITTER_EMAIL="contact@vinta.com.br" git commit -m "Replacing circle.yml" --author "Vinta Software <contact@vinta.com.br>"
-      - git push origin release --force
+      - git push origin boilerplate-release --force
