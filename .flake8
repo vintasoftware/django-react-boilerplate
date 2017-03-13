@@ -2,3 +2,7 @@
 max-line-length = 100
 ignore = D100,D101,D102,D103,D105,D205,D400
 exclude = node_modules/*,*/migrations/*,*/settings/*,./venv/*,./env/*
+
+putty-ignore =
+  test_*.py : E501
+  cinnamon/settings/*.py : E114,E116,F405
