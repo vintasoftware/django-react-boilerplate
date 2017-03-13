@@ -10,7 +10,8 @@ test:
     - npm run build
     # style check
     - flake8
-    # safety check
+    # security checks
+    - bandit -r .
     - cat requirements.txt | safety check --stdin
     # imports check
     - isort **/*.py --check-only
