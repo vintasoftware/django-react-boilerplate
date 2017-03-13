@@ -16,15 +16,15 @@ module.exports = [{
       {
         test: /\.jsx?$/,
         exclude: [nodeModulesDir],
-        loader: 'babel?presets[]=es2015',
+        loader: 'babel-loader?presets[]=es2015',
       },
       {
         test: /jquery\/dist\/jquery\.js$/,
-        loader: 'expose?$',
+        loader: 'expose-loader?$',
       },
       {
         test: /jquery\/dist\/jquery\.js$/,
-        loader: 'expose?jQuery',
+        loader: 'expose-loader?jQuery',
       }],
   },
   plugins: [
@@ -45,18 +45,18 @@ module.exports = [{
       {
         test: /\.css$/,
         loaders: [
-          'style',
-          'css',
-          'postcss',
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
         ],
       },
       {
         test: /\.scss$/,
         loaders: [
-          'style',
-          'css',
-          'postcss',
-          'sass',
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
         ],
       },
       {
@@ -66,17 +66,16 @@ module.exports = [{
       {
         test: /\.(jpg|png)?$/,
         loaders: [
-          'file?name=i-[hash].[ext]',
+          'file-loader?name=i-[hash].[ext]',
         ],
       },
     ],
   },
-  postcss: [autoprefixer],
   plugins: [
     // defined in local or prod
   ],
   resolve: {
-    modulesDirectories: ['node_modules', 'bower_components'],
-    extensions: ['', '.js', '.jsx'],
+    modules: ['node_modules', 'bower_components'],
+    extensions: ['.js', '.jsx'],
   },
 }];
