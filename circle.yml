@@ -1,5 +1,5 @@
 # This circle.yml file does some basic testing on CI for the boilerplate itself.
-# When using the boilerplate this file will not be used, prof_circle.yml is used
+# When using the boilerplate this file will not be used, proj_circle.yml is used
 # instead.
 
 machine:

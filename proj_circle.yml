@@ -1,8 +1,8 @@
 machine:  # remeber to update those!
   python:
-    version: 3.6.0
+    version: 3.5.2
   node:
-    version: 6.1.0
+    version: 5.11.1
 
 test:
   override:
@@ -10,6 +10,9 @@ test:
     - npm run build
     # style check
     - flake8
+    # security checks
+    - bandit -r .
+    - cat requirements.txt | safety check --stdin
     # imports check
     - isort **/*.py --check-only
     # pre-commit additional checks
@@ -29,7 +32,7 @@ test:
   post:
     - coverage html -d $CIRCLE_ARTIFACTS
 
-# This is necessary for the boilerplate's CI. You can remove this lines
+# This is necessary for the boilerplate's CI. You can remove these lines
 general:
   branches:
     ignore:
