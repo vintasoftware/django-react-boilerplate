@@ -19,7 +19,9 @@ test:
     - source testproject/venv/bin/activate
     - pip install -r requirements-to-freeze.txt:
         pwd: testproject
-    - npm update --save --dev:
+    - npm update --save:
+        pwd: testproject
+    - npm install:
         pwd: testproject
     - cp testproject/testproject/settings/local.py.example testproject/testproject/settings/local.py
     - echo 'DJANGO_SETTINGS_MODULE="testproject.settings.local"' > testproject/.env
