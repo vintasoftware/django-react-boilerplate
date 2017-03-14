@@ -29,6 +29,7 @@ test:
         REDIS_URL='redis://'
             python manage.py check --deploy --settings={{project_name}}.settings.production
     - coverage run manage.py test
+    - npm run lint
   post:
     - coverage html -d $CIRCLE_ARTIFACTS
 

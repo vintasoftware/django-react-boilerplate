@@ -37,6 +37,8 @@ test:
         pwd: testproject
     - npm run build:
         pwd: testproject
+    - npm run lint:
+        pwd: testproject
 
 deployment:
   release:
