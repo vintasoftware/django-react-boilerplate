@@ -1,33 +1,54 @@
-machine:  # remeber to update those!
-  python:
-    version: 3.5.2
-  node:
-    version: 5.11.1
+# This circle.yml file does some basic testing on CI for the boilerplate itself.
+# When using the boilerplate this file will not be used, proj_circle.yml is used
+# instead.
 
+machine:
+  python:
+    version: 3.6.0
+  node:
+    version: 6.1.0
+
+dependencies:
+  post:
+    - pip install django
+    - pip install virtualenv
+    - django-admin startproject testproject --extension py,yml,json --name Procfile --template=.
 test:
   override:
-    - npm install
-    - npm run build
-    # style check
-    - flake8
-    # security checks
-    - bandit -r .
-    - cat requirements.txt | safety check --stdin
-    # imports check
-    - isort **/*.py --check-only
-    # pre-commit additional checks
-    - SKIP=flake8,isort pre-commit run --all-files
-    - >
-        DJANGO_SETTINGS_MODULE={{project_name}}.settings.local
-            python manage.py has_missing_migrations --ignore authtools;
-    - >
-        SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')
-        DATABASE_URL='sqlite:///'
-        ALLOWED_HOSTS='.example.org'
-        SENDGRID_USERNAME='test'
-        SENDGRID_PASSWORD='test'
-        REDIS_URL='redis://'
-            python manage.py check --deploy --settings={{project_name}}.settings.production
-    - coverage run manage.py test
-  post:
-    - coverage html -d $CIRCLE_ARTIFACTS
+    - virtualenv testproject/venv
+    - source testproject/venv/bin/activate
+    - pip install -r requirements-to-freeze.txt:
+        pwd: testproject
+    - npm update --save:
+        pwd: testproject
+    - npm install:
+        pwd: testproject
+    - cp testproject/testproject/settings/local.py.example testproject/testproject/settings/local.py
+    - echo 'DJANGO_SETTINGS_MODULE="testproject.settings.local"' > testproject/.env
+    - python manage.py makemigrations:
+        pwd: testproject
+    - python manage.py migrate:
+        pwd: testproject
+    - python manage.py test:
+        pwd: testproject
+    - flake8:
+        pwd: testproject
+    - python manage.py has_missing_migrations:
+        pwd: testproject
+    - SECRET_KEY="$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")" SENDGRID_USERNAME='foo' SENDGRID_PASSWORD='password' DJANGO_SETTINGS_MODULE='testproject.settings.production' DATABASE_URL='sqlite:///' ALLOWED_HOSTS='.example.org' REDIS_URL='redis://' python manage.py check --deploy --fail-level WARNING:
+        pwd: testproject
+    - npm run build:
+        pwd: testproject
+    - npm run lint:
+        pwd: testproject
+
+deployment:
+  release:
+    branch: master
+    commands:
+      - mv proj_circle.yml circle.yml
+      - git checkout -b boilerplate-release
+      - git add circle.yml
+      - git rm proj_circle.yml
+      - GIT_COMMITTER_NAME="Vinta Software" GIT_COMMITTER_EMAIL="contact@vinta.com.br" git commit -m "Replacing circle.yml" --author "Vinta Software <contact@vinta.com.br>"
+      - git push origin boilerplate-release --force

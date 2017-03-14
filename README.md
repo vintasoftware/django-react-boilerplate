@@ -23,9 +23,9 @@ This should be enough as a starting point for any modern web project.
 
 ## Project bootstrap
 
-- [ ] Start your project using: 
+- [ ] Start your project using:
 ```
-django-admin startproject theprojectname --extension py,yml,json --name Procfile --template=https://github.com/vintasoftware/boilerplate/archive/master.zip
+django-admin startproject theprojectname --extension py,yml,json --name Procfile --template=https://github.com/vintasoftware/boilerplate/archive/boilerplate-release.zip
 ```
 - [ ] Above: don't forget the `--extension` and `--name` params!
 - [ ] `pip install -r requirements-to-freeze.txt`

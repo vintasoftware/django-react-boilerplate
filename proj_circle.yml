@@ -1,0 +1,40 @@
+machine:  # remeber to update those!
+  python:
+    version: 3.5.2
+  node:
+    version: 5.11.1
+
+test:
+  override:
+    - npm install
+    - npm run build
+    # style check
+    - flake8
+    # security checks
+    - bandit -r .
+    - cat requirements.txt | safety check --stdin
+    # imports check
+    - isort **/*.py --check-only
+    # pre-commit additional checks
+    - SKIP=flake8,isort pre-commit run --all-files
+    - >
+        DJANGO_SETTINGS_MODULE={{project_name}}.settings.local
+            python manage.py has_missing_migrations --ignore authtools;
+    - >
+        SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')
+        DATABASE_URL='sqlite:///'
+        ALLOWED_HOSTS='.example.org'
+        SENDGRID_USERNAME='test'
+        SENDGRID_PASSWORD='test'
+        REDIS_URL='redis://'
+            python manage.py check --deploy --settings={{project_name}}.settings.production
+    - coverage run manage.py test
+    - npm run lint
+  post:
+    - coverage html -d $CIRCLE_ARTIFACTS
+
+# This is necessary for the boilerplate's CI. You can remove these lines
+general:
+  branches:
+    ignore:
+      - boilerplate-release
