@@ -1,4 +1,4 @@
-# Vinta Boilerplate
+# Django React Boilerplate
 
 ## About this boilerplate
 
@@ -25,7 +25,7 @@ This should be enough as a starting point for any modern web project.
 
 - [ ] Start your project using:
 ```
-django-admin startproject theprojectname --extension py,yml,json --name Procfile --template=https://github.com/vintasoftware/boilerplate/archive/boilerplate-release.zip
+django-admin startproject theprojectname --extension py,yml,json --name Procfile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
 ```
 - [ ] Above: don't forget the `--extension` and `--name` params!
 - [ ] `pip install -r requirements-to-freeze.txt`
@@ -34,8 +34,8 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] Remove the `^` from `"bootstrap": "^4.0.0-alpha.4"` in the package.json file. While bootstrap is in alpha we have decided to lock the version to alpha4 to avoid breakage
 - [ ] Check for outdated npm dependencies with `npm outdated` and update them
 - [ ] Change the first line of README to the name of the project
-- [ ] Create a Google Group to receive 500 errors and forward to your email. It should be a private group, but remember to change settings to allow posting from any email
-- [ ] Add the Google Group email address to the `ADMINS` settings variable
+- [ ] Add an email address to the `ADMINS` settings variable
+- [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails.
 
 After completing ALL of the above, remove this `Project bootstrap` section from the project README.
 
