@@ -21,7 +21,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = 'mediafiles'
 MEDIA_URL = '/media/'
 
-SERVER_EMAIL = 'admin@vinta.com.br'
+SERVER_EMAIL = 'foo@example.com'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = config('SENDGRID_USERNAME')
