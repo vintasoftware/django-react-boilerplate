@@ -21,8 +21,7 @@ Also, includes a Heroku `app.json` and a working Django `production.py` settings
 
 This should be enough as a starting point for any modern web project.
 
-## Project bootstrap
-[![CircleCI](https://circleci.com/gh/vintasoftware/django-react-boilerplate.svg?style=svg)](https://circleci.com/gh/vintasoftware/django-react-boilerplate)
+## Project bootstrap [![CircleCI](https://circleci.com/gh/vintasoftware/django-react-boilerplate.svg?style=svg)](https://circleci.com/gh/vintasoftware/django-react-boilerplate)
 - [ ] Start your project using:
 ```
 django-admin startproject theprojectname --extension py,yml,json --name Procfile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
