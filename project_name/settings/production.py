@@ -52,12 +52,12 @@ CELERY_SEND_TASK_ERROR_EMAILS = True
 
 # Whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-MIDDLEWARE_CLASSES.insert(  # insert WhiteNoiseMiddleware right after SecurityMiddleware
-    MIDDLEWARE_CLASSES.index('django.middleware.security.SecurityMiddleware') + 1,
+MIDDLEWARE.insert(  # insert WhiteNoiseMiddleware right after SecurityMiddleware
+    MIDDLEWARE.index('django.middleware.security.SecurityMiddleware') + 1,
     'whitenoise.middleware.WhiteNoiseMiddleware')
 
 # django-log-request-id
-MIDDLEWARE_CLASSES.insert(  # insert RequestIDMiddleware on the top
+MIDDLEWARE.insert(  # insert RequestIDMiddleware on the top
     0, 'log_request_id.middleware.RequestIDMiddleware')
 
 LOG_REQUEST_ID_HEADER = 'HTTP_X_REQUEST_ID'
@@ -65,7 +65,7 @@ LOG_REQUESTS = True
 
 # Opbeat
 INSTALLED_APPS += ['opbeat.contrib.django']
-MIDDLEWARE_CLASSES.insert(  # insert OpbeatAPMMiddleware on the top
+MIDDLEWARE.insert(  # insert OpbeatAPMMiddleware on the top
     0, 'opbeat.contrib.django.middleware.OpbeatAPMMiddleware')
 
 LOGGING = {
