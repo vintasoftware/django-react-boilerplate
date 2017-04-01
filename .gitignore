@@ -41,3 +41,6 @@ npm-debug.log
 # Spritesmith
 spritesmith-generated/
 spritesmith.scss
+
+# templated email
+tmp_email/
