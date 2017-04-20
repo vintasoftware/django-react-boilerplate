@@ -38,7 +38,7 @@ styleLoaders:
 # Thus, you may customize Bootstrap variables
 # based on the values established in the Bootstrap _variables.scss file
 #
-# bootstrapCustomizations: ./path/to/bootstrap/customizations.scss
+# bootstrapCustomizations: ./assets/sass/vendor/custom-bootstrap.scss
 
 
 # Import your custom styles here
