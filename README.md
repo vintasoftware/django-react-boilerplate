@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.TXT)
+
 # Django React Boilerplate
 
 ## About this boilerplate
@@ -96,3 +98,5 @@ Add high level dependecies to `requirements-to-freeze.txt` and `pip freeze > req
 
 ## Commercial Support
 This project, as other Vinta open-source projects, is used in products of Vinta clients. We are always looking for exciting work, so if you need any commercial support, feel free to get in touch: contact@vinta.com.br
+
+Copyright (c) 2017 Vinta Serviços e Soluções Tecnológicas Ltda
