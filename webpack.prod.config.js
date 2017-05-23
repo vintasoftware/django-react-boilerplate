@@ -40,7 +40,7 @@ baseConfig[1].plugins = [
       },
       retina: '@2x'
   }),
-  new ExtractTextPlugin('[name]-[hash].css', { allChunks: true }),
+  new ExtractTextPlugin({ filename: '[name]-[hash].css', disable: false, allChunks: true })
   new webpack.optimize.UglifyJsPlugin({ comments: false }),
   new BundleTracker({
     filename: './webpack-stats.json'
