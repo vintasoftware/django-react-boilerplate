@@ -10,10 +10,10 @@ useFlexbox: false
 
 # Webpack loaders, order matters
 styleLoaders:
-  - style
-  - css
-  - postcss
-  - sass
+  - style-loader
+  - css-loader
+  - postcss-loader
+  - sass-loader
 
 # Extract styles to stand-alone css file
 # Different settings for different environments can be used,
@@ -69,7 +69,7 @@ styles:
   buttons: true
 
   # Components
-  animation: true
+  transitions: true
   dropdown: false
   button-group: false
   input-group: false
@@ -86,7 +86,7 @@ styles:
   list-group: false
   responsive-embed: false
   close: false
-  tags: false
+  badge: false
 
   # Components w/ JavaScript
   modal: false
