@@ -37,9 +37,9 @@ test:
         pwd: testproject
     - SECRET_KEY="$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")" SENDGRID_USERNAME='foo' SENDGRID_PASSWORD='password' DJANGO_SETTINGS_MODULE='testproject.settings.production' DATABASE_URL='sqlite:///' ALLOWED_HOSTS='.example.org' REDIS_URL='redis://' python manage.py check --deploy --fail-level WARNING:
         pwd: testproject
-    - npm run lint:
-        pwd: testproject
     - npm run build:
+        pwd: testproject
+    - npm run lint:
         pwd: testproject
 
 deployment:
