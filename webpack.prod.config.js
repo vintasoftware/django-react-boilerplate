@@ -12,7 +12,7 @@ baseConfig[1].entry = [
 ]
 
 baseConfig[1].output = {
-  path: path.resolve('./assets/bundles/'),
+  path: path.resolve('./assets/webpack_bundles/'),
   publicPath: '',
   filename: '[name]-[hash].js',
 }
@@ -20,7 +20,7 @@ baseConfig[1].output = {
 baseConfig[1].module.loaders.push({
   test: /\.jsx?$/,
   exclude: [nodeModulesDir],
-  loaders: ['babel?presets[]=react,presets[]=es2015']
+  loaders: ['babel-loader?presets[]=react,presets[]=es2015']
 });
 
 baseConfig[1].plugins = [
@@ -40,10 +40,28 @@ baseConfig[1].plugins = [
       },
       retina: '@2x'
   }),
-  new ExtractTextPlugin('[name]-[hash].css', { allChunks: true }),
+  new ExtractTextPlugin({ filename: '[name]-[hash].css', disable: false, allChunks: true }),
   new webpack.optimize.UglifyJsPlugin({ comments: false }),
   new BundleTracker({
     filename: './webpack-stats.json'
+  }),
+  new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery",
+    "window.jQuery": "jquery",
+    Tether: "tether",
+    "window.Tether": "tether",
+    Alert: "exports-loader?Alert!bootstrap/js/dist/alert",
+    Button: "exports-loader?Button!bootstrap/js/dist/button",
+    Carousel: "exports-loader?Carousel!bootstrap/js/dist/carousel",
+    Collapse: "exports-loader?Collapse!bootstrap/js/dist/collapse",
+    Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
+    Modal: "exports-loader?Modal!bootstrap/js/dist/modal",
+    Popover: "exports-loader?Popover!bootstrap/js/dist/popover",
+    Scrollspy: "exports-loader?Scrollspy!bootstrap/js/dist/scrollspy",
+    Tab: "exports-loader?Tab!bootstrap/js/dist/tab",
+    Tooltip: "exports-loader?Tooltip!bootstrap/js/dist/tooltip",
+    Util: "exports-loader?Util!bootstrap/js/dist/util",
   })
 ]
 
