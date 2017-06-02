@@ -65,7 +65,7 @@ p.s. if you want to deploy in a different way please take a look the `app.json` 
 
 ### Tools
 
-- Setup [editorconfig](http://editorconfig.org/), [flake8](http://flake8.pycqa.org/en/latest/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
+- Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
 
 ### Running the project
 
@@ -88,8 +88,8 @@ Add high level dependecies to `requirements-to-freeze.txt` and `pip freeze > req
 
 ## Checking lint
 
-- Manually with `flake8` and `npm run lint` on project root.
-- During development with an editor compatible with flake8 and ESLint.
+- Manually with `prospector` and `npm run lint` on project root.
+- During development with an editor compatible with prospector and ESLint.
 
 ## Pre-commit hooks
 
