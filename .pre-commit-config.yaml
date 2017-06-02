@@ -12,14 +12,14 @@
 
 - repo: local
   hooks:
-  - id: flake8
-    name: flake8-local
-    entry: python -m flake8
-    language: system
+  - id: prospector
+    name: prospector-local
+    entry: prospector
+    language: python
     files: \.py$
   - id: isort
     name: isort-local
     entry: isort -rc .
     language: system
     always_run: true
-    files: \$
+    files: \$api

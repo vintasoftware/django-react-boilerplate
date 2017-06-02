@@ -1,0 +1,49 @@
+output-format: text
+
+strictness: veryhigh
+test-warnings: true
+doc-warnings: false
+member-warnings: true
+
+uses:
+  - django
+  - celery
+
+pep8:
+  full: true
+  disable:
+    - D100
+    - D101
+    - D102
+    - D103
+    - D105
+    - D205
+    - D400 
+    - E701
+    - N802
+  options:
+    max-line-length: 100
+
+pylint:
+  disable:
+    - unused-argument
+    - too-few-public-methods
+    - invalid-name
+    - no-member
+    - no-self-use 
+  options:
+    max-line-length: 100
+
+vulture:
+  disable:
+    - unused-function
+  run: true
+
+ignore-paths:
+  - node_modules
+  - venv
+  - env
+
+ignore-patterns:
+  - (^|/)migrations(/|$)
+  - (^|/)settings(/|$)
