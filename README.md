@@ -89,7 +89,7 @@ Add high level dependecies to `requirements-to-freeze.txt` and `pip freeze > req
 ## Checking lint
 
 - Manually with `flake8` and `npm run lint` on project root.
-- During development with an editor compatible with flake8 and ESLint.
+- During development with an editor compatible with flake8 and ESLint
 
 ## Pre-commit hooks
 
