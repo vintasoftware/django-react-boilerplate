@@ -4,7 +4,7 @@
 
 ## About this boilerplate
 
-A Django 1.10 project boilerplate/template with lots of state of the art libraries and tools like:
+A Django 1.11 project boilerplate/template with lots of state of the art libraries and tools like:
 - React, for interactive UI development
 - django.js, for generating URLs on JS
 - Bootstrap 4, for responsive styling
