@@ -5,7 +5,7 @@
 ## About this boilerplate
 
 A [Django 1.11](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
-- [React](https://github.com/facebook/react), for interactive UI development
+- [React](https://facebook.github.io/react/), for interactive UI development
 - [django-js-reverse](https://github.com/ierror/django-js-reverse), for generating URLs on JS
 - [Bootstrap 4](https://v4-alpha.getbootstrap.com/), for responsive styling
 - [Webpack](https://webpack.js.org/), for bundling static assets
