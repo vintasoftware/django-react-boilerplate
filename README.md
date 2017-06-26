@@ -4,13 +4,13 @@
 
 ## About this boilerplate
 
-A Django 1.11 project boilerplate/template with lots of state of the art libraries and tools like:
-- React, for interactive UI development
-- django.js, for generating URLs on JS
-- Bootstrap 4, for responsive styling
-- Webpack, for bundling static assets
-- Celery, for background worker tasks
-- WhiteNoise with brotlipy, for efficient static files serving
+A [Django 1.11](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
+- [React](https://github.com/facebook/react), for interactive UI development
+- [django-js-reverse](https://github.com/ierror/django-js-reverse), for generating URLs on JS
+- [Bootstrap 4](https://v4-alpha.getbootstrap.com/), for responsive styling
+- [Webpack](https://webpack.js.org/), for bundling static assets
+- [Celery](http://www.celeryproject.org/), for background worker tasks
+- [WhiteNoise](http://whitenoise.evans.io/en/stable/) with brotlipy, for efficient static files serving
 
 For continuous integration, a [CircleCI](https://circleci.com/) configuration `circle.yml` is included.
 
