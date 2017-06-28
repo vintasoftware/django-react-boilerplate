@@ -1,8 +1,8 @@
 {
-  "name": "theprojectname-frontend",
+  "name": "{{project_name}}-frontend",
   "version": "0.0.1",
   "private": true,
-  "description": "theprojectname frontend assets.",
+  "description": "{{project_name}} frontend assets.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
