@@ -4,13 +4,13 @@
 
 ## About this boilerplate
 
-A Django 1.10 project boilerplate/template with lots of state of the art libraries and tools like:
-- React, for interactive UI development
-- django.js, for generating URLs on JS
-- Bootstrap 4, for responsive styling
-- Webpack, for bundling static assets
-- Celery, for background worker tasks
-- WhiteNoise with brotlipy, for efficient static files serving
+A [Django 1.11](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
+- [React](https://facebook.github.io/react/), for interactive UI development
+- [django-js-reverse](https://github.com/ierror/django-js-reverse), for generating URLs on JS
+- [Bootstrap 4](https://v4-alpha.getbootstrap.com/), for responsive styling
+- [Webpack](https://webpack.js.org/), for bundling static assets
+- [Celery](http://www.celeryproject.org/), for background worker tasks
+- [WhiteNoise](http://whitenoise.evans.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlipy), for efficient static files serving
 
 For continuous integration, a [CircleCI](https://circleci.com/) configuration `circle.yml` is included.
 
@@ -32,7 +32,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] `pip install -r requirements-to-freeze.txt`
 - [ ] `pip freeze > requirements.txt`
 - [ ] `npm update --save`
-- [ ] Remove the `^` from `"bootstrap": "^4.0.0-alpha.4"` in the package.json file. While bootstrap is in alpha we have decided to lock the version to alpha4 to avoid breakage
+- [ ] Remove the `^` from `"bootstrap": "^4.0.0-alpha.6"` in the package.json file. While bootstrap is in alpha we have decided to lock the version to alpha6 to avoid breakage
 - [ ] Check for outdated npm dependencies with `npm outdated` and update them
 - [ ] Change the first line of README to the name of the project
 - [ ] Add an email address to the `ADMINS` settings variable
