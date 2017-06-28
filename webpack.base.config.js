@@ -1,4 +1,3 @@
-var autoprefixer = require('autoprefixer');
 var path = require('path');
 var nodeModulesDir = path.resolve(__dirname, 'node_modules');
 var BundleTracker = require('webpack-bundle-tracker');
