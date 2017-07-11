@@ -21,7 +21,12 @@ test:
         pwd: testproject
     - npm update --save:
         pwd: testproject
+    - npm update --save-dev:
+        pwd: testproject
     - npm install:
+        pwd: testproject
+    # npm ls will error on dependencies errors
+    - npm ls:
         pwd: testproject
     - cp testproject/testproject/settings/local.py.example testproject/testproject/settings/local.py
     - echo 'DJANGO_SETTINGS_MODULE="testproject.settings.local"' > testproject/.env

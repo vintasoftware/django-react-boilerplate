@@ -32,6 +32,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] `pip install -r requirements-to-freeze.txt`
 - [ ] `pip freeze > requirements.txt`
 - [ ] `npm update --save`
+- [ ] `npm update --save-dev`
 - [ ] Remove the `^` from `"bootstrap": "^4.0.0-alpha.6"` in the package.json file. While bootstrap is in alpha we have decided to lock the version to alpha6 to avoid breakage
 - [ ] Check for outdated npm dependencies with `npm outdated` and update them
 - [ ] Change the first line of README to the name of the project
