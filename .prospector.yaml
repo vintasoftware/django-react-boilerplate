@@ -1,0 +1,49 @@
+output-format: text
+
+strictness: veryhigh
+test-warnings: true
+doc-warnings: false
+member-warnings: true
+
+uses:
+  - django
+  - celery
+
+pep8:
+  full: true
+  disable:
+    - D100
+    - D101
+    - D102
+    - D103
+    - D105
+    - D205
+    - D400
+    - N802  # function name should be lowercase, breaks on tests
+  options:
+    max-line-length: 100
+
+pyflakes:
+  disable:
+    - F999
+
+pylint:
+  disable:
+    - too-few-public-methods
+    - invalid-name
+    - no-self-use
+    - no-member
+  options:
+    max-line-length: 100
+
+dodgy:
+  run: true
+
+ignore-paths:
+  - node_modules
+  - venv
+  - env
+
+ignore-patterns:
+  - .+/migrations/.+
+  - .+/settings/.+

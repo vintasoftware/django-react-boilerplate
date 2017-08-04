@@ -1,8 +1,7 @@
+from django.test import Client, TestCase
 from django.urls import reverse
 
 from model_mommy import mommy
-
-from django.test import TestCase, Client
 
 
 class TestCaseUtils(TestCase):

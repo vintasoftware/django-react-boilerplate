@@ -36,7 +36,7 @@ test:
         pwd: testproject
     - python manage.py test:
         pwd: testproject
-    - flake8:
+    - prospector:
         pwd: testproject
     - python manage.py has_missing_migrations:
         pwd: testproject
