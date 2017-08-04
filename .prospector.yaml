@@ -9,9 +9,6 @@ uses:
   - django
   - celery
 
-dodgy:
-  run: false
-
 pep8:
   full: true
   disable:
@@ -21,9 +18,8 @@ pep8:
     - D103
     - D105
     - D205
-    - D400 
-    - E701
-    - N802
+    - D400
+    - N802  # function name should be lowercase, breaks on tests
   options:
     max-line-length: 100
 
@@ -33,20 +29,14 @@ pyflakes:
 
 pylint:
   disable:
-    - unused-argument
     - too-few-public-methods
     - invalid-name
+    - no-self-use
     - no-member
-    - no-self-use 
-    - anomalous-backslash-in-string
   options:
     max-line-length: 100
 
-vulture:
-  disable:
-    - unused-function
-    - unused-variable
-    - unused-attribute
+dodgy:
   run: true
 
 ignore-paths:

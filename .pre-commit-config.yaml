@@ -22,4 +22,4 @@
     entry: isort -rc .
     language: system
     always_run: true
-    files: \$api
+    files: \$
