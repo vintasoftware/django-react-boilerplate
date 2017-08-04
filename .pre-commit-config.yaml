@@ -1,5 +1,5 @@
-- repo: git://github.com/vintasoftware/pre-commit-hooks
-  sha: v0.6.1
+- repo: git://github.com/pre-commit/pre-commit-hooks
+  sha: v0.9.1
   hooks:
     - id: check-added-large-files
       args: ['--maxkb=500']
@@ -16,10 +16,12 @@
     name: prospector-local
     entry: prospector
     language: python
-    files: \.py$
+    types: [python]
+    exclude: .+/(settings|migrations)/.+
   - id: isort
     name: isort-local
-    entry: isort -rc .
-    language: system
-    always_run: true
-    files: \$
+    entry : isort
+    language: python
+    types: [python]
+    exclude: .+/(settings|migrations)/.+
+    args: ['--check-only']
