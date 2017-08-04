@@ -30,6 +30,7 @@ baseConfig[1].module.loaders.push({
 
 baseConfig[1].plugins = [
   new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),  // don't reload if there is an error
   new SpritesmithPlugin({
       src: {
