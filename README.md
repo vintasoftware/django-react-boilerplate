@@ -72,7 +72,7 @@ p.s. if you want to deploy in a different way please take a look the `app.json` 
 
 - `pip install -r requirements.txt`
 - `npm install`
-- `make bundle`
+- `npm run start`
 - `python manage.py runserver`
 
 ### Testing
