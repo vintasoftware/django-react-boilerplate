@@ -23,6 +23,9 @@ test:
         pwd: testproject
     - npm update --save-dev:
         pwd: testproject
+    # hotfix for #133
+    - |
+      sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' testproject/package.json
     - npm install:
         pwd: testproject
     # npm ls will error on dependencies errors
