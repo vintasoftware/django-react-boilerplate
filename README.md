@@ -33,7 +33,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] `pip freeze > requirements.txt`
 - [ ] `npm update --save`
 - [ ] `npm update --save-dev`
-- [ ] Remove the `^` from `"bootstrap-loader": "^2.1.0"` in the package.json file. bootstrap-loader 2.2 breaks symversion by breaking support for 4.0.0-alpha.6. This step will be removed when we update to bootstrap beta version.
+- [ ] Remove the `^` from `"bootstrap-loader": "^2.1.0"` in the package.json file. bootstrap-loader 2.2 breaks semver by breaking support for 4.0.0-alpha.6. This step will be removed when we update to bootstrap beta version.
 - [ ] Check for outdated npm dependencies with `npm outdated` and update them
 - [ ] Change the first line of README to the name of the project
 - [ ] Add an email address to the `ADMINS` settings variable
