@@ -95,13 +95,13 @@ If you made changes to this boilerplate and want to test them, commit your chang
 
 ### How to test Heroku deployment
 
-Push your changes to a branch and visit `https://dashboard.heroku.com/new?template=https://github.com/fill-org-or-user/fill-project-repo-name/tree/fill-branch` (replace all `fill`).
+Push your changes to a branch and visit `https://dashboard.heroku.com/new?template=https://github.com/fill-org-or-user/fill-project-repo-name/tree/fill-branch` (replace all `fill-*`).
 
 ### How to add a 'Deploy to Heroku' button
 
 Read [this](https://devcenter.heroku.com/articles/heroku-button#adding-the-heroku-button).
 
-P.S. if you want to deploy in a different way please take a look the `app.json` file for what needs to be configured.
+P.S. if you want to deploy in a different way please check the `app.json` file for what needs to be configured.
 
 ## Commercial Support
 This project, as other Vinta open-source projects, is used in products of Vinta clients. We are always looking for exciting work, so if you need any commercial support, feel free to get in touch: contact@vinta.com.br
