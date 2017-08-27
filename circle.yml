@@ -25,6 +25,9 @@ test:
         pwd: testproject
     - npm install:
         pwd: testproject
+    # hotfix for #133
+    - npm install bootstrap-loader@2.1.0:
+        pwd: testproject
     # npm ls will error on dependencies errors
     - npm ls:
         pwd: testproject
