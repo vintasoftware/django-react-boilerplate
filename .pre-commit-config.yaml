@@ -1,5 +1,5 @@
 - repo: git://github.com/pre-commit/pre-commit-hooks
-  sha: v0.9.1
+  sha: v0.9.2
   hooks:
     - id: check-added-large-files
       args: ['--maxkb=500']
@@ -18,10 +18,29 @@
     language: python
     types: [python]
     exclude: .+/(settings|migrations)/.+
+    pass_filenames: true
+  - id: eslint
+    name: eslint-local
+    entry: npm run lint
+    language: system
+    types: [javascript]
+    exclude: >
+            (?x)^(
+                .+\.config\.js|
+                server\.js|
+                \.eslintrc\.js
+            )$
+    pass_filenames: true
   - id: isort
     name: isort-local
     entry : isort
     language: python
     types: [python]
     exclude: .+/(settings|migrations)/.+
-    args: ['--check-only']
+    pass_filenames: true
+  - id: missing-migrations
+    name: missing-migrations-local
+    entry: python manage.py has_missing_migrations
+    language: system
+    always_run: true
+    pass_filenames: false
