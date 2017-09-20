@@ -1,5 +1,5 @@
 import Urls from './urls';
 
 export {
-  Urls,
+  Urls, // eslint-disable-line import/prefer-default-export
 };
