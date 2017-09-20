@@ -64,3 +64,5 @@ LOGGING = {
         }
     }
 }
+
+JS_REVERSE_JS_MINIFY = False

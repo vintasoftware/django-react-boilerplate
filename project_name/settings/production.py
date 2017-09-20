@@ -121,3 +121,5 @@ LOGGING = {
         },
     }
 }
+
+JS_REVERSE_EXCLUDE_NAMESPACES = ['admin']
