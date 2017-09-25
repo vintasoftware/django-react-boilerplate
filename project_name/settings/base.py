@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'djangojs',
+    'django_js_reverse',
     'webpack_loader',
 
     'common',

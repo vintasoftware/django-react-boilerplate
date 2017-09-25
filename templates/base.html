@@ -1,5 +1,4 @@
 {% load render_bundle from webpack_loader %}
-{% load js %}
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -19,8 +18,8 @@
     {% block body %}{% endblock %}
 
     {% render_bundle 'main' 'js' 'JQUERY' %}
-    <!-- django.js -->
-    {% django_js jquery=false csrf=false %}
+    <!-- django-js-reverse -->
+    <script src="{% url 'js_reverse' %}" type="text/javascript"></script>
 
     <!-- Webpack rendered Javascript -->
     {% render_bundle 'main' 'js' %}

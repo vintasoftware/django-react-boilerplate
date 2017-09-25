@@ -5,7 +5,7 @@ Django
 celery[redis]
 django-model-utils
 django-webpack-loader
-django.js-vinta
+django-js-reverse
 python-decouple<=4.0
 psycopg2
 
