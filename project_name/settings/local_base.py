@@ -33,13 +33,26 @@ INSTALLED_APPS += ('naomi',)
 EMAIL_BACKEND = 'naomi.mail.backends.naomi.NaomiBackend'
 EMAIL_FILE_PATH = base_dir_join('tmp_email')
 
-# Django debug toolbar
+# django-debug-toolbar and django-debug-toolbar-request-history
 INSTALLED_APPS += ('debug_toolbar',)
 MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 INTERNAL_IPS = '127.0.0.1'
 
-# django-debug-toolbar-request-history
-DEBUG_TOOLBAR_PANELS += ['ddt_request_history.panels.request_history.RequestHistoryPanel']
+DEBUG_TOOLBAR_PANELS = [
+    'ddt_request_history.panels.request_history.RequestHistoryPanel',
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+]
 
 # Fix My Django
 INSTALLED_APPS += ('fixmydjango',)
