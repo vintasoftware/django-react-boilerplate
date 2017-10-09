@@ -33,6 +33,14 @@ INSTALLED_APPS += ('naomi',)
 EMAIL_BACKEND = 'naomi.mail.backends.naomi.NaomiBackend'
 EMAIL_FILE_PATH = base_dir_join('tmp_email')
 
+# Django debug toolbar
+INSTALLED_APPS += ('debug_toolbar',)
+MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+INTERNAL_IPS = '127.0.0.1'
+
+# django-debug-toolbar-request-history
+DEBUG_TOOLBAR_PANELS += ['ddt_request_history.panels.request_history.RequestHistoryPanel']
+
 # Fix My Django
 INSTALLED_APPS += ('fixmydjango',)
 FIX_MY_DJANGO_ADMIN_MODE = True
