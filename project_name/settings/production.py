@@ -15,10 +15,10 @@ DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = base_dir_join('staticfiles')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = 'mediafiles'
+MEDIA_ROOT = base_dir_join('mediafiles')
 MEDIA_URL = '/media/'
 
 SERVER_EMAIL = 'foo@example.com'
