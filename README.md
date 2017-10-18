@@ -39,7 +39,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] Add an email address to the `ADMINS` settings variable
 - [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails.
 
-After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Quickstart` below.
+After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
 
 ## Running
 ### Setup
