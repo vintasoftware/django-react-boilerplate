@@ -3,22 +3,24 @@ import renderer from 'react-test-renderer';
 
 import ColorChanger from '../ColorChanger';
 
+jest.mock('../../ColorDisplay/ColorDisplay');
+
 
 describe('ColorChanger', () => {
   let Component;
   let tree;
 
-  test('green', () => {
+  test('Some title', () => {
     Component = renderer.create(
-      <ColorChanger color="green" />);
+      <ColorChanger title="This is a test title" />);
 
     tree = Component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  test('unknown color', () => {
+  test('No title (should use default)', () => {
     Component = renderer.create(
-      <ColorChanger color="caterpillar" />);
+      <ColorChanger />);
 
     tree = Component.toJSON();
     expect(tree).toMatchSnapshot();

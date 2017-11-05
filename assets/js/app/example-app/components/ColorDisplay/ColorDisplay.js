@@ -8,6 +8,7 @@ const ColorDisplay = (props) => {
   const style = {
     color,
     fontWeight: 'bold',
+    margin: '0px 5px 0px 5px',
   };
 
   return (

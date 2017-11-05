@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorDisplay no color (should default to black) 1`] = `
+<span
+  style={
+    Object {
+      "color": "black",
+      "fontWeight": "bold",
+      "margin": "0px 5px 0px 5px",
+    }
+  }
+>
+  black
+</span>
+`;
+
+exports[`ColorDisplay purple 1`] = `
+<span
+  style={
+    Object {
+      "color": "purple",
+      "fontWeight": "bold",
+      "margin": "0px 5px 0px 5px",
+    }
+  }
+>
+  purple
+</span>
+`;
+
+exports[`ColorDisplay unknown color 1`] = `
+<span
+  style={
+    Object {
+      "color": "caterpillar",
+      "fontWeight": "bold",
+      "margin": "0px 5px 0px 5px",
+    }
+  }
+>
+  caterpillar
+</span>
+`;
