@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import ColorDisplay from '../ColorDisplay';
 
 
-describe('ColorDisplay', () =>{
+describe('ColorDisplay', () => {
   let Component;
   let tree;
 
@@ -31,4 +31,4 @@ describe('ColorDisplay', () =>{
     tree = Component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-})
+});
