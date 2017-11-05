@@ -1,2 +1,2 @@
 // import pages
-import 'pages/HomePage';
+import 'pages/homePage';
