@@ -1,15 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ColorChanger No title (should use default) 1`] = `
-<div>
+<div
+  className="main-container"
+>
   <h2>
     React App Loaded!
   </h2>
+  <h3
+    className="app-name"
+  >
+    Color Changer App
+  </h3>
   <p>
     Check this example app: change the color to see it reflected in the text next to it.
   </p>
   <div
-    className="container"
+    className="inner-container"
   >
     <select
       className="color-picker"
@@ -50,15 +57,22 @@ exports[`ColorChanger No title (should use default) 1`] = `
 `;
 
 exports[`ColorChanger Some title 1`] = `
-<div>
+<div
+  className="main-container"
+>
   <h2>
     This is a test title
   </h2>
+  <h3
+    className="app-name"
+  >
+    Color Changer App
+  </h3>
   <p>
     Check this example app: change the color to see it reflected in the text next to it.
   </p>
   <div
-    className="container"
+    className="inner-container"
   >
     <select
       className="color-picker"

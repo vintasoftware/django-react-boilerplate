@@ -26,13 +26,14 @@ class ColorChanger extends React.Component {
     const { title } = this.props;
 
     return (
-      <div>
+      <div className="main-container">
         <h2>{title}</h2>
+        <h3 className="app-name">Color Changer App</h3>
         <p>
           Check this example app: change the color to see it reflected in the text next to it.
         </p>
 
-        <div className="container">
+        <div className="inner-container">
           <select className="color-picker" onChange={this.handleChangeColor}>
             <option value="black">Black</option>
             <option value="green">Green</option>

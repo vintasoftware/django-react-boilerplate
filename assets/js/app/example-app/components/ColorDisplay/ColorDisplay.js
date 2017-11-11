@@ -1,18 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './style.scss';
+
 
 const ColorDisplay = (props) => {
   const { color } = props;
 
-  const style = {
-    color,
-    fontWeight: 'bold',
-    margin: '0px 5px 0px 5px',
-  };
-
   return (
-    <span style={style}>
+    <span className={`color-${color}`}>
       {color}
     </span>
   );

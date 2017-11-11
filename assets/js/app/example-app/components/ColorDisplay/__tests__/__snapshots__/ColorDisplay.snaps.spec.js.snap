@@ -2,13 +2,7 @@
 
 exports[`ColorDisplay no color (should default to black) 1`] = `
 <span
-  style={
-    Object {
-      "color": "black",
-      "fontWeight": "bold",
-      "margin": "0px 5px 0px 5px",
-    }
-  }
+  className="color-black"
 >
   black
 </span>
@@ -16,13 +10,7 @@ exports[`ColorDisplay no color (should default to black) 1`] = `
 
 exports[`ColorDisplay purple 1`] = `
 <span
-  style={
-    Object {
-      "color": "purple",
-      "fontWeight": "bold",
-      "margin": "0px 5px 0px 5px",
-    }
-  }
+  className="color-purple"
 >
   purple
 </span>
@@ -30,13 +18,7 @@ exports[`ColorDisplay purple 1`] = `
 
 exports[`ColorDisplay unknown color 1`] = `
 <span
-  style={
-    Object {
-      "color": "caterpillar",
-      "fontWeight": "bold",
-      "margin": "0px 5px 0px 5px",
-    }
-  }
+  className="color-caterpillar"
 >
   caterpillar
 </span>

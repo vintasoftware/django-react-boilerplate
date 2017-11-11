@@ -1,8 +1,19 @@
-.container {
-  margin: 0;
+.main-container {
+  border: 1px dashed grey;
+  margin: 5px;
   padding: 5px;
 
-  .color-picker {
-    margin: 0px 5px 0px 5px;
+  .app-name {
+    color: red;
+    padding-top: 20px;
+  }
+
+  .inner-container {
+    margin: 0;
+    padding: 5px;
+
+    .color-picker {
+      margin: 0px 5px 0px 5px;
+    }
   }
 }
