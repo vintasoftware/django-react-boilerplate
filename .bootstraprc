@@ -5,15 +5,12 @@
 # Major version of Bootstrap: 3 or 4
 bootstrapVersion: 4
 
-# If Bootstrap version 4 is used - turn on/off flexbox model
-useFlexbox: false
-
 # Webpack loaders, order matters
 styleLoaders:
   - style-loader
   - css-loader
-  - postcss-loader
   - sass-loader
+  - postcss-loader
 
 # Extract styles to stand-alone css file
 # Different settings for different environments can be used,
@@ -83,7 +80,6 @@ styles:
   progress: false
   media: false
   list-group: false
-  responsive-embed: false
   close: false
   badge: false
 
