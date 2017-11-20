@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 
     'django_js_reverse',
     'webpack_loader',
+    'import_export',
 
     'common',
     'users',
