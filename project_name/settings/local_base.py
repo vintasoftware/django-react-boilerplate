@@ -36,7 +36,7 @@ EMAIL_FILE_PATH = base_dir_join('tmp_email')
 # django-debug-toolbar and django-debug-toolbar-request-history
 INSTALLED_APPS += ('debug_toolbar',)
 MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-INTERNAL_IPS = '127.0.0.1'
+INTERNAL_IPS = ['127.0.0.1', '::1']
 
 DEBUG_TOOLBAR_PANELS = [
     'ddt_request_history.panels.request_history.RequestHistoryPanel',
