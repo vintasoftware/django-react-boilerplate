@@ -5,15 +5,12 @@
 # Major version of Bootstrap: 3 or 4
 bootstrapVersion: 4
 
-# If Bootstrap version 4 is used - turn on/off flexbox model
-useFlexbox: false
-
 # Webpack loaders, order matters
 styleLoaders:
   - style-loader
   - css-loader
-  - postcss-loader
   - sass-loader
+  - postcss-loader
 
 # Extract styles to stand-alone css file
 # Different settings for different environments can be used,
@@ -55,44 +52,42 @@ styles:
   mixins: true
 
   # Reset and dependencies
-  normalize: true
   print: true
 
   # Core CSS
-  reboot: true
-  type: true
-  images: true
-  code: true
-  grid: true
-  tables: true
-  forms: true
   buttons: true
+  code: true
+  forms: true
+  grid: true
+  images: true
+  reboot: true
+  tables: true
+  type: true
 
   # Components
-  transitions: true
-  dropdown: false
+  alert: false
+  badge: false
+  breadcrumb: false
   button-group: false
-  input-group: false
+  card: true
+  close: false
   custom-forms: false
+  dropdown: false
+  input-group: false
+  jumbotron: true
+  list-group: false
+  media: false
   nav: true
   navbar: true
-  card: true
-  breadcrumb: false
   pagination: false
-  jumbotron: true
-  alert: false
   progress: false
-  media: false
-  list-group: false
-  responsive-embed: false
-  close: false
-  badge: false
+  transitions: true
 
   # Components w/ JavaScript
-  modal: false
-  tooltip: false
-  popover: false
   carousel: false
+  modal: false
+  popover: false
+  tooltip: false
 
   # Utility classes
   utilities: true
