@@ -27,7 +27,7 @@ baseConfig[1].module.loaders.push({
 },
 {
   test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
-  loader: 'file?name=public/fonts/[name].[ext]',
+  loader: 'file-loader?name=fonts/[name].[ext]',
 });
 
 baseConfig[1].plugins = [
