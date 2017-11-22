@@ -24,6 +24,10 @@ baseConfig[1].module.loaders.push({
   test: /\.jsx?$/,
   exclude: [nodeModulesDir],
   loaders: ['babel-loader?presets[]=react,presets[]=es2015']
+},
+{
+  test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+  loader: 'file?name=public/fonts/[name].[ext]',
 });
 
 baseConfig[1].plugins = [
