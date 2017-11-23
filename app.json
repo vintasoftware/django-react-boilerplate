@@ -2,7 +2,7 @@
   "name": "{{project_name}}",
   "description": "{{project_name|title}} Heroku app.",
   "scripts": {
-    "postdeploy": "python manage.py migrate"
+    "postdeploy": "pipenv run python manage.py migrate"
   },
   "env": {
     "ALLOWED_HOSTS": {
@@ -61,7 +61,7 @@
       "url": "heroku/nodejs"
     },
     {
-      "url": "heroku/python"
+      "url": "https://github.com/kennethreitz/heroku-buildpack-pipenv"
     }
   ]
 }
