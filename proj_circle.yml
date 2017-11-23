@@ -12,14 +12,14 @@ test:
     - prospector
     # security checks
     - bandit -r .
-    - cat requirements.txt | safety check --stdin
+    - pipenv run pip freeze | safety check --stdin
     # imports check
     - isort **/*.py --check-only
     # pre-commit additional checks
     - SKIP=prospector,isort pre-commit run --all-files
     - >
         DJANGO_SETTINGS_MODULE={{project_name}}.settings.local
-            python manage.py has_missing_migrations --ignore authtools;
+            pipenv run python manage.py has_missing_migrations --ignore authtools;
     - >
         SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')
         DATABASE_URL='sqlite:///'
@@ -27,11 +27,11 @@ test:
         SENDGRID_USERNAME='test'
         SENDGRID_PASSWORD='test'
         REDIS_URL='redis://'
-            python manage.py check --deploy --settings={{project_name}}.settings.production
-    - coverage run manage.py test
+            pipenv run python manage.py check --deploy --settings={{project_name}}.settings.production
+    - pipenv run coverage run manage.py test
     - npm run lint
   post:
-    - coverage html -d $CIRCLE_ARTIFACTS
+    - pipenv run coverage html -d $CIRCLE_ARTIFACTS
 
 # This is necessary for the boilerplate's CI. You can remove these lines
 general:
