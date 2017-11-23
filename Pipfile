@@ -6,6 +6,12 @@ name = "pypi"
 
 
 [dev-packages]
+django-debug-toolbar = "*"
+django-debug-toolbar-request-history = "*"
+django-naomi = "*"
+fixmydjango = "*"
+model-mommy = "*"
+pre_commit = "*"
 
 
 
@@ -30,15 +36,9 @@ coverage = "*"
 prospector = {extras = ["with-vulture"]}
 isort = "*"
 safety = "*"
-django-naomi = "*"
-fixmydjango = "*"
 ipython = "*"
-model-mommy = "*"
-pre_commit = "*"
-django-debug-toolbar = "*"
-django-debug-toolbar-request-history = "*"
 
 
 [requires]
 
-python_version = "3.5"
+python_version = "3.6"

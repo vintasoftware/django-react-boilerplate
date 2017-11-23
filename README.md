@@ -29,8 +29,8 @@ This is a good starting point for modern Python/JavaScript web projects.
 django-admin startproject theprojectname --extension py,yml,json --name Procfile,README.md,.env.example --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
 ```
 - [ ] Above: don't forget the `--extension` and `--name` params!
-- [ ] install pipenv if not installed yes: `pip install pipenv` (maybe you have to run this command as an OS superuser)
-- [ ] `pipenv install`
+- [ ] install pipenv if not installed yet: `pip install pipenv` (maybe you have to run this command as an OS superuser)
+- [ ] `pipenv install --dev`
 - [ ] `npm update --save`
 - [ ] `npm update --save-dev`
 - [ ] Check for outdated npm dependencies with `npm outdated` and update them
