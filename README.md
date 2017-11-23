@@ -29,8 +29,8 @@ This is a good starting point for modern Python/JavaScript web projects.
 django-admin startproject theprojectname --extension py,yml,json --name Procfile,README.md,.env.example --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
 ```
 - [ ] Above: don't forget the `--extension` and `--name` params!
-- [ ] `pip install -r requirements-to-freeze.txt`
-- [ ] `pip freeze > requirements.txt`
+- [ ] install pipenv if not installed yes: `pip install pipenv` (maybe you have to run this command as an OS superuser)
+- [ ] `pipenv install`
 - [ ] `npm update --save`
 - [ ] `npm update --save-dev`
 - [ ] Check for outdated npm dependencies with `npm outdated` and update them
@@ -56,7 +56,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
 
 ### Running the project
-- `pip install -r requirements.txt`
+- `pipenv install`
 - `npm install`
 - `npm run start`
 - `python manage.py runserver`
@@ -69,7 +69,7 @@ Will run django tests using `--keepdb` and `--parallel`. You may pass a path to 
 `make test someapp.tests.test_views`
 
 ### Adding new pypi libs
-Add high level dependecies to `requirements-to-freeze.txt` and `pip freeze > requirements.txt`. This is [A Better Pip Workflow](http://www.kennethreitz.org/essays/a-better-pip-workflow).
+Just run `pipenv install LIB_NAME_ON_PYPI` and then `pipenv lock` to lock the version in Pipfile.lock file
 
 ## Linting
 - Manually with `prospector` and `npm run lint` on project root.
