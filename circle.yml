@@ -17,7 +17,7 @@ test:
   override:
     - virtualenv testproject/venv
     - source testproject/venv/bin/activate
-    - pip install -r requirements-to-freeze.txt:
+    - pipenv install:
         pwd: testproject
     - npm update --save:
         pwd: testproject
@@ -33,17 +33,17 @@ test:
         pwd: testproject
     - cp testproject/testproject/settings/local.py.example testproject/testproject/settings/local.py
     - echo 'DJANGO_SETTINGS_MODULE="testproject.settings.local"' > testproject/.env
-    - python manage.py makemigrations:
+    - pipenv run python manage.py makemigrations:
         pwd: testproject
-    - python manage.py migrate:
+    - pipenv run python manage.py migrate:
         pwd: testproject
-    - python manage.py test:
+    - pipenv run python manage.py test:
         pwd: testproject
     - prospector:
         pwd: testproject
-    - python manage.py has_missing_migrations:
+    - pipenv run python manage.py has_missing_migrations:
         pwd: testproject
-    - SECRET_KEY="$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")" SENDGRID_USERNAME='foo' SENDGRID_PASSWORD='password' DJANGO_SETTINGS_MODULE='testproject.settings.production' DATABASE_URL='sqlite:///' ALLOWED_HOSTS='.example.org' REDIS_URL='redis://' python manage.py check --deploy --fail-level WARNING:
+    - SECRET_KEY="$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")" SENDGRID_USERNAME='foo' SENDGRID_PASSWORD='password' DJANGO_SETTINGS_MODULE='testproject.settings.production' DATABASE_URL='sqlite:///' ALLOWED_HOSTS='.example.org' REDIS_URL='redis://' pipenv run python manage.py check --deploy --fail-level WARNING:
         pwd: testproject
     - npm run lint:
         pwd: testproject
