@@ -3,22 +3,25 @@ machine:  # remeber to update those!
     version: 3.6.0
   node:
     version: 6.1.0
+  environment:
+    # makes default virtualenv be ignored by pipenv avoiding dependencies conflict
+    PIPENV_IGNORE_VIRTUALENVS: True
 
 dependencies:
   pre:
     - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
     - sudo apt-get install git-lfs --upgrade
   post:
-    - pip install pipenv
+    - pip install requests pipenv --upgrade
     - pipenv install
 
 test:
   override:
     - npm run build
     # style check
-    - prospector
+    - pipenv run prospector
     # security checks
-    - bandit -r .
+    - pipenv run bandit -r .
     - pipenv run pip freeze | safety check --stdin
     # imports check
     - pipenv run isort **/*.py --check-only
