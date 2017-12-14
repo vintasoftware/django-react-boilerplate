@@ -40,7 +40,7 @@ test:
         pwd: testproject
     - pipenv run python manage.py test:
         pwd: testproject
-    - prospector:
+    - pipenv run prospector:
         pwd: testproject
     - pipenv run python manage.py has_missing_migrations:
         pwd: testproject
