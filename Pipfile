@@ -17,7 +17,7 @@ pre_commit = "*"
 
 [packages]
 
-Django = "*"
+Django = "==1.11.8"
 celery = {extras = ["redis"]}
 django-model-utils = "*"
 django-webpack-loader = "*"
