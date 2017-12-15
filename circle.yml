@@ -19,7 +19,7 @@ dependencies:
 
 test:
   override:
-    - pipenv install:
+    - pipenv install --dev:
         pwd: testproject
     - npm update --save:
         pwd: testproject
