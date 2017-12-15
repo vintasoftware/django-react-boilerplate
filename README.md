@@ -58,7 +58,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
 
 ### Running the project
-- `pipenv install`
+- `pipenv install --dev`
 - `npm install`
 - `npm run start`
 - `pipenv shell`
