@@ -15,7 +15,7 @@ dependencies:
     - sudo apt-get install git-lfs --upgrade
   post:
     - pip install requests pipenv --upgrade
-    - pipenv install
+    - pipenv install --dev
 
 test:
   override:
