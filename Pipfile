@@ -33,7 +33,7 @@ opbeat = "*"
 whitenoise = "*"
 bandit = "*"
 coverage = "*"
-pylint = "<1.8"
+pylint = "<1.7.5"
 prospector = {extras = ["with-vulture"]}
 isort = "*"
 safety = "*"
