@@ -4,9 +4,15 @@ machine:  # remeber to update those!
   node:
     version: 6.1.0
 
+dependencies:
+  pre:
+    # this updates git-lfs to make pre-commit large files check hook work properly
+    # more details in https://github.com/pre-commit/pre-commit-hooks/issues/252
+    - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+    - sudo apt-get install git-lfs --upgrade
+
 test:
   override:
-    - npm install
     - npm run build
     # style check
     - prospector
@@ -16,18 +22,19 @@ test:
     # imports check
     - isort **/*.py --check-only
     # pre-commit additional checks
-    - SKIP=prospector,isort pre-commit run --all-files
-    - >
-        DJANGO_SETTINGS_MODULE={{project_name}}.settings.local
-            python manage.py has_missing_migrations --ignore authtools;
-    - >
-        SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')
-        DATABASE_URL='sqlite:///'
-        ALLOWED_HOSTS='.example.org'
-        SENDGRID_USERNAME='test'
-        SENDGRID_PASSWORD='test'
-        REDIS_URL='redis://'
-            python manage.py check --deploy --settings={{project_name}}.settings.production
+    - SKIP=prospector,isort,eslint,missing-migrations pre-commit run --all-files
+    - >-
+      DJANGO_SETTINGS_MODULE={{project_name}}.settings.local_base
+      python manage.py has_missing_migrations --ignore authtools;
+    - >-
+      DJANGO_SETTINGS_MODULE={{project_name}}.settings.production
+      SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')
+      DATABASE_URL='sqlite:///'
+      ALLOWED_HOSTS='.example.org'
+      SENDGRID_USERNAME='test'
+      SENDGRID_PASSWORD='test'
+      REDIS_URL='redis://'
+      python manage.py check --deploy
     - coverage run manage.py test
     - npm run lint
   post:
