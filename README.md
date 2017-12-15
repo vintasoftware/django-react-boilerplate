@@ -61,6 +61,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - `pipenv install`
 - `npm install`
 - `npm run start`
+- `pipenv shell`
 - `python manage.py runserver`
 
 ### Testing
