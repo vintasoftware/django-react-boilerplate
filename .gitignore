@@ -9,6 +9,7 @@ __pycache__/
 
 # coverage result
 .coverage
+/coverage/
 
 # pycharm
 .idea
