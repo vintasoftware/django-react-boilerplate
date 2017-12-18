@@ -20,6 +20,7 @@ dependencies:
 test:
   override:
     - npm run build
+    - npm run lint
     # style check
     - pipenv run prospector
     # security checks
@@ -42,7 +43,7 @@ test:
       REDIS_URL='redis://'
       pipenv run python manage.py check --deploy
     - pipenv run coverage run manage.py test
-    - npm run lint
+    - npm run test
   post:
     - pipenv run coverage html -d $CIRCLE_ARTIFACTS
 
