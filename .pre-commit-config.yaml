@@ -33,7 +33,7 @@
     pass_filenames: true
   - id: missing-migrations
     name: missing-migrations-local
-    entry: python manage.py has_missing_migrations
+    entry: pipenv run python manage.py has_missing_migrations
     language: system
     always_run: true
     pass_filenames: false

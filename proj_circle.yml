@@ -3,35 +3,49 @@ machine:  # remeber to update those!
     version: 3.6.0
   node:
     version: 6.1.0
+  environment:
+    # makes default virtualenv be ignored by pipenv avoiding dependencies conflict
+    PIPENV_IGNORE_VIRTUALENVS: True
+
+dependencies:
+  pre:
+    # this updates git-lfs to make pre-commit large files check hook work properly
+    # more details in https://github.com/pre-commit/pre-commit-hooks/issues/252
+    - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+    - sudo apt-get install git-lfs --upgrade
+  post:
+    - pip install requests pipenv --upgrade
+    - pipenv install --dev
 
 test:
   override:
-    - npm install
     - npm run build
-    # style check
-    - prospector
-    # security checks
-    - bandit -r .
-    - cat requirements.txt | safety check --stdin
-    # imports check
-    - isort **/*.py --check-only
-    # pre-commit additional checks
-    - SKIP=prospector,isort pre-commit run --all-files
-    - >
-        DJANGO_SETTINGS_MODULE={{project_name}}.settings.local
-            python manage.py has_missing_migrations --ignore authtools;
-    - >
-        SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')
-        DATABASE_URL='sqlite:///'
-        ALLOWED_HOSTS='.example.org'
-        SENDGRID_USERNAME='test'
-        SENDGRID_PASSWORD='test'
-        REDIS_URL='redis://'
-            python manage.py check --deploy --settings={{project_name}}.settings.production
-    - coverage run manage.py test
     - npm run lint
+    # style check
+    - pipenv run prospector
+    # security checks
+    - pipenv run bandit -r .
+    - pipenv run pip freeze | safety check --stdin
+    # imports check
+    - pipenv run isort **/*.py --check-only
+    # pre-commit additional checks
+    - SKIP=prospector,isort,eslint,missing-migrations pipenv run pre-commit run --all-files
+    - >-
+      DJANGO_SETTINGS_MODULE={{project_name}}.settings.local_base
+      pipenv run python manage.py has_missing_migrations --ignore authtools;
+    - >-
+      DJANGO_SETTINGS_MODULE={{project_name}}.settings.production
+      SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')
+      DATABASE_URL='sqlite:///'
+      ALLOWED_HOSTS='.example.org'
+      SENDGRID_USERNAME='test'
+      SENDGRID_PASSWORD='test'
+      REDIS_URL='redis://'
+      pipenv run python manage.py check --deploy
+    - pipenv run coverage run manage.py test
+    - npm run test
   post:
-    - coverage html -d $CIRCLE_ARTIFACTS
+    - pipenv run coverage html -d $CIRCLE_ARTIFACTS
 
 # This is necessary for the boilerplate's CI. You can remove these lines
 general:

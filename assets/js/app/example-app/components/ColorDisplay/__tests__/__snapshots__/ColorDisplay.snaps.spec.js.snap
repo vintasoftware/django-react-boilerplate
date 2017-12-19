@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorDisplay no color (should default to black) 1`] = `
+<span
+  className="color-black"
+>
+  black
+</span>
+`;
+
+exports[`ColorDisplay purple 1`] = `
+<span
+  className="color-purple"
+>
+  purple
+</span>
+`;
+
+exports[`ColorDisplay unknown color 1`] = `
+<span
+  className="color-caterpillar"
+>
+  caterpillar
+</span>
+`;
