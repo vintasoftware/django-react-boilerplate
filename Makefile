@@ -9,4 +9,4 @@ test:
 	pipenv run py.test $(ARG) -n auto --reuse-db
 
 testreset:
-	pipenv run py.test $(ARG) -n auto
+	pipenv run py.test $(ARG) -n auto --create-db
