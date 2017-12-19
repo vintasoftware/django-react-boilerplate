@@ -42,6 +42,7 @@ ipython = "*"
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
+pytest-xdist = "*"
 
 
 [requires]
