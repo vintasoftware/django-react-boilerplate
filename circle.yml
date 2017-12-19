@@ -13,7 +13,7 @@ machine:
 
 dependencies:
   post:
-    - pip install django
+    - pip install "django<2"
     - django-admin startproject testproject --extension py,yml,json --name Procfile,README.md --template=.
     - pip install requests pipenv --upgrade
 
