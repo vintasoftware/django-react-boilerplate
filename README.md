@@ -67,7 +67,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 ### Testing
 `make test`
 
-Will run django tests using `--keepdb` and `--parallel`. You may pass a path to the desired test module in the make command. E.g.:
+Will run django tests using pytest flags `--reuse-db` and `-n auto`, equivalent to `--keepdb` and `--parallel` respectively. You may pass a path to the desired test module in the make command. E.g.:
 
 `make test someapp.tests.test_views`
 
