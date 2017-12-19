@@ -39,6 +39,9 @@ prospector = {extras = ["with-vulture"]}
 isort = "*"
 safety = "*"
 ipython = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
 
 
 [requires]
