@@ -39,7 +39,7 @@ test:
         pwd: testproject
     - pipenv run python manage.py migrate:
         pwd: testproject
-    - pipenv run python manage.py test:
+    - pipenv run py.test:
         pwd: testproject
     - pipenv run prospector:
         pwd: testproject
@@ -59,8 +59,9 @@ deployment:
     branch: master
     commands:
       - mv proj_circle.yml circle.yml
+      - mv proj_pytest.ini pytest.ini
       - git checkout -b boilerplate-release
-      - git add circle.yml
-      - git rm proj_circle.yml
-      - GIT_COMMITTER_NAME="Vinta Software" GIT_COMMITTER_EMAIL="contact@vinta.com.br" git commit -m "Replacing circle.yml" --author "Vinta Software <contact@vinta.com.br>"
+      - git add circle.yml pytest.ini
+      - git rm proj_circle.yml proj_pytest.ini
+      - GIT_COMMITTER_NAME="Vinta Software" GIT_COMMITTER_EMAIL="contact@vinta.com.br" git commit -m "Replacing circle.yml and pytest.ini" --author "Vinta Software <contact@vinta.com.br>"
       - git push origin boilerplate-release --force
