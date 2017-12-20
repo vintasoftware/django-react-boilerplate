@@ -21,6 +21,10 @@ test:
   override:
     - pipenv install --dev:
         pwd: testproject
+    # The above command would have wrongly installed django 2.x
+    # the follwing is a workaround for https://github.com/pypa/pipenv/issues/1220
+    - pipenv install
+        pwd: testproject
     - npm update --save:
         pwd: testproject
     - npm update --save-dev:
