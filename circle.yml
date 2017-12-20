@@ -13,13 +13,17 @@ machine:
 
 dependencies:
   post:
-    - pip install django
+    - pip install "django<2"
     - django-admin startproject testproject --extension py,yml,json --name Procfile,README.md --template=.
     - pip install requests pipenv --upgrade
 
 test:
   override:
     - pipenv install --dev:
+        pwd: testproject
+    # The above command would have wrongly installed django 2.x
+    # the follwing is a workaround for https://github.com/pypa/pipenv/issues/1220
+    - pipenv install:
         pwd: testproject
     - npm update --save:
         pwd: testproject
