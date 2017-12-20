@@ -42,10 +42,9 @@ test:
       SENDGRID_PASSWORD='test'
       REDIS_URL='redis://'
       pipenv run python manage.py check --deploy
-    - pipenv run coverage run manage.py test
+    - mkdir -p $CIRCLE_TEST_REPORTS/django
+    - pipenv run pytest --create-db --migrations --cov . --cov-config .coveragerc --junit-xml $CIRCLE_TEST_REPORTS/django/pytest-report.xml --cov-report html:$CIRCLE_ARTIFACTS
     - npm run test
-  post:
-    - pipenv run coverage html -d $CIRCLE_ARTIFACTS
 
 # This is necessary for the boilerplate's CI. You can remove these lines
 general:

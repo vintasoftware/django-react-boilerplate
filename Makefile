@@ -6,7 +6,7 @@ clean:
 	@find . -name "__pycache__" -delete
 
 test:
-	pipenv run python manage.py test $(ARG) --parallel --keepdb
+	pipenv run py.test $(ARG) -n auto --reuse-db
 
 testreset:
-	pipenv run python manage.py test $(ARG) --parallel
+	pipenv run py.test $(ARG) -n auto --create-db
