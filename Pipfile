@@ -33,9 +33,9 @@ opbeat = "*"
 whitenoise = "*"
 bandit = "*"
 coverage = "*"
-astroid = "<1.6"
-pylint = "<1.8"
-prospector = {extras = ["with-vulture"]}
+astroid = "*"
+pylint = "*"
+prospector = {git = "https://github.com/vintasoftware/prospector.git", ref="f81e290", extras = ["with-vulture"]}
 isort = "*"
 safety = "*"
 ipython = "*"
