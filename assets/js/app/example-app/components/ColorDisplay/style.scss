@@ -1,0 +1,29 @@
+%text-color {
+  font-weight: bold;
+  margin: 0px 5px;
+};
+
+.color-black {
+  @extend %text-color;
+  color: black;
+}
+
+.color-green {
+  @extend %text-color;
+  color: green;
+}
+
+.color-red {
+  @extend %text-color;
+  color: red;
+}
+
+.color-blue {
+  @extend %text-color;
+  color: blue;
+}
+
+.color-purple {
+  @extend %text-color;
+  color: purple;
+}

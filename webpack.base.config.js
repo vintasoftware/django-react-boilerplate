@@ -63,10 +63,6 @@ module.exports = [{
         loader: 'url-loader?limit=100000',
       },
       {
-        test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file-loader?name=fonts/[name].[ext]',
-      },
-      {
         test: /\.(jpg|png)?$/,
         loaders: [
           'file-loader?name=i-[hash].[ext]',
