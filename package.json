@@ -77,6 +77,7 @@
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
+    "ajv": "^6.2.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-import-resolver-webpack": "^0.8.3",
