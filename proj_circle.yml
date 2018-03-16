@@ -25,7 +25,7 @@ test:
     - pipenv run prospector
     # security checks
     - pipenv run bandit -r .
-    - pipenv run pip freeze | safety check --stdin
+    - pipenv check
     # imports check
     - pipenv run isort **/*.py --check-only
     # pre-commit additional checks
