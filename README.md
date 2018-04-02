@@ -48,7 +48,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 ### Setup
 - On project root, do the following:
 - Create a copy of ``{{theprojectname}}/settings/local.py.example``:  
-  `cp {{theprojectname}}/settings/local.py.example {{theprojectname}}/settings/local.py` (remembering you should remove the curly braces and replace `{{theprojectname}}` with your project's name!).
+  `cp {{theprojectname}}/settings/local.py.example {{theprojectname}}/settings/local.py` (remembering you should replace `{{theprojectname}}` with your project's name!).
 - Create a copy of ``.env.example``:  
   `cp .env.example .env`
 - Create the migrations for `users` app (do this, then remove this line from the README):  
