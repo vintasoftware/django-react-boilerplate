@@ -30,7 +30,7 @@ This is a good starting point for modern Python/JavaScript web projects.
 django-admin startproject theprojectname --extension py,yml,json --name Procfile,README.md,.env.example --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
 ```
 - [ ] Above: don't forget the `--extension` and `--name` params! (also don't forget to change `theprojectname` to your project's name).
-- [ ] Enter the project's directory through your command line.
+- [ ] Navigate to the project's directory through your command line.
 - [ ] Install pipenv if not installed yet: `pip install pipenv` (maybe you'll have to run this command as an OS superuser).
 - [ ] Make sure you have Python 3.6 installed.
 - [ ] `pipenv install --dev`
@@ -39,7 +39,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] `npm update --save-dev`
 - [ ] Check for outdated npm dependencies with `npm outdated` and update them.
 - [ ] Change the first line of README to the name of the project.
-- [ ] Add an email address to the `ADMINS` settings variable in `theprojectname/theprojectname/settings/base.py`
+- [ ] Add an email address to the `ADMINS` settings variable in `{{theprojectname}}/{{theprojectname}}/settings/base.py`
 - [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails.
 
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
@@ -47,13 +47,13 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 ## Running
 ### Setup
 - On project root, do the following:
-- Create a copy of ``theprojectname/settings/local.py.example``:  
-  `cp theprojectname/settings/local.py.example theprojectname/settings/local.py` (don't forget to replace `theprojectname` with your project's name again!).
+- Create a copy of ``{{theprojectname}}/settings/local.py.example``:  
+  `cp {{theprojectname}}/settings/local.py.example {{theprojectname}}/settings/local.py` (remembering you should remove the curly braces and replace `{{theprojectname}}` with your project's name!).
 - Create a copy of ``.env.example``:  
   `cp .env.example .env`
 - Create the migrations for `users` app (do this, then remove this line from the README):  
   `python manage.py makemigrations`
-- If "there's no module named Django", install Django 1.11 `pip install Django==1.11` and try the step above again.
+- If you get an "there's no module named Django" error, install it through `pip install Django<2` and try the step above again.
 - Run the migrations:  
   `python manage.py migrate`
 
