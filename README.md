@@ -24,20 +24,22 @@ Also, includes a Heroku `app.json` and a working Django `production.py` settings
 This is a good starting point for modern Python/JavaScript web projects.
 
 ## Project bootstrap [![CircleCI](https://circleci.com/gh/vintasoftware/django-react-boilerplate.svg?style=svg)](https://circleci.com/gh/vintasoftware/django-react-boilerplate)
+- [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
 ```
 django-admin startproject theprojectname --extension py,yml,json --name Procfile,README.md,.env.example --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
 ```
-- [ ] Above: don't forget the `--extension` and `--name` params!
-- [ ] Install pipenv if not installed yet: `pip install pipenv` (maybe you have to run this command as an OS superuser)
-- [ ] Make sure you have Python 3.6 installed
+- [ ] Above: don't forget the `--extension` and `--name` params! (also don't forget to change `theprojectname` to your project's name).
+- [ ] Enter the project's directory through your command line.
+- [ ] Install pipenv if not installed yet: `pip install pipenv` (maybe you'll have to run this command as an OS superuser).
+- [ ] Make sure you have Python 3.6 installed.
 - [ ] `pipenv install --dev`
 - [ ] Activate the newly created virtualenv with `pipenv shell`
 - [ ] `npm update --save`
 - [ ] `npm update --save-dev`
-- [ ] Check for outdated npm dependencies with `npm outdated` and update them
-- [ ] Change the first line of README to the name of the project
-- [ ] Add an email address to the `ADMINS` settings variable
+- [ ] Check for outdated npm dependencies with `npm outdated` and update them.
+- [ ] Change the first line of README to the name of the project.
+- [ ] Add an email address to the `ADMINS` settings variable in `theprojectname/theprojectname/settings/base.py`
 - [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails.
 
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
@@ -45,12 +47,13 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 ## Running
 ### Setup
 - On project root, do the following:
-- Create a copy of ``{{project_name}}/settings/local.py.example``:  
-  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py`
-- Create a copy of ``.env.example``:  
+- Create a copy of ``theprojectname/settings/local.py.example``:  
+  `cp theprojectname/settings/local.py.example theprojectname/settings/local.py` (don't forget to replace `theprojectname` with your project's name again!).
+- Create a copy of ``.env.example``:  
   `cp .env.example .env`
-- Create the migrations for `users` app (do this, then remove this line from the README):  
+- Create the migrations for `users` app (do this, then remove this line from the README):  
   `python manage.py makemigrations`
+- If "there's no module named Django", install Django 1.11 `pip install Django==1.11` and try the step above again.
 - Run the migrations:  
   `python manage.py migrate`
 
@@ -58,9 +61,11 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
 
 ### Running the project
+- Open a command line window and go to the project's directory.
 - `pipenv install --dev`
 - `npm install`
 - `npm run start`
+- Open another command line window and go to the project's directory.
 - `pipenv shell`
 - `python manage.py runserver`
 
@@ -97,5 +102,5 @@ P.S. if you want to deploy in a different way please check the `app.json` file f
 ## Commercial Support
 This project, as other Vinta open-source projects, is used in products of Vinta clients. We are always looking for exciting work, so if you need any commercial support, feel free to get in touch: contact@vinta.com.br
 
-Copyright (c) 2017 Vinta Serviços e Soluções Tecnológicas Ltda.
+Copyright (c) 2018 Vinta Serviços e Soluções Tecnológicas Ltda.
 [MIT License](LICENSE.txt)
