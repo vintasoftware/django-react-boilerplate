@@ -51,7 +51,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py` (remembering you should replace `{{project_name}}` with your project's name!).
 - Create a copy of ``.env.example``:  
   `cp .env.example .env`
-- Create the migrations for `users` app (do this, then remove this line from the README):  
+- Create the migrations for `users` app (do this, then remove this line from the README):  
   `python manage.py makemigrations`
 - If you get an "there's no module named django" error, install it through `pip install django<2` and try the step above again.
 - Run the migrations:  
