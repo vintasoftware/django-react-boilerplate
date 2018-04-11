@@ -39,7 +39,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] `npm update --save-dev`
 - [ ] Check for outdated npm dependencies with `npm outdated` and update them.
 - [ ] Change the first line of README to the name of the project.
-- [ ] Add an email address to the `ADMINS` settings variable in `{{theprojectname}}/{{theprojectname}}/settings/base.py`
+- [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/{{project_name}}/settings/base.py`
 - [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails.
 
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
@@ -47,13 +47,13 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 ## Running
 ### Setup
 - On project root, do the following:
-- Create a copy of ``{{theprojectname}}/settings/local.py.example``:  
-  `cp {{theprojectname}}/settings/local.py.example {{theprojectname}}/settings/local.py` (remembering you should replace `{{theprojectname}}` with your project's name!).
-- Create a copy of ``.env.example``:  
+- Create a copy of ``{{project_name}}/settings/local.py.example``:  
+  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py` (remembering you should replace `{{project_name}}` with your project's name!).
+- Create a copy of ``.env.example``:  
   `cp .env.example .env`
-- Create the migrations for `users` app (do this, then remove this line from the README):  
+- Create the migrations for `users` app (do this, then remove this line from the README):  
   `python manage.py makemigrations`
-- If you get an "there's no module named Django" error, install it through `pip install Django<2` and try the step above again.
+- If you get an "there's no module named Django" error, install it through `pip install django<2` and try the step above again.
 - Run the migrations:  
   `python manage.py migrate`
 
