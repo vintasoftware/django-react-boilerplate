@@ -16,7 +16,7 @@ fixmydjango = "*"
 isort = "*"
 model-mommy = "*"
 pre-commit = "*"
-prospector = {git = "https://github.com/vintasoftware/prospector.git", ref="f81e290", extras = ["with-vulture"]}
+prospector = {git = "https://github.com/vintasoftware/prospector.git", ref="0a63f2b", extras = ["with-vulture"]}
 pylint = "*"
 safety = "*"
 
