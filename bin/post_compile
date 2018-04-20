@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-echo "----->Post-compile hook"
+echo "-----> Post-compile hook"
 
 if [ -f bin/run_collectstatic ] && [ "$DISABLE_COLLECTSTATIC" == 0 ]; then
     echo "-----> Running run_collectstatic"
