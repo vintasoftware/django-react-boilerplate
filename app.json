@@ -13,7 +13,7 @@
       "value": "1"
     },
     "AUTO_MIGRATE": {
-      "description": "Heroku setting to run Django makemigrations automatically (it is run by bin/post_compile)",
+      "description": "Heroku setting to run Django migrate automatically (it is run by bin/post_compile)",
       "value": "1"
     },
     "DJANGO_SETTINGS_MODULE": {
