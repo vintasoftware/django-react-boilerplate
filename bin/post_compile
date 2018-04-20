@@ -13,8 +13,10 @@ echo "-----> Running manage.py check --deploy --fail-level WARNING"
 python manage.py check --deploy --fail-level WARNING
 
 if [ -n "$AUTO_MIGRATE" ]; then
-    echo "-----> Running manage.py migrate"
-    python manage.py migrate --noinput
+    if [ $AUTO_MIGRATE == 1 ]; then
+        echo "-----> Running manage.py migrate"
+        python manage.py migrate --noinput
+    fi
 fi
 
 echo "-----> Post-compile done"
