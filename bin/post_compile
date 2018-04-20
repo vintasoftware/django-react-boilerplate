@@ -3,7 +3,7 @@ set -eo pipefail
 
 echo "----->Post-compile hook"
 
-if [ -f bin/run_collectstatic ]; then
+if [ -f bin/run_collectstatic ] && [ "$DISABLE_COLLECTSTATIC" == 0 ]; then
     echo "-----> Running run_collectstatic"
     chmod +x bin/run_collectstatic
     bin/run_collectstatic
@@ -13,7 +13,7 @@ echo "-----> Running manage.py check --deploy --fail-level WARNING"
 python manage.py check --deploy --fail-level WARNING
 
 if [ -n "$AUTO_MIGRATE" ]; then
-    if [ $AUTO_MIGRATE == 1 ]; then
+    if [ "$AUTO_MIGRATE" == 1 ]; then
         echo "-----> Running manage.py migrate"
         python manage.py migrate --noinput
     fi
