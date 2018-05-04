@@ -12,8 +12,7 @@ fi
 echo "-----> Running manage.py check --deploy --fail-level WARNING"
 python manage.py check --deploy --fail-level WARNING
 
-if [ -n "$AUTO_MIGRATE" ]; then
-    if [ "$AUTO_MIGRATE" == 1 ]; then
+if [ -n "$AUTO_MIGRATE" ] && [ "$AUTO_MIGRATE" == 1 ]; then
         echo "-----> Running manage.py migrate"
         python manage.py migrate --noinput
     fi
