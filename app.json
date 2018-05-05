@@ -12,6 +12,10 @@
       "description": "Heroku setting to disable Django collectstatic (it is run by bin/post_compile)",
       "value": "1"
     },
+    "AUTO_MIGRATE": {
+      "description": "Heroku setting to run Django migrate automatically (it is run by bin/post_compile)",
+      "value": "1"
+    },
     "DJANGO_SETTINGS_MODULE": {
       "description": "Django settings Python import path",
       "value": "{{project_name}}.settings.production"

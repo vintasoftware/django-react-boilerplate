@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-echo "----->Post-compile hook"
+echo "-----> Post-compile hook"
 
-if [ -f bin/run_collectstatic ]; then
+if [ -f bin/run_collectstatic ] && [ "$DISABLE_COLLECTSTATIC" == 0 ]; then
     echo "-----> Running run_collectstatic"
     chmod +x bin/run_collectstatic
     bin/run_collectstatic
@@ -12,9 +12,10 @@ fi
 echo "-----> Running manage.py check --deploy --fail-level WARNING"
 python manage.py check --deploy --fail-level WARNING
 
-if [ -n "$AUTO_MIGRATE" ]; then
-    echo "-----> Running manage.py migrate"
-    python manage.py migrate --noinput
+if [ -n "$AUTO_MIGRATE" ] && [ "$AUTO_MIGRATE" == 1 ]; then
+        echo "-----> Running manage.py migrate"
+        python manage.py migrate --noinput
+    fi
 fi
 
 echo "-----> Post-compile done"
