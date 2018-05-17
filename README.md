@@ -19,7 +19,6 @@ Also, includes a Heroku `app.json` and a working Django `production.py` settings
 - Redis, for Celery
 - Sendgrid, for e-mail sending
 - Papertrail, for logs and platform errors alerts (must set them manually)
-- Opbeat, for performance monitoring
 
 This is a good starting point for modern Python/JavaScript web projects.
 

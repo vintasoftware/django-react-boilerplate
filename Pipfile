@@ -35,7 +35,6 @@ brotlipy = "*"
 django-log-request-id = "*"
 dj-database-url = "*"
 gunicorn = "*"
-opbeat = "*"
 whitenoise = "*"
 ipython = "*"
 

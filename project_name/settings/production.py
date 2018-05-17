@@ -63,11 +63,6 @@ MIDDLEWARE.insert(  # insert RequestIDMiddleware on the top
 LOG_REQUEST_ID_HEADER = 'HTTP_X_REQUEST_ID'
 LOG_REQUESTS = True
 
-# Opbeat
-INSTALLED_APPS += ['opbeat.contrib.django']
-MIDDLEWARE.insert(  # insert OpbeatAPMMiddleware on the top
-    0, 'opbeat.contrib.django.middleware.OpbeatAPMMiddleware')
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
