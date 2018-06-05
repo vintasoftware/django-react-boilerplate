@@ -68,6 +68,11 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - `pipenv shell`
 - `python manage.py runserver`
 
+#### Celery
+- Open a command line window and go to the project's directory
+- `pipenv shell`
+- `python manage.py celery`
+
 ### Testing
 `make test`
 
