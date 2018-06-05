@@ -1,3 +1,4 @@
+# pylint: skip-file
 import shlex
 from subprocess import PIPE  # nosec
 
