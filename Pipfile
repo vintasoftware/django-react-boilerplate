@@ -16,7 +16,7 @@ fixmydjango = "*"
 isort = "*"
 model-mommy = "*"
 pre-commit = "*"
-prospector = {git = "https://github.com/vintasoftware/prospector.git", ref="0a63f2b", extras = ["with-vulture"]}
+prospector = {extras = ["with-vulture"]}
 pylint = "*"
 safety = "*"
 
@@ -36,6 +36,7 @@ django-log-request-id = "*"
 dj-database-url = "*"
 gunicorn = "*"
 whitenoise = "*"
+psutil = "*"
 ipython = "*"
 
 
