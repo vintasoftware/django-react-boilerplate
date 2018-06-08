@@ -54,10 +54,6 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
 
-# Fix My Django
-INSTALLED_APPS += ('fixmydjango',)
-FIX_MY_DJANGO_ADMIN_MODE = True
-
 # Logging
 LOGGING = {
     'version': 1,
