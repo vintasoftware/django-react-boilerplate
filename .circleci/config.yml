@@ -80,7 +80,7 @@ jobs:
           command: npm update --save-dev
           path: testproject
       - run:
-          name: hotfix for \#133
+          name: "hotfix for #133"
           command: |
             sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' package.json
           path: testproject

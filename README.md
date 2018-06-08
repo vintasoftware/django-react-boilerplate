@@ -12,7 +12,7 @@ A [Django 1.11](https://www.djangoproject.com/) project boilerplate/template wit
 - [WhiteNoise](http://whitenoise.evans.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlipy), for efficient static files serving
 - [prospector](https://prospector.landscape.io/en/master/) and [ESLint](https://eslint.org/) with [pre-commit](http://pre-commit.com/) for automated quality assurance (does not replace proper testing!)
 
-For continuous integration, a [CircleCI](https://circleci.com/) configuration `circle.yml` is included.
+For continuous integration, a [CircleCI](https://circleci.com/) configuration `.circleci/config.yml` is included.
 
 Also, includes a Heroku `app.json` and a working Django `production.py` settings, enabling easy deployments with ['Deploy to Heroku' button](https://devcenter.heroku.com/articles/heroku-button). Those Heroku plugins are included in `app.json`:
 - PostgreSQL, for DB
