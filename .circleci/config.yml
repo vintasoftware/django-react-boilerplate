@@ -25,13 +25,16 @@ jobs:
       - run:
           command: pip install requests pipenv --upgrade
           path: testproject
+      - run:
+          command: pipenv lock --dev
+          path: testproject
       - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "testproject/Pipfile" }}
+          key: dependency-cache-{{ .Branch }}-{{ checksum "testproject/Pipfile.lock" }}
       - run:
           command: pipenv install --dev
           path: testproject
       - save_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "testproject/Pipfile" }}
+          key: dependency-cache-{{ .Branch }}-{{ checksum "testproject/Pipfile.lock" }}
           paths:
             - testproject/.venv
             - /usr/local/bin
