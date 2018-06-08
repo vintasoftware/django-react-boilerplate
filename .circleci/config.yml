@@ -118,7 +118,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: mv proj_circle.yml circle.yml
+          command: mv proj_circle.yml .circleci/config.yml
       - run:
           command: git checkout -b boilerplate-release
       - run:
