@@ -1,0 +1,138 @@
+# This circle.yml file does some basic testing on CI for the boilerplate itself.
+# When using the boilerplate this file will not be used, proj_circle.yml is used
+# instead.
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/django-react-boilerplate
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+        environment:
+          PIPENV_IGNORE_VIRTUALENVS: True
+          PIPENV_VENV_IN_PROJECT: True
+          PIPENV_DONT_LOAD_ENV: 0
+    steps:
+      - checkout
+      - run:
+          command: sudo chown -R circleci:circleci /usr/local/bin
+      - run:
+          command: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run:
+          command: pip install django
+      - run:
+          command: django-admin startproject testproject --extension py,yml,json --name Procfile,README.md --template=.
+      - run:
+          command: pip install requests pipenv --upgrade
+      - run:
+          command: pipenv install --dev
+          path: testproject
+      - save_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - .venv
+            - /usr/local/bin
+            - /usr/local/lib/python3.6/site-packages
+      - run:
+          command: cp testproject/settings/local.py.example testproject/settings/local.py
+          path: testproject
+      - run:
+          command: cp .env.example .env
+          path: testproject
+      - run:
+          command: pipenv run python manage.py makemigrations
+          path: testproject
+      - run:
+          command: pipenv run python manage.py migrate
+          path: testproject
+      - run:
+          command: pipenv run python manage.py test
+          path: testproject
+      - run:
+          command: pipenv run prospector
+          path: testproject
+      - run:
+          command: pipenv run python manage.py has_missing_migrations
+          path: testproject
+      - run:
+          command: pipenv run python manage.py check --deploy --fail-level WARNING
+          path: testproject
+          environment:
+            SECRET_KEY: '$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")'
+            SENDGRID_USERNAME: foo
+            SENDGRID_PASSWORD: password
+            DJANGO_SETTINGS_MODULE: 'testproject.settings.production'
+            DATABASE_URL: 'sqlite:///'
+            ALLOWED_HOSTS: '.example.org'
+            REDIS_URL: 'redis://'
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          command: npm update --save
+          path: testproject
+      - run:
+          command: npm update --save-dev
+          path: testproject
+      - run:
+          name: hotfix for \#133
+          command: |
+            sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' testproject/package.json
+      - run:
+          command: npm install
+          path: testproject
+      # npm ls will error on dependencies errors
+      - run:
+          command: npm ls
+          path: testproject
+      - save_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          command: npm run test
+          path: testproject
+      - run:
+          command: npm run lint
+          path: testproject
+      - run:
+          command: npm run build
+          path: testproject
+  deploy:
+    working_directory: ~/django-react-boilerplate
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+        environment:
+          PIPENV_IGNORE_VIRTUALENVS: True
+          PIPENV_VENV_IN_PROJECT: True
+          PIPENV_DONT_LOAD_ENV: 0
+    steps:
+      - checkout
+      - run:
+          command: mv proj_circle.yml circle.yml
+      - run:
+          command: git checkout -b boilerplate-release
+      - run:
+          command: git add circle.yml
+      - run:
+          command: git rm proj_circle.yml
+      - run:
+          command: git commit -m "Replacing circle.yml" --author "Vinta Software <contact@vinta.com.br>"
+          environment:
+            GIT_COMMITTER_NAME: "Vinta Software"
+            GIT_COMMITTER_EMAIL: "contact@vinta.com.br"
+      - run:
+          command: git push origin boilerplate-release --force
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
