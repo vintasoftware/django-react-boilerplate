@@ -22,7 +22,7 @@ Also, includes a Heroku `app.json` and a working Django `production.py` settings
 
 This is a good starting point for modern Python/JavaScript web projects.
 
-## Project bootstrap [![CircleCI](https://circleci.com/gh/vintasoftware/django-react-boilerplate.svg?style=svg)](https://circleci.com/gh/vintasoftware/django-react-boilerplate)
+## Project bootstrap [![CircleCI](https://circleci.com/gh/vintasoftware/django-react-boilerplate.svg?style=svg)](https://circleci.com/gh/vintasoftware/django-react-boilerplate) [![Greenkeeper badge](https://badges.greenkeeper.io/vintasoftware/django-react-boilerplate.svg)](https://greenkeeper.io/)
 - [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
 ```
