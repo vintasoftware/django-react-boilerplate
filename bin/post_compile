@@ -3,7 +3,7 @@ set -eo pipefail
 
 echo "-----> Post-compile hook"
 
-if [ -f bin/run_collectstatic ] && [ "$DISABLE_COLLECTSTATIC" == 0 ]; then
+if [ -f bin/run_collectstatic ] && [ -n "$ENABLE_DJANGO_COLLECTSTATIC" ] && [ "$ENABLE_DJANGO_COLLECTSTATIC" == 1 ]; then
     echo "-----> Running run_collectstatic"
     chmod +x bin/run_collectstatic
     bin/run_collectstatic
