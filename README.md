@@ -3,7 +3,7 @@
 # Django React Boilerplate
 
 ## About
-A [Django 1.11](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
+A [Django](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
 - [React](https://facebook.github.io/react/), for building interactive UIs
 - [django-js-reverse](https://github.com/ierror/django-js-reverse), for generating URLs on JS
 - [Bootstrap 4](https://v4-alpha.getbootstrap.com/), for responsive styling
@@ -52,7 +52,6 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   `cp .env.example .env`
 - Create the migrations for `users` app (do this, then remove this line from the README):  
   `python manage.py makemigrations`
-- If you get an "there's no module named Django" error, install it through `pip install django<2` and try the step above again.
 - Run the migrations:  
   `python manage.py migrate`
 
