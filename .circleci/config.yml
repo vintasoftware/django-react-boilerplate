@@ -122,7 +122,7 @@ jobs:
       - run:
           command: git checkout -b boilerplate-release
       - run:
-          command: git add circle.yml
+          command: git add .circleci/config.yml
       - run:
           command: git rm proj_circle.yml
       - run:
