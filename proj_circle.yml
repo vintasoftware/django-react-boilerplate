@@ -24,15 +24,31 @@ jobs:
           command: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - run:
           command: pip install requests pipenv --upgrade
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: pipenv install --dev
+      - save_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - .venv
+            - /usr/local/bin
+            - /usr/local/lib/python3.6/site-packages
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - node_modules
       - run:
           command: npm run build
       - run:
           command: npm run lint
       # style check
       - run:
-          command: pipenv run propector
+          command: pipenv run prospector --messages-only
       # security checks
       - run:
           command: pipenv run bandit -r .
