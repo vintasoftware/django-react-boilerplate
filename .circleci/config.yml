@@ -21,7 +21,7 @@ jobs:
       - run:
           command: pip install django
       - run:
-          command: django-admin startproject testproject --extension py,yml,json,.example --name Procfile,README.md --template=.
+          command: django-admin startproject testproject --extension py,yml,json,example --name Procfile,README.md --template=.
       - run:
           command: pip install requests pipenv --upgrade
           path: testproject

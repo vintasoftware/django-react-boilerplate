@@ -76,15 +76,13 @@ jobs:
             SENDGRID_PASSWORD: 'test'
             REDIS_URL: 'redis://'
       - run:
-          command: pipenv run python manage.py check --deploy
-      - run:
           command: pipenv run coverage run manage.py test
       - run:
           command: npm run test
       - run:
           command: |
-            mkdir -p ~/reports
-            pipenv run coverage xml -O ~/test-reports/junit.xml
+            mkdir -p ~/test-reports/django/
+            pipenv run coverage xml -O ~/test-reports/django/results.xml
           when: always
       - store_test_results:
           path: ~/test-reports
