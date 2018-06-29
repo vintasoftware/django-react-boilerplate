@@ -24,26 +24,30 @@ jobs:
           command: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - run:
           command: pip install requests pipenv --upgrade
-      {% verbatim %}
       - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          keys:
+            - v1-pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-pipenv-cache-{{ .Branch }}-
+            - v1-pipenv-cache-
       - run:
           command: pipenv install --dev
       - save_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          key: pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - .venv
             - /usr/local/bin
             - /usr/local/lib/python3.6/site-packages
       - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          keys:
+            - v1-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-npm-cache-{{ .Branch }}-
+            - v1-npm-cache-
       - run:
           command: npm install
       - save_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          key: npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - node_modules
-      {% endverbatim %}
       - run:
           command: npm run build
       - run:

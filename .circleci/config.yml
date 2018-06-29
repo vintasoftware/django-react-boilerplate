@@ -29,12 +29,15 @@ jobs:
           command: pipenv lock --dev
           path: testproject
       - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "testproject/Pipfile.lock" }}
+          keys:
+            - v1-pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-pipenv-cache-{{ .Branch }}-
+            - v1-pipenv-cache-
       - run:
           command: pipenv install --dev
           path: testproject
       - save_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "testproject/Pipfile.lock" }}
+          key: pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - testproject/.venv
             - /usr/local/bin
@@ -72,7 +75,10 @@ jobs:
             ALLOWED_HOSTS: '.example.org'
             REDIS_URL: 'redis://'
       - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "testproject/package.json" }}
+          keys:
+            - v1-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-npm-cache-{{ .Branch }}-
+            - v1-npm-cache-
       - run:
           command: npm update --save
           path: testproject
@@ -95,7 +101,7 @@ jobs:
           command: npm ls
           path: testproject
       - save_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "testproject/package.json" }}
+          key: dependency-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - testproject/node_modules
       - run:
