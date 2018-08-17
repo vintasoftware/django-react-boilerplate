@@ -1,14 +1,13 @@
 var autoprefixer = require('autoprefixer');
 var baseConfig = require('./webpack.base.config');
 var webpack = require('webpack')
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var SpritesmithPlugin = require('webpack-spritesmith');
 var BundleTracker = require('webpack-bundle-tracker');
 var path = require('path');
 var nodeModulesDir = path.resolve(__dirname, 'node_modules');
 
 baseConfig[1].entry = [
-  'bootstrap-loader/extractStyles',
   'whatwg-fetch',
   'babel-polyfill',
   './assets/js/index.js',
@@ -47,7 +46,7 @@ baseConfig[1].plugins = [
       },
       retina: '@2x'
   }),
-  new ExtractTextPlugin({ filename: '[name]-[hash].css', disable: false, allChunks: true }),
+  new MiniCssExtractPlugin({ filename: '[name]-[hash].css', disable: false, allChunks: true }),
   new webpack.optimize.UglifyJsPlugin({ comments: false }),
   new BundleTracker({
     filename: './webpack-stats.json'

@@ -9,7 +9,6 @@ var nodeModulesDir = path.resolve(__dirname, 'node_modules');
 baseConfig[1].entry = [
   'webpack-dev-server/client?http://localhost:3000',
   'webpack/hot/only-dev-server',
-  'bootstrap-loader',
   'whatwg-fetch',
   'babel-polyfill',
   './assets/js/index',
