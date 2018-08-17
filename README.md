@@ -3,7 +3,7 @@
 # Django React Boilerplate
 
 ## About
-A [Django 1.11](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
+A [Django](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
 - [React](https://facebook.github.io/react/), for building interactive UIs
 - [django-js-reverse](https://github.com/ierror/django-js-reverse), for generating URLs on JS
 - [Bootstrap 4](https://v4-alpha.getbootstrap.com/), for responsive styling
@@ -12,7 +12,7 @@ A [Django 1.11](https://www.djangoproject.com/) project boilerplate/template wit
 - [WhiteNoise](http://whitenoise.evans.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlipy), for efficient static files serving
 - [prospector](https://prospector.landscape.io/en/master/) and [ESLint](https://eslint.org/) with [pre-commit](http://pre-commit.com/) for automated quality assurance (does not replace proper testing!)
 
-For continuous integration, a [CircleCI](https://circleci.com/) configuration `circle.yml` is included.
+For continuous integration, a [CircleCI](https://circleci.com/) configuration `.circleci/config.yml` is included.
 
 Also, includes a Heroku `app.json` and a working Django `production.py` settings, enabling easy deployments with ['Deploy to Heroku' button](https://devcenter.heroku.com/articles/heroku-button). Those Heroku plugins are included in `app.json`:
 - PostgreSQL, for DB
@@ -52,7 +52,6 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   `cp .env.example .env`
 - Create the migrations for `users` app (do this, then remove this line from the README):  
   `python manage.py makemigrations`
-- If you get an "there's no module named Django" error, install it through `pip install django<2` and try the step above again.
 - Run the migrations:  
   `python manage.py migrate`
 
