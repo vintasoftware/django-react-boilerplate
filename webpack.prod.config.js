@@ -19,7 +19,7 @@ baseConfig[1].output = {
   filename: '[name]-[hash].js',
 }
 
-baseConfig[1].module.loaders.push({
+baseConfig[1].module.rules.push({
   test: /\.jsx?$/,
   exclude: [nodeModulesDir],
   loaders: ['babel-loader?presets[]=react,presets[]=es2015']
