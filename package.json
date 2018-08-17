@@ -82,9 +82,10 @@
     "eslint-plugin-import": "^2.6.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.1.0",
-    "react-hot-loader": "^4.3.1",
     "jest": "^23.1.0",
     "jest-css-modules": "^1.1.0",
-    "react-test-renderer": "^16.4.0"
+    "react-hot-loader": "^4.3.1",
+    "react-test-renderer": "^16.4.0",
+    "webpack-cli": "^3.1.0"
   }
 }
