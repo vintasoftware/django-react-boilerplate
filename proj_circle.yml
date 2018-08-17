@@ -87,13 +87,13 @@ jobs:
           command: npm run test
       - run:
           command: |
-            mkdir -p ~/test-reports/django/
-            pipenv run coverage xml -O ~/test-reports/django/results.xml
+            mkdir -p test-reports/
+            pipenv run coverage xml -O test-reports/results.xml
           when: always
       - store_test_results:
-          path: ~/test-reports
+          path: test-reports
       - store_artifacts:
-          path: ~/test-reports
+          path: test-reports
 
 
 # This is necessary for the boilerplate's CI. You can remove these lines
