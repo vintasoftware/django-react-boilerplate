@@ -29,6 +29,8 @@ baseConfig[1].module.loaders.push({
   loader: 'file-loader?name=fonts/[name].[ext]',
 });
 
+baseConfig[1].optimization = { minimize: true };
+
 baseConfig[1].plugins = [
   new webpack.DefinePlugin({  // removes React warnings
     'process.env':{
@@ -47,7 +49,6 @@ baseConfig[1].plugins = [
       retina: '@2x'
   }),
   new MiniCssExtractPlugin({ filename: '[name]-[hash].css', disable: false, allChunks: true }),
-  new webpack.optimize.UglifyJsPlugin({ comments: false }),
   new BundleTracker({
     filename: './webpack-stats.json'
   }),
