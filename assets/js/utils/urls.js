@@ -1,3 +1,3 @@
-const Urls = window.Urls;
+const { Urls } = window;
 
 export default Urls;

@@ -9,7 +9,6 @@ var nodeModulesDir = path.resolve(__dirname, 'node_modules');
 baseConfig[1].entry = [
   'webpack-dev-server/client?http://localhost:3000',
   'webpack/hot/only-dev-server',
-  'bootstrap-loader',
   'whatwg-fetch',
   'babel-polyfill',
   './assets/js/index',
@@ -22,7 +21,7 @@ baseConfig[1].output = {
   filename: '[name].js',
 }
 
-baseConfig[1].module.loaders.push({
+baseConfig[1].module.rules.push({
   test: /\.jsx?$/,
   exclude: [nodeModulesDir],
   loaders: ['react-hot-loader', 'babel-loader?presets[]=react,presets[]=es2015']
