@@ -7,6 +7,9 @@ var BundleTracker = require('webpack-bundle-tracker');
 var path = require('path');
 var nodeModulesDir = path.resolve(__dirname, 'node_modules');
 
+baseConfig[0].mode = 'production'
+baseConfig[1].mode = 'production'
+
 baseConfig[1].entry = [
   'whatwg-fetch',
   'babel-polyfill',
