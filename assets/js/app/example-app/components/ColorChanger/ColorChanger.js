@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader'
+import { hot } from 'react-hot-loader';
 
 import ColorDisplay from '../ColorDisplay';
 
