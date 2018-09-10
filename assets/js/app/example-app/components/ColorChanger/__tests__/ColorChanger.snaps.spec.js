@@ -11,16 +11,18 @@ describe('ColorChanger', () => {
   let tree;
 
   test('Some title', () => {
-    Component = renderer.create(
-      <ColorChanger title="This is a test title" />);
+    Component = renderer.create((
+      <ColorChanger title="This is a test title" />
+    ));
 
     tree = Component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   test('No title (should use default)', () => {
-    Component = renderer.create(
-      <ColorChanger />);
+    Component = renderer.create((
+      <ColorChanger />
+    ));
 
     tree = Component.toJSON();
     expect(tree).toMatchSnapshot();
