@@ -48,7 +48,7 @@ exports[`ColorChanger No title (should use default) 1`] = `
         Purple
       </option>
     </select>
-    <mock
+    <ColorDisplay
       color="black"
     />
   </div>
@@ -103,7 +103,7 @@ exports[`ColorChanger Some title 1`] = `
         Purple
       </option>
     </select>
-    <mock
+    <ColorDisplay
       color="black"
     />
   </div>
