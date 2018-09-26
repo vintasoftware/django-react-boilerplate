@@ -69,7 +69,7 @@
     "marked": "^0.4.0",
     "node-sass": "^4.5.3",
     "popper.js": "^1.12.9",
-    "postcss": "^6.0.3",
+    "postcss": "^7.0.3",
     "postcss-loader": "^2.0.6",
     "prop-types": "^15.5.10",
     "react": "^16.4.0",
