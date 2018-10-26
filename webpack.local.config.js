@@ -6,10 +6,12 @@ var BundleTracker = require('webpack-bundle-tracker');
 var path = require('path');
 var nodeModulesDir = path.resolve(__dirname, 'node_modules');
 
+baseConfig[0].mode = 'development'
+baseConfig[1].mode = 'development'
+
 baseConfig[1].entry = [
   'webpack-dev-server/client?http://localhost:3000',
   'webpack/hot/only-dev-server',
-  'bootstrap-loader',
   'whatwg-fetch',
   'babel-polyfill',
   './assets/js/index',
@@ -22,10 +24,10 @@ baseConfig[1].output = {
   filename: '[name].js',
 }
 
-baseConfig[1].module.loaders.push({
+baseConfig[1].module.rules.push({
   test: /\.jsx?$/,
   exclude: [nodeModulesDir],
-  loaders: ['react-hot-loader', 'babel-loader?presets[]=react,presets[]=es2015']
+  loader: require.resolve('babel-loader')
 },
 {
   test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
