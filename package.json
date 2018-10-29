@@ -12,44 +12,6 @@
     "lint": "eslint assets",
     "coverage": "jest --coverage"
   },
-  "jest": {
-    "transform": {
-      ".*": "<rootDir>/node_modules/jest-css-modules"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/*"
-    ],
-    "modulePaths": [
-      "assets",
-      "assets/js",
-      "assets/js/app"
-    ],
-    "moduleNameMapper": {
-      "^.+\\.(css|scss)$": "identity-obj-proxy"
-    },
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "setupFiles": [
-      "./jest-setup.js"
-    ],
-    "collectCoverageFrom": [
-      "assets/js/**/*.{js,jsx}"
-    ],
-    "coveragePathIgnorePatterns": [
-      "assets/js/store.js",
-      "assets/js/index.js",
-      "assets/js/jquery-index.js",
-      "assets/js/constants/*",
-      "assets/js/pages/*",
-      "assets/js/tests/*"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 10
-      }
-    }
-  },
   "dependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
