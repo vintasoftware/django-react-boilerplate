@@ -12,7 +12,7 @@ baseConfig[1].mode = 'production'
 
 baseConfig[1].entry = [
   'whatwg-fetch',
-  'babel-polyfill',
+  '@babel/polyfill',
   './assets/js/index.js',
 ]
 
@@ -25,7 +25,12 @@ baseConfig[1].output = {
 baseConfig[1].module.rules.push({
   test: /\.jsx?$/,
   exclude: [nodeModulesDir],
-  loaders: ['babel-loader?presets[]=react,presets[]=es2015']
+  use: {
+    loader: 'babel-loader',
+    options: {
+      presets: ['@babel/preset-env', '@babel/preset-react'],
+    },
+  },
 },
 {
   test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
