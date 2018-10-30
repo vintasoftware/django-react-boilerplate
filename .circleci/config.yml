@@ -4,7 +4,21 @@
 version: 2
 
 jobs:
-  build:
+  checkout_code:
+    working_directory: ~/django-react-boilerplate
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      - run: pip install django
+      - run: django-admin startproject testproject --extension py,yml,json,example --name Procfile,README.md --template=.
+      - save_cache:
+          key: repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/django-react-boilerplate
+  build_dependencies_backend:
     working_directory: ~/django-react-boilerplate
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
@@ -13,15 +27,10 @@ jobs:
           PIPENV_VENV_IN_PROJECT: True
           PIPENV_DONT_LOAD_ENV: 0
     steps:
-      - checkout
-      - run:
-          command: sudo chown -R circleci:circleci /usr/local/bin
-      - run:
-          command: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - run:
-          command: pip install django
-      - run:
-          command: django-admin startproject testproject --extension py,yml,json,example --name Procfile,README.md --template=.
+      - restore_cache:
+          key: repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - run:
           command: pip install requests pipenv --upgrade
           path: testproject
@@ -30,18 +39,30 @@ jobs:
           path: testproject
       - restore_cache:
           keys:
-            - v1-pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - v1-pipenv-cache-{{ .Branch }}-
-            - v1-pipenv-cache-
+            - pipenv-cache-{{ .Branch }}-{{ checksum "testproject/Pipfile.lock" }}
       - run:
           command: pipenv install --dev
           path: testproject
       - save_cache:
-          key: pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          key: pipenv-cache-{{ .Branch }}-{{ checksum "testproject/Pipfile.lock" }}
           paths:
             - testproject/.venv
             - /usr/local/bin
             - /usr/local/lib/python3.6/site-packages
+  run_tests_and_lint_backend:
+    working_directory: ~/django-react-boilerplate
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+        environment:
+          PIPENV_IGNORE_VIRTUALENVS: True
+          PIPENV_VENV_IN_PROJECT: True
+          PIPENV_DONT_LOAD_ENV: 0
+    steps:
+      - restore_cache:
+          key: repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          keys:
+            - pipenv-cache-{{ .Branch }}-{{ checksum "testproject/Pipfile.lock" }}
       - run:
           command: cp testproject/settings/local.py.example testproject/settings/local.py
           path: testproject
@@ -74,11 +95,19 @@ jobs:
             DATABASE_URL: 'sqlite:///'
             ALLOWED_HOSTS: '.example.org'
             REDIS_URL: 'redis://'
+  build_dependencies_frontend:
+    working_directory: ~/django-react-boilerplate
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+    steps:
+      - restore_cache:
+          key: repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          command: npm install --package-lock-only
+          path: testproject
       - restore_cache:
           keys:
-            - v1-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - v1-npm-cache-{{ .Branch }}-
-            - v1-npm-cache-
+            - npm-cache-{{ .Branch }}-{{ checksum "testproject/package-lock.json" }}
       - run:
           command: npm update --save
           path: testproject
@@ -101,9 +130,16 @@ jobs:
           command: npm ls
           path: testproject
       - save_cache:
-          key: dependency-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          key: npm-cache-{{ .Branch }}-{{ checksum "testproject/package-lock.json" }}
           paths:
             - testproject/node_modules
+  run_tests_and_lint_frontend:
+    working_directory: ~/django-react-boilerplate
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+    steps:
+      - restore_cache:
+          key: repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           command: npm run test
           path: testproject
@@ -143,10 +179,23 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build
+      - checkout_code
+      - build_dependencies_backend:
+          requires:
+            - checkout_code
+      - build_dependencies_frontend:
+          requires:
+            - checkout_code
+      - run_tests_and_lint_backend:
+          requires:
+            - build_dependencies_backend
+      - run_tests_and_lint_frontend:
+          requires:
+            - build_dependencies_frontend
       - deploy:
           requires:
-            - build
+            - run_tests_and_lint_backend
+            - run_tests_and_lint_frontend
           filters:
             branches:
               only: master
