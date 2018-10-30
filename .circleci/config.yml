@@ -201,7 +201,10 @@ workflows:
   version: 2
   checkout_build_test_and_lint:
     jobs:
-      - checkout_code
+      - checkout_code:
+          filters:
+            branches:
+              ignore: master
       - build_dependencies_backend:
           requires:
             - checkout_code
