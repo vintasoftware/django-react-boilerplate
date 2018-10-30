@@ -186,9 +186,27 @@ jobs:
 
 workflows:
   version: 2
-  build_and_deploy:
+  checkout_build_test_and_lint:
     jobs:
       - checkout_code
+      - build_dependencies_backend:
+          requires:
+            - checkout_code
+      - build_dependencies_frontend:
+          requires:
+            - checkout_code
+      - run_tests_and_lint_backend:
+          requires:
+            - build_dependencies_backend
+      - run_tests_and_lint_frontend:
+          requires:
+            - build_dependencies_frontend
+  checkout_build_test_lint_and_deploy:
+    jobs:
+      - checkout_code:
+          filters:
+            branches:
+              only: master
       - build_dependencies_backend:
           requires:
             - checkout_code
@@ -205,6 +223,3 @@ workflows:
           requires:
             - run_tests_and_lint_backend
             - run_tests_and_lint_frontend
-          filters:
-            branches:
-              only: master
