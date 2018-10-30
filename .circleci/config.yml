@@ -110,16 +110,22 @@ jobs:
       - run:
           command: npm install --package-lock-only
           path: testproject
-      - restore_cache:
-          keys:
-            - npm-cache-{{ .Branch }}-{{ checksum "testproject/package-lock.json" }}
+      - run:
+          command: npm update --save
+          path: testproject
+      - run:
+          command: npm update --save-dev
+          path: testproject
       - run:
           name: "hotfix for #133"
           command: |
             sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' package.json
           path: testproject
+      - restore_cache:
+          keys:
+            - npm-cache-{{ .Branch }}-{{ checksum "testproject/package-lock.json" }}
       - run:
-          command: npm install --no-optional --no-save
+          command: npm install --no-optional
           path: testproject
       - run:
           command: npm dedupe
@@ -141,6 +147,17 @@ jobs:
           key: repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           command: npm install --package-lock-only
+          path: testproject
+      - run:
+          command: npm update --save
+          path: testproject
+      - run:
+          command: npm update --save-dev
+          path: testproject
+      - run:
+          name: "hotfix for #133"
+          command: |
+            sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' package.json
           path: testproject
       - restore_cache:
           keys:
