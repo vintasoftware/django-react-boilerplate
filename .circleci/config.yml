@@ -60,6 +60,8 @@ jobs:
     steps:
       - restore_cache:
           key: repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - run:
           command: pipenv lock --dev
           path: testproject
@@ -112,18 +114,12 @@ jobs:
           keys:
             - npm-cache-{{ .Branch }}-{{ checksum "testproject/package-lock.json" }}
       - run:
-          command: npm update --save
-          path: testproject
-      - run:
-          command: npm update --save-dev
-          path: testproject
-      - run:
           name: "hotfix for #133"
           command: |
             sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' package.json
           path: testproject
       - run:
-          command: npm install --no-optional
+          command: npm install --no-optional --no-save
           path: testproject
       - run:
           command: npm dedupe
