@@ -1,68 +1,103 @@
 version: 2
 
 jobs:
-  build:
+  checkout_code:
+    working_directory: ~/{{project_name}}
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers # remeber to update those!
+    steps:
+      - checkout
+      - save_cache:
+          key: repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/{{project_name}}
+  build_dependencies_backend:
     working_directory: ~/{{project_name}}
     docker:
       - image: circleci/python:3.6-stretch-node-browsers # remeber to update those!
         environment:
-    # makes default virtualenv be ignored by pipenv avoiding dependencies conflict
           PIPENV_IGNORE_VIRTUALENVS: True
           PIPENV_VENV_IN_PROJECT: True
           PIPENV_DONT_LOAD_ENV: 0
     steps:
-      - checkout
-      # this updates git-lfs to make pre-commit large files check hook work properly
-      # more details in https://github.com/pre-commit/pre-commit-hooks/issues/252
-      - run:
-          command: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-      - run:
-          command: sudo apt-get install git-lfs --upgrade
-      - run:
-          command: sudo chown -R circleci:circleci /usr/local/bin
-      - run:
-          command: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - run:
-          command: pip install requests pipenv --upgrade
       - restore_cache:
           keys:
-            - v1-pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - v1-pipenv-cache-{{ .Branch }}-
-            - v1-pipenv-cache-
-      - run:
-          command: pipenv install --dev
+            - repo-{{ .Environment.CIRCLE_SHA1 }}
+      # this updates git-lfs to make pre-commit large files check hook work properly
+      # more details in https://github.com/pre-commit/pre-commit-hooks/issues/252
+      - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+      - run: sudo apt-get install git-lfs --upgrade
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      - run: pip install requests pipenv --upgrade
+      - restore_cache:
+          keys:
+            - pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run: pipenv install --dev
       - save_cache:
           key: pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - .venv
             - /usr/local/bin
             - /usr/local/lib/python3.6/site-packages
+  build_dependencies_frontend:
+    working_directory: ~/{{project_name}}
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers # remeber to update those!
+    steps:
       - restore_cache:
           keys:
-            - v1-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - v1-npm-cache-{{ .Branch }}-
-            - v1-npm-cache-
-      - run:
-          command: npm install
+            - repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          keys:
+            - npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run: npm install
       - save_cache:
           key: npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - node_modules
-      - run:
-          command: npm run build
-      - run:
-          command: npm run lint
+  run_test_lint_and_check_build_frontend:
+    working_directory: ~/{{project_name}}
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers # remeber to update those!
+    steps:
+      - restore_cache:
+          keys:
+            - repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          keys:
+            - npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run: npm run test
+      - run: npm run lint
+      - run: npm run build
+  run_linters_and_test_backend:
+    working_directory: ~/{{project_name}}
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers # remeber to update those!
+        environment:
+          PIPENV_IGNORE_VIRTUALENVS: True
+          PIPENV_VENV_IN_PROJECT: True
+          PIPENV_DONT_LOAD_ENV: 0
+    steps:
+      - restore_cache:
+          keys:
+            - repo-{{ .Environment.CIRCLE_SHA1 }}
+      # this updates git-lfs to make pre-commit large files check hook work properly
+      # more details in https://github.com/pre-commit/pre-commit-hooks/issues/252
+      - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+      - run: sudo apt-get install git-lfs --upgrade
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      - restore_cache:
+          keys:
+            - pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
       # style check
-      - run:
-          command: pipenv run prospector --messages-only
+      - run: pipenv run prospector --messages-only
       # security checks
-      - run:
-          command: pipenv run bandit -r .
-      - run:
-          command: pipenv check
+      - run: pipenv run bandit -r .
+      - run: pipenv check
       # imports check
-      - run:
-          command: pipenv run isort **/*.py --check-only
+      - run: pipenv run isort **/*.py --check-only
       - run:
           command: pipenv run pre-commit run --all-files
           environment:
@@ -81,10 +116,7 @@ jobs:
             SENDGRID_USERNAME: 'test'
             SENDGRID_PASSWORD: 'test'
             REDIS_URL: 'redis://'
-      - run:
-          command: pipenv run coverage run manage.py test
-      - run:
-          command: npm run test
+      - run: pipenv run coverage run manage.py test
       - run:
           command: |
             mkdir -p test-reports/
@@ -96,12 +128,25 @@ jobs:
           path: test-reports
 
 
-# This is necessary for the boilerplate's CI. You can remove these lines
 workflows:
   version: 2
   build-workflow:
     jobs:
-      - build:
+      - checkout_code:
+          # This is necessary for the boilerplate's CI. You can remove these lines
           filters:
             branches:
               ignore: boilerplate-release
+      - build_dependencies_backend:
+          requires:
+            - checkout_code
+      - build_dependencies_frontend:
+          requires:
+            - checkout_code
+      - run_test_lint_and_check_build_frontend:
+          requires:
+            - build_dependencies_frontend
+      - run_linters_and_test_backend:
+          requires:
+            - build_dependencies_backend
+              
