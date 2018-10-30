@@ -3,7 +3,7 @@
 # Django React Boilerplate
 
 ## About
-A [Django 1.11](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
+A [Django](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
 - [React](https://facebook.github.io/react/), for building interactive UIs
 - [django-js-reverse](https://github.com/ierror/django-js-reverse), for generating URLs on JS
 - [Bootstrap 4](https://v4-alpha.getbootstrap.com/), for responsive styling
@@ -12,7 +12,7 @@ A [Django 1.11](https://www.djangoproject.com/) project boilerplate/template wit
 - [WhiteNoise](http://whitenoise.evans.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlipy), for efficient static files serving
 - [prospector](https://prospector.landscape.io/en/master/) and [ESLint](https://eslint.org/) with [pre-commit](http://pre-commit.com/) for automated quality assurance (does not replace proper testing!)
 
-For continuous integration, a [CircleCI](https://circleci.com/) configuration `circle.yml` is included.
+For continuous integration, a [CircleCI](https://circleci.com/) configuration `.circleci/config.yml` is included.
 
 Also, includes a Heroku `app.json` and a working Django `production.py` settings, enabling easy deployments with ['Deploy to Heroku' button](https://devcenter.heroku.com/articles/heroku-button). Those Heroku plugins are included in `app.json`:
 - PostgreSQL, for DB
@@ -22,7 +22,7 @@ Also, includes a Heroku `app.json` and a working Django `production.py` settings
 
 This is a good starting point for modern Python/JavaScript web projects.
 
-## Project bootstrap [![CircleCI](https://circleci.com/gh/vintasoftware/django-react-boilerplate.svg?style=svg)](https://circleci.com/gh/vintasoftware/django-react-boilerplate)
+## Project bootstrap [![CircleCI](https://circleci.com/gh/vintasoftware/django-react-boilerplate.svg?style=svg)](https://circleci.com/gh/vintasoftware/django-react-boilerplate) [![Greenkeeper badge](https://badges.greenkeeper.io/vintasoftware/django-react-boilerplate.svg)](https://greenkeeper.io/)
 - [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
 ```
@@ -39,7 +39,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] Check for outdated npm dependencies with `npm outdated` and update them.
 - [ ] Change the first line of README to the name of the project.
 - [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/{{project_name}}/settings/base.py`
-- [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails.
+- [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails in `{{project_name}}/{{project_name}}/settings/production.py`
 
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
 
@@ -52,7 +52,6 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   `cp .env.example .env`
 - Create the migrations for `users` app (do this, then remove this line from the README):  
   `python manage.py makemigrations`
-- If you get an "there's no module named Django" error, install it through `pip install django<2` and try the step above again.
 - Run the migrations:  
   `python manage.py migrate`
 
@@ -67,6 +66,11 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - Open another command line window and go to the project's directory.
 - `pipenv shell`
 - `python manage.py runserver`
+
+#### Celery
+- Open a command line window and go to the project's directory
+- `pipenv shell`
+- `python manage.py celery`
 
 ### Testing
 `make test`
@@ -85,18 +89,6 @@ Just run `pipenv install LIB_NAME_ON_PYPI` and then `pipenv lock` to lock the ve
 ## Pre-commit hooks
 - Run `pre-commit install` to enable the hook into your git repo. The hook will run automatically for each commit.
 - Run `git commit -m "Your message" -n` to skip the hook if you need.
-
-## Contributing
-### How to test `django-admin startproject`
-If you made changes to this boilerplate and want to test them, commit your changes and use `git archive -o boilerplate.zip HEAD` to create the template zip. Then, do a `cd ..` and a `django-admin startproject theprojectname --extension py,yml,json --name Procfile,README.md,.env.example --template=django-react-boilerplate/boilerplate.zip` to test the project bootstrap.
-
-### How to test Heroku deployment
-Push your changes to a branch and visit `https://dashboard.heroku.com/new?template=https://github.com/fill-org-or-user/fill-project-repo-name/tree/fill-branch` (replace all `fill-*`).
-
-### How to add a 'Deploy to Heroku' button
-Read [this](https://devcenter.heroku.com/articles/heroku-button#adding-the-heroku-button).
-
-P.S. if you want to deploy in a different way please check the `app.json` file for what needs to be configured.
 
 ## Commercial Support
 This project, as other Vinta open-source projects, is used in products of Vinta clients. We are always looking for exciting work, so if you need any commercial support, feel free to get in touch: contact@vinta.com.br

@@ -48,10 +48,9 @@ exports[`ColorChanger No title (should use default) 1`] = `
         Purple
       </option>
     </select>
-    <span>
-      ColorDisplay 
-      {"color":"black"}
-    </span>
+    <ColorDisplay
+      color="black"
+    />
   </div>
 </div>
 `;
@@ -104,10 +103,9 @@ exports[`ColorChanger Some title 1`] = `
         Purple
       </option>
     </select>
-    <span>
-      ColorDisplay 
-      {"color":"black"}
-    </span>
+    <ColorDisplay
+      color="black"
+    />
   </div>
 </div>
 `;
