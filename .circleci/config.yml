@@ -60,6 +60,9 @@ jobs:
     steps:
       - restore_cache:
           key: repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          command: pipenv lock --dev
+          path: testproject
       - restore_cache:
           keys:
             - pipenv-cache-{{ .Branch }}-{{ checksum "testproject/Pipfile.lock" }}
@@ -140,6 +143,12 @@ jobs:
     steps:
       - restore_cache:
           key: repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          command: npm install --package-lock-only
+          path: testproject
+      - restore_cache:
+          keys:
+            - npm-cache-{{ .Branch }}-{{ checksum "testproject/package-lock.json" }}
       - run:
           command: npm run test
           path: testproject
