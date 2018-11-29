@@ -13,7 +13,7 @@ baseConfig[1].entry = [
   'webpack-dev-server/client?http://localhost:3000',
   'webpack/hot/only-dev-server',
   'whatwg-fetch',
-  'babel-polyfill',
+  '@babel/polyfill',
   './assets/js/index',
 ]
 
