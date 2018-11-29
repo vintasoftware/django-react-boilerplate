@@ -88,7 +88,7 @@ jobs:
       - run:
           command: |
             mkdir -p test-reports/
-            pipenv run coverage xml -O test-reports/results.xml
+            pipenv run coverage xml -o test-reports/results.xml
           when: always
       - store_test_results:
           path: test-reports
