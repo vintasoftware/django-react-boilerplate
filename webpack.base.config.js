@@ -15,7 +15,12 @@ module.exports = [{
       {
         test: /\.jsx?$/,
         exclude: [nodeModulesDir],
-        loader: 'babel-loader?presets[]=es2015',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
       {
         test: /jquery\/dist\/jquery\.js$/,
