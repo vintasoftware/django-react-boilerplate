@@ -27,7 +27,7 @@
     "imports-loader": "^0.8.0",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
-    "marked": "^0.5.1",
+    "marked": "^0.6.0",
     "node-sass": "^4.5.3",
     "popper.js": "^1.12.9",
     "postcss": "^7.0.3",
