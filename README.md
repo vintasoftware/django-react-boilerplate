@@ -30,6 +30,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 ```
 - [ ] Above: don't forget the `--extension` and `--name` params! (also don't forget to change `theprojectname` to your project's name).
 - [ ] Navigate to the project's directory through your command line.
+- [ ] Adding a dot on the command between projectname and --extension would extract on same folder, and not a level below.
 - [ ] Install pipenv if not installed yet: `pip install pipenv` (maybe you'll have to run this command as an OS superuser).
 - [ ] Make sure you have Python 3.6 installed.
 - [ ] `pipenv install --dev`
