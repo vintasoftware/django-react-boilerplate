@@ -124,13 +124,17 @@ jobs:
     steps:
       - checkout
       - run:
-          command: mv proj_circle.yml .circleci/config.yml
+          command: mkdir -p circleci
+      - run:
+          command: mv proj_circle.yml circleci/config.yml
       - run:
           command: git checkout -b boilerplate-release
       - run:
-          command: git add .circleci/config.yml
+          command: git add circleci/config.yml
       - run:
           command: git rm proj_circle.yml
+      - run:
+          command: git rm -rf .circleci
       - run:
           command: git commit -m "Replacing circle.yml" --author "Vinta Software <contact@vinta.com.br>"
           environment:
