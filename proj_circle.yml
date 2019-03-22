@@ -43,13 +43,13 @@ jobs:
             - v1-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
             - v1-npm-cache-{{ .Branch }}-
             - v1-npm-cache-
-      {% endverbatim %}
       - run:
           command: npm install
       - save_cache:
           key: npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - node_modules
+      {% endverbatim %}
       - run:
           command: npm run build
       - run:

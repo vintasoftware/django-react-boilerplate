@@ -41,7 +41,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] Change the first line of README to the name of the project.
 - [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/{{project_name}}/settings/base.py`
 - [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails in `{{project_name}}/{{project_name}}/settings/production.py`
-- [ ] Rename the folder `circleci` to `.circleci`
+- [ ] Rename the folder `circleci` to `.circleci` with the command `mv circleci .circleci`
 
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
 
