@@ -24,6 +24,7 @@ jobs:
           command: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - run:
           command: pip install requests pipenv --upgrade
+      {% verbatim %}
       - restore_cache:
           keys:
             - v1-pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
@@ -42,6 +43,7 @@ jobs:
             - v1-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
             - v1-npm-cache-{{ .Branch }}-
             - v1-npm-cache-
+      {% endverbatim %}
       - run:
           command: npm install
       - save_cache:
