@@ -1,6 +1,12 @@
 # This circle.yml file does some basic testing on CI for the boilerplate itself.
-# When using the boilerplate this file will not be used, proj_circle.yml is used
-# instead.
+#
+# Although this file is present on the "boilerplate-release" branch, this file is
+#   not restored from the django-admin startproject command.
+#
+# There are instructions on README.md for the user to replace this path with the
+#   correct file.
+#
+
 version: 2
 
 jobs:
@@ -133,8 +139,6 @@ jobs:
           command: git add circleci/config.yml
       - run:
           command: git rm proj_circle.yml
-      - run:
-          command: git rm -rf .circleci
       - run:
           command: git commit -m "Replacing circle.yml" --author "Vinta Software <contact@vinta.com.br>"
           environment:
