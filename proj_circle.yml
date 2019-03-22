@@ -96,14 +96,3 @@ jobs:
           path: test-reports
       - store_artifacts:
           path: test-reports
-
-
-# This is necessary for the boilerplate's CI. You can remove these lines
-workflows:
-  version: 2
-  build-workflow:
-    jobs:
-      - build:
-          filters:
-            branches:
-              ignore: boilerplate-release
