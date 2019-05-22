@@ -24,6 +24,7 @@ class ColorChanger extends React.Component {
 
   render() {
     const { title } = this.props;
+    const { color } = this.state;
 
     return (
       <div className="main-container">
@@ -40,7 +41,7 @@ class ColorChanger extends React.Component {
             <option value="purple">Purple</option>
           </select>
 
-          <ColorDisplay color={this.state.color} />
+          <ColorDisplay color={color} />
         </div>
       </div>
     );
