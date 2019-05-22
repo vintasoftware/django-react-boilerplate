@@ -1,3 +1,3 @@
-import ColorChanger from './components'
+import ColorChanger from './components';
 
-export default ColorChanger
+export default ColorChanger;
