@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-echo "----->Pre-compile hook"
+echo "-----> Pre-compile hook"
 
 if [ -f bin/run_webpack ]; then
     echo "-----> Running Webpack"
