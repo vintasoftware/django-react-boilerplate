@@ -44,7 +44,7 @@
     "url-loader": "~1.0.1",
     "webpack": "~4.32.2",
     "webpack-bundle-tracker": "~0.3.0",
-    "webpack-dev-server": "~3.1.4",
+    "webpack-dev-server": "~3.7.2",
     "webpack-spritesmith": "~1.0.0",
     "whatwg-fetch": "~2.0.3"
   },
