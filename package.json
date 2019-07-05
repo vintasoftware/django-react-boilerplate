@@ -41,7 +41,7 @@
     "sass-loader": "~7.0.3",
     "script-loader": "~0.7.0",
     "style-loader": "~0.23.1",
-    "url-loader": "~1.0.1",
+    "url-loader": "~2.0.1",
     "webpack": "~4.35.2",
     "webpack-bundle-tracker": "~0.3.0",
     "webpack-dev-server": "~3.7.2",
