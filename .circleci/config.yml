@@ -71,7 +71,7 @@ jobs:
           path: testproject/backend
       - run:
           command: pipenv run python manage.py check --deploy --fail-level WARNING
-          path: testproject
+          path: testproject/backend
           environment:
             SECRET_KEY: '$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")'
             SENDGRID_USERNAME: foo
