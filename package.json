@@ -17,7 +17,7 @@
     "@babel/polyfill": "~7.4.4",
     "@babel/preset-env": "~7.4.5",
     "@babel/preset-react": "~7.0.0",
-    "autoprefixer": "~9.3.1",
+    "autoprefixer": "~9.6.1",
     "babel-loader": "~8.0.0",
     "bootstrap": "~4.3.1",
     "classnames": "~2.2.5",
