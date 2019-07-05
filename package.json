@@ -15,7 +15,7 @@
   "dependencies": {
     "@babel/cli": "~7.5.0",
     "@babel/polyfill": "~7.4.4",
-    "@babel/preset-env": "~7.4.5",
+    "@babel/preset-env": "~7.5.0",
     "@babel/preset-react": "~7.0.0",
     "autoprefixer": "~9.3.1",
     "babel-loader": "~8.0.0",
