@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/{{project_name}}
     docker:
-      - image: circleci/python:3.7.3-stretch-node-browsers # remeber to update those!
+      - image: circleci/python:3.7-stretch-node-browsers # remeber to update those!
         environment:
     # makes default virtualenv be ignored by pipenv avoiding dependencies conflict
           PIPENV_IGNORE_VIRTUALENVS: True
@@ -21,7 +21,7 @@ jobs:
       - run:
           command: sudo chown -R circleci:circleci /usr/local/bin
       - run:
-          command: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+          command: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - run:
           command: pip install requests pipenv --upgrade
       {% verbatim %}
@@ -37,7 +37,7 @@ jobs:
           paths:
             - .venv
             - /usr/local/bin
-            - /usr/local/lib/python3.6/site-packages
+            - /usr/local/lib/python3.7/site-packages
       - restore_cache:
           keys:
             - v1-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
