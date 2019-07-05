@@ -50,25 +50,25 @@ jobs:
             - /usr/local/lib/python3.6/site-packages
       - run:
           command: cp testproject/settings/local.py.example testproject/settings/local.py
-          path: testproject
+          path: testproject/backend
       - run:
           command: cp .env.example .env
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run python manage.py makemigrations
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run python manage.py migrate
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run python manage.py test
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run prospector
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run python manage.py has_missing_migrations
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run python manage.py check --deploy --fail-level WARNING
           path: testproject

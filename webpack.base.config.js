@@ -4,10 +4,10 @@ var BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = [{
   entry: [
-    './assets/js/jquery-index.js',
+    './frontend/js/jquery-index.js',
   ],
   output: {
-    path: path.resolve('./assets/bundles/'),
+    path: path.resolve('./frontend/bundles/'),
     filename: 'bundle-jquery.js',
   },
   module: {
@@ -82,7 +82,7 @@ module.exports = [{
     modules: [
       'node_modules',
       'bower_components',
-      path.resolve(__dirname, 'assets/js/'),
+      path.resolve(__dirname, 'frontend/js/'),
     ],
     extensions: ['.js', '.jsx'],
   },

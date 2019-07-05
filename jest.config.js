@@ -12,9 +12,9 @@ module.exports = {
     'node_modules/*',
   ],
   modulePaths: [
-    'assets',
-    'assets/js',
-    'assets/js/app',
+    'frontend',
+    'frontend/js',
+    'frontend/js/app',
   ],
   snapshotSerializers: [
     'enzyme-to-json/serializer',
@@ -23,15 +23,15 @@ module.exports = {
     './jest-setup.js',
   ],
   collectCoverageFrom: [
-    'assets/js/**/*.{js,jsx}',
+    'frontend/js/**/*.{js,jsx}',
   ],
   coveragePathIgnorePatterns: [
-    'assets/js/store.js',
-    'assets/js/index.js',
-    'assets/js/jquery-index.js',
-    'assets/js/constants/*',
-    'assets/js/pages/*',
-    'assets/js/tests/*',
+    'frontend/js/store.js',
+    'frontend/js/index.js',
+    'frontend/js/jquery-index.js',
+    'frontend/js/constants/*',
+    'frontend/js/pages/*',
+    'frontend/js/tests/*',
   ],
   coverageThreshold: {
     global: {
