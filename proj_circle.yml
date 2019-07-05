@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/{{project_name}}
     docker:
-      - image: circleci/python:3.6-stretch-node-browsers # remeber to update those!
+      - image: circleci/python:3.7.3-stretch-node-browsers # remeber to update those!
         environment:
     # makes default virtualenv be ignored by pipenv avoiding dependencies conflict
           PIPENV_IGNORE_VIRTUALENVS: True
