@@ -65,7 +65,7 @@
     "eslint-plugin-react": "~7.14.2",
     "identity-obj-proxy": "~3.0.0",
     "jest": "~23.6.0",
-    "jest-css-modules": "~2.0.0",
+    "jest-css-modules": "~2.1.0",
     "mini-css-extract-plugin": "~0.7.0",
     "redux-mock-store": "~1.5.3",
     "webpack-cli": "~3.3.2"
