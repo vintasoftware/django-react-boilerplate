@@ -15,10 +15,7 @@ django-naomi = "*"
 isort = "*"
 model-mommy = "*"
 pre-commit = "*"
-prospector = {extras = ["with-vulture"]}
-pylint = "*"
-pylint-django = "*"
-pylint-celery = "*"
+prospector = {version="==1.1.6.2", extras = ["with-vulture"]}
 safety = "*"
 
 

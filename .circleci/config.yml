@@ -1,6 +1,12 @@
 # This circle.yml file does some basic testing on CI for the boilerplate itself.
-# When using the boilerplate this file will not be used, proj_circle.yml is used
-# instead.
+#
+# Although this file is present on the "boilerplate-release" branch, this file is
+#   not restored from the django-admin startproject command.
+#
+# There are instructions on README.md for the user to replace this path with the
+#   correct file.
+#
+
 version: 2
 
 jobs:
@@ -124,11 +130,13 @@ jobs:
     steps:
       - checkout
       - run:
-          command: mv proj_circle.yml .circleci/config.yml
+          command: mkdir -p circleci
+      - run:
+          command: mv proj_circle.yml circleci/config.yml
       - run:
           command: git checkout -b boilerplate-release
       - run:
-          command: git add .circleci/config.yml
+          command: git add circleci/config.yml
       - run:
           command: git rm proj_circle.yml
       - run:
@@ -143,7 +151,10 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore: boilerplate-release
       - deploy:
           requires:
             - build
