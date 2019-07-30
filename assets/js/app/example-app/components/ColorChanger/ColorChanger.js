@@ -6,7 +6,6 @@ import ColorDisplay from '../ColorDisplay';
 
 import './style.scss';
 
-
 class ColorChanger extends React.Component {
   constructor(props) {
     super(props);
@@ -31,9 +30,7 @@ class ColorChanger extends React.Component {
       <div className="main-container">
         <h2>{title}</h2>
         <h3 className="app-name">Color Changer App</h3>
-        <p>
-          Check this example app: change the color to see it reflected in the text next to it.
-        </p>
+        <p>Check this example app: change the color to see it reflected in the text next to it.</p>
 
         <div className="inner-container">
           <select className="color-picker" onChange={this.handleChangeColor}>
