@@ -7,18 +7,18 @@ describe('ColorDisplay', () => {
   test('purple', () => {
     const wrapper = shallow(<ColorDisplay color="purple" />);
 
-    expect(wrapper).toMatchInlineSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('no color (should default to black)', () => {
     const wrapper = shallow(<ColorDisplay />);
 
-    expect(wrapper).toMatchInlineSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('unknown color', () => {
     const wrapper = shallow(<ColorDisplay color="caterpillar" />);
 
-    expect(wrapper).toMatchInlineSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

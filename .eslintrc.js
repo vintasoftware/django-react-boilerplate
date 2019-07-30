@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   extends: 'vinta/recommended',
   rules: {
-    'react/jsx-filename-extension': 0
+    'jest/prefer-inline-snapshots': ['off'],
   },
   env: {
     es6: true,
