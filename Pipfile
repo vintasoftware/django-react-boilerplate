@@ -9,8 +9,6 @@ name = "pypi"
 
 bandit = "*"
 coverage = "*"
-django-debug-toolbar = "*"
-django-debug-toolbar-request-history = "*"
 django-naomi = "*"
 isort = "*"
 model-mommy = "*"
