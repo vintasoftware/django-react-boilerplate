@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/{{project_name}}
     docker:
-      - image: circleci/python:3.6-stretch-node-browsers # remeber to update those!
+      - image: circleci/python:3.7-stretch-node-browsers # remeber to update those!
         environment:
     # makes default virtualenv be ignored by pipenv avoiding dependencies conflict
           PIPENV_IGNORE_VIRTUALENVS: True
@@ -21,7 +21,7 @@ jobs:
       - run:
           command: sudo chown -R circleci:circleci /usr/local/bin
       - run:
-          command: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+          command: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - run:
           command: pip install requests pipenv --upgrade
       {% verbatim %}
@@ -37,7 +37,7 @@ jobs:
           paths:
             - .venv
             - /usr/local/bin
-            - /usr/local/lib/python3.6/site-packages
+            - /usr/local/lib/python3.7/site-packages
       - restore_cache:
           keys:
             - v1-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
@@ -70,11 +70,11 @@ jobs:
           environment:
             SKIP: prospector,isort,eslint,missing-migrations
       - run:
-          command: pipenv run python manage.py has_missing_migrations --ignore authtools
+          command: (cd backend; pipenv run python manage.py has_missing_migrations --ignore authtools)
           environment:
             DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.local_base'
       - run:
-          command: pipenv run python manage.py check --deploy
+          command: (cd backend; pipenv run python manage.py check --deploy)
           environment:
             DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.production'
             SECRET_KEY: "$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')"
@@ -84,7 +84,7 @@ jobs:
             SENDGRID_PASSWORD: 'test'
             REDIS_URL: 'redis://'
       - run:
-          command: pipenv run coverage run manage.py test
+          command: (cd backend; pipenv run coverage run manage.py test)
       - run:
           command: npm run test
       - run:

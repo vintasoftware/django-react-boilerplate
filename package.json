@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.0.1",
   "private": true,
-  "description": "{{project_name}} frontend assets.",
+  "description": "{{project_name}} frontend.",
   "main": "index.js",
   "prettier": "eslint-config-vinta/prettier",
   "scripts": {
@@ -10,7 +10,7 @@
     "test:watch": "npm test -- --watch",
     "start": "babel-node server.js",
     "build": "NODE_ENV=production webpack -p --progress --colors --config webpack.prod.config.js --bail",
-    "lint": "eslint assets",
+    "lint": "eslint frontend",
     "coverage": "jest --coverage"
   },
   "dependencies": {
