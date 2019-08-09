@@ -13,7 +13,7 @@ jobs:
   build:
     working_directory: ~/django-react-boilerplate
     docker:
-      - image: circleci/python:3.6-stretch-node-browsers
+      - image: circleci/python:3.7-stretch-node-browsers
         environment:
           PIPENV_IGNORE_VIRTUALENVS: True
           PIPENV_VENV_IN_PROJECT: True
@@ -23,7 +23,7 @@ jobs:
       - run:
           command: sudo chown -R circleci:circleci /usr/local/bin
       - run:
-          command: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+          command: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - run:
           command: pip install django
       - run:
@@ -47,31 +47,31 @@ jobs:
           paths:
             - testproject/.venv
             - /usr/local/bin
-            - /usr/local/lib/python3.6/site-packages
+            - /usr/local/lib/python3.7/site-packages
       - run:
           command: cp testproject/settings/local.py.example testproject/settings/local.py
-          path: testproject
+          path: testproject/backend
       - run:
           command: cp .env.example .env
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run python manage.py makemigrations
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run python manage.py migrate
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run python manage.py test
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run prospector
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run python manage.py has_missing_migrations
-          path: testproject
+          path: testproject/backend
       - run:
           command: pipenv run python manage.py check --deploy --fail-level WARNING
-          path: testproject
+          path: testproject/backend
           environment:
             SECRET_KEY: '$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")'
             SENDGRID_USERNAME: foo

@@ -47,7 +47,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 ## Running
 ### Setup
-- On project root, do the following:
+- Inside the `backend` folder, do the following:
 - Create a copy of ``{{project_name}}/settings/local.py.example``:  
   `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py` (remembering you should replace `{{project_name}}` with your project's name!).
 - Create a copy of ``.env.example``:  
@@ -65,7 +65,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - `pipenv install --dev`
 - `npm install`
 - `npm run start`
-- Open another command line window and go to the project's directory.
+- Open another command line window and go to the `backend` directory.
 - `pipenv shell`
 - `python manage.py runserver`
 
