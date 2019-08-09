@@ -10,7 +10,11 @@ const FallbackUI = ({ eventId }) => (
 );
 
 FallbackUI.propTypes = {
-  eventId: PropTypes.string.isRequired,
+  eventId: PropTypes.string,
+};
+
+FallbackUI.defaultProps = {
+  eventId: '',
 };
 
 class ExampleBoundary extends Component {
