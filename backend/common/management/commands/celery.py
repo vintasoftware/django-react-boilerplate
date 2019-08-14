@@ -4,7 +4,7 @@ import shlex
 from subprocess import PIPE  # nosec
 
 from django.core.management.base import BaseCommand
-from django.utils import autoreload
+from django.utils.autoreload import run_with_reloader
 
 import psutil
 
@@ -29,4 +29,4 @@ def restart_celery():
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         print('Starting celery worker with autoreload')
-        autoreload.main(restart_celery)
+        run_with_reloader(restart_celery)
