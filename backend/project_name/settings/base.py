@@ -4,7 +4,6 @@ import os
 
 from decouple import config  # noqa
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
@@ -66,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'common.context_processors.sentry_dsn',
             ],
         },
     },
@@ -120,3 +120,6 @@ WEBPACK_LOADER = {
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+# Sentry
+SENTRY_DSN = config('SENTRY_DSN', default='')

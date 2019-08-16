@@ -1,5 +1,8 @@
+import sentry_sdk
+
 from decouple import Csv, config
 from dj_database_url import parse as db_url
+from sentry_sdk.integrations.django import DjangoIntegration
 
 from .base import *  # noqa
 
@@ -117,3 +120,9 @@ LOGGING = {
 }
 
 JS_REVERSE_EXCLUDE_NAMESPACES = ['admin']
+
+# Sentry
+sentry_sdk.init(
+    dsn=SENTRY_DSN,
+    integrations=[DjangoIntegration()]
+)
