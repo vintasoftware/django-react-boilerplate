@@ -81,6 +81,24 @@ Will run django tests using `--keepdb` and `--parallel`. You may pass a path to 
 ### Adding new pypi libs
 Just run `pipenv install LIB_NAME_ON_PYPI` and then `pipenv lock` to lock the version in Pipfile.lock file
 
+## Deployment 
+### Setup
+This project comes with a `app.json` file for heroku, that can be used to create an app on heroku from a GitHub repository.
+
+After setting up the project, you can init a repository and push it on GitHub. If your repository is public, you can use the following button:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) 
+
+If you are in a private repository, access the following link replacing `$YOUR_REPOSITORY_LINK$` with your repository link.
+
+`https://heroku.com/deploy?template=$YOUR_REPOSITORY_LINK$`
+
+Remember to fill the `ALLOWED_HOSTS` with the URL of your app, the default on heroku is `appname.herokuapp.com`. Replace `appname` with your heroku app name.
+
+### Sentry
+
+[Sentry](https://sentry.io) is already set up on the project. For production, add `SENTRY_DSN` environment variable on Heroku, with your Sentry DSN as the value.
+
 ## Linting
 - Manually with `prospector` and `npm run lint` on project root.
 - During development with an editor compatible with prospector and ESLint.
