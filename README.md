@@ -49,6 +49,8 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py` (remembering you should replace `{{project_name}}` with your project's name!).
 - Create a copy of ``.env.example``:  
   `cp .env.example .env`
+- Move to backend folder:  
+  `cd backend`
 - Create the migrations for `users` app (do this, then remove this line from the README):  
   `python manage.py makemigrations`
 - Run the migrations:  
