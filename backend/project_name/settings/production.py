@@ -122,7 +122,6 @@ LOGGING = {
 JS_REVERSE_EXCLUDE_NAMESPACES = ['admin']
 
 # Sentry
-SENTRY_DSN = config('SENTRY_DSN', default='')
 sentry_sdk.init(
     dsn=SENTRY_DSN,
     integrations=[DjangoIntegration()]
