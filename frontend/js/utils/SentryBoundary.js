@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 const FallbackUI = ({ eventId }) => (
   <>
     <h3>Check if there is an error on your Sentry app</h3>
-    <button type="button" onClick={() => Sentry.showReportDialog({ eventId })}>Report feedback</button>
+    <button type="button" onClick={() => Sentry.showReportDialog({ eventId })}>
+      Report feedback
+    </button>
   </>
 );
 
@@ -18,13 +20,13 @@ FallbackUI.defaultProps = {
 };
 
 class ExampleBoundary extends Component {
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
   constructor(props) {
     super(props);
     this.state = { eventId: null };
-  }
-
-  static getDerivedStateFromError() {
-    return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
