@@ -35,9 +35,6 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] Make sure you have Python 3.6 installed.
 - [ ] `pipenv install --dev`
 - [ ] Activate the newly created virtualenv with `pipenv shell`
-- [ ] `npm update --save`
-- [ ] `npm update --save-dev`
-- [ ] Check for outdated npm dependencies with `npm outdated` and update them.
 - [ ] Change the first line of README to the name of the project.
 - [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/{{project_name}}/settings/base.py`
 - [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails in `{{project_name}}/{{project_name}}/settings/production.py`
