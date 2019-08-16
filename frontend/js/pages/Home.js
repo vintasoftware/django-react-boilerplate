@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { hot } from 'react-hot-loader';
 
 import ColorChanger from '../app/example-app';
 
@@ -22,4 +21,4 @@ const Home = () => {
   );
 };
 
-export default hot(module)(Home);
+export default Home;
