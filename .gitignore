@@ -6,6 +6,7 @@
 /staticfiles/*
 /mediafiles/*
 __pycache__/
+/.vscode/
 
 # coverage result
 .coverage

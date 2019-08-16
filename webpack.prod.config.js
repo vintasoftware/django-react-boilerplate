@@ -2,7 +2,6 @@ var autoprefixer = require('autoprefixer');
 var baseConfig = require('./webpack.base.config');
 var webpack = require('webpack')
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var SpritesmithPlugin = require('webpack-spritesmith');
 var BundleTracker = require('webpack-bundle-tracker');
 var path = require('path');
 var nodeModulesDir = path.resolve(__dirname, 'node_modules');
@@ -44,17 +43,6 @@ baseConfig[1].plugins = [
     'process.env':{
       'NODE_ENV': JSON.stringify('production')
     }
-  }),
-  new SpritesmithPlugin({
-      src: {
-        cwd: path.resolve(__dirname, 'frontend/images/'),
-        glob: '*.png'
-      },
-      target: {
-        image: path.resolve(__dirname, 'frontend/images/spritesmith-generated/sprite.png'),
-        css: path.resolve(__dirname, 'frontend/sass/vendor/spritesmith.scss')
-      },
-      retina: '@2x'
   }),
   new MiniCssExtractPlugin({ filename: '[name]-[hash].css', disable: false, allChunks: true }),
   new BundleTracker({

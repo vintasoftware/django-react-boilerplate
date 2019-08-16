@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ColorChanger No title (should use default) 1`] = `
+exports[`ColorChanger no title (should use default) 1`] = `
 <div
   className="main-container"
 >
@@ -55,7 +55,7 @@ exports[`ColorChanger No title (should use default) 1`] = `
 </div>
 `;
 
-exports[`ColorChanger Some title 1`] = `
+exports[`ColorChanger some title 1`] = `
 <div
   className="main-container"
 >
