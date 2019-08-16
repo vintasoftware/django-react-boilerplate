@@ -9,12 +9,15 @@ if [ -f bin/run_collectstatic ] && [ -n "$ENABLE_DJANGO_COLLECTSTATIC" ] && [ "$
     bin/run_collectstatic
 fi
 
+MANAGE_FILE=$(find . -maxdepth 3 -type f -name 'manage.py' | head -1)
+MANAGE_FILE=${MANAGE_FILE:2}
+
 echo "-----> Running manage.py check --deploy --fail-level WARNING"
-python manage.py check --deploy --fail-level WARNING
+python $MANAGE_FILE check --deploy --fail-level WARNING
 
 if [ -n "$AUTO_MIGRATE" ] && [ "$AUTO_MIGRATE" == 1 ]; then
     echo "-----> Running manage.py migrate"
-    python manage.py migrate --noinput
+    python $MANAGE_FILE migrate --noinput
 fi
 
 echo "-----> Post-compile done"
