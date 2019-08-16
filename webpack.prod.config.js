@@ -45,17 +45,6 @@ baseConfig[1].plugins = [
       'NODE_ENV': JSON.stringify('production')
     }
   }),
-  new SpritesmithPlugin({
-      src: {
-        cwd: path.resolve(__dirname, 'frontend/images/'),
-        glob: '*.png'
-      },
-      target: {
-        image: path.resolve(__dirname, 'frontend/images/spritesmith-generated/sprite.png'),
-        css: path.resolve(__dirname, 'frontend/sass/vendor/spritesmith.scss')
-      },
-      retina: '@2x'
-  }),
   new MiniCssExtractPlugin({ filename: '[name]-[hash].css', disable: false, allChunks: true }),
   new BundleTracker({
     filename: './webpack-stats.json'
