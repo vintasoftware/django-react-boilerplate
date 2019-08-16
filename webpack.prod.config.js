@@ -2,7 +2,6 @@ var autoprefixer = require('autoprefixer');
 var baseConfig = require('./webpack.base.config');
 var webpack = require('webpack')
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var SpritesmithPlugin = require('webpack-spritesmith');
 var BundleTracker = require('webpack-bundle-tracker');
 var path = require('path');
 var nodeModulesDir = path.resolve(__dirname, 'node_modules');
