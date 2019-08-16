@@ -99,6 +99,8 @@ Remember to fill the `ALLOWED_HOSTS` with the URL of your app, the default on he
 
 [Sentry](https://sentry.io) is already set up on the project. For production, add `SENTRY_DSN` environment variable on Heroku, with your Sentry DSN as the value.
 
+You can test your Sentry configuration by deploying the boilerplate with the sample page and clicking on the corresponding button.  
+
 ## Linting
 - Manually with `prospector` and `npm run lint` on project root.
 - During development with an editor compatible with prospector and ESLint.

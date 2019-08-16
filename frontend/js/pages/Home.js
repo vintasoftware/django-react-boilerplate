@@ -14,7 +14,7 @@ const Home = () => {
     <>
       <ColorChanger title={title} />
       <button type="button" onClick={() => setShowBugComponent(true)}>
-        Click to test frontend Sentry error handling!
+        Click to test if Sentry is capturing frontend errors! (Should only work in Production)
       </button>
       {showBugComponent && <ErrorComponent />}
     </>
