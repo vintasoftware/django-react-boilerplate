@@ -45,7 +45,7 @@
     "style-loader": "~1.0.0",
     "url-loader": "~2.1.0",
     "webpack": "~4.39.2",
-    "webpack-bundle-tracker": "~0.3.0",
+    "webpack-bundle-tracker": "~0.4.2-beta",
     "webpack-dev-server": "~3.8.0",
     "whatwg-fetch": "~2.0.3"
   },
