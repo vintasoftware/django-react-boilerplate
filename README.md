@@ -32,7 +32,7 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 - [ ] Above: don't forget the `--extension` and `--name` params! (also don't forget to change `theprojectname` to your project's name).
 - [ ] Navigate to the project's directory through your command line.
 - [ ] Install pipenv if not installed yet: `pip install pipenv` (maybe you'll have to run this command as an OS superuser).
-- [ ] Make sure you have Python 3.6 installed.
+- [ ] Make sure you have Python 3.7 installed.
 - [ ] `pipenv install --dev`
 - [ ] Activate the newly created virtualenv with `pipenv shell`
 - [ ] Change the first line of README to the name of the project.
