@@ -91,7 +91,7 @@ After setting up the project, you can init a repository and push it on GitHub. I
 
 If you are in a private repository, access the following link replacing `$YOUR_REPOSITORY_LINK$` with your repository link.
 
-`https://heroku.com/deploy?template=$YOUR_REPOSITORY_LINK$`
+- `https://heroku.com/deploy?template=$YOUR_REPOSITORY_LINK$`
 
 Remember to fill the `ALLOWED_HOSTS` with the URL of your app, the default on heroku is `appname.herokuapp.com`. Replace `appname` with your heroku app name.
 
@@ -107,15 +107,13 @@ The `bin/post_compile` script has a step to push Javascript source maps to Sentr
 
 You need to enable Heroku dyno metadata on your Heroku App. Use the following command on Heroku CLI:
 
-`heroku labs:enable runtime-dyno-metadata -a <app name>`
+- `heroku labs:enable runtime-dyno-metadata -a <app name>`
 
 The environment variables that need to be set are:
 
-`SENTRY_ORG` - Name of the Sentry Organization that owns your Sentry Project.
-
-`SENTRY_PROJECT_NAME` - Name of the Sentry Project.
-
-`SENTRY_API_KEY` - Sentry API key that needs to be generated on Sentry. [You can find or create authentication tokens within Sentry](https://sentry.io/api/).
+- `SENTRY_ORG` - Name of the Sentry Organization that owns your Sentry Project.
+- `SENTRY_PROJECT_NAME` - Name of the Sentry Project.
+- `SENTRY_API_KEY` - Sentry API key that needs to be generated on Sentry. [You can find or create authentication tokens within Sentry](https://sentry.io/api/).
 
 After enabling dyno metadata and setting the environment variables, your next Heroku Deploys will create a release on Sentry where the release name is the commit SHA, and it will push the source maps to it.
 
