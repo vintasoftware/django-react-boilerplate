@@ -99,7 +99,25 @@ Remember to fill the `ALLOWED_HOSTS` with the URL of your app, the default on he
 
 [Sentry](https://sentry.io) is already set up on the project. For production, add `SENTRY_DSN` environment variable on Heroku, with your Sentry DSN as the value.
 
-You can test your Sentry configuration by deploying the boilerplate with the sample page and clicking on the corresponding button.  
+You can test your Sentry configuration by deploying the boilerplate with the sample page and clicking on the corresponding button.
+
+### Sentry source maps for JS files
+
+The `bin/post_compile` script has a step to push Javascript source maps to Sentry, however some environment variables need to be set on Heroku.
+
+You need to enable Heroku dyno metadata on your Heroku App. Use the following command on Heroku CLI:
+
+`heroku labs:enable runtime-dyno-metadata -a <app name>`
+
+The environment variables that need to be set are:
+
+`SENTRY_ORG` - Name of the Sentry Organization that owns your Sentry Project.
+
+`SENTRY_PROJECT_NAME` - Name of the Sentry Project.
+
+`SENTRY_API_KEY` - Sentry API key that needs to be generated on Sentry. [You can find or create authentication tokens within Sentry](https://sentry.io/api/).
+
+After enabling dyno metadata and setting the environment variables, your next Heroku Deploys will create a release on Sentry where the release name is the commit SHA, and it will push the source maps to it.
 
 ## Linting
 - Manually with `prospector` and `npm run lint` on project root.
