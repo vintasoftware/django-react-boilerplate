@@ -7,7 +7,6 @@ const title =
   "change the app's name below to test hot reloading)";
 
 const Home = () => {
-  const ErrorComponent = null;
   const [showBugComponent, setShowBugComponent] = useState(false);
 
   return (
@@ -16,7 +15,7 @@ const Home = () => {
       <button type="button" onClick={() => setShowBugComponent(true)}>
         Click to test if Sentry is capturing frontend errors! (Should only work in Production)
       </button>
-      {showBugComponent && <ErrorComponent />}
+      {showBugComponent && showBugComponent.field.notexist}
     </>
   );
 };
