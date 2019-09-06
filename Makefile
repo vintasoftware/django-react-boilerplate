@@ -6,7 +6,13 @@ clean:
 	@find . -name "__pycache__" -delete
 
 test:
-	pipenv run python backend/manage.py test $(ARG) --parallel --keepdb
+	python backend/manage.py test $(ARG) --parallel --keepdb
+
+dockertest:
+	docker-compose run backend python backend/manage.py test $(ARG) --parallel --keepdb
 
 testreset:
-	pipenv run python backend/manage.py test $(ARG) --parallel
+	python backend/manage.py test $(ARG) --parallel
+
+dockertestreset:
+	docker-compose run backend python backend/manage.py test $(ARG) --parallel
