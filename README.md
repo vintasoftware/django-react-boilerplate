@@ -94,8 +94,9 @@ Will run django tests using `--keepdb` and `--parallel`. You may pass a path to 
 `make test someapp.tests.test_views`
 
 ### Adding new pypi libs
-Add the libname to either requirements.in or dev-requirents.in, then compile it and install.
-`pip-compile requirements.in > requirements.txt && pip install -r requirements.txt`
+Add the libname to either requirements.in or dev-requirents.in, then either upgrade the libs with `make upgrade` or manually compile it and then,  install.
+`pip-compile requirements.in > requirements.txt` or `make upgrade`
+`pip install -r requirements.txt`
 
 ## Deployment 
 ### Setup

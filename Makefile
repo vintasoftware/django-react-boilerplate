@@ -16,3 +16,11 @@ testreset:
 
 dockertestreset:
 	docker-compose run backend python backend/manage.py test $(ARG) --parallel
+
+upgrade: ## update the *requirements.txt files with the latest packages satisfying *requirements.in
+	pip install -U -q pip-tools
+	pip-compile --upgrade -o dev-requirements.txt dev-requirements.in
+	pip-compile --upgrade -o requirements.txt requirements.in
+	# Make everything =>, not ==
+	sed 's/==/>=/g' requirements.txt > requirements.tmp
+	mv requirements.tmp requirements.txt
