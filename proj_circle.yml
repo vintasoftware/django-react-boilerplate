@@ -5,11 +5,6 @@ jobs:
     working_directory: ~/{{project_name}}
     docker:
       - image: circleci/python:3.7-stretch-node-browsers # remeber to update those!
-        environment:
-    # makes default virtualenv be ignored by pipenv avoiding dependencies conflict
-          PIPENV_IGNORE_VIRTUALENVS: True
-          PIPENV_VENV_IN_PROJECT: True
-          PIPENV_DONT_LOAD_ENV: 0
     steps:
       - checkout
       # this updates git-lfs to make pre-commit large files check hook work properly
@@ -23,17 +18,20 @@ jobs:
       - run:
           command: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - run:
-          command: pip install requests pipenv --upgrade
+          command: pip install requests pip-tools --upgrade
       {% verbatim %}
       - restore_cache:
           keys:
-            - v1-pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - v1-pipenv-cache-{{ .Branch }}-
-            - v1-pipenv-cache-
+            - v1-pip-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-pip-cache-{{ .Branch }}-
+            - v1-pip-cache-
       - run:
-          command: pipenv install --dev
+          command: |
+            pip-compile requirements.in > requirements.txt;
+            pip-compile dev-requirements.in > dev-requirements.txt;
+            pip install --user -r requirements.txt && pip install -r dev-requirements.tx
       - save_cache:
-          key: pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          key: pip-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - .venv
             - /usr/local/bin
@@ -56,25 +54,23 @@ jobs:
           command: npm run lint
       # style check
       - run:
-          command: pipenv run prospector --messages-only
+          command: prospector --messages-only
       # security checks
       - run:
-          command: pipenv run bandit -r .
-      - run:
-          command: pipenv check
+          command: bandit -r .
       # imports check
       - run:
-          command: pipenv run isort **/*.py --check-only
+          command: isort **/*.py --check-only
       - run:
-          command: pipenv run pre-commit run --all-files
+          command: pre-commit run --all-files
           environment:
             SKIP: prospector,isort,eslint,missing-migrations
       - run:
-          command: (cd backend; pipenv run python manage.py has_missing_migrations --ignore authtools)
+          command: (cd backend; python manage.py has_missing_migrations --ignore authtools)
           environment:
             DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.local_base'
       - run:
-          command: (cd backend; pipenv run python manage.py check --deploy)
+          command: (cd backend; python manage.py check --deploy)
           environment:
             DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.production'
             SECRET_KEY: "$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')"
@@ -84,13 +80,13 @@ jobs:
             SENDGRID_PASSWORD: 'test'
             REDIS_URL: 'redis://'
       - run:
-          command: (cd backend; pipenv run coverage run manage.py test)
+          command: (cd backend; coverage run manage.py test)
       - run:
           command: npm run test
       - run:
           command: |
             mkdir -p test-reports/
-            pipenv run coverage xml -o test-reports/results.xml
+            coverage xml -o test-reports/results.xml
           when: always
       - store_test_results:
           path: test-reports

@@ -27,14 +27,17 @@ This is a good starting point for modern Python/JavaScript web projects.
 - [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
 ```
-django-admin startproject theprojectname --extension py,yml,json --name Procfile,README.md,.env.example --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+django-admin startproject theprojectname --extension py,yml,json --name Procfile,Dockerfile,README.md,.env.example --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
 ```
-- [ ] Above: don't forget the `--extension` and `--name` params! (also don't forget to change `theprojectname` to your project's name).
+In the next steps, always remember to replace theprojectname with your project's name
+- [ ] Above: don't forget the `--extension` and `--name` params!
 - [ ] Navigate to the project's directory through your command line.
-- [ ] Install pipenv if not installed yet: `pip install pipenv` (maybe you'll have to run this command as an OS superuser).
+- [ ] Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv theprojectname` or `python -m venv theprojectname`.
+- [ ] Make sure the virtualenv is activated `workon theprojectname` or `source theprojectname/bin/activate`
+- [ ] Install pip-tools if not installed yet: `pip install pip-tools` (maybe you'll have to run this command as an OS superuser).
 - [ ] Make sure you have Python 3.7 installed.
-- [ ] `pipenv install --dev`
-- [ ] Activate the newly created virtualenv with `pipenv shell`
+- [ ] Compile the requirements before installation: `pip-compile requirements.in > requirements.txt && pip-compile dev-requirements.in > dev-requirements.txt`
+- [ ] `pip install -r requirements.txt && pip install -r dev-requirements.txt`
 - [ ] Change the first line of README to the name of the project.
 - [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/{{project_name}}/settings/base.py`
 - [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails in `{{project_name}}/{{project_name}}/settings/production.py`
@@ -43,32 +46,44 @@ django-admin startproject theprojectname --extension py,yml,json --name Procfile
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
 
 ## Running
-### Setup
+### Setup (plain python)
 - Inside the `backend` folder, do the following:
-- Create a copy of ``{{project_name}}/settings/local.py.example``:  
+- Create a copy of ``{{project_name}}/settings/local.py.example``:
   `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py` (remembering you should replace `{{project_name}}` with your project's name!).
-- Create a copy of ``.env.example``:  
+- Create a copy of ``.env.example``:
   `cp .env.example .env`
-- Create the migrations for `users` app (do this, then remove this line from the README):  
+If you are using plain python:
+- Create the migrations for `users` app (do this, then remove this line from the README):
   `python manage.py makemigrations`
-- Run the migrations:  
+- Run the migrations:
   `python manage.py migrate`
+If you are using docker:
+- Create the migrations for `users` app (do this, then remove this line from the README):
+  `docker-compose backend run python manage.py makemigrations`
+- Run the migrations:
+  `docker-compose backend run python manage.py migrate`
 
 ### Tools
 - Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
 
-### Running the project
+### Running the project (without docker)
 - Open a command line window and go to the project's directory.
-- `pipenv install --dev`
+- `pip install -r requirements.txt && pip install -r dev-requirements.txt`
 - `npm install`
 - `npm run start`
 - Open another command line window and go to the `backend` directory.
-- `pipenv shell`
+- `workon theprojectname` or `source theprojectname/bin/activate` depending on if you are using virtualenvwrapper or just virtualenv.
 - `python manage.py runserver`
+
+
+### Running the project (with docker)
+- Open a command line window and go to the project's directory.
+- `docker-compose up -d `
+To access the logs for each service run `docker-compose logs -f service_name` (either backend, frontend, etc)
 
 #### Celery
 - Open a command line window and go to the project's directory
-- `pipenv shell`
+- `workon theprojectname` or `source theprojectname/bin/activate` depending on if you are using virtualenvwrapper or just virtualenv.
 - `python manage.py celery`
 
 ### Testing
@@ -79,7 +94,9 @@ Will run django tests using `--keepdb` and `--parallel`. You may pass a path to 
 `make test someapp.tests.test_views`
 
 ### Adding new pypi libs
-Just run `pipenv install LIB_NAME_ON_PYPI` and then `pipenv lock` to lock the version in Pipfile.lock file
+Add the libname to either requirements.in or dev-requirents.in, then either upgrade the libs with `make upgrade` or manually compile it and then,  install.
+`pip-compile requirements.in > requirements.txt` or `make upgrade`
+`pip install -r requirements.txt`
 
 ## Deployment 
 ### Setup

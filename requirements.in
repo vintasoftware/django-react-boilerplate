@@ -1,0 +1,16 @@
+django
+celery[redis]
+django-model-utils
+django-webpack-loader
+django-js-reverse
+django-import-export
+python-decouple
+psycopg2
+brotlipy
+django-log-request-id
+dj-database-url
+gunicorn
+whitenoise
+psutil
+ipython
+sentry-sdk

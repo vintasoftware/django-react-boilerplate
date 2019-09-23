@@ -14,10 +14,6 @@ jobs:
     working_directory: ~/django-react-boilerplate
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
-        environment:
-          PIPENV_IGNORE_VIRTUALENVS: True
-          PIPENV_VENV_IN_PROJECT: True
-          PIPENV_DONT_LOAD_ENV: 0
     steps:
       - checkout
       - run:
@@ -29,21 +25,21 @@ jobs:
       - run:
           command: django-admin startproject testproject --extension py,yml,json,example --name Procfile,README.md --template=.
       - run:
-          command: pip install requests pipenv --upgrade
+          command: pip install requests pip-tools --upgrade
           path: testproject
       - run:
-          command: pipenv lock --dev
+          command: pip-compile requirements.in > requirements.txt && pip-compile dev-requirements.in > dev-requirements.txt
           path: testproject
       - restore_cache:
           keys:
-            - v1-pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - v1-pipenv-cache-{{ .Branch }}-
-            - v1-pipenv-cache-
+            - v1-pip-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-pip-cache-{{ .Branch }}-
+            - v1-pip-cache-
       - run:
-          command: pipenv install --dev
+          command: pip install --user -r requirements.txt && pip install -r dev-requirements.txt
           path: testproject
       - save_cache:
-          key: pipenv-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          key: pip-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - testproject/.venv
             - /usr/local/bin
@@ -55,22 +51,22 @@ jobs:
           command: cp .env.example .env
           path: testproject/backend
       - run:
-          command: pipenv run python manage.py makemigrations
+          command: python manage.py makemigrations
           path: testproject/backend
       - run:
-          command: pipenv run python manage.py migrate
+          command: python manage.py migrate
           path: testproject/backend
       - run:
-          command: pipenv run python manage.py test
+          command: python manage.py test
           path: testproject/backend
       - run:
-          command: pipenv run prospector
+          command: prospector
           path: testproject/backend
       - run:
-          command: pipenv run python manage.py has_missing_migrations
+          command: python manage.py has_missing_migrations
           path: testproject/backend
       - run:
-          command: pipenv run python manage.py check --deploy --fail-level WARNING
+          command: python manage.py check --deploy --fail-level WARNING
           path: testproject/backend
           environment:
             SECRET_KEY: '$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")'
@@ -123,10 +119,6 @@ jobs:
     working_directory: ~/django-react-boilerplate
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
-        environment:
-          PIPENV_IGNORE_VIRTUALENVS: True
-          PIPENV_VENV_IN_PROJECT: True
-          PIPENV_DONT_LOAD_ENV: 0
     steps:
       - checkout
       - run:
