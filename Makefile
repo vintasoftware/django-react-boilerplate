@@ -1,5 +1,5 @@
 ARG := $(word 2, $(MAKECMDGOALS) )
-
+FRONTEND_EXAMPLE_APP_PATH:="./frontend/js/app/exampleapp"
 
 clean:
 	@find . -name "*.pyc" -exec rm -rf {} \;
@@ -24,3 +24,11 @@ upgrade: ## update the *requirements.txt files with the latest packages satisfyi
 	# Make everything =>, not ==
 	sed 's/==/>=/g' requirements.txt > requirements.tmp
 	mv requirements.tmp requirements.txt
+
+cleanexamples:
+	# remove backend example app
+	@rm -rf ./backend/exampleapp
+	# remove frontend example app and its usage
+	@rm -rf FRONTEND_EXAMPLE_APP_PATH
+	# Remove example app components usage
+	@grep -vwE "ColorChanger" $(FRONTEND_EXAMPLE_APP_PATH)/Home.js > Home_Clean.js; mv Home_Clean.js ./frontend/js/pages/Home.js
