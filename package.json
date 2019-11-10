@@ -39,7 +39,7 @@
     "react-dom": "~16.9.0",
     "react-hot-loader": "~4.12.3",
     "redux": "~4.0.0",
-    "resolve-url-loader": "~3.0.0",
+    "resolve-url-loader": "~3.1.1",
     "sass-loader": "~7.3.1",
     "script-loader": "~0.7.0",
     "style-loader": "~1.0.0",
