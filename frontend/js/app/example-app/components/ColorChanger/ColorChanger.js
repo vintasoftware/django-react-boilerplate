@@ -22,8 +22,11 @@ class ColorChanger extends React.Component {
   }
 
   render() {
-    const { title } = this.props;
     const { color } = this.state;
+
+    const title =
+      'It really does work! (this section is rendered by React, ' +
+      'change the app\'s name below to test hot reloading)';
 
     return (
       <div className="main-container">
