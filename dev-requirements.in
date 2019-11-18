@@ -1,0 +1,8 @@
+bandit
+coverage
+django-naomi
+isort
+model-mommy
+pre-commit
+prospector[with-vulture]
+safety
