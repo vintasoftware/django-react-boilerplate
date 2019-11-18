@@ -25,7 +25,7 @@ upgrade: ## update the *requirements.txt files with the latest packages satisfyi
 	sed 's/==/>=/g' requirements.txt > requirements.tmp
 	mv requirements.tmp requirements.txt
 
-cleanexamples:
+clean_examples:
 	# Removing backend example app fles
 	rm -rf ./backend/exampleapp
 	# Removing frontend example app files
