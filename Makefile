@@ -30,5 +30,6 @@ clean_examples:
 	rm -rf ./backend/exampleapp
 	# Removing frontend example app files
 	rm -rf ./frontend/js/app/example-app
-	# Removing frontend example app components usage
-	grep -vwE "ColorChanger" $(FRONTEND_PAGES_PATH)/Home.js > Home_Clean.js; mv Home_Clean.js $(FRONTEND_PAGES_PATH)/Home.js
+	# Replace Home.js that contains example app components with another without these dependencies
+	rm $(FRONTEND_PAGES_PATH)/Home.js
+	mv $(FRONTEND_PAGES_PATH)/HomeFinal.js $(FRONTEND_PAGES_PATH)/Home.js
