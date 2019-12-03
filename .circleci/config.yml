@@ -21,7 +21,7 @@ jobs:
       - run:
           command: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - run:
-          command: pip install django<3
+          command: pip install django==2.*
       - run:
           command: django-admin startproject testproject --extension py,yml,json,example --name Procfile,README.md --template=.
       - run:
