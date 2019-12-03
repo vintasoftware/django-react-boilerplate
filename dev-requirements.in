@@ -1,10 +1,9 @@
 bandit
 coverage
-# Temporary fixed version. It will change when we update django version to > 3
-django-naomi==0.8
+django<3 # Fixed django version in order to avoid libs to install v3
+django-naomi
 isort
-# Temporary fixed version. It will be replace by model-bakery
-model-mommy==2.0.0
+model-mommy # It will be replace by model-bakery
 pre-commit
 prospector[with-vulture]
 safety
