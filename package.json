@@ -1,13 +1,14 @@
 {
-  "name": "{{project_name}}-frontend",
+  "name": "theprojectname-frontend",
   "version": "0.0.1",
   "private": true,
-  "description": "{{project_name}} frontend.",
+  "description": "theprojectname frontend.",
   "main": "index.js",
   "prettier": "eslint-config-vinta/prettier",
   "scripts": {
     "test": "jest",
     "test:watch": "npm test -- --watch",
+    "test:update": "npm test -- --u",
     "start": "babel-node server.js",
     "build": "NODE_ENV=production webpack -p --progress --colors --config webpack.prod.config.js --bail",
     "lint": "eslint frontend",
