@@ -5,7 +5,7 @@ exports[`ColorChanger no title (should use default) 1`] = `
   className="main-container"
 >
   <h2>
-    React App Loaded!
+    It really does work! (this section is rendered by React, change the app's name below to test hot reloading)
   </h2>
   <h3
     className="app-name"
@@ -60,7 +60,7 @@ exports[`ColorChanger some title 1`] = `
   className="main-container"
 >
   <h2>
-    This is a test title
+    It really does work! (this section is rendered by React, change the app's name below to test hot reloading)
   </h2>
   <h3
     className="app-name"
