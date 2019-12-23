@@ -1,76 +1,58 @@
-var path = require('path');
-var nodeModulesDir = path.resolve(__dirname, 'node_modules');
-var BundleTracker = require('webpack-bundle-tracker');
+const path = require('path');
 
-module.exports = [
-  {
-    entry: ['./frontend/js/jquery-index.js'],
-    output: {
-      path: path.resolve('./frontend/bundles/'),
-      filename: 'bundle-jquery.js',
-    },
-    module: {
-      rules: [
-        {
-          test: /\.jsx?$/,
-          exclude: [nodeModulesDir],
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env'],
-            },
+const nodeModulesDir = path.resolve(__dirname, 'node_modules');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const devMode = process.env.NODE_ENV !== 'production';
+
+module.exports = {
+  context: __dirname,
+  entry: [],
+  output: {
+    path: path.resolve(__dirname, 'frontend/bundles/'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          ...(devMode ? ['style-loader'] : ['style-loader', MiniCssExtractPlugin.loader]),
+          'css-loader',
+          'postcss-loader',
+          'resolve-url-loader',
+        ],
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+      },
+      {
+        test: /\.(svg)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=100000',
+      },
+      {
+        test: /\.(jpg|png)?$/,
+        loaders: ['file-loader?name=i-[hash].[ext]'],
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: [nodeModulesDir],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
           },
         },
-        {
-          test: /jquery\/dist\/jquery\.js$/,
-          loader: 'expose-loader?$',
-        },
-        {
-          test: /jquery\/dist\/jquery\.js$/,
-          loader: 'expose-loader?jQuery',
-        },
-      ],
-    },
-    plugins: [
-      new BundleTracker({
-        filename: './jquery-webpack-stats.json',
-      }),
+      },
     ],
   },
-  {
-    context: __dirname,
-    entry: [
-      // defined in local or prod
+  plugins: [],
+  resolve: {
+    modules: [
+      'node_modules',
+      path.resolve('.frontend/'),
+      path.resolve('.frontend/js/'),
     ],
-    output: {
-      // defined in local or prod
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          loaders: ['style-loader', 'css-loader', 'postcss-loader'],
-        },
-        {
-          test: /\.scss$/,
-          loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
-        },
-        {
-          test: /\.(svg)(\?v=\d+\.\d+\.\d+)?$/,
-          loader: 'url-loader?limit=100000',
-        },
-        {
-          test: /\.(jpg|png)?$/,
-          loaders: ['file-loader?name=i-[hash].[ext]'],
-        },
-      ],
-    },
-    plugins: [
-      // defined in local or prod
-    ],
-    resolve: {
-      modules: ['node_modules', 'bower_components', path.resolve(__dirname, 'frontend/js/')],
-      extensions: ['.js', '.jsx'],
-    },
+    extensions: ['.js', '.jsx'],
   },
-];
+};

@@ -1,5 +1,5 @@
 // import pages
-import 'bootstrap-includes';
+import './bootstrap-includes';
 import '../sass/style.scss';
 
 import React from 'react';

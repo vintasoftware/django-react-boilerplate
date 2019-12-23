@@ -1,10 +1,12 @@
-var autoprefixer = require('autoprefixer');
-var baseConfig = require('./webpack.base.config');
-var webpack = require('webpack');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var BundleTracker = require('webpack-bundle-tracker');
-var path = require('path');
-var nodeModulesDir = path.resolve(__dirname, 'node_modules');
+const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleTracker = require('webpack-bundle-tracker');
+const path = require('path');
+
+const baseConfig = require('./webpack.base.config');
+
+const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 
 baseConfig[0].mode = 'production';
 baseConfig[1].mode = 'production';
