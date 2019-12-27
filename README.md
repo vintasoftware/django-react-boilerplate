@@ -152,7 +152,7 @@ We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY
 
 If you wish to contribute to this project, please first discuss the change you wish to make via an [issue](https://github.com/vintasoftware/django-react-boilerplate/issues).
 
-Check our [contributing guide](#CONTRIBUTING) to learn more about our development process and how you can test your changes to the boilerplate.
+Check our [contributing guide](https://github.com/vintasoftware/django-react-boilerplate/blob/master/CONTRIBUTING.md) to learn more about our development process and how you can test your changes to the boilerplate.
 
 ## Commercial Support
 This project, as other Vinta open-source projects, is used in products of Vinta clients. We are always looking for exciting work, so if you need any commercial support, feel free to get in touch: contact@vinta.com.br
