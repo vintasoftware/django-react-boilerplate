@@ -15,10 +15,10 @@ If you made changes to this boilerplate and want to test them, do as following:
 
 ## How to test Heroku deployment
 
-Push your changes to a branch and visit
-```
+Push your changes to a branch and visit the link below
+
 https://dashboard.heroku.com/new?template=https://github.com/fill-org-or-user/fill-project-repo-name/tree/fill-branch
-```
+
 > Make sure to replace all `fill-*`
 
 ## How to add a 'Deploy to Heroku' button
