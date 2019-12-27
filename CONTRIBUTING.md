@@ -1,6 +1,12 @@
 # Contributing
 
-## How to test `django-admin startproject`
+## Pull requests
+
+Read [this checklist](http://pullrequests.devchecklists.com) for a more detailed guide on best practices for opening pull requests.
+
+## Testing your changes
+
+### Testing `django-admin startproject`
 
 If you made changes to this boilerplate and want to test them, do as following:
 
@@ -13,7 +19,7 @@ If you made changes to this boilerplate and want to test them, do as following:
   ```
 - A new folder called `theprojectname` will be created and now you can test your changes
 
-## How to test Heroku deployment
+### Testing Heroku deployment
 
 Push your changes to a branch and visit the link below
 
@@ -21,12 +27,9 @@ https://dashboard.heroku.com/new?template=https://github.com/fill-org-or-user/fi
 
 > Make sure to replace all `fill-*`
 
-## How to add a 'Deploy to Heroku' button
+## How to add a "Deploy to Heroku" button
 
 Read [this](https://devcenter.heroku.com/articles/heroku-button#adding-the-heroku-button).
 
-P.S. if you want to deploy in a different way please check the `app.json` file for what needs to be configured.
+P.S. if you want to deploy in a different way, please check the `app.json` file for what needs to be configured.
 
-## PR Checklist
-
-Read [this](http://pullrequests.devchecklists.com) for a more detailed guide on best practices for opening PRs.
