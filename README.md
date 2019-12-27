@@ -46,13 +46,13 @@ In the next steps, always remember to replace theprojectname with your project's
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
 
 ## Running
-### Setup (plain python)
+### Setup (plain Python)
 - Inside the `backend` folder, do the following:
 - Create a copy of ``{{project_name}}/settings/local.py.example``:
   `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py` (remembering you should replace `{{project_name}}` with your project's name!).
 - Create a copy of ``.env.example``:
   `cp .env.example .env`
-If you are using plain python:
+If you are using plain Python:
 - Create the migrations for `users` app (do this, then remove this line from the README):
   `python manage.py makemigrations`
 - Run the migrations:
