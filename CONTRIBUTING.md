@@ -4,6 +4,7 @@
 
 If you made changes to this boilerplate and want to test them, do as following:
 
+- [Make sure you have pre-commit installed](https://github.com/vintasoftware/django-react-boilerplate#pre-commit-hooks)
 - Commit your changes
 - Run `git archive -o boilerplate.zip HEAD` to create the template zip file
 - Run the following:
@@ -14,7 +15,11 @@ If you made changes to this boilerplate and want to test them, do as following:
 
 ## How to test Heroku deployment
 
-Push your changes to a branch and visit `https://dashboard.heroku.com/new?template=https://github.com/fill-org-or-user/fill-project-repo-name/tree/fill-branch` (replace all `fill-*`).
+Push your changes to a branch and visit
+```
+https://dashboard.heroku.com/new?template=https://github.com/fill-org-or-user/fill-project-repo-name/tree/fill-branch
+```
+> Make sure to replace all `fill-*`
 
 ## How to add a 'Deploy to Heroku' button
 
