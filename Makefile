@@ -1,5 +1,4 @@
 ARG := $(word 2, $(MAKECMDGOALS) )
-FRONTEND_PAGES_PATH := "./frontend/js/pages"
 
 clean:
 	@find . -name "*.pyc" -exec rm -rf {} \;
