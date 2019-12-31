@@ -27,6 +27,7 @@ AUTH_PASSWORD_VALIDATORS = []  # allow easy passwords only on local
 
 # Celery
 CELERY_TASK_ALWAYS_EAGER = True
+CELERY_TASK_EAGER_PROPAGATES = True
 
 # Email
 INSTALLED_APPS += ('naomi',)
