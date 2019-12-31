@@ -101,11 +101,11 @@ Add the libname to either requirements.in or dev-requirents.in, then either upgr
 `pip install -r requirements.txt`
 
 ### Cleaning example code
-Before start creating you own apps, run the command `make clean_examples` in order to clean the example apps from the front and backend. It will also remove it's usage.
+Before start creating your own apps, run the command `make clean_examples` in order to clean up the example apps from the front and backend. It will also remove its usage.
 
 ## Deployment 
 ### Setup
-This project comes with a `app.json` file for heroku, that can be used to create an app on heroku from a GitHub repository.
+This project comes with an `app.json` file for heroku, that can be used to create an app on heroku from a GitHub repository.
 
 After setting up the project, you can init a repository and push it on GitHub. If your repository is public, you can use the following button:
 
