@@ -8,7 +8,7 @@ from django.apps import apps
 
 from celery import Celery
 
-from {{project_name}}.celerybeat_schedule import CELERYBEAT_SCHEDULE
+from .celerybeat_schedule import CELERYBEAT_SCHEDULE
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{project_name}}.settings.local")
 
