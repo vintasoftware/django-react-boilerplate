@@ -46,22 +46,24 @@ In the next steps, always remember to replace theprojectname with your project's
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
 
 ## Running
-### Setup (plain python)
+### Setup
 - Inside the `backend` folder, do the following:
-- Create a copy of ``{{project_name}}/settings/local.py.example``:
-  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py` (remembering you should replace `{{project_name}}` with your project's name!).
+- Create a copy of ``{{project_name}}/settings/local.py.example``:  
+  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py`
 - Create a copy of ``.env.example``:
   `cp .env.example .env`
-If you are using plain python:
-- Create the migrations for `users` app (do this, then remove this line from the README):
+
+#### If you are using plain python:
+- Create the migrations for `users` app: 
   `python manage.py makemigrations`
 - Run the migrations:
   `python manage.py migrate`
-If you are using docker:
-- Create the migrations for `users` app (do this, then remove this line from the README):
-  `docker-compose backend run python manage.py makemigrations`
+
+#### If you are using docker:
+- Create the migrations for `users` app:  
+  `docker-compose run --rm backend python manage.py makemigrations`
 - Run the migrations:
-  `docker-compose backend run python manage.py migrate`
+  `docker-compose run --rm backend python manage.py migrate`
 
 ### Tools
 - Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
