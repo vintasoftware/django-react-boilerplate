@@ -2,7 +2,7 @@
   "name": "theprojectname-frontend",
   "version": "0.0.1",
   "private": true,
-  "description": "theprojectname frontend.",
+  "description": "{{project_name}} frontend.",
   "main": "index.js",
   "prettier": "eslint-config-vinta/prettier",
   "scripts": {

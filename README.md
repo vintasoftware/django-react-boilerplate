@@ -101,7 +101,7 @@ Add the libname to either requirements.in or dev-requirents.in, then either upgr
 `pip install -r requirements.txt`
 
 ### Cleaning example code
-Before start creating your own apps, run the command `make clean_examples` in order to clean up the example apps from the front and backend. It will also remove its usage.
+Before start creating your own apps, run the command `make clean_examples` in order to clean up the example apps from the front and backend.
 
 ## Deployment 
 ### Setup

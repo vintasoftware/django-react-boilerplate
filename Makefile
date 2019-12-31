@@ -30,6 +30,3 @@ clean_examples:
 	rm -rf ./backend/exampleapp
 	# Removing frontend example app files
 	rm -rf ./frontend/js/app/example-app
-	# Replace Home.js that contains example app components with another without these dependencies
-	rm $(FRONTEND_PAGES_PATH)/Home.js
-	mv $(FRONTEND_PAGES_PATH)/HomeFinal.js $(FRONTEND_PAGES_PATH)/Home.js
