@@ -6,6 +6,7 @@ import config from './webpack.local.config';
 
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
+  port: 3000,
   hot: true,
   inline: true,
   historyApiFallback: true,

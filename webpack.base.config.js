@@ -1,7 +1,7 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -24,7 +24,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         test: /\.(svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -32,7 +32,7 @@ module.exports = {
       },
       {
         test: /\.(jpg|png)?$/,
-        loaders: ['file-loader?name=i-[hash].[ext]'],
+        use: ['file-loader?name=i-[hash].[ext]'],
       },
       {
         test: /\.jsx?$/,
@@ -48,11 +48,7 @@ module.exports = {
   },
   plugins: [],
   resolve: {
-    modules: [
-      'node_modules',
-      path.resolve('.frontend/'),
-      path.resolve('.frontend/js/'),
-    ],
+    modules: ['node_modules', path.resolve(__dirname, 'frontend/js/')],
     extensions: ['.js', '.jsx'],
   },
 };

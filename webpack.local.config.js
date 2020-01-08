@@ -5,8 +5,6 @@ const path = require('path');
 
 const baseConfig = require('./webpack.base.config');
 
-const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-
 baseConfig.mode = 'development';
 
 baseConfig.entry = [
@@ -24,24 +22,16 @@ baseConfig.optimization = {
   },
 };
 
-baseConfig.output.publicPath = 'http://localhost:3000/frontend/bundles/';
 baseConfig.output = {
   path: path.resolve('./frontend/bundles/'),
   publicPath: 'http://localhost:3000/frontend/bundles/',
   filename: '[name].js',
 };
 
-baseConfig.module.rules.push(
-  {
-    test: /\.jsx?$/,
-    exclude: [nodeModulesDir],
-    loader: require.resolve('babel-loader'),
-  },
-  {
-    test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
-    loader: 'url-loader?limit=100000',
-  }
-);
+baseConfig.module.rules.push({
+  test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+  use: 'url-loader?limit=100000',
+});
 
 baseConfig.plugins = [
   new webpack.EvalSourceMapDevToolPlugin({
@@ -79,8 +69,7 @@ baseConfig.plugins = [
 ];
 
 baseConfig.resolve.alias = {
-  'react-dom': '@hot-loader/react-dom'
+  'react-dom': '@hot-loader/react-dom',
 };
-
 
 module.exports = baseConfig;
