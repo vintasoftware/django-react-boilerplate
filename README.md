@@ -46,22 +46,24 @@ In the next steps, always remember to replace theprojectname with your project's
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
 
 ## Running
-### Setup (plain python)
+### Setup
 - Inside the `backend` folder, do the following:
-- Create a copy of ``{{project_name}}/settings/local.py.example``:
-  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py` (remembering you should replace `{{project_name}}` with your project's name!).
+- Create a copy of ``{{project_name}}/settings/local.py.example``:  
+  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py`
 - Create a copy of ``.env.example``:
   `cp .env.example .env`
-If you are using plain python:
-- Create the migrations for `users` app (do this, then remove this line from the README):
+
+#### If you are using plain python:
+- Create the migrations for `users` app: 
   `python manage.py makemigrations`
 - Run the migrations:
   `python manage.py migrate`
-If you are using docker:
-- Create the migrations for `users` app (do this, then remove this line from the README):
-  `docker-compose backend run python manage.py makemigrations`
+
+#### If you are using Docker:
+- Create the migrations for `users` app:  
+  `docker-compose run --rm backend python manage.py makemigrations`
 - Run the migrations:
-  `docker-compose backend run python manage.py migrate`
+  `docker-compose run --rm backend python manage.py migrate`
 
 ### Tools
 - Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
@@ -148,8 +150,15 @@ Some settings defaults were decided based on Vinta's experiences. Here's the rat
 ### `CELERY_ACKS_LATE = True`
 We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY_ACKS_LATE = True` to ensure tasks will be re-queued after a worker failure. Check Celery docs on ["Should I use retry or acks_late?"](https://docs.celeryproject.org/en/latest/faq.html#should-i-use-retry-or-acks-late) for more info.
 
+## Contributing
+
+If you wish to contribute to this project, please first discuss the change you wish to make via an [issue](https://github.com/vintasoftware/django-react-boilerplate/issues).
+
+Check our [contributing guide](https://github.com/vintasoftware/django-react-boilerplate/blob/master/CONTRIBUTING.md) to learn more about our development process and how you can test your changes to the boilerplate.
+
 ## Commercial Support
 This project, as other Vinta open-source projects, is used in products of Vinta clients. We are always looking for exciting work, so if you need any commercial support, feel free to get in touch: contact@vinta.com.br
 
-Copyright (c) 2018 Vinta Serviços e Soluções Tecnológicas Ltda.
+Copyright (c) 2020 Vinta Serviços e Soluções Tecnológicas Ltda.
+
 [MIT License](LICENSE.txt)
