@@ -16,6 +16,9 @@ module.exports = {
         config: path.join(__dirname, '/webpack.local.config.js'),
         'config-index': 1
       }
-    }
+    },
+    react: {
+        "version": "detect"
+    },
   }
 }

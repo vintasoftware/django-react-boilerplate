@@ -1,6 +1,5 @@
 ARG := $(word 2, $(MAKECMDGOALS) )
 
-
 clean:
 	@find . -name "*.pyc" -exec rm -rf {} \;
 	@find . -name "__pycache__" -delete
@@ -24,3 +23,9 @@ upgrade: ## update the *requirements.txt files with the latest packages satisfyi
 	# Make everything =>, not ==
 	sed 's/==/>=/g' requirements.txt > requirements.tmp
 	mv requirements.tmp requirements.txt
+
+clean_examples:
+	# Removing backend example app fles
+	rm -rf ./backend/exampleapp
+	# Removing frontend example app files
+	rm -rf ./frontend/js/app/example-app
