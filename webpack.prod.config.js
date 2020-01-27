@@ -38,9 +38,6 @@ baseConfig.module.rules.push(
 
 baseConfig.optimization = {
   minimize: true,
-  splitChunks: {
-    chunks: 'all',
-  },
 };
 
 baseConfig.plugins = [

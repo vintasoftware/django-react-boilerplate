@@ -30,7 +30,7 @@ baseConfig.output = {
 
 baseConfig.module.rules.push({
   test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
-  use: 'url-loader?limit=100000',
+  loader: 'url-loader?limit=100000',
 });
 
 baseConfig.plugins = [

@@ -1,11 +1,10 @@
 // import pages
-import React from 'react';
-import * as Sentry from '@sentry/browser';
-
-import { render } from 'react-dom';
-
 import './bootstrap-includes';
 import '../sass/style.scss';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import * as Sentry from '@sentry/browser';
 
 import App from './App';
 
@@ -14,4 +13,4 @@ Sentry.init({
   release: window.COMMIT_SHA,
 });
 
-render(<App />, document.getElementById('react-app'));
+ReactDOM.render(<App />, document.getElementById('react-app'));
