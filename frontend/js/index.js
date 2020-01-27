@@ -1,7 +1,8 @@
 // import pages
 import React from 'react';
-import ReactDOM from 'react-dom';
 import * as Sentry from '@sentry/browser';
+
+import ReactDOM from 'react-dom';
 
 import './bootstrap-includes';
 import '../sass/style.scss';
