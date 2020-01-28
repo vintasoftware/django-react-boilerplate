@@ -1,14 +1,22 @@
 const path = require('path');
-const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
   context: __dirname,
-  entry: [],
+  entry: [
+    // defined in local or prod
+  ],
+  output: {
+    // defined in local or prod
+  },
   module: {
     rules: [
       {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+        loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         test: /\.(svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -16,22 +24,15 @@ module.exports = {
       },
       {
         test: /\.(jpg|png)?$/,
-        use: ['file-loader?name=i-[hash].[ext]'],
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: [nodeModulesDir],
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
+        loaders: ['file-loader?name=i-[hash].[ext]'],
       },
     ],
   },
+  plugins: [
+    // defined in local or prod
+  ],
   resolve: {
-    modules: ['node_modules', path.resolve(__dirname, 'frontend/js/')],
+    modules: ['node_modules', 'bower_components', path.resolve(__dirname, 'frontend/js/')],
     extensions: ['.js', '.jsx'],
   },
 };

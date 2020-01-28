@@ -5,17 +5,18 @@ const path = require('path');
 
 const baseConfig = require('./webpack.base.config');
 
+const nodeModulesDir = path.resolve(__dirname, 'node_modules');
+
 baseConfig.mode = 'development';
 
 baseConfig.entry = [
-  'react-hot-loader/patch',
+  'webpack-dev-server/client?http://localhost:3000',
+  'webpack/hot/only-dev-server',
   'whatwg-fetch',
   '@babel/polyfill',
   './frontend/js/index.js',
 ];
 
-baseConfig.devtool = false;
-baseConfig.cache = true;
 baseConfig.optimization = {
   splitChunks: {
     chunks: 'all',
@@ -28,10 +29,17 @@ baseConfig.output = {
   filename: '[name].js',
 };
 
-baseConfig.module.rules.push({
-  test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
-  loader: 'url-loader?limit=100000',
-});
+baseConfig.module.rules.push(
+  {
+    test: /\.jsx?$/,
+    exclude: [nodeModulesDir],
+    loader: require.resolve('babel-loader'),
+  },
+  {
+    test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+    loader: 'url-loader?limit=100000',
+  }
+);
 
 baseConfig.plugins = [
   new webpack.EvalSourceMapDevToolPlugin({
