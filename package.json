@@ -52,7 +52,7 @@
     "whatwg-fetch": "~2.0.3"
   },
   "devDependencies": {
-    "@babel/core": "~7.5.0",
+    "@babel/core": "~7.8.4",
     "@babel/node": "~7.5.0",
     "ajv": "~6.10.0",
     "babel-core": "~7.0.0-bridge.0",
