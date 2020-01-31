@@ -10,8 +10,7 @@ const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 baseConfig.mode = 'development';
 
 baseConfig.entry = [
-  'webpack-dev-server/client?http://localhost:3000',
-  'webpack/hot/only-dev-server',
+  'react-hot-loader/patch',
   'whatwg-fetch',
   '@babel/polyfill',
   './frontend/js/index.js',
