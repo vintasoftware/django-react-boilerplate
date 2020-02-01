@@ -73,8 +73,9 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - `pip install -r requirements.txt && pip install -r dev-requirements.txt`
 - `npm install`
 - `npm run start`
-- Open another command line window and go to the `backend` directory.
+- Open another command line window.
 - `workon theprojectname` or `source theprojectname/bin/activate` depending on if you are using virtualenvwrapper or just virtualenv.
+- Go to the `backend` directory.
 - `python manage.py runserver`
 
 
