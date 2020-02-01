@@ -1,6 +1,7 @@
 from django.conf.urls import include, url  # noqa
+from django.urls import path
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.shortcuts import redirect
 
 import django_js_reverse.views
 
