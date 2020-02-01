@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+  <h1>Django React Boilerplate Example App</h1>
+
+  <p>The setup of the Django React Boilerplate Example App was successful.</p>
+
+  <h2>React Example App</h2>
+  <p>Here is an example of a React app included in the Django framework:</p>
+
+  <div id="react-app"></div>
+
+  <h2>Django Example App</h2>
+  <p>This is an example Django app for creating, reading and voting on polls. The app closely follows the official
+    Django tutorial available <a href="https://docs.djangoproject.com/en/2.2/intro/tutorial01/">here</a>.</p>
+
+  <p>Questions and Choices can be created in the <a href="/admin/">Admin interface</a>. Please make sure that you have
+    created a superuser with the command <code>'python manage.py createsuperuser'</code> and have setup the database
+    with <code>'python manage.py makemigrations exampleapp'</code> and <code>'python manage.py migrate'</code>.</p>
+
+  <h3>Polls</h3>
+  {% if latest_question_list %}
+    <p>List of polls available:</p>
+    <ul>
+      {% for question in latest_question_list %}
+        <li><a href="{% url 'exampleapp:detail' question.id %}">{{ question.question_text }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No polls are available.</p>
+  {% endif %}
+{% endblock %}
