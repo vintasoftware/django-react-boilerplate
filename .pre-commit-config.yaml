@@ -21,6 +21,13 @@ repos:
     types: [python]
     exclude: .+/(settings|migrations)/.+
     pass_filenames: true
+  - id: black
+    name: black-local
+    entry: black
+    language: python
+    types: [python]
+    exclude: .+/(settings|migrations)/.+
+    pass_filenames: true
   - id: eslint
     name: eslint-local
     entry: npm run lint
