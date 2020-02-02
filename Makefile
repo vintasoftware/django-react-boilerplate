@@ -29,3 +29,10 @@ clean_examples:
 	rm -rf ./backend/exampleapp
 	# Removing frontend example app files
 	rm -rf ./frontend/js/app/example-app
+
+compile_install_requirements:
+	@echo 'Compiling and installing requirements...'
+	@pip-compile requirements.in > requirements.txt
+	@pip-compile dev-requirements.in > dev-requirements.txt
+	@echo 'Installing requirements...'
+	@pip install -r requirements.txt && pip install -r dev-requirements.txt
