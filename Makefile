@@ -16,6 +16,9 @@ testreset:
 dockertestreset:
 	docker-compose run backend python backend/manage.py test $(ARG) --parallel
 
+backend_format:
+	black backend
+
 upgrade: ## update the *requirements.txt files with the latest packages satisfying *requirements.in
 	pip install -U -q pip-tools
 	pip-compile --upgrade -o dev-requirements.txt dev-requirements.in
