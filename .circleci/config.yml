@@ -93,14 +93,14 @@ jobs:
             sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' package.json
           path: testproject
       - run:
-          command: npm install --logevel=error --no-optional
+          command: npm install --no-optional
           path: testproject
       - run:
           command: npm dedupe
           path: testproject
       # npm ls will error on dependencies errors
       - run:
-          command: npm ls --logevel=error
+          command: npm ls
           path: testproject
       - save_cache:
           key: dependency-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
