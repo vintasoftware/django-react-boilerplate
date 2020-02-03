@@ -93,7 +93,7 @@ jobs:
             sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' package.json
           path: testproject
       - run:
-          command: npm install --no-optional
+          command: npm install --logevel=error --no-optional
           path: testproject
       - run:
           command: npm dedupe
