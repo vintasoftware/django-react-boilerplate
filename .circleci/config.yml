@@ -100,7 +100,7 @@ jobs:
           path: testproject
       # npm ls will error on dependencies errors
       - run:
-          command: npm ls
+          command: npm ls --logevel=error
           path: testproject
       - save_cache:
           key: dependency-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
