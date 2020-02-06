@@ -21,6 +21,13 @@ repos:
     types: [python]
     exclude: .+/(settings|migrations)/.+
     pass_filenames: true
+  - id: black
+    name: black-local
+    entry: black
+    language: python
+    types: [python]
+    exclude: .+/(settings|migrations)/.+
+    pass_filenames: true
   - id: eslint
     name: eslint-local
     entry: npm run lint
@@ -35,7 +42,7 @@ repos:
     pass_filenames: true
   - id: missing-migrations
     name: missing-migrations-local
-    entry: pipenv run python manage.py has_missing_migrations
+    entry: python backend/manage.py has_missing_migrations
     language: system
     always_run: true
     pass_filenames: false
