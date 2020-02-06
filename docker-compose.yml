@@ -37,7 +37,7 @@ services:
       - db
       - broker
       - result
-
+      - frontend
   celery:
     build:
       dockerfile: backend/Dockerfile
