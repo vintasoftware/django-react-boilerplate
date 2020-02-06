@@ -37,6 +37,7 @@ npm-debug.log
 /env/
 /output/
 /cache/
+boilerplate.zip
 
 # Spritesmith
 spritesmith-generated/
