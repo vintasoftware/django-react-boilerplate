@@ -30,8 +30,6 @@ services:
       - "8000:8000"
     volumes:
       - ./backend/:/home/user/app/
-      - ./webpack-stats.json:/home/user/webpack-stats.json
-      - ./jquery-webpack-stats.json:/home/user/jquery-webpack-stats.json
     env_file: backend/.env
     depends_on:
       - db
