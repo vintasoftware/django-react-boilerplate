@@ -21,6 +21,7 @@ RUN pip install -r requirements.txt && \
 RUN apt-get purge libpq-dev -y && apt-get autoremove -y && \
     rm /var/lib/apt/lists/* rm -rf /var/cache/apt/*
 
+COPY webpack-stats.json/ /home/user
 ADD backend/ /home/user/app
 
 USER user

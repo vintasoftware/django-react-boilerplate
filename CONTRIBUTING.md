@@ -15,7 +15,7 @@ If you made changes to this boilerplate and want to test them, do as following:
 - Run `git archive -o boilerplate.zip HEAD` to create the template zip file
 - Run the following:
   ```bash
-  cd .. && django-admin startproject theprojectname --extension py,yml,json --name Procfile,README.md,.env.example --template=django-react-boilerplate/boilerplate.zip
+  cd .. && django-admin startproject theprojectname --extension py,yml,json --name Procfile,README.md,.env.example,Dockerfile --template=django-react-boilerplate/boilerplate.zip
   ```
 - A new folder called `theprojectname` will be created and now you can test your changes
 
