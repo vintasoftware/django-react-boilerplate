@@ -13,7 +13,7 @@ def restart_celery():
     for proc in psutil.process_iter():
         if proc.username() != getpass.getuser():  # skip processes not owned by user
             continue
-        if proc.name() != 'celery':
+        if proc.name() != "celery":
             continue
         # SIGTERM should only be sent to parent process, never to children processes
         # see: https://github.com/celery/celery/issues/2700#issuecomment-259716123
@@ -28,5 +28,5 @@ def restart_celery():
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        print('Starting celery worker with autoreload')
+        print("Starting celery worker with autoreload")
         run_with_reloader(restart_celery)
