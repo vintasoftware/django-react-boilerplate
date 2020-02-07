@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  root: true,
   extends: ['vinta/recommended'],
   rules: {
     'jest/prefer-inline-snapshots': ['off'],
