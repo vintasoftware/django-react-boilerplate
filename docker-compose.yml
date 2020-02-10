@@ -29,7 +29,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend/:/home/user/app/
+      - ./:/home/user/app/
     env_file: backend/.env
     depends_on:
       - db
