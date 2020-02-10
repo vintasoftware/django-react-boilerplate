@@ -12,11 +12,21 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'postcss-loader' }],
       },
       {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          { loader: 'sass-loader' },
+        ],
       },
       {
         test: /\.(svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -24,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.(jpg|png)?$/,
-        loaders: ['file-loader?name=i-[hash].[ext]'],
+        loader: ['file-loader?name=i-[hash].[ext]'],
       },
     ],
   },
