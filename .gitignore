@@ -22,9 +22,6 @@ __pycache__/
 node_modules/
 npm-debug.log
 
-#Folders
-.DS_Store
-
 # Webpack
 /frontend/bundles/*
 /frontend/webpack_bundles/*
@@ -40,6 +37,7 @@ npm-debug.log
 /env/
 /output/
 /cache/
+boilerplate.zip
 
 # Spritesmith
 spritesmith-generated/
@@ -47,3 +45,6 @@ spritesmith.scss
 
 # templated email
 tmp_email/
+
+# requirements
+*requirements.txt

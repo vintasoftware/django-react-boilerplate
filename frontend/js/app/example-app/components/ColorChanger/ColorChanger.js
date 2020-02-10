@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import ColorDisplay from '../ColorDisplay';
 
@@ -22,8 +22,8 @@ class ColorChanger extends React.Component {
   }
 
   render() {
-    const { title } = this.props;
     const { color } = this.state;
+    const { title } = this.props;
 
     return (
       <div className="main-container">
