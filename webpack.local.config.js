@@ -42,7 +42,7 @@ baseConfig.module.rules.push(
 
 baseConfig.plugins = [
   new webpack.EvalSourceMapDevToolPlugin({
-    exclude: /node_modules/,
+    filename: '[name].js.map',
   }),
   new webpack.NamedModulesPlugin(),
   new webpack.NoEmitOnErrorsPlugin(), // don't reload if there is an error
