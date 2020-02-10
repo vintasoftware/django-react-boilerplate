@@ -1,13 +1,10 @@
 from .base import *  # noqa
 
 
-SECRET_KEY = 'test'
+SECRET_KEY = "test"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': base_dir_join('db.sqlite3'),
-    }
+    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": base_dir_join("db.sqlite3"),}
 }
 
 STATIC_ROOT = "staticfiles"
@@ -16,12 +13,12 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = "mediafiles"
 MEDIA_URL = "/media/"
 
-DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # Speed up password hashing
 PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.MD5PasswordHasher',
+    "django.contrib.auth.hashers.MD5PasswordHasher",
 ]
 
 # Celery

@@ -16,6 +16,9 @@ testreset:
 dockertestreset:
 	docker-compose run backend python backend/manage.py test $(ARG) --parallel
 
+backend_format:
+	black backend
+
 upgrade: ## update the *requirements.txt files with the latest packages satisfying *requirements.in
 	pip install -U -q pip-tools
 	pip-compile --upgrade -o dev-requirements.txt dev-requirements.in
@@ -31,3 +34,10 @@ clean_examples:
 	rm -rf ./frontend/js/app/example-app
 	# Removing example templates files
 	rm -rf ./backend/templates/exampleapp
+
+compile_install_requirements:
+	@echo 'Compiling requirements...'
+	pip-compile requirements.in > requirements.txt
+	pip-compile dev-requirements.in > dev-requirements.txt
+	@echo 'Installing requirements...'
+	pip install -r requirements.txt && pip install -r dev-requirements.txt

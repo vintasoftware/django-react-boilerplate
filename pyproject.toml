@@ -1,0 +1,17 @@
+[tool.black]
+line-length = 100
+target-version = ['py36']
+quiet = true
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.venv
+  | _build
+  | build
+  | dist
+  | [a-z_]+/migrations
+)/
+'''

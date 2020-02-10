@@ -5,10 +5,9 @@ from model_mommy import mommy
 
 
 class TestCaseUtils(TestCase):
-
     def setUp(self):
-        self._user_password = '123456'
-        self.user = mommy.prepare('users.User', email='user@email.com')
+        self._user_password = "123456"
+        self.user = mommy.prepare("users.User", email="user@email.com")
         self.user.set_password(self._user_password)
         self.user.save()
 
@@ -53,14 +52,12 @@ class TestCaseUtils(TestCase):
 
 
 class TestGetRequiresAuthenticatedUser:
-
     def test_get_requires_authenticated_user(self):
         response = self.client.get(self.view_url)
         self.assertResponse403(response)
 
 
 class TestAuthGetRequestSuccess:
-
     def test_auth_get_success(self):
         response = self.auth_client.get(self.view_url)
         self.assertResponse200(response)
