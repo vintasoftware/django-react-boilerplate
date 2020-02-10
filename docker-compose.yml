@@ -1,0 +1,52 @@
+version: '3.1'
+
+services:
+  db:
+    image: "postgres:alpine"
+    volumes:
+      - .db:/var/lib/postgresql/data
+
+  broker:
+    image: "rabbitmq:alpine"
+
+  result:
+    image: "redis:alpine"
+
+  frontend:
+    build:
+      dockerfile: frontend/Dockerfile
+      context: .
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+
+  backend:
+    build:
+      dockerfile: backend/Dockerfile
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/:/home/user/app/
+      - ./webpack-stats.json:/home/user/webpack-stats.json
+      - ./jquery-webpack-stats.json:/home/user/jquery-webpack-stats.json
+    env_file: backend/.env
+    depends_on:
+      - db
+      - broker
+      - result
+
+  celery:
+    build:
+      dockerfile: backend/Dockerfile
+      context: .
+    command: python manage.py celery
+    volumes:
+      - ./backend/:/home/user/app/
+    env_file: backend/.env
+    depends_on:
+      - db
+      - broker
+      - result
