@@ -3,7 +3,7 @@ import datetime
 from django.test import TestCase
 from django.utils import timezone
 
-from ..models import Question
+from backend.exampleapp.models import Question
 
 
 class QuestionModelTests(TestCase):
