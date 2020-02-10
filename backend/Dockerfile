@@ -21,7 +21,7 @@ RUN pip install -r requirements.txt && \
 RUN apt-get purge libpq-dev -y && apt-get autoremove -y && \
     rm /var/lib/apt/lists/* rm -rf /var/cache/apt/*
 
-ADD backend/ /home/user/backend
+ADD backend/ /home/user/app/backend
 
 USER user
 CMD gunicorn {{project_name}}.wsgi --log-file - -b 0.0.0.0:8000 --reload

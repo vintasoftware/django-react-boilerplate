@@ -18,6 +18,7 @@ If you made changes to this boilerplate and want to test them, do as following:
   cd .. && django-admin startproject theprojectname --extension py,yml,json --name Procfile,README.md,.env.example,Dockerfile --template=django-react-boilerplate/boilerplate.zip
   ```
 - A new folder called `theprojectname` will be created and now you can test your changes
+- Make sure that the project is still running fine with and without docker
 
 ### Testing Heroku deployment
 
