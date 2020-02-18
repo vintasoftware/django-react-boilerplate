@@ -45,6 +45,3 @@ spritesmith.scss
 
 # templated email
 tmp_email/
-
-# requirements
-*requirements.txt
