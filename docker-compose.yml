@@ -49,3 +49,9 @@ services:
       - db
       - broker
       - result
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "39004:1025"
+      - "39005:8025"
