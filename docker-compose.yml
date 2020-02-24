@@ -50,8 +50,8 @@ services:
       - broker
       - result
 
-  mailhog:
+  mailhog: # service for faking a SMTP server
     image: mailhog/mailhog
     ports:
-      - "39004:1025"
-      - "39005:8025"
+      - '1025:1025' # smtp server
+      - '8025:8025' # web ui
