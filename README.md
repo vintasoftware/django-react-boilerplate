@@ -101,10 +101,10 @@ Add the libname to either requirements.in or dev-requirents.in, then either upgr
 `pip install -r requirements.txt`
 
 ### Cleaning example code
-Before you start creating your own apps, deregister the example app by removing `'exampleapp.apps.ExampleappConfig'` from ``{{project_name}}/settings/base.py`` and adjust 
-``{{project_name}}/urls.py`` to point to your newly created Django app.
-Then run the command `make clean_examples` in order to clean up the example apps from the front and backend.
-Finally adjust ``{{project_name}}/urls.py`` to remove the path configuration that redirects to the deleted example app.
+Before you start creating your own apps remove the example:
+- Run the command `make clean_examples` in order to clean up the example apps from the front and backend.
+- Deregister the example app by removing `'exampleapp.apps.ExampleappConfig'` from ``{{project_name}}/settings/base.py``.
+- Adjust ``{{project_name}}/urls.py`` to point to your newly created Django app and remove the path configuration that redirects to the deleted example app.
 
 ## Deployment 
 ### Setup
