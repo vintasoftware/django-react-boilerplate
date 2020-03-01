@@ -27,13 +27,14 @@ This is a good starting point for modern Python/JavaScript web projects.
 - [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
 ```
-django-admin startproject theprojectname --extension py,yml,json --name Procfile,Dockerfile,README.md,.env.example --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+django-admin startproject theprojectname --extension py,yml,json --name Procfile,Dockerfile,README.md,.env.example,.gitignore --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
 ```
 In the next steps, always remember to replace theprojectname with your project's name
 - [ ] Above: don't forget the `--extension` and `--name` params!
 - [ ] Navigate to the project's directory through your command line
-- [ ] Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv {{project_name}}` or `python -m venv venv`.
-- [ ] Make sure the virtualenv is activated `workon {{project_name}}` or `source venv/bin/activate`
+- [ ] Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv {{project_name}}` or `python -m venv {{project_name}}-venv`.
+    > If you're using Python's virtualenv (the latter option), make sure to create the environment with the suggested name, otherwise it will be added to version control.
+- [ ] Make sure the virtualenv is activated `workon {{project_name}}` or `source {{project_name}}-venv/bin/activate`.
 - [ ] Install pip-tools if not installed yet: `pip install pip-tools` (maybe you'll have to run this command as an OS superuser)
 - [ ] Make sure you have Python 3.7 installed
 - [ ] Compile the requirements before installation and install them:  `make compile_install_requirements`
