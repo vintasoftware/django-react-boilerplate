@@ -8,13 +8,13 @@ test:
 	python backend/manage.py test $(ARG) --parallel --keepdb
 
 dockertest:
-	docker-compose run backend python backend/manage.py test $(ARG) --parallel --keepdb
+	docker-compose run backend python manage.py test $(ARG) --parallel --keepdb
 
 testreset:
 	python backend/manage.py test $(ARG) --parallel
 
 dockertestreset:
-	docker-compose run backend python backend/manage.py test $(ARG) --parallel
+	docker-compose run backend python manage.py test $(ARG) --parallel
 
 backend_format:
 	black backend
