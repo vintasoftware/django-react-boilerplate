@@ -1,5 +1,5 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
+import { hot } from 'react-hot-loader/root';
 
 import Home from './pages/Home';
 import SentryBoundary from './utils/SentryBoundary';
@@ -10,4 +10,4 @@ const App = () => (
   </SentryBoundary>
 );
 
-export default hot(module)(App);
+export default hot(App);

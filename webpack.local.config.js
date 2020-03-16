@@ -1,29 +1,34 @@
-var autoprefixer = require('autoprefixer');
-var webpack = require('webpack');
-var baseConfig = require('./webpack.base.config');
-var BundleTracker = require('webpack-bundle-tracker');
-var path = require('path');
-var nodeModulesDir = path.resolve(__dirname, 'node_modules');
+const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
+const BundleTracker = require('webpack-bundle-tracker');
+const path = require('path');
 
-baseConfig[0].mode = 'development';
-baseConfig[1].mode = 'development';
+const baseConfig = require('./webpack.base.config');
 
-baseConfig[1].entry = [
-  'webpack-dev-server/client?http://localhost:3000',
-  'webpack/hot/only-dev-server',
+const nodeModulesDir = path.resolve(__dirname, 'node_modules');
+
+baseConfig.mode = 'development';
+
+baseConfig.entry = [
+  'react-hot-loader/patch',
   'whatwg-fetch',
   '@babel/polyfill',
-  './frontend/js/index',
+  './frontend/js/index.js',
 ];
 
-baseConfig[0].output['publicPath'] = 'http://localhost:3000/frontend/bundles/';
-baseConfig[1].output = {
+baseConfig.optimization = {
+  splitChunks: {
+    chunks: 'all',
+  },
+};
+
+baseConfig.output = {
   path: path.resolve('./frontend/bundles/'),
   publicPath: 'http://localhost:3000/frontend/bundles/',
   filename: '[name].js',
 };
 
-baseConfig[1].module.rules.push(
+baseConfig.module.rules.push(
   {
     test: /\.jsx?$/,
     exclude: [nodeModulesDir],
@@ -35,11 +40,10 @@ baseConfig[1].module.rules.push(
   }
 );
 
-baseConfig[1].plugins = [
+baseConfig.plugins = [
   new webpack.EvalSourceMapDevToolPlugin({
-    exclude: /node_modules/,
+    exclude: /node_modules/
   }),
-  new webpack.HotModuleReplacementPlugin(),
   new webpack.NamedModulesPlugin(),
   new webpack.NoEmitOnErrorsPlugin(), // don't reload if there is an error
   new BundleTracker({
@@ -54,7 +58,6 @@ baseConfig[1].plugins = [
   new webpack.ProvidePlugin({
     $: 'jquery',
     jQuery: 'jquery',
-    'window.jQuery': 'jquery',
     Tether: 'tether',
     'window.Tether': 'tether',
     Popper: ['popper.js', 'default'],
@@ -71,5 +74,9 @@ baseConfig[1].plugins = [
     Util: 'exports-loader?Util!bootstrap/js/dist/util',
   }),
 ];
+
+baseConfig.resolve.alias = {
+  'react-dom': '@hot-loader/react-dom',
+};
 
 module.exports = baseConfig;

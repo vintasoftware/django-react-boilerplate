@@ -1,10 +1,9 @@
 const path = require('path');
 
 module.exports = {
-  extends: 'vinta/recommended',
-  rules: {
-    'jest/prefer-inline-snapshots': ['off'],
-  },
+  root: true,
+  extends: ['vinta/recommended'],
+  rules: {},
   env: {
     es6: true,
     browser: true,
@@ -16,6 +15,9 @@ module.exports = {
         config: path.join(__dirname, '/webpack.local.config.js'),
         'config-index': 1
       }
-    }
+    },
+    react: {
+        "version": "detect"
+    },
   }
 }

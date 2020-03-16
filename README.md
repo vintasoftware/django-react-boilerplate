@@ -27,41 +27,43 @@ This is a good starting point for modern Python/JavaScript web projects.
 - [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
 ```
-django-admin startproject theprojectname --extension py,yml,json --name Procfile,Dockerfile,README.md,.env.example --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+django-admin startproject theprojectname --extension py,yml,json --name Procfile,Dockerfile,README.md,.env.example,.gitignore --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
 ```
 In the next steps, always remember to replace theprojectname with your project's name
 - [ ] Above: don't forget the `--extension` and `--name` params!
 - [ ] Navigate to the project's directory through your command line.
-- [ ] Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv theprojectname` or `python -m venv theprojectname`.
-- [ ] Make sure the virtualenv is activated `workon theprojectname` or `source theprojectname/bin/activate`
-- [ ] Install pip-tools if not installed yet: `pip install pip-tools` (maybe you'll have to run this command as an OS superuser).
-- [ ] Make sure you have Python 3.7 installed.
-- [ ] Compile the requirements before installation: `pip-compile requirements.in > requirements.txt && pip-compile dev-requirements.in > dev-requirements.txt`
-- [ ] `pip install -r requirements.txt && pip install -r dev-requirements.txt`
-- [ ] Change the first line of README to the name of the project.
-- [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/{{project_name}}/settings/base.py`
-- [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails in `{{project_name}}/{{project_name}}/settings/production.py`
+- [ ] Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv {{project_name}}` or `python -m venv {{project_name}}-venv`.
+    > If you're using Python's virtualenv (the latter option), make sure to create the environment with the suggested name, otherwise it will be added to version control.
+- [ ] Make sure the virtualenv is activated `workon {{project_name}}` or `source {{project_name}}-venv/bin/activate`.
+- [ ] Install pip-tools if not installed yet: `pip install pip-tools` (maybe you'll have to run this command as an OS superuser)
+- [ ] Make sure you have Python 3.7 installed
+- [ ] Compile the requirements before installation and install them:  `make compile_install_requirements`
+- [ ] Change the first line of README to the name of the project
+- [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/backend/{{project_name}}/settings/base.py`
+- [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails in `{{project_name}}/backend/{{project_name}}/settings/production.py`
 - [ ] Rename the folder `circleci` to `.circleci` with the command `mv circleci .circleci`
 
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
 
 ## Running
-### Setup (plain python)
+### Setup
 - Inside the `backend` folder, do the following:
-- Create a copy of ``{{project_name}}/settings/local.py.example``:
-  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py` (remembering you should replace `{{project_name}}` with your project's name!).
+- Create a copy of ``{{project_name}}/settings/local.py.example``:  
+  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py`
 - Create a copy of ``.env.example``:
   `cp .env.example .env`
-If you are using plain python:
-- Create the migrations for `users` app (do this, then remove this line from the README):
+
+#### If you are using plain python:
+- Create the migrations for `users` app: 
   `python manage.py makemigrations`
 - Run the migrations:
   `python manage.py migrate`
-If you are using docker:
-- Create the migrations for `users` app (do this, then remove this line from the README):
-  `docker-compose backend run python manage.py makemigrations`
+
+#### If you are using Docker:
+- Create the migrations for `users` app:  
+  `docker-compose run --rm backend python manage.py makemigrations`
 - Run the migrations:
-  `docker-compose backend run python manage.py migrate`
+  `docker-compose run --rm backend python manage.py migrate`
 
 ### Tools
 - Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
@@ -71,8 +73,9 @@ If you are using docker:
 - `pip install -r requirements.txt && pip install -r dev-requirements.txt`
 - `npm install`
 - `npm run start`
-- Open another command line window and go to the `backend` directory.
+- Open another command line window.
 - `workon theprojectname` or `source theprojectname/bin/activate` depending on if you are using virtualenvwrapper or just virtualenv.
+- Go to the `backend` directory.
 - `python manage.py runserver`
 
 
@@ -98,9 +101,15 @@ Add the libname to either requirements.in or dev-requirents.in, then either upgr
 `pip-compile requirements.in > requirements.txt` or `make upgrade`
 `pip install -r requirements.txt`
 
+### Cleaning example code
+Before you start creating your own apps remove the example:
+- Run the command `make clean_examples` in order to clean up the example apps from the front and backend.
+- Deregister the example app by removing `'exampleapp.apps.ExampleappConfig'` from ``backend/{{project_name}}/settings/base.py``.
+- Adjust ``backend/{{project_name}}/urls.py`` to point to your newly created Django app and remove the path configuration that redirects to the deleted example app.
+
 ## Deployment 
 ### Setup
-This project comes with a `app.json` file for heroku, that can be used to create an app on heroku from a GitHub repository.
+This project comes with an `app.json` file, which can be used to create an app on Heroku from a GitHub repository.
 
 After setting up the project, you can init a repository and push it on GitHub. If your repository is public, you can use the following button:
 
@@ -148,8 +157,15 @@ Some settings defaults were decided based on Vinta's experiences. Here's the rat
 ### `CELERY_ACKS_LATE = True`
 We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY_ACKS_LATE = True` to ensure tasks will be re-queued after a worker failure. Check Celery docs on ["Should I use retry or acks_late?"](https://docs.celeryproject.org/en/latest/faq.html#should-i-use-retry-or-acks-late) for more info.
 
+## Contributing
+
+If you wish to contribute to this project, please first discuss the change you wish to make via an [issue](https://github.com/vintasoftware/django-react-boilerplate/issues).
+
+Check our [contributing guide](https://github.com/vintasoftware/django-react-boilerplate/blob/master/CONTRIBUTING.md) to learn more about our development process and how you can test your changes to the boilerplate.
+
 ## Commercial Support
 This project, as other Vinta open-source projects, is used in products of Vinta clients. We are always looking for exciting work, so if you need any commercial support, feel free to get in touch: contact@vinta.com.br
 
-Copyright (c) 2018 Vinta Serviços e Soluções Tecnológicas Ltda.
+Copyright (c) 2020 Vinta Serviços e Soluções Tecnológicas Ltda.
+
 [MIT License](LICENSE.txt)

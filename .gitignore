@@ -1,5 +1,5 @@
 *.pyc
-/db.sqlite3
+/backend/db.sqlite3
 .DS_Store
 .env
 */settings/local.py
@@ -22,9 +22,6 @@ __pycache__/
 node_modules/
 npm-debug.log
 
-#Folders
-.DS_Store
-
 # Webpack
 /frontend/bundles/*
 /frontend/webpack_bundles/*
@@ -36,10 +33,12 @@ npm-debug.log
 *.map
 
 # General
+/{{project_name}}-venv/
 /venv/
 /env/
 /output/
 /cache/
+boilerplate.zip
 
 # Spritesmith
 spritesmith-generated/
