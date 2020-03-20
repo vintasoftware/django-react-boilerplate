@@ -52,7 +52,7 @@
     "whatwg-fetch": "~2.0.3"
   },
   "devDependencies": {
-    "@babel/core": "~7.8.4",
+    "@babel/core": "~7.9.0",
     "@babel/node": "~7.8.4",
     "@hot-loader/react-dom": "^16.11.0",
     "ajv": "~6.10.0",
