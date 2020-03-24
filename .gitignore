@@ -13,7 +13,7 @@ __pycache__/
 /coverage/
 
 # pycharm
-.idea
+.idea/
 
 # data
 *.dump
