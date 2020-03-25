@@ -23,6 +23,7 @@ Also, includes a Heroku `app.json` and a working Django `production.py` settings
 This is a good starting point for modern Python/JavaScript web projects.
 
 ## Project bootstrap [![CircleCI](https://circleci.com/gh/vintasoftware/django-react-boilerplate.svg?style=svg)](https://circleci.com/gh/vintasoftware/django-react-boilerplate) [![Greenkeeper badge](https://badges.greenkeeper.io/vintasoftware/django-react-boilerplate.svg)](https://greenkeeper.io/)
+- [ ] Make sure you have Python 3.8 installed
 - [ ] Install Django with `pip install django`, to have the `django-admin` command available.
 - [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
@@ -35,8 +36,6 @@ In the next steps, always remember to replace theprojectname with your project's
 - [ ] Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv {{project_name}}` or `python -m venv {{project_name}}-venv`.
     > If you're using Python's virtualenv (the latter option), make sure to create the environment with the suggested name, otherwise it will be added to version control.
 - [ ] Make sure the virtualenv is activated `workon {{project_name}}` or `source {{project_name}}-venv/bin/activate`.
-- [ ] Install pip-tools if not installed yet: `pip install pip-tools` (maybe you'll have to run this command as an OS superuser)
-- [ ] Make sure you have Python 3.7 installed
 - [ ] Compile the requirements before installation and install them:  `make compile_install_requirements`
 - [ ] Change the first line of README to the name of the project
 - [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/backend/{{project_name}}/settings/base.py`
