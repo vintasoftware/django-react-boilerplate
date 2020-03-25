@@ -38,6 +38,9 @@ clean_examples:
 	rm -rf ./backend/templates/exampleapp
 
 compile_install_requirements:
+	@echo 'Installing pip-tools...'
+	export PIP_REQUIRE_VIRTUALENV=true; \
+	pip install pip-tools
 	@echo 'Compiling requirements...'
 	pip-compile requirements.in > requirements.txt
 	pip-compile dev-requirements.in > dev-requirements.txt
