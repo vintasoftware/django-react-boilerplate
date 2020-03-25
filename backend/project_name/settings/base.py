@@ -25,6 +25,7 @@ AUTH_USER_MODEL = "users.User"
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    "exampleapp.apps.ExampleappConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -105,6 +106,7 @@ CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_ACKS_LATE = True
+CELERY_TIMEZONE = TIME_ZONE
 
 # Sentry
 SENTRY_DSN = config("SENTRY_DSN", default="")

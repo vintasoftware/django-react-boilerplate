@@ -1,5 +1,5 @@
 *.pyc
-/db.sqlite3
+/backend/db.sqlite3
 .DS_Store
 .env
 */settings/local.py
@@ -13,7 +13,7 @@ __pycache__/
 /coverage/
 
 # pycharm
-.idea
+.idea/
 
 # data
 *.dump
@@ -33,6 +33,7 @@ npm-debug.log
 *.map
 
 # General
+/{{project_name}}-venv/
 /venv/
 /env/
 /output/
@@ -45,6 +46,3 @@ spritesmith.scss
 
 # templated email
 tmp_email/
-
-# requirements
-*requirements.txt
