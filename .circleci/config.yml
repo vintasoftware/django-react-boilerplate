@@ -20,10 +20,52 @@ jobs:
           command: sudo chown -R circleci:circleci /usr/local/bin
       - run:
           command: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
+          # create testproject
       - run:
           command: pip install django==2.*
       - run:
           command: django-admin startproject testproject --extension py,yml,json,example --name Procfile,README.md --template=.
+          # build and test frontend
+      - restore_cache:
+          keys:
+            - v1-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - v1-npm-cache-{{ .Branch }}-
+            - v1-npm-cache-
+      - run:
+          command: npm update --save
+          path: testproject
+      - run:
+          command: npm update --save-dev
+          path: testproject
+      - run:
+          name: "hotfix for #133"
+          command: |
+            sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' package.json
+          path: testproject
+      - run:
+          command: npm install --no-optional
+          path: testproject
+      - run:
+          command: npm dedupe
+          path: testproject
+      # npm ls will error on dependencies errors
+      - run:
+          command: npm ls
+          path: testproject
+      - save_cache:
+          key: dependency-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - testproject/node_modules
+      - run:
+          command: npm run test
+          path: testproject
+      - run:
+          command: npm run lint
+          path: testproject
+      - run:
+          command: npm run build
+          path: testproject
+          # build and test backend
       - run:
           command: pip install requests pip-tools --upgrade
           path: testproject
@@ -76,45 +118,6 @@ jobs:
             DATABASE_URL: 'sqlite:///'
             ALLOWED_HOSTS: '.example.org'
             REDIS_URL: 'redis://'
-      - restore_cache:
-          keys:
-            - v1-npm-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - v1-npm-cache-{{ .Branch }}-
-            - v1-npm-cache-
-      - run:
-          command: npm update --save
-          path: testproject
-      - run:
-          command: npm update --save-dev
-          path: testproject
-      - run:
-          name: "hotfix for #133"
-          command: |
-            sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' package.json
-          path: testproject
-      - run:
-          command: npm install --no-optional
-          path: testproject
-      - run:
-          command: npm dedupe
-          path: testproject
-      # npm ls will error on dependencies errors
-      - run:
-          command: npm ls
-          path: testproject
-      - save_cache:
-          key: dependency-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - testproject/node_modules
-      - run:
-          command: npm run test
-          path: testproject
-      - run:
-          command: npm run lint
-          path: testproject
-      - run:
-          command: npm run build
-          path: testproject
   deploy:
     working_directory: ~/django-react-boilerplate
     docker:

@@ -28,12 +28,19 @@ upgrade: ## update the *requirements.txt files with the latest packages satisfyi
 	mv requirements.tmp requirements.txt
 
 clean_examples:
-	# Removing backend example app fles
+	# Remove the tables specific for the example app
+	python manage.py migrate exampleapp zero
+	# Removing backend example app files
 	rm -rf ./backend/exampleapp
 	# Removing frontend example app files
 	rm -rf ./frontend/js/app/example-app
+	# Removing example templates files
+	rm -rf ./backend/templates/exampleapp
 
 compile_install_requirements:
+	@echo 'Installing pip-tools...'
+	export PIP_REQUIRE_VIRTUALENV=true; \
+	pip install pip-tools
 	@echo 'Compiling requirements...'
 	pip-compile requirements.in > requirements.txt
 	pip-compile dev-requirements.in > dev-requirements.txt
