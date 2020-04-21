@@ -30,7 +30,7 @@
     "imports-loader": "~0.8.0",
     "jquery": "~3.4.0",
     "lodash": "~4.17.4",
-    "marked": "~0.8.0",
+    "marked": "~1.0.0",
     "node-sass": "~4.13.1",
     "popper.js": "~1.16.0",
     "postcss": "~7.0.13",
