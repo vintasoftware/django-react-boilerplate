@@ -69,7 +69,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 ### Running the project (without docker)
 - Open a command line window and go to the project's directory.
-- `pip install -r requirements.txt && pip install -r dev-requirements.txt`
+- `pip install -r requirements.in && pip install -r dev-requirements.in`
 - `npm install`
 - `npm run start`
 - Open another command line window.
