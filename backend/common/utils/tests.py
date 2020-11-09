@@ -1,13 +1,13 @@
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from model_mommy import mommy
+from model_bakery import baker
 
 
 class TestCaseUtils(TestCase):
     def setUp(self):
         self._user_password = "123456"
-        self.user = mommy.prepare("users.User", email="user@email.com")
+        self.user = baker.prepare("users.User", email="user@email.com")
         self.user.set_password(self._user_password)
         self.user.save()
 
