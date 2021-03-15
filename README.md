@@ -27,9 +27,13 @@ This is a good starting point for modern Python/JavaScript web projects.
 - [ ] Install Django with `pip install django`, to have the `django-admin` command available.
 - [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
-```
-django-admin startproject theprojectname --extension py,yml,json --name Procfile,Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
-```
+    ```
+    django-admin startproject theprojectname --extension py,yml,json --name Procfile,Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+    ```
+    Alternatively, you may start the project in the current directory by placing a `.` right after the project name, using the following command:
+    ```
+    django-admin startproject theprojectname . --extension py,yml,json --name Procfile,Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+    ```
 In the next steps, always remember to replace theprojectname with your project's name
 - [ ] Above: don't forget the `--extension` and `--name` params!
 - [ ] Navigate to the project's directory through your command line.
@@ -69,6 +73,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 ### Running the project (without docker)
 - Open a command line window and go to the project's directory.
+- `pip-compile requirements.in > requirements.txt && pip-compile dev-requirements.in > dev-requirements.txt`
 - `pip install -r requirements.txt && pip install -r dev-requirements.txt`
 - `npm install`
 - `npm run start`
