@@ -3,6 +3,7 @@ black
 coverage
 django<3 # Fixed django version in order to avoid libs to install v3
 django-naomi
+flake8==3.8.4
 isort
 model-bakery
 pre-commit
