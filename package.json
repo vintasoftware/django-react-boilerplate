@@ -34,7 +34,7 @@
     "marked": "~2.0.1",
     "node-sass": "~4.14.1",
     "popper.js": "~1.16.0",
-    "postcss": "~7.0.35",
+    "postcss": "~8.2.8",
     "postcss-loader": "~2.1.6",
     "prop-types": "~15.7.2",
     "react": "~16.14.0",
