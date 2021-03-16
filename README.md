@@ -93,6 +93,13 @@ To access the logs for each service run `docker-compose logs -f service_name` (e
 - `workon theprojectname` or `source theprojectname/bin/activate` depending on if you are using virtualenvwrapper or just virtualenv.
 - `python manage.py celery`
 
+#### Mailhog
+- For development, we use Mailhog to test our e-mail workflows, since it allows us to inspect the messages to validate they're correctly built
+  - Docker users already have it setup and running once they start the project
+  - For non-Docker users, please have a look [here](https://github.com/mailhog/MailHog#installation) for instructions on how to setup Mailhog on specific environments
+> The project expects Mailhog SMTP server to be running on port 1025, you may alter that by changing `EMAIL_PORT` on settings
+
+
 ### Testing
 `make test`
 
@@ -101,7 +108,7 @@ Will run django tests using `--keepdb` and `--parallel`. You may pass a path to 
 `make test someapp.tests.test_views`
 
 ### Adding new pypi libs
-Add the libname to either requirements.in or dev-requirents.in, then either upgrade the libs with `make upgrade` or manually compile it and then,  install.
+Add the libname to either `requirements.in` or `dev-requirements.in`, then either upgrade the libs with `make upgrade` or manually compile it and then,  install.
 `pip-compile requirements.in > requirements.txt` or `make upgrade`
 `pip install -r requirements.txt`
 
@@ -170,6 +177,6 @@ Check our [contributing guide](https://github.com/vintasoftware/django-react-boi
 ## Commercial Support
 This project, as other Vinta open-source projects, is used in products of Vinta clients. We are always looking for exciting work, so if you need any commercial support, feel free to get in touch: contact@vinta.com.br
 
-Copyright (c) 2020 Vinta Serviços e Soluções Tecnológicas Ltda.
+Copyright (c) 2021 Vinta Serviços e Soluções Tecnológicas Ltda.
 
 [MIT License](LICENSE.txt)
