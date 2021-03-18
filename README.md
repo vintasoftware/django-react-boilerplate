@@ -36,11 +36,6 @@ This is a good starting point for modern Python/JavaScript web projects.
     ```
 In the next steps, always remember to replace theprojectname with your project's name
 - [ ] Above: don't forget the `--extension` and `--name` params!
-- [ ] Navigate to the project's directory through your command line.
-- [ ] Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv {{project_name}}` or `python -m venv {{project_name}}-venv`
-    > If you're using Python's virtualenv (the latter option), make sure to create the environment with the suggested name, otherwise it will be added to version control.
-- [ ] Make sure the virtualenv is activated `workon {{project_name}}` or `source {{project_name}}-venv/bin/activate`
-- [ ] Compile the requirements before installation and install them:  `make compile_install_requirements`
 - [ ] Change the first line of README to the name of the project
 - [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/backend/{{project_name}}/settings/base.py`
 - [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails in `{{project_name}}/backend/{{project_name}}/settings/production.py`
@@ -49,6 +44,9 @@ In the next steps, always remember to replace theprojectname with your project's
 After completing ALL of the above, remove this `Project bootstrap` section from the project README. Then follow `Running` below.
 
 ## Running
+### Tools
+- Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
+
 ### Setup
 - Inside the `backend` folder, do the following:
 - Create a copy of ``{{project_name}}/settings/local.py.example``:  
@@ -56,41 +54,40 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - Create a copy of ``.env.example``:
   `cp .env.example .env`
 
-#### If you are using plain python:
-- Create the migrations for `users` app: 
-  `python manage.py makemigrations`
-- Run the migrations:
-  `python manage.py migrate`
-
-#### If you are using Docker:
+### If you are using Docker:
+- Open a new command line window and go to the project's directory.
 - Create the migrations for `users` app:  
   `docker-compose run --rm backend python manage.py makemigrations`
 - Run the migrations:
   `docker-compose run --rm backend python manage.py migrate`
+- Run the project:
+  `docker-compose up -d`
+- To access the logs for each service run `docker-compose logs -f service_name` (either `backend`, `frontend`, etc)
 
-### Tools
-- Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
-
-### Running the project (without docker)
-- Open a command line window and go to the project's directory.
-- `pip-compile requirements.in > requirements.txt && pip-compile dev-requirements.in > dev-requirements.txt`
-- `pip install -r requirements.txt && pip install -r dev-requirements.txt`
+### If you are not using Docker:
+#### Setup the frontend
+- Open a new command line window and go to the project's directory.
 - `npm install`
 - `npm run start`
-- Open another command line window.
-- `workon theprojectname` or `source theprojectname/bin/activate` depending on if you are using virtualenvwrapper or just virtualenv.
+
+#### Setup the backend
+- Open a new command line window and go to the project's directory.
+- Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv {{project_name}}` or `python -m venv {{project_name}}-venv`
+  > If you're using Python's virtualenv (the latter option), make sure to create the environment with the suggested name, otherwise it will be added to version control.
+- Make sure the virtualenv is activated `workon {{project_name}}` or `source {{project_name}}-venv/bin/activate`
+- `make compile_install_requirements`
+  > Please make sure you have already setup PostgreSQL before installing the requirements
 - Go to the `backend` directory.
-- `python manage.py runserver`
+- Create the migrations for `users` app: 
+  `python manage.py makemigrations`
+- Run the migrations:
+  `python manage.py migrate`
+- Run the project:
+  `python manage.py runserver`
 
-
-### Running the project (with docker)
-- Open a command line window and go to the project's directory.
-- `docker-compose up -d `
-To access the logs for each service run `docker-compose logs -f service_name` (either backend, frontend, etc)
-
-#### Celery
+#### Setup Celery
 - Open a command line window and go to the project's directory
-- `workon theprojectname` or `source theprojectname/bin/activate` depending on if you are using virtualenvwrapper or just virtualenv.
+- `workon {{project_name}}` or `source {{project_name}}-venv/bin/activate` depending on if you are using virtualenvwrapper or just virtualenv.
 - `python manage.py celery`
 
 #### Mailhog
