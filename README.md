@@ -75,8 +75,10 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv {{project_name}}` or `python -m venv {{project_name}}-venv`
   > If you're using Python's virtualenv (the latter option), make sure to create the environment with the suggested name, otherwise it will be added to version control.
 - Make sure the virtualenv is activated `workon {{project_name}}` or `source {{project_name}}-venv/bin/activate`
-- `make compile_install_requirements`
-  > Please make sure you have already setup PostgreSQL before installing the requirements
+- Run `make compile_install_requirements` to install the requirements
+  > Please make sure you have already setup PostgreSQL on your environment before installing the requirements
+
+  > In case you wish to use a Conda virtual environment, please remove the line `export PIP_REQUIRE_VIRTUALENV=true; \` from `Makefile`
 - Go to the `backend` directory.
 - Create the migrations for `users` app: 
   `python manage.py makemigrations`
