@@ -38,6 +38,7 @@
     "postcss-loader": "~2.1.6",
     "prop-types": "~15.7.2",
     "react": "~16.14.0",
+    "react-bootstrap": "~1.5.2",
     "react-dom": "~16.14.0",
     "react-hot-loader": "~4.13.0",
     "redux": "~4.0.5",

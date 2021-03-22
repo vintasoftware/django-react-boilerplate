@@ -6,7 +6,7 @@
 A [Django](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
 - [React](https://facebook.github.io/react/), for building interactive UIs
 - [django-js-reverse](https://github.com/ierror/django-js-reverse), for generating URLs on JS
-- [Bootstrap 4](https://v4-alpha.getbootstrap.com/), for responsive styling
+- [React Bootstrap](https://https://react-bootstrap.github.io/), for responsive styling
 - [Webpack](https://webpack.js.org/), for bundling static assets
 - [Celery](http://www.celeryproject.org/), for background worker tasks
 - [WhiteNoise](http://whitenoise.evans.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlipy), for efficient static files serving
@@ -57,12 +57,24 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 ### If you are using Docker:
 - Open a new command line window and go to the project's directory.
 - Create the migrations for `users` app:  
-  `docker-compose run --rm backend python manage.py makemigrations`
+  `make docker_makemigrations`
 - Run the migrations:
-  `docker-compose run --rm backend python manage.py migrate`
+  `make docker_migrate`
 - Run the project:
-  `docker-compose up -d`
-- To access the logs for each service run `docker-compose logs -f service_name` (either `backend`, `frontend`, etc)
+  `make docker_up`
+- To access the logs for each service, run:
+  `make docker_logs <service name>` (either `backend`, `frontend`, etc)
+- Stop the project:
+  `make docker_down`
+
+#### Adding new dependencies
+- Open a new command line window and go to the project's directory.
+- To install a new frontend package, run:
+  `make docker_npm_install <package name>`
+- To update the frontend dependencies using the current `package.json`, run:
+  `make docker_update_frontend_deps`
+- To update the backend dependencies using the current `requirements.in` and `dev-requirements.in`, run:
+  `make docker_update_backend_deps`
 
 ### If you are not using Docker:
 #### Setup the frontend
