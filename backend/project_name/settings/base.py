@@ -66,6 +66,15 @@ TEMPLATES = [
                 "common.context_processors.sentry_dsn",
                 "common.context_processors.commit_sha",
             ],
+            "loaders": [
+                (
+                    "django.template.loaders.cached.Loader",
+                    [
+                        "django.template.loaders.filesystem.Loader",
+                        "django.template.loaders.app_directories.Loader",
+                    ],
+                ),
+            ],
         },
     },
 ]
