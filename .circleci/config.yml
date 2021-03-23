@@ -49,9 +49,9 @@ jobs:
           command: npm dedupe
           path: testproject
       # npm ls will error on dependencies errors
-      - run:
-          command: npm ls
-          path: testproject
+      #- run:
+      #    command: npm ls
+      #    path: testproject
       - save_cache:
           key: dependency-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
