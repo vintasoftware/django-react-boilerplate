@@ -111,3 +111,8 @@ CELERY_TIMEZONE = TIME_ZONE
 # Sentry
 SENTRY_DSN = config("SENTRY_DSN", default="")
 COMMIT_SHA = config("HEROKU_SLUG_COMMIT", default="")
+
+# Fix for Safari 12 compatibility issues, please check:
+# https://github.com/vintasoftware/safari-samesite-cookie-issue
+CSRF_COOKIE_SAMESITE = None
+SESSION_COOKIE_SAMESITE = None
