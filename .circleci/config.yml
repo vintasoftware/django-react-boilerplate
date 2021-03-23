@@ -38,23 +38,10 @@ jobs:
           command: npm update --save-dev
           path: testproject
       - run:
-          name: "hotfix for #133"
-          command: |
-            sed -i 's/"bootstrap-loader": "^2.1.0"/"bootstrap-loader": "2.1.0"/g' package.json
-          path: testproject
-      - run:
           command: npm install --no-optional
           path: testproject
       - run:
-          name: "install jquery and popper as bootstrap dependencies"
-          command: npm install jquery@3.6.0 popper.js@1.16.1
-          path: testproject
-      - run:
           command: npm dedupe
-          path: testproject
-      # npm ls will error on dependencies errors
-      - run:
-          command: npm ls
           path: testproject
       - save_cache:
           key: dependency-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
