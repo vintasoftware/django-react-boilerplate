@@ -46,12 +46,16 @@ jobs:
           command: npm install --no-optional
           path: testproject
       - run:
+          name: "install jquery and popper as bootstrap dependencies"
+          command: npm install jquery@3.6.0 popper.js@1.16.1
+          path: testproject
+      - run:
           command: npm dedupe
           path: testproject
       # npm ls will error on dependencies errors
-      #- run:
-      #    command: npm ls
-      #    path: testproject
+      - run:
+          command: npm ls
+          path: testproject
       - save_cache:
           key: dependency-cache-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
