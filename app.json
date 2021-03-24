@@ -40,14 +40,14 @@
     {
       "plan": "heroku-postgresql:hobby-dev",
       "options": {
-        "version": "9.5"
+        "version": "9.6"
       },
       "as": "DATABASE"
     },
     {
       "plan": "heroku-redis:hobby-dev",
       "options": {
-        "version": "3.2"
+        "version": "6"
       },
       "as": "REDIS"
     },
