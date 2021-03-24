@@ -26,7 +26,6 @@ npm-debug.log
 /frontend/bundles/*
 /frontend/webpack_bundles/*
 /webpack-stats.json
-/jquery-webpack-stats.json
 
 # Sass
 .sass-cache

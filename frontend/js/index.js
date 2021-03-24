@@ -3,7 +3,6 @@ import * as Sentry from '@sentry/browser';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './bootstrap-includes';
 import '../sass/style.scss';
 
 import App from './App';

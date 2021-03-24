@@ -1,3 +1,4 @@
+SHELL := /bin/bash # Use bash syntax
 ARG := $(word 2, $(MAKECMDGOALS) )
 
 clean:
@@ -7,14 +8,8 @@ clean:
 test:
 	python backend/manage.py test backend/ $(ARG) --parallel --keepdb
 
-dockertest:
-	docker-compose run backend python manage.py test $(ARG) --parallel --keepdb
-
-testreset:
+test_reset:
 	python backend/manage.py test backend/ $(ARG) --parallel
-
-dockertestreset:
-	docker-compose run backend python manage.py test $(ARG) --parallel
 
 backend_format:
 	black backend
@@ -50,3 +45,42 @@ compile_install_requirements:
 	pip-compile dev-requirements.in > dev-requirements.txt
 	@echo 'Installing requirements...'
 	pip install -r requirements.txt && pip install -r dev-requirements.txt
+
+# Commands for Docker version
+docker_test:
+	docker-compose run backend python manage.py test $(ARG) --parallel --keepdb
+
+docker_test_reset:
+	docker-compose run backend python manage.py test $(ARG) --parallel
+
+docker_up:
+	docker-compose up -d
+
+docker_down:
+	docker-compose down
+
+docker_logs:
+	docker-compose logs -f $(ARG)
+
+docker_makemigrations:
+	docker-compose run --rm backend python manage.py makemigrations
+
+docker_migrate:
+	docker-compose run --rm backend python manage.py migrate
+
+docker_npm_install:
+	@if [[ "$$(docker-compose ps | grep frontend | grep -v frontend_run | grep -cim1 Up)" -eq "0" ]]; then \
+		docker-compose run --rm frontend npm install $(ARG) --save; \
+	else \
+		docker-compose exec frontend npm install $(ARG) --save; \
+	fi;
+
+docker_update_backend_deps:
+	docker-compose build backend
+
+docker_update_frontend_deps:
+	@if [[ "$$(docker-compose ps | grep frontend | grep -v frontend_run | grep -cim1 Up)" -eq "0" ]]; then \
+		docker-compose run --rm frontend npm install; \
+	else \
+		docker-compose exec frontend npm install; \
+	fi;
