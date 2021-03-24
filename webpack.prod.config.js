@@ -2,7 +2,6 @@ const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BundleTracker = require('webpack-bundle-tracker');
-const CircularDependencyPlugin = require('circular-dependency-plugin');
 const path = require('path');
 
 const baseConfig = require('./webpack.base.config');
