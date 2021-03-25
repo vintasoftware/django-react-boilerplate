@@ -77,12 +77,12 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   `make docker_update_backend_deps`
 
 ### If you are not using Docker:
-#### Setup the frontend
+#### Setup and run the frontend app
 - Open a new command line window and go to the project's directory.
 - `npm install`
 - `npm run start`
 
-#### Setup the backend
+#### Setup the backend app
 - Open a new command line window and go to the project's directory.
 - Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv {{project_name}}` or `python -m venv {{project_name}}-venv`
   > If you're using Python's virtualenv (the latter option), make sure to create the environment with the suggested name, otherwise it will be added to version control.
@@ -91,7 +91,9 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   > Please make sure you have already setup PostgreSQL on your environment before installing the requirements
 
   > In case you wish to use a Conda virtual environment, please remove the line `export PIP_REQUIRE_VIRTUALENV=true; \` from `Makefile`
-- Go to the `backend` directory.
+
+#### Run the backend app
+- With the virtualenv enabled, go to the `backend` directory.
 - Create the migrations for `users` app: 
   `python manage.py makemigrations`
 - Run the migrations:
@@ -132,6 +134,8 @@ Before you start creating your own apps remove the example:
 ## Deployment 
 ### Setup
 This project comes with an `app.json` file, which can be used to create an app on Heroku from a GitHub repository.
+
+Before deploying, please make sure you've generated an up-to-date `requirements.txt` file containing the Python dependencies. This is necessary even if you've used Docker for local runs. Do so by following [these instructions](#setup-the-backend-app).
 
 After setting up the project, you can init a repository and push it on GitHub. If your repository is public, you can use the following button:
 

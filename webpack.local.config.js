@@ -1,6 +1,7 @@
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 const path = require('path');
 
 const baseConfig = require('./webpack.base.config');
@@ -54,6 +55,14 @@ baseConfig.plugins = [
       context: __dirname,
       postcss: [autoprefixer],
     },
+  }),
+  new CircularDependencyPlugin({
+    // exclude detection of files based on a RegExp
+    exclude: /a\.js|node_modules/,
+    // add errors to webpack instead of warnings
+    failOnError: true,
+    // set the current working directory for displaying module paths
+    cwd: process.cwd(),
   }),
 ];
 
