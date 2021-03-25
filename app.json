@@ -40,7 +40,7 @@
     {
       "plan": "heroku-postgresql:hobby-dev",
       "options": {
-        "version": "9.6"
+        "version": "13"
       },
       "as": "DATABASE"
     },
