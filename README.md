@@ -69,12 +69,12 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 #### Adding new dependencies
 - Open a new command line window and go to the project's directory.
-- To install a new frontend package, run:
-  `make docker_npm_install <package name>`
-- To update the frontend dependencies using the current `package.json`, run:
-  `make docker_update_frontend_deps`
-- To update the backend dependencies using the current `requirements.in` and `dev-requirements.in`, run:
-  `make docker_update_backend_deps`
+- Perform any number of the following steps:
+  - To add a new **frontend** dependency, run `npm install <package name> --save`
+    > The above command will update your `package.json`, but won't make the change effective inside the container yet
+  - To add a new **backend** dependency, update `requirements.in` or `dev-requirements.in` with the newest requirements
+- After updating the desired file(s), run `make docker_update_dependencies` to update the containers with the new dependencies
+  > The above command will stop and re-build the containers in order to make the new dependencies effective
 
 ### If you are not using Docker:
 #### Setup and run the frontend app
