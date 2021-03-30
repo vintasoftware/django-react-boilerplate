@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
+
+import { creators } from '../store/rest_check';
 
 import DjangoImgSrc from '../../assets/images/django-logo-negative.png';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const restCheck = useSelector((state) => state.restCheck);
+  useEffect(() => {
+    const action = creators.fetchRestCheck();
+    dispatch(action);
+  }, []);
+
   const [showBugComponent, setShowBugComponent] = useState(false);
 
   return (

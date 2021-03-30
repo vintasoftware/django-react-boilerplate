@@ -1,14 +1,14 @@
 import { createBrowserHistory } from 'history';
 import thunk from 'redux-thunk';
-import { routerMiddleware, connectRouter } from 'connected-react-router';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { routerMiddleware } from 'connected-react-router';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
+import { createRootReducer } from './reducers';
 
 export const history = createBrowserHistory();
 
-const rootReducer = combineReducers({
-  router: connectRouter(history),
-});
+const rootReducer = createRootReducer(history);
 
 const enhancer = composeWithDevTools(
   applyMiddleware(thunk, routerMiddleware(history))

@@ -4,6 +4,11 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+
 from .models import Choice, Question
 
 
@@ -56,3 +61,18 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('exampleapp:results', args=(question.id,)))
+
+# Rest API
+
+class RestViewSet(viewsets.ViewSet):
+    @action(
+        detail=False,
+        methods=['get'],
+        permission_classes=[AllowAny],
+        url_path='rest-check',
+    )
+    def rest_check(self, request):
+        return Response(
+            {"result": "If you're seeing this, the REST API is working!"},
+            status=status.HTTP_200_OK,
+        )
