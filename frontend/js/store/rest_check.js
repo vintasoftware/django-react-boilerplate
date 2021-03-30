@@ -10,19 +10,16 @@ const types = {
 // Action creators
 export const creators = {
   fetchRestCheck: () => {
-    return dispatch => {
+    return async (dispatch) => {
       dispatch({ type: types.FETCH_REQUESTED });
-      api
-        .get('/api/rest/rest-check/')
-        .then(res => {
-          const { data } = res;
-          dispatch({ type: types.FETCH_SUCCESS, data })
-        })
-        .catch(error => {
-          dispatch({ type: types.FETCH_ERROR, error })
-        });
-    }
-  }
+      try {
+        const res = await api.get('/api/rest/rest-check/');
+        dispatch({ type: types.FETCH_SUCCESS, data: res.data });
+      } catch (error) {
+        dispatch({ type: types.FETCH_ERROR, error });
+      }
+    };
+  },
 };
 
 // Reducer

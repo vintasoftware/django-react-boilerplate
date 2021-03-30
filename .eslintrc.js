@@ -3,7 +3,9 @@ const path = require('path');
 module.exports = {
   root: true,
   extends: ['vinta/recommended'],
-  rules: {},
+  rules: {
+    "default-param-last": "off",
+  },
   env: {
     es6: true,
     browser: true,
@@ -17,7 +19,7 @@ module.exports = {
       }
     },
     react: {
-        "version": "detect"
+      "version": "detect"
     },
   }
 }
