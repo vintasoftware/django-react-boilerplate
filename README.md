@@ -131,12 +131,6 @@ Add the libname to either `requirements.in` or `dev-requirements.in`, then eithe
 `pip-compile requirements.in > requirements.txt` or `make upgrade`
 `pip install -r requirements.txt`
 
-### Cleaning example code
-Before you start creating your own apps remove the example:
-- Run the command `make clean_examples` in order to clean up the example apps from the front and backend.
-- Deregister the example app by removing `'exampleapp.apps.ExampleappConfig'` from ``backend/{{project_name}}/settings/base.py``.
-- Adjust ``backend/{{project_name}}/urls.py`` to point to your newly created Django app and remove the path configuration that redirects to the deleted example app.
-
 ## Deployment 
 ### Setup
 This project comes with an `app.json` file, which can be used to create an app on Heroku from a GitHub repository.
