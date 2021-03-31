@@ -62,25 +62,30 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   `make docker_migrate`
 - Run the project:
   `make docker_up`
+- Access `http://localhost:8000` on your browser and the project should be running there
+  - When you run `make docker_up`, some containers are spinned up (frontend, backend, database, etc) and each one will be running on a different port
+  - The container with the React app uses port 3000. However, if you try accessing it on your browser, the app won't appear there and you'll probably see a blank page with the "Cannot GET /" error
+  - This happens because the container responsible for displaying the whole application is the Django app one (running on port 8000). The frontend container is responsible for providing a bundle with its assets for [django-webpack-loader](https://github.com/django-webpack/django-webpack-loader) to consume and render them on a Django template
 - To access the logs for each service, run:
   `make docker_logs <service name>` (either `backend`, `frontend`, etc)
-- Stop the project:
+- To stop the project, run:
   `make docker_down`
 
 #### Adding new dependencies
 - Open a new command line window and go to the project's directory.
-- To install a new frontend package, run:
-  `make docker_npm_install <package name>`
-- To update the frontend dependencies using the current `package.json`, run:
-  `make docker_update_frontend_deps`
-- To update the backend dependencies using the current `requirements.in` and `dev-requirements.in`, run:
-  `make docker_update_backend_deps`
+- Update the dependencies management files by performing any number of the following steps:
+  - To add a new **frontend** dependency, run `npm install <package name> --save`
+    > The above command will update your `package.json`, but won't make the change effective inside the container yet
+  - To add a new **backend** dependency, update `requirements.in` or `dev-requirements.in` with the newest requirements
+- After updating the desired file(s), run `make docker_update_dependencies` to update the containers with the new dependencies
+  > The above command will stop and re-build the containers in order to make the new dependencies effective
 
 ### If you are not using Docker:
 #### Setup and run the frontend app
 - Open a new command line window and go to the project's directory.
 - `npm install`
 - `npm run start`
+  - This is used to serve the frontend assets to be consumed by [django-webpack-loader](https://github.com/django-webpack/django-webpack-loader) and not to run the React application as usual, so don't worry if you try to check what's running on port 3000 and see an error on your browser
 
 #### Setup the backend app
 - Open a new command line window and go to the project's directory.
@@ -100,6 +105,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   `python manage.py migrate`
 - Run the project:
   `python manage.py runserver`
+- Open a browser and go to `http://localhost:8000` to see the project running
 
 #### Setup Celery
 - Open a command line window and go to the project's directory
@@ -124,12 +130,6 @@ Will run django tests using `--keepdb` and `--parallel`. You may pass a path to 
 Add the libname to either `requirements.in` or `dev-requirements.in`, then either upgrade the libs with `make upgrade` or manually compile it and then,  install.
 `pip-compile requirements.in > requirements.txt` or `make upgrade`
 `pip install -r requirements.txt`
-
-### Cleaning example code
-Before you start creating your own apps remove the example:
-- Run the command `make clean_examples` in order to clean up the example apps from the front and backend.
-- Deregister the example app by removing `'exampleapp.apps.ExampleappConfig'` from ``backend/{{project_name}}/settings/base.py``.
-- Adjust ``backend/{{project_name}}/urls.py`` to point to your newly created Django app and remove the path configuration that redirects to the deleted example app.
 
 ## Deployment 
 ### Setup
