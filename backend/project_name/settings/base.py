@@ -128,6 +128,9 @@ CELERY_RESULT_SERIALIZER = "json"
 CELERY_ACKS_LATE = True
 CELERY_TIMEZONE = TIME_ZONE
 
+# Redbeat
+redbeat_redis_url = config("REDBEAT_REDIS_URL", default="")
+
 # Sentry
 SENTRY_DSN = config("SENTRY_DSN", default="")
 COMMIT_SHA = config("HEROKU_SLUG_COMMIT", default="")
