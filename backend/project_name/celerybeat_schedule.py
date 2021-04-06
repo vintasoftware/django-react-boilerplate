@@ -1,4 +1,4 @@
-from celery.schedules import crontab
+from celery.schedules import crontab  # pylint:disable=import-error,no-name-in-module
 
 
 CELERYBEAT_SCHEDULE = {
