@@ -183,6 +183,45 @@ Some settings defaults were decided based on Vinta's experiences. Here's the rat
 ### `CELERY_ACKS_LATE = True`
 We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY_ACKS_LATE = True` to ensure tasks will be re-queued after a worker failure. Check Celery docs on ["Should I use retry or acks_late?"](https://docs.celeryproject.org/en/latest/faq.html#should-i-use-retry-or-acks-late) for more info.
 
+## Features Catalogue
+
+### Frontend
+- `react` for building interactive UIs
+- `react-dom` for rendering the UI
+- `react-router` for page navigation
+- `webpack` for bundling static assets
+- `webpack-bundle-tracker` for providing the bundled assets to Django
+- Styling
+  - `bootstrap` for providing responsive stylesheets
+  - `react-bootstrap` for providing components built on top of Bootstrap CSS without using plugins
+  - `node-sass` for providing compatibility with SCSS files
+- State management and backend integration
+  - `axios` for performing asynchronous calls
+  - `cookie` for easy integration with Django using the `csrftoken` cookie
+  - `redux` for easy state management across the application
+  - `connected-react-router` for integrating Redux with React Router
+  - `history` for providing browser history to Connected React Router
+  - `react-redux` for integrating React with Redux
+  - `redux-devtools-extension` for inspecting and debugging Redux via browser
+  - `redux-thunk` for interacting with the Redux store through asynchronous logic
+- Utilities
+  - `lodash` for general utility functions
+  - `classnames` for easy working with complex CSS class names on components
+  - `prop-types` for improving QoL while developing providing basic type-checking for React props
+  - `react-hot-loader` for improving QoL while developing through automatic browser refreshing
+
+### Backend
+- `django` for building backend logic using Python
+- `djangorestframework` for building a REST API on top of Django
+- `django-webpack-loader` for rendering the bundled frontend assets
+- `django-js-reverse` for easy handling of Django URLs on JS
+- `psycopg2` for using PostgreSQL database
+- `sentry-sdk` for error monitoring
+- `python-decouple` for reading environment variables on settings files
+- `celery` for background worker tasks
+- `django-debreach` for additional protection against BREACH attack
+- `whitenoise` and `brotlipy` for serving static assets
+
 ## Contributing
 
 If you wish to contribute to this project, please first discuss the change you wish to make via an [issue](https://github.com/vintasoftware/django-react-boilerplate/issues).
