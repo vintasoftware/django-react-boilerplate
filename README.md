@@ -217,9 +217,9 @@ We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY
 - `django-js-reverse` for easy handling of Django URLs on JS
 - `psycopg2` for using PostgreSQL database
 - `sentry-sdk` for error monitoring
-- `python-decouple` for easy working with environment variables
+- `python-decouple` for reading environment variables on settings files
 - `celery` for background worker tasks
-- `django-debreach` for performing safer requests
+- `django-debreach` for additional protection against BREACH attack
 - `whitenoise` and `brotlipy` for serving static assets
 
 ## Contributing
