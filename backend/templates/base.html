@@ -25,7 +25,7 @@
   <script src="{% url 'js_reverse' %}" type="text/javascript"></script>
 
   <!-- Webpack rendered Javascript -->
-  {% render_bundle 'vendors~main' 'js' 'DEFAULT' %} {% render_bundle 'main' 'js' 'DEFAULT' %}
+  {% render_bundle 'main' 'js' 'DEFAULT' %}
   {% block scripts %}{% endblock %}
 </body>
 </html>
