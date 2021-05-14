@@ -136,3 +136,7 @@ COMMIT_SHA = config("HEROKU_SLUG_COMMIT", default="")
 # https://github.com/vintasoftware/safari-samesite-cookie-issue
 CSRF_COOKIE_SAMESITE = None
 SESSION_COOKIE_SAMESITE = None
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
