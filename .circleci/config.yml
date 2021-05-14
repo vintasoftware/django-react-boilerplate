@@ -96,7 +96,7 @@ jobs:
           command: prospector
           path: testproject/backend
       - run:
-          command: python manage.py has_missing_migrations
+          command: python manage.py makemigrations --check --dry-run
           path: testproject/backend
       - run:
           command: python manage.py check --deploy --fail-level WARNING
