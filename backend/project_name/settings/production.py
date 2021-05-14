@@ -56,10 +56,6 @@ redbeat_redis_url = config("REDBEAT_REDIS_URL", default="")
 
 # Whitenoise
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-MIDDLEWARE.insert(  # insert WhiteNoiseMiddleware right after SecurityMiddleware
-    MIDDLEWARE.index("django.middleware.security.SecurityMiddleware") + 1,
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-)
 
 # django-log-request-id
 MIDDLEWARE.insert(  # insert RequestIDMiddleware on the top
