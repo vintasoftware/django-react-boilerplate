@@ -49,9 +49,9 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 ### Setup
 - Inside the `backend` folder, do the following:
-- Create a copy of `{{project_name}}/settings/local.py.example`:  
+  - Create a copy of `{{project_name}}/settings/local.py.example`:  
   `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py`
-- Create a copy of `.env.example`:
+  - Create a copy of `.env.example`:
   `cp .env.example .env`
 
 ### If you are using Docker:
