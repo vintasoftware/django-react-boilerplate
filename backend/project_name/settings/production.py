@@ -32,6 +32,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Security
+SECURE_HSTS_PRELOAD = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
@@ -56,10 +57,6 @@ redbeat_redis_url = config("REDBEAT_REDIS_URL", default="")
 
 # Whitenoise
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-MIDDLEWARE.insert(  # insert WhiteNoiseMiddleware right after SecurityMiddleware
-    MIDDLEWARE.index("django.middleware.security.SecurityMiddleware") + 1,
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-)
 
 # django-log-request-id
 MIDDLEWARE.insert(  # insert RequestIDMiddleware on the top

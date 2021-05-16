@@ -2,7 +2,7 @@ django>=3
 celery[redis]
 celery-redbeat
 django-model-utils
-django-webpack-loader
+django-webpack-loader>=1.0.0
 django-js-reverse
 django-import-export
 djangorestframework
