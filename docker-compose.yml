@@ -3,8 +3,14 @@ version: '3.1'
 services:
   db:
     image: "postgres:alpine"
+    environment:
+      - POSTGRES_USER={{project_name}}
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB={{project_name}}
+    ports:
+      - "55432:5432"
     volumes:
-      - .db:/var/lib/postgresql/data
+      - dbdata:/var/lib/postgresql/data:delegated
 
   broker:
     image: "rabbitmq:alpine"
@@ -55,3 +61,8 @@ services:
     ports:
       - '1025:1025' # smtp server
       - '8025:8025' # web ui
+
+volumes:
+  dbdata:
+    external:
+      name: dbdata

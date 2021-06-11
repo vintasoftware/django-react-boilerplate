@@ -3,6 +3,7 @@
 import os
 
 from decouple import config  # noqa
+from dj_database_url import parse as db_url  # noqa
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -21,6 +22,10 @@ ADMINS = (("Admin", "foo@example.com"),)
 AUTH_USER_MODEL = "users.User"
 
 ALLOWED_HOSTS = []
+
+DATABASES = {
+    "default": config("DATABASE_URL", cast=db_url),
+}
 
 INSTALLED_APPS = [
     "django.contrib.admin",
