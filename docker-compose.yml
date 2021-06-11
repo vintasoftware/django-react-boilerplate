@@ -8,7 +8,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB={{project_name}}
     ports:
-      - "55432:5432"
+      - "5432"
     volumes:
       - dbdata:/var/lib/postgresql/data:delegated
 
@@ -65,4 +65,4 @@ services:
 volumes:
   dbdata:
     external:
-      name: dbdata
+      name: {{project_name}}_dbdata
