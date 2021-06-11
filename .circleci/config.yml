@@ -89,6 +89,8 @@ jobs:
       - run:
           command: python manage.py migrate
           path: testproject/backend
+          environment:
+            DATABASE_URL: 'sqlite:///'
       - run:
           command: python manage.py test
           path: testproject/backend
