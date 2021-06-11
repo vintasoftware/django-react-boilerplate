@@ -6,7 +6,7 @@ RUN groupadd user && useradd --create-home --home-dir /home/user -g user user
 WORKDIR /home/user/app/backend
 
 # Install system dependencies
-RUN apt-get update && apt-get install gcc build-essential libpq-dev python-psycopg2 -y && \
+RUN apt-get update && apt-get install gcc build-essential libpq-dev -y && \
     python3 -m pip install --no-cache-dir pip-tools
 
 # install python dependencies
