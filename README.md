@@ -55,7 +55,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   `cp .env.example .env`
 
 ### If you are using Docker:
-- Open the `/backend/.env` file on a text editor and remove the line `DATABASE_URL=sqlite:///backend/db.sqlite3` from it
+- Open the `/backend/.env` file on a text editor and uncomment the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}`
 - Open a new command line window and go to the project's directory
 - Run the initial setup:
   `make docker_setup`
@@ -92,12 +92,10 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 #### Setup the backend app
 - Open the `/backend/.env` file on a text editor and do one of the following:
-  - If you wish to use SQLite locally, remove the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}`
-  - If you wish to use PostgreSQL locally:
-    - Remove the line `DATABASE_URL=sqlite:///backend/db.sqlite3` from the file
-    - Edit the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}` in order to make it correctly point to your database URL
-      - The url format is the following: `postgres://USER:PASSWORD@HOST:PORT/NAME`
-  - If you wish to use another database engine locally, please remove both existing `DATABASE_URL` settings and add a new `DATABASE_URL` setting for the database you wish to use
+  - If you wish to use SQLite locally, uncomment the line `DATABASE_URL=sqlite:///backend/db.sqlite3`
+  - If you wish to use PostgreSQL locally, uncomment and edit the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}` in order to make it correctly point to your database URL
+    - The url format is the following: `postgres://USER:PASSWORD@HOST:PORT/NAME`
+  - If you wish to use another database engine locally, add a new `DATABASE_URL` setting for the database you wish to use
     - Please refer to [dj-database-url](https://github.com/jacobian/dj-database-url#url-schema) on how to configure `DATABASE_URL` for commonly used engines
 - Open a new command line window and go to the project's directory
 - Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv {{project_name}}` or `python -m venv {{project_name}}-venv`
