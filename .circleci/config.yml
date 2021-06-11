@@ -96,6 +96,8 @@ jobs:
       - run:
           command: python manage.py test
           path: testproject/backend
+          environment:
+            DATABASE_URL: 'sqlite:///'
       - run:
           command: prospector
           path: testproject/backend
