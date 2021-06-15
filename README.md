@@ -50,12 +50,15 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 ### Setup
 - Inside the `backend` folder, do the following:
   - Create a copy of `{{project_name}}/settings/local.py.example`:  
-  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py`
+  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py`
   - Create a copy of `.env.example`:
   `cp .env.example .env`
 
 ### If you are using Docker:
-- Open a new command line window and go to the project's directory.
+- Open the `/backend/.env` file on a text editor and uncomment the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}`
+- Open a new command line window and go to the project's directory
+- Run the initial setup:
+  `make docker_setup`
 - Create the migrations for `users` app:  
   `make docker_makemigrations`
 - Run the migrations:
@@ -72,7 +75,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   `make docker_down`
 
 #### Adding new dependencies
-- Open a new command line window and go to the project's directory.
+- Open a new command line window and go to the project's directory
 - Update the dependencies management files by performing any number of the following steps:
   - To add a new **frontend** dependency, run `npm install <package name> --save`
     > The above command will update your `package.json`, but won't make the change effective inside the container yet
@@ -82,13 +85,19 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 ### If you are not using Docker:
 #### Setup and run the frontend app
-- Open a new command line window and go to the project's directory.
+- Open a new command line window and go to the project's directory
 - `npm install`
 - `npm run start`
   - This is used to serve the frontend assets to be consumed by [django-webpack-loader](https://github.com/django-webpack/django-webpack-loader) and not to run the React application as usual, so don't worry if you try to check what's running on port 3000 and see an error on your browser
 
 #### Setup the backend app
-- Open a new command line window and go to the project's directory.
+- Open the `/backend/.env` file on a text editor and do one of the following:
+  - If you wish to use SQLite locally, uncomment the line `DATABASE_URL=sqlite:///backend/db.sqlite3`
+  - If you wish to use PostgreSQL locally, uncomment and edit the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}` in order to make it correctly point to your database URL
+    - The url format is the following: `postgres://USER:PASSWORD@HOST:PORT/NAME`
+  - If you wish to use another database engine locally, add a new `DATABASE_URL` setting for the database you wish to use
+    - Please refer to [dj-database-url](https://github.com/jacobian/dj-database-url#url-schema) on how to configure `DATABASE_URL` for commonly used engines
+- Open a new command line window and go to the project's directory
 - Create a new virtualenv with either [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) or only virtualenv: `mkvirtualenv {{project_name}}` or `python -m venv {{project_name}}-venv`
   > If you're using Python's virtualenv (the latter option), make sure to create the environment with the suggested name, otherwise it will be added to version control.
 - Make sure the virtualenv is activated `workon {{project_name}}` or `source {{project_name}}-venv/bin/activate`
@@ -98,7 +107,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   > In case you wish to use a Conda virtual environment, please remove the line `export PIP_REQUIRE_VIRTUALENV=true; \` from `Makefile`
 
 #### Run the backend app
-- With the virtualenv enabled, go to the `backend` directory.
+- With the virtualenv enabled, go to the `backend` directory
 - Create the migrations for `users` app: 
   `python manage.py makemigrations`
 - Run the migrations:

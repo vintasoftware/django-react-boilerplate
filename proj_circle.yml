@@ -69,6 +69,7 @@ jobs:
           command: (cd backend; python manage.py makemigrations --check --dry-run --ignore authtools)
           environment:
             DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.local_base'
+            DATABASE_URL: 'sqlite:///'
       - run:
           command: (cd backend; python manage.py check --deploy)
           environment:
@@ -81,6 +82,8 @@ jobs:
             REDIS_URL: 'redis://'
       - run:
           command: (cd backend; coverage run manage.py test)
+          environment:
+            DATABASE_URL: 'sqlite:///'
       - run:
           command: npm run test
       - run:

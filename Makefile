@@ -33,6 +33,11 @@ compile_install_requirements:
 	pip install -r requirements.txt && pip install -r dev-requirements.txt
 
 # Commands for Docker version
+docker_setup:
+	docker volume create {{project_name}}_dbdata
+	docker-compose build --no-cache backend
+	docker-compose run frontend npm install
+
 docker_test:
 	docker-compose run backend python manage.py test $(ARG) --parallel --keepdb
 

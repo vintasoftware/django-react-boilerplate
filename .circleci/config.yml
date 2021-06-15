@@ -86,18 +86,26 @@ jobs:
       - run:
           command: python manage.py makemigrations
           path: testproject/backend
+          environment:
+            DATABASE_URL: 'sqlite:///'
       - run:
           command: python manage.py migrate
           path: testproject/backend
+          environment:
+            DATABASE_URL: 'sqlite:///'
       - run:
           command: python manage.py test
           path: testproject/backend
+          environment:
+            DATABASE_URL: 'sqlite:///'
       - run:
           command: prospector
           path: testproject/backend
       - run:
           command: python manage.py makemigrations --check --dry-run
           path: testproject/backend
+          environment:
+            DATABASE_URL: 'sqlite:///'
       - run:
           command: python manage.py check --deploy --fail-level WARNING
           path: testproject/backend
