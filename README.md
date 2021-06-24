@@ -1,8 +1,7 @@
-[![License: MIT](https://img.shields.io/github/license/vintasoftware/django-react-boilerplate.svg)](LICENSE.txt)
-
 # Django React Boilerplate
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](code_of_conduct.md)
+[![License: MIT](https://img.shields.io/github/license/vintasoftware/django-react-boilerplate.svg)](LICENSE.txt)
 
 ## About
 A [Django](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
