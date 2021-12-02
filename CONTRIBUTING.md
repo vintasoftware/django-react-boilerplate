@@ -8,7 +8,7 @@ Read [this checklist](http://pullrequests.devchecklists.com) for a more detailed
 
 ### Testing `django-admin startproject`
 
-If you made changes to this boilerplate and want to test them, do as following:
+If you made changes to this boilerplate and want to test them, do as follows:
 
 - [Make sure you have pre-commit installed](https://github.com/vintasoftware/django-react-boilerplate#pre-commit-hooks)
 - Commit your changes
