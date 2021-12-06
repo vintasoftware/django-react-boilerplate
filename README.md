@@ -9,9 +9,9 @@ A [Django](https://www.djangoproject.com/) project boilerplate/template with lot
 - [django-js-reverse](https://github.com/ierror/django-js-reverse), for generating URLs on JS
 - [React Bootstrap](https://react-bootstrap.github.io/), for responsive styling
 - [Webpack](https://webpack.js.org/), for bundling static assets
-- [Celery](http://www.celeryproject.org/), for background worker tasks
+- [Celery](https://docs.celeryproject.org/), for background worker tasks
 - [WhiteNoise](http://whitenoise.evans.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlipy), for efficient static files serving
-- [prospector](https://prospector.landscape.io/en/master/) and [ESLint](https://eslint.org/) with [pre-commit](http://pre-commit.com/) for automated quality assurance (does not replace proper testing!)
+- [prospector](https://prospector.landscape.io/en/master/) and [ESLint](https://eslint.org/) with [pre-commit](https://pre-commit.com/) for automated quality assurance (does not replace proper testing!)
 
 For continuous integration, a [CircleCI](https://circleci.com/) configuration `.circleci/config.yml` is included.
 
