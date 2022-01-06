@@ -1,0 +1,28 @@
+name: deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Generate stable boilerplate build
+    strategy:
+      matrix:
+        python-version: [3.8]
+        node-version: [14.5]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: master
+      - run: mv proj_main.yml github/main.yml
+      - run: git checkout -b boilerplate-release
+      - run: git add github/main.yml
+      - run: git rm proj_main.yml
+      - run: git commit -m "Replacing project actions" --author "Vinta Software <contact@vinta.com.br>"
+        env:
+          GIT_COMMITTER_NAME: "Vinta Software"
+          GIT_COMMITTER_EMAIL: "contact@vinta.com.br"
+      - run: git push origin boilerplate-release --force
