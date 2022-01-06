@@ -1,4 +1,4 @@
-django>=3
+django>=3,<4
 celery[redis]
 celery-redbeat
 django-model-utils
