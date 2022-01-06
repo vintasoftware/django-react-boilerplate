@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
+      - run: mkdir -p github/workflows
       - run: mv proj_main.yml github/workflows/main.yml
       - run: git checkout -b boilerplate-release
       - run: git add github/workflows/main.yml
