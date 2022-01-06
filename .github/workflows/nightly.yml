@@ -1,0 +1,91 @@
+name: nightly
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    name: Build boilerplate code
+    strategy:
+      matrix:
+        python-version: [3.8]
+        node-version: [14.5]
+    env:
+      DATABASE_URL: 'sqlite:///'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: python -m pip install --upgrade pip
+      - name: Install Django
+        run: pip install "django>=3,<4"
+      - name: Setup testproject
+        run: django-admin startproject testproject --extension py,yml,json,example --name Procfile,README.md --template=.
+      - run: |
+          npm update --save
+          npm update --save-dev
+        working-directory: testproject
+      - run: npm install --no-optional
+        working-directory: testproject
+      - run: npm dedupe
+        working-directory: testproject
+      - run: npm run test
+        working-directory: testproject
+      - run: npm run lint
+        working-directory: testproject
+      - run: npm run build
+        working-directory: testproject
+      - run: pip install requests pip-tools --upgrade
+        working-directory: testproject
+      - run: |
+          pip-compile requirements.in > requirements.txt
+          pip-compile dev-requirements.in > dev-requirements.txt
+        working-directory: testproject
+      - run: |
+          pip install --user -r requirements.txt
+          pip install --user -r dev-requirements.txt
+        working-directory: testproject
+      - run: cp testproject/settings/local.py.example testproject/settings/local.py
+        working-directory: testproject/backend
+      - run: cp .env.example .env
+        working-directory: testproject/backend
+      - run: python manage.py makemigrations
+        working-directory: testproject/backend
+      - run: python manage.py migrate
+        working-directory: testproject/backend
+      - run: python manage.py test
+        working-directory: testproject/backend
+      - name: Generate secret key
+        run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
+        id: secret-id-generator
+      - run: prospector -X
+        working-directory: testproject/backend
+        env:
+          SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}
+          SENDGRID_USERNAME: foo
+          SENDGRID_PASSWORD: password
+          DJANGO_SETTINGS_MODULE: 'testproject.settings.local'
+          ALLOWED_HOSTS: '.example.org'
+          REDIS_URL: 'redis://'
+      - run: python manage.py makemigrations --check --dry-run
+        working-directory: testproject/backend
+
+      - run: python manage.py check --deploy --fail-level WARNING
+        working-directory: testproject/backend
+        env:
+          SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}
+          SENDGRID_USERNAME: foo
+          SENDGRID_PASSWORD: password
+          DJANGO_SETTINGS_MODULE: 'testproject.settings.production'
+          ALLOWED_HOSTS: '.example.org'
+          REDIS_URL: 'redis://'
