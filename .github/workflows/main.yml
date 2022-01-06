@@ -3,6 +3,7 @@ on:
   push:
     branches-ignore:
       - boilerplate-release
+  pull_request:
 
 jobs:
   build:
