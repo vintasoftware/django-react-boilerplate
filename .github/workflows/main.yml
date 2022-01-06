@@ -1,0 +1,15 @@
+name: main
+on:
+  push:
+    branches-ignore:
+      - boilerplate-release
+  pull_request:
+
+jobs:
+  build:
+    name: Build boilerplate code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: ./.github/workflows/shared-build

@@ -1,10 +1,11 @@
 bandit
 black
 coverage
-django>=3
+django>=3,<4
 flake8==3.8.4
 isort
 model-bakery
 pre-commit
-prospector[with-vulture]
+pylint-django<2.5
+prospector[with_vulture]
 safety

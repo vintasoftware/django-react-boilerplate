@@ -1,0 +1,15 @@
+name: nightly
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    name: Build boilerplate code nightly
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: master
+      - uses: ./.github/workflows/shared-build
