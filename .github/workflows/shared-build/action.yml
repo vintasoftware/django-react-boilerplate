@@ -4,6 +4,12 @@ description: "Shared build steps for main and nightly"
 runs:
   using: "composite"
   steps:
+    - name: Store branch and latest SHA
+      id: vars
+      shell: bash
+      run: |
+        echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
@@ -20,6 +26,28 @@ runs:
     - name: Setup testproject
       run: django-admin startproject testproject --extension py,yml,json,example --name Procfile,README.md --template=.
       shell: bash
+    - name: Cache node modules
+      uses: actions/cache@v2
+      env:
+        cache-name: node-modules-cache
+      with:
+        path: ~/.npm
+        key: build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
+        restore-keys: |
+          build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
+          build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}
+          build-${{ env.cache-name }}
+    - name: Cache pip
+      uses: actions/cache@v2
+      env:
+        cache-name: pip-cache
+      with:
+        path: ~/.cache/pip
+        key: build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
+        restore-keys: |
+          build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
+          build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}
+          build-${{ env.cache-name }}
     - run: |
         npm update --save
         npm update --save-dev
