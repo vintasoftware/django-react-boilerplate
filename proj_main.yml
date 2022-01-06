@@ -1,0 +1,75 @@
+name: main
+on: [push]
+
+jobs:
+  main:
+    name: Build {{project_name}}
+    strategy:
+      matrix:
+        python: [3.8]
+        node: [14.5]
+    env:
+      DATABASE_URL: 'sqlite:///'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Python ${% templatetag openvariable %} matrix.python {% templatetag closevariable %}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${% templatetag openvariable %} matrix.python {% templatetag closevariable %}
+      - name: Setup Node ${% templatetag openvariable %} matrix.node {% templatetag closevariable %}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${% templatetag openvariable %} matrix.node {% templatetag closevariable %}
+      - run: python -m pip install --upgrade pip
+      - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+      - run: sudo apt-get install git-lfs --upgrade
+      - run: pip install requests pip-tools --upgrade
+      - run: |
+          pip-compile requirements.in > requirements.txt
+          pip-compile dev-requirements.in > dev-requirements.txt
+          pip install --user -r requirements.txt
+          pip install --user -r dev-requirements.txt
+      - run: npm install
+      - run: npm run build
+      - run: npm run lint
+      - name: Generate secret key
+        run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
+        id: secret_id_generator
+      - name: Style check
+        run: prospector --messages-only
+        env:
+          DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.local_base'
+          SECRET_KEY:  ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          DATABASE_URL: 'sqlite:///'
+          ALLOWED_HOSTS: '.example.org'
+          SENDGRID_USERNAME: 'test'
+          SENDGRID_PASSWORD: 'test'
+          REDIS_URL: 'redis://'
+        working-directory: backend
+      - name: Security checks
+        run: bandit -r .
+      - name: Imports check
+        run: isort **/*.py --check-only
+      - run: pre-commit run --all-files
+        env:
+          SKIP: prospector,isort,eslint,missing-migrations
+      - run: python manage.py makemigrations --check --dry-run --ignore authtools
+        working-directory: backend
+      - run: python manage.py check --deploy
+        env:
+          DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.production'
+          SECRET_KEY:  ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          DATABASE_URL: 'sqlite:///'
+          ALLOWED_HOSTS: '.example.org'
+          SENDGRID_USERNAME: 'test'
+          SENDGRID_PASSWORD: 'test'
+          REDIS_URL: 'redis://'
+        working-directory: backend
+      - run: python manage.py test
+        working-directory: backend
+      - run: npm run test
+      - run: |
+          mkdir -p junit
+          coverage xml -o junit/test-results.xml
