@@ -6,6 +6,6 @@ flake8==3.8.4
 isort
 model-bakery
 pre-commit
-pylint-django<2.5
+pylint-django
 prospector[with_vulture]
 safety
