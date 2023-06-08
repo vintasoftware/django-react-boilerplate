@@ -1,5 +1,4 @@
 import React from 'react';
-import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';
 
 import Home from './pages/Home';
@@ -15,4 +14,4 @@ const App = () => (
   </SentryBoundary>
 );
 
-export default hot(App);
+export default App;

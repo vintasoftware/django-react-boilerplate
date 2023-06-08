@@ -11,7 +11,7 @@ const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 baseConfig.mode = 'production';
 baseConfig.devtool = 'source-map';
 
-baseConfig.entry = ['whatwg-fetch', '@babel/polyfill', './frontend/js/index.js'];
+baseConfig.entry = ['./frontend/js/index.js'];
 
 baseConfig.output = {
   path: path.resolve('./frontend/webpack_bundles/'),
@@ -32,7 +32,7 @@ baseConfig.module.rules.push(
   },
   {
     test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
-    loader: 'file-loader?name=fonts/[name].[ext]',
+    type: 'asset/resource'
   }
 );
 
@@ -50,9 +50,10 @@ baseConfig.plugins = [
       NODE_ENV: JSON.stringify('production'),
     },
   }),
-  new MiniCssExtractPlugin({ filename: '[name]-[hash].css', disable: false, allChunks: true }),
+  new MiniCssExtractPlugin({ filename: '[name]-[hash].css' }),
   new BundleTracker({
-    filename: './webpack-stats.json',
+    path: __dirname,
+    filename: 'webpack-stats.json',
   }),
   new webpack.LoaderOptionsPlugin({
     options: {

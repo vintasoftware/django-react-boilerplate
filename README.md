@@ -204,21 +204,19 @@ We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY
 - Styling
   - `bootstrap` for providing responsive stylesheets
   - `react-bootstrap` for providing components built on top of Bootstrap CSS without using plugins
-  - `node-sass` for providing compatibility with SCSS files
+  - `sass` for providing compatibility with SCSS files
 - State management and backend integration
   - `axios` for performing asynchronous calls
   - `cookie` for easy integration with Django using the `csrftoken` cookie
-  - `redux` for easy state management across the application
+  - `@reduxjs/toolkit` for easy state management across the application with the whole toolkit including devtools for inspecting and debugging Redux via browser and ability to run thunks for interacting with the Redux store through asynchronous logic
   - `connected-react-router` for integrating Redux with React Router
   - `history` for providing browser history to Connected React Router
   - `react-redux` for integrating React with Redux
-  - `redux-devtools-extension` for inspecting and debugging Redux via browser
-  - `redux-thunk` for interacting with the Redux store through asynchronous logic
-- Utilities
+  - Utilities
   - `lodash` for general utility functions
   - `classnames` for easy working with complex CSS class names on components
   - `prop-types` for improving QoL while developing providing basic type-checking for React props
-  - `react-hot-loader` for improving QoL while developing through automatic browser refreshing
+  - `react-refresh` for improving QoL while developing through automatic browser refreshing
 
 ### Backend
 - `django` for building backend logic using Python

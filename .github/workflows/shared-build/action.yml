@@ -17,7 +17,7 @@ runs:
     - name: Setup Node
       uses: actions/setup-node@v2
       with:
-        node-version: "14.5"
+        node-version: "18.2"
     - name: Cache node modules
       uses: actions/cache@v2
       env:
@@ -106,7 +106,7 @@ runs:
       run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
       id: secret-id-generator
       shell: bash
-    - run: prospector -X
+    - run: prospector -X --profile-path ../.prospector.yaml
       working-directory: testproject/backend
       env:
         SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}

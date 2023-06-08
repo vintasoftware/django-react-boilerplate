@@ -16,12 +16,10 @@ module.exports = {
     'frontend/js',
     'frontend/js/app',
   ],
-  snapshotSerializers: [
-    'enzyme-to-json/serializer',
-  ],
-  setupFiles: [
+  setupFilesAfterEnv: [
     './jest-setup.js',
   ],
+  testEnvironment: 'jsdom',
   collectCoverageFrom: [
     'frontend/js/**/*.{js,jsx}',
   ],

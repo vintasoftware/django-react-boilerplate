@@ -5,6 +5,7 @@ module.exports = {
   extends: ['vinta/recommended'],
   rules: {
     "default-param-last": "off",
+    "@babel/camelcase": "off"
   },
   env: {
     es6: true,
