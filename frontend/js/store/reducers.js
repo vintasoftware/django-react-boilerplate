@@ -1,11 +1,7 @@
-import { connectRouter } from 'connected-react-router';
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 
 import { restCheckReducer as restCheck } from './rest_check';
 
-export const createRootReducer = (history) => {
-  return combineReducers({
-    router: connectRouter(history),
-    restCheck,
-  });
-};
+export const rootReducer = combineReducers({
+  restCheck,
+});

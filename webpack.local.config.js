@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const path = require('path');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const baseConfig = require('./webpack.base.config');
 
@@ -11,9 +12,6 @@ const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 baseConfig.mode = 'development';
 
 baseConfig.entry = [
-  'react-hot-loader/patch',
-  'whatwg-fetch',
-  '@babel/polyfill',
   './frontend/js/index.js',
 ];
 
@@ -21,6 +19,7 @@ baseConfig.optimization = {
   splitChunks: {
     chunks: 'all',
   },
+  moduleIds: 'named'
 };
 
 baseConfig.output = {
@@ -33,22 +32,28 @@ baseConfig.module.rules.push(
   {
     test: /\.jsx?$/,
     exclude: [nodeModulesDir],
-    loader: require.resolve('babel-loader'),
+    use: {
+      loader: require.resolve('babel-loader'),  
+      options: {
+        plugins: [require.resolve('react-refresh/babel')],
+      },
+    },
   },
   {
     test: /\.(woff(2)?|eot|ttf)(\?v=\d+\.\d+\.\d+)?$/,
-    loader: 'url-loader?limit=100000',
+    type: 'asset/inline',
   }
 );
 
 baseConfig.plugins = [
+  new ReactRefreshWebpackPlugin(),
   new webpack.EvalSourceMapDevToolPlugin({
     exclude: /node_modules/
   }),
-  new webpack.NamedModulesPlugin(),
   new webpack.NoEmitOnErrorsPlugin(), // don't reload if there is an error
   new BundleTracker({
-    filename: './webpack-stats.json',
+    path: __dirname,
+    filename: 'webpack-stats.json',
   }),
   new webpack.LoaderOptionsPlugin({
     options: {
@@ -65,9 +70,5 @@ baseConfig.plugins = [
     cwd: process.cwd(),
   }),
 ];
-
-baseConfig.resolve.alias = {
-  'react-dom': '@hot-loader/react-dom',
-};
 
 module.exports = baseConfig;

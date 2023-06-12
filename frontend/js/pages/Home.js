@@ -3,13 +3,13 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 
 import DjangoImgSrc from '../../assets/images/django-logo-negative.png';
-import { creators } from '../store/rest_check';
+import { fetchRestCheck } from '../store/rest_check';
 
 const Home = () => {
   const dispatch = useDispatch();
   const restCheck = useSelector((state) => state.restCheck);
   useEffect(() => {
-    const action = creators.fetchRestCheck();
+    const action = fetchRestCheck();
     dispatch(action);
   }, [dispatch]);
 
@@ -28,7 +28,7 @@ const Home = () => {
         </div>
         <img alt="Django Negative Logo" src={DjangoImgSrc} />
       </div>
-      <div>{restCheck.result}</div>
+      <div>{restCheck?.data?.payload?.result}</div>
       <Button variant="outline-dark" onClick={() => setShowBugComponent(true)}>
         Click to test if Sentry is capturing frontend errors! (Should only work in Production)
       </Button>

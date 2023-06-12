@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import ColorDisplay from '../ColorDisplay';
+import ColorDisplay from './ColorDisplay';
 
 import './style.scss';
 
@@ -32,7 +32,11 @@ class ColorChanger extends React.Component {
         <p>Check this example app: change the color to see it reflected in the text next to it.</p>
 
         <div className="inner-container">
-          <select className="color-picker" onChange={this.handleChangeColor}>
+          <select
+            aria-label="Color Picker"
+            className="color-picker"
+            onChange={this.handleChangeColor}
+          >
             <option value="black">Black</option>
             <option value="green">Green</option>
             <option value="red">Red</option>

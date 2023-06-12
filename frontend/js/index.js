@@ -1,7 +1,7 @@
 // import pages
 import * as Sentry from '@sentry/browser';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import '../sass/style.scss';
 
@@ -12,4 +12,5 @@ Sentry.init({
   release: window.COMMIT_SHA,
 });
 
-ReactDOM.render(<App />, document.getElementById('react-app'));
+const root = createRoot(document.getElementById('react-app'));
+root.render(<App />);
