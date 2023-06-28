@@ -101,8 +101,6 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - Open a new command line window and go to the project's directory
 - run `poetry install`
 
-  > In case you wish to use a Conda virtual environment, please remove the line `export PIP_REQUIRE_VIRTUALENV=true; \` from `Makefile`
-
 #### Run the backend app
 - With the virtualenv enabled, go to the `backend` directory
 - Create the migrations for `users` app: 
