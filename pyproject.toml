@@ -16,6 +16,10 @@ exclude = '''
 )/
 '''
 
+[tool.bandit]
+exclude_dirs = ["*/test_*.py", "*/tests.py", "tests", "./venv/", "./env/", "./node_modules/", "./cacheback/", "./.env", "./.venv"]
+skips = ["B101", "B311"]
+
 [tool.poetry]
 name = "{{project_name}}"
 version = "0.1.0"
