@@ -2,7 +2,7 @@
 /backend/db.sqlite3
 .DS_Store
 .env
-*/settings/local.py
+**/settings/local.py
 /staticfiles/*
 /mediafiles/*
 __pycache__/

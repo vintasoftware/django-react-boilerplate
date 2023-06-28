@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "description": "{{project_name}} frontend.",
+  "engines": {
+    "node": ">=18 <19"
+  },
   "main": "index.js",
   "prettier": "eslint-config-vinta/prettier",
   "scripts": {

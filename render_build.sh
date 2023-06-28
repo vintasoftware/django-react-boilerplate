@@ -1,23 +1,34 @@
-#!/usr/bin/env bash
-set -eo pipefail
+echo "-----> Build hook"
 
-echo "-----> Post-compile hook"
+echo "-----> Build frontend"
+if [ ! -f webpack-stats.json ]; then
+    touch webpack-stats.json
+    chmod 777 webpack-stats.json
+    echo "webpack-stats.json created"
+fi
+npm install
+npm run build
+echo "-----> Build frontend done"
+
+echo "-----> Poetry install"
+poetry install --no-interaction --without dev
+echo "-----> Poetry done"
 
 if [ -f bin/run_collectstatic ] && [ -n "$ENABLE_DJANGO_COLLECTSTATIC" ] && [ "$ENABLE_DJANGO_COLLECTSTATIC" == 1 ]; then
     echo "-----> Running run_collectstatic"
-    chmod +x bin/run_collectstatic
-    bin/run_collectstatic
+
+    echo "-----> Collecting static files"
+    poetry run backend/manage.py collectstatic --noinput  2>&1 | sed '/^Copying/d;/^$/d;/^ /d'
+
+    echo
 fi
 
-MANAGE_FILE=$(find . -maxdepth 3 -type f -name 'manage.py' | head -1)
-MANAGE_FILE=${MANAGE_FILE:2}
-
 echo "-----> Running manage.py check --deploy --fail-level WARNING"
-python $MANAGE_FILE check --deploy --fail-level WARNING
+poetry run backend/manage.py check --deploy --fail-level WARNING
 
 if [ -n "$AUTO_MIGRATE" ] && [ "$AUTO_MIGRATE" == 1 ]; then
     echo "-----> Running manage.py migrate"
-    python $MANAGE_FILE migrate --noinput
+    poetry run backend/manage.py migrate --noinput
 fi
 
 echo "-----> Pushing source maps to Sentry"

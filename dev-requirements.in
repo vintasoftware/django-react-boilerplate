@@ -1,9 +1,0 @@
-bandit
-black
-coverage
-django>=3,<4
-isort
-model-bakery
-pre-commit
-pylint-django
-prospector[with_vulture]

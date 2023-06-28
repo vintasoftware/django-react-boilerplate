@@ -64,5 +64,5 @@ services:
 
 volumes:
   dbdata:
-    external:
-      name: {{project_name}}_dbdata
+    name: {{project_name}}_dbdata
+    external: true
