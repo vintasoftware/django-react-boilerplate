@@ -20,17 +20,16 @@ If you made changes to this boilerplate and want to test them, do as follows:
 - A new folder called `theprojectname` will be created and now you can test your changes
 - Make sure that the project is still running fine with and without docker
 
-### Testing Heroku deployment
+### Testing Render.com deployment
 
 Push your changes to a branch and visit the link below
 
-https://dashboard.heroku.com/new?template=https://github.com/fill-org-or-user/fill-project-repo-name/tree/fill-branch
+https://render.com/deploy?repo=https://github.com/fill-org-or-user/fill-project-repo-name/tree/fill-branch
 
 > Make sure to replace all `fill-*`
 
-## How to add a "Deploy to Heroku" button
+## How to add a "Deploy to Render.com" button
 
-Read [this](https://devcenter.heroku.com/articles/heroku-button#adding-the-heroku-button).
+Read [this](https://render.com/docs/deploy-to-render).
 
-P.S. if you want to deploy in a different way, please check the `app.json` file for what needs to be configured.
-
+P.S. if you want to deploy in a different way, please check the `render.yaml` file for what needs to be configured.

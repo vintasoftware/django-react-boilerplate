@@ -16,11 +16,9 @@ A [Django](https://www.djangoproject.com/) project boilerplate/template with lot
 
 For continuous integration, a [Github Action](https://github.com/features/actions) configuration `.github/workflows/main.yml` is included.
 
-Also, includes a Heroku `app.json` and a working Django `production.py` settings, enabling easy deployments with ['Deploy to Heroku' button](https://devcenter.heroku.com/articles/heroku-button). Those Heroku plugins are included in `app.json`:
+Also, includes a Render.com `render.yaml` and a working Django `production.py` settings, enabling easy deployments with ['Deploy to Render' button](https://render.com/docs/deploy-to-render). The `render.yaml` includes the following:
 - PostgreSQL, for DB
 - Redis, for Celery
-- SendGrid, for e-mail sending
-- Papertrail, for logs and platform errors alerts (must set them manually)
 
 This is a good starting point for modern Python/JavaScript web projects.
 
@@ -141,9 +139,6 @@ After setting up the project, you can init a repository and push it on GitHub. I
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) 
-
 If you are in a private repository, access the following link replacing `$YOUR_REPOSITORY_LINK$` with your repository link.
 
 - `https://render.com/deploy?repo=$YOUR_REPOSITORY_LINK$`
@@ -158,17 +153,13 @@ These variables are required for your application to work on Render.com since it
 
 ### Sentry
 
-[Sentry](https://sentry.io) is already set up on the project. For production, add `SENTRY_DSN` environment variable on Heroku, with your Sentry DSN as the value.
+[Sentry](https://sentry.io) is already set up on the project. For production, add `SENTRY_DSN` environment variable on Render.com, with your Sentry DSN as the value.
 
 You can test your Sentry configuration by deploying the boilerplate with the sample page and clicking on the corresponding button.
 
 ### Sentry source maps for JS files
 
-The `bin/post_compile` script has a step to push Javascript source maps to Sentry, however some environment variables need to be set on Heroku.
-
-You need to enable Heroku dyno metadata on your Heroku App. Use the following command on Heroku CLI:
-
-- `heroku labs:enable runtime-dyno-metadata -a <app name>`
+The `render_build.sh` script has a step to push Javascript source maps to Sentry, however some environment variables need to be set on Render.com.
 
 The environment variables that need to be set are:
 
@@ -176,7 +167,7 @@ The environment variables that need to be set are:
 - `SENTRY_PROJECT_NAME` - Name of the Sentry Project.
 - `SENTRY_API_KEY` - Sentry API key that needs to be generated on Sentry. [You can find or create authentication tokens within Sentry](https://sentry.io/api/).
 
-After enabling dyno metadata and setting the environment variables, your next Heroku Deploys will create a release on Sentry where the release name is the commit SHA, and it will push the source maps to it.
+After enabling dyno metadata and setting the environment variables, your next Render.com Deploys will create a release on Sentry where the release name is the commit SHA, and it will push the source maps to it.
 
 ## Linting
 - Manually with `poetry run prospector` and `npm run lint` on project root.
