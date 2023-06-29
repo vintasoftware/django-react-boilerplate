@@ -14,8 +14,8 @@ echo "-----> Poetry install"
 poetry install --no-interaction --without dev
 echo "-----> Poetry done"
 
-if [ -f bin/run_collectstatic ] && [ -n "$ENABLE_DJANGO_COLLECTSTATIC" ] && [ "$ENABLE_DJANGO_COLLECTSTATIC" == 1 ]; then
-    echo "-----> Running run_collectstatic"
+if [ -n "$ENABLE_DJANGO_COLLECTSTATIC" ] && [ "$ENABLE_DJANGO_COLLECTSTATIC" == 1 ]; then
+    echo "-----> Running collectstatic"
 
     echo "-----> Collecting static files"
     poetry run backend/manage.py collectstatic --noinput  2>&1 | sed '/^Copying/d;/^$/d;/^ /d'

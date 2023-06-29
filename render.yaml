@@ -13,7 +13,7 @@ services:
     name: {{project_name}}
     plan: free
     runtime: python
-    buildCommand: "./build.sh"
+    buildCommand: "./render_build.sh"
     startCommand: "poetry run gunicorn {{project_name}}.wsgi:application --chdir backend --limit-request-line 8188 --log-file -"
     envVars:
       - key: ENABLE_DJANGO_COLLECTSTATIC
@@ -34,7 +34,6 @@ services:
       - fromGroup: python-services
   - type: worker
     name: worker-default
-    plan: free
     runtime: python
     env: python
     buildCommand: poetry install
@@ -58,7 +57,6 @@ services:
       - fromGroup: python-services
   - type: worker
     name: beat
-    plan: free
     runtime: python
     env: python
     buildCommand: poetry install
