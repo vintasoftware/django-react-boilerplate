@@ -20,6 +20,24 @@ exclude = '''
 exclude_dirs = ["*/test_*.py", "*/tests.py", "tests", "./venv/", "./env/", "./node_modules/", "./cacheback/", "./.env", "./.venv"]
 skips = ["B101", "B311"]
 
+[tool.coverage.run]
+branch = true
+source = ["backend"]
+omit = ["**/virtualenvs/*", "**/migrations/*", "**/settings/*", "**/tests/*"]
+
+[tool.isort]
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+known_django = "django"
+sections = ["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+lines_after_imports = 2
+atomic = true
+combine_star = true
+skip=["venv", "env", "node_modules", "migrations", ".env", ".venv"]
+
 [tool.poetry]
 name = "{{project_name}}"
 version = "0.1.0"

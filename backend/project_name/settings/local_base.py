@@ -5,7 +5,7 @@ DEBUG = True
 
 HOST = "http://localhost:8000"
 
-SECRET_KEY = "secret"
+SECRET_KEY = "secret"  # nosec
 
 STATIC_ROOT = base_dir_join("staticfiles")
 STATIC_URL = "/static/"
@@ -24,16 +24,22 @@ CELERY_TASK_EAGER_PROPAGATES = True
 
 # Email settings for mailhog
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = 'mailhog'
+EMAIL_HOST = "mailhog"
 EMAIL_PORT = 1025
 
 # Logging
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "formatters": {"standard": {"format": "%(levelname)-8s [%(asctime)s] %(name)s: %(message)s"},},
+    "formatters": {
+        "standard": {"format": "%(levelname)-8s [%(asctime)s] %(name)s: %(message)s"},
+    },
     "handlers": {
-        "console": {"level": "DEBUG", "class": "logging.StreamHandler", "formatter": "standard",},
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "standard",
+        },
     },
     "loggers": {
         "": {"handlers": ["console"], "level": "INFO"},

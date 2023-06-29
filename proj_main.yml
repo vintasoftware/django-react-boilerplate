@@ -77,7 +77,7 @@ jobs:
       - run: poetry run pre-commit run --all-files
         env:
           SKIP: prospector,isort,eslint,missing-migrations
-      - run: poetry run manage.py makemigrations --check --dry-run --ignore authtools
+      - run: poetry run python manage.py makemigrations --check --dry-run
         working-directory: backend
       - run: poetry run python manage.py check --deploy
         env:
@@ -89,9 +89,9 @@ jobs:
           SENDGRID_PASSWORD: 'test'
           REDIS_URL: 'redis://'
         working-directory: backend
-      - run: poetry run manage.py test
+      - run: |
+          poetry run coverage run manage.py test
+          mkdir -p junit
+          poetry run coverage xml -o junit/test-results.xml
         working-directory: backend
       - run: npm run test
-      - run: |
-          mkdir -p junit
-          coverage xml -o junit/test-results.xml
