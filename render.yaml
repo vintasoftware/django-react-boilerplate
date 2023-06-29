@@ -1,0 +1,104 @@
+databases:
+  - name: {{project_name}}-postgres
+    databaseName: {{project_name}}
+    plan: free
+    user: {{project_name}}
+
+services:
+  - type: redis
+    name: {{project_name}}-redis
+    plan: free
+    ipAllowList: [] # only allow internal connections
+    
+  - type: web
+    name: {{project_name}}
+    plan: free
+    runtime: python
+    buildCommand: "./render_build.sh"
+    startCommand: "poetry run gunicorn {{project_name}}.wsgi:application --chdir backend --limit-request-line 8188 --log-file -"
+    envVars:
+      - key: ENABLE_DJANGO_COLLECTSTATIC
+        sync: false
+      - key: AUTO_MIGRATE
+        sync: false
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: {{project_name}}-postgres
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: {{project_name}}-redis
+          property: connectionString
+      - fromGroup: python-services
+      - fromGroup: integrations-credentials
+      
+  # As there aren't free plans for Workers in Render, the configuration for 
+  # celery workers/beat will be commented by default
+  #
+  # - type: worker
+  #   name: worker-default
+  #   runtime: python
+  #   env: python
+  #   buildCommand: poetry install
+  #   startCommand: "poetry run celery --workdir backend --app={{project_name}} worker --loglevel=info --max-memory-per-child=$WORKER_MAX_MEMORY  --concurrency=$WORKER_CONCURRENCY"
+  #   envVars:
+  #     - key: REMAP_SIGTERM
+  #       value: SIGQUIT      
+  #     - key: WORKER_MAX_MEMORY
+  #       sync: false
+  #     - key: WORKER_CONCURRENCY
+  #       sync: false
+  #     - key: DATABASE_URL
+  #       fromDatabase:
+  #         name: {{project_name}}-postgres
+  #         property: connectionString
+  #     - key: REDIS_URL
+  #       fromService:
+  #         type: redis
+  #         name: {{project_name}}-redis
+  #         property: connectionString
+  #     - fromGroup: python-services
+  #     - fromGroup: integrations-credentials
+  # - type: worker
+  #   name: beat
+  #   runtime: python
+  #   env: python
+  #   buildCommand: poetry install
+  #   startCommand: "poetry run celery --workdir backend --app={{project_name}} beat --loglevel=info"
+  #   envVars:
+  #     - key: REMAP_SIGTERM
+  #       value: SIGQUIT
+  #     - key: DATABASE_URL
+  #       fromDatabase:
+  #         name: {{project_name}}-postgres
+  #         property: connectionString
+  #     - key: REDIS_URL
+  #       fromService:
+  #         type: redis
+  #         name: {{project_name}}-redis
+  #         property: connectionString
+  #     - fromGroup: python-services
+  #     - fromGroup: integrations-credentials
+
+envVarGroups:
+  - name: python-services
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.4
+      - key: POETRY_VERSION
+        value: 1.5.1
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DJANGO_SETTINGS_MODULE
+        value: {{project_name}}.settings.production
+      - key: ALLOWED_HOSTS
+        value: '*'
+  - name: integrations-credentials
+    envVars:
+      - key: SENDGRID_USERNAME
+        value: apikey
+      - key: SENDGRID_PASSWORD
+        value: placeholder-value

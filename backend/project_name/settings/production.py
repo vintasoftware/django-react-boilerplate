@@ -75,7 +75,9 @@ LOGGING = {
         },
     },
     "handlers": {
-        "null": {"class": "logging.NullHandler",},
+        "null": {
+            "class": "logging.NullHandler",
+        },
         "mail_admins": {
             "level": "ERROR",
             "class": "django.utils.log.AdminEmailHandler",
@@ -90,8 +92,15 @@ LOGGING = {
     },
     "loggers": {
         "": {"handlers": ["console"], "level": "INFO"},
-        "django.security.DisallowedHost": {"handlers": ["null"], "propagate": False,},
-        "django.request": {"handlers": ["mail_admins"], "level": "ERROR", "propagate": True,},
+        "django.security.DisallowedHost": {
+            "handlers": ["null"],
+            "propagate": False,
+        },
+        "django.request": {
+            "handlers": ["mail_admins"],
+            "level": "ERROR",
+            "propagate": True,
+        },
         "log_request_id.middleware": {
             "handlers": ["console"],
             "level": "DEBUG",

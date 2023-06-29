@@ -1,11 +1,11 @@
 fail_fast: true
 repos:
-- repo: git://github.com/pre-commit/pre-commit-hooks
-  rev: v0.9.2
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
   hooks:
     - id: check-added-large-files
       args: ['--maxkb=500']
-    - id: check-byte-order-marker
+    - id: fix-byte-order-marker
     - id: check-case-conflict
     - id: check-merge-conflict
     - id: check-symlinks

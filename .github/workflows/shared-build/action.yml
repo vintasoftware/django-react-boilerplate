@@ -13,7 +13,7 @@ runs:
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
-        python-version: "3.8"
+        python-version: "3.11"
     - name: Setup Node
       uses: actions/setup-node@v2
       with:
@@ -46,7 +46,7 @@ runs:
       run: pip install "django>=3,<4"
       shell: bash
     - name: Setup testproject
-      run: django-admin startproject testproject --extension py,yml,json,example --name Procfile,README.md --template=.
+      run: django-admin startproject testproject --extension py,yml,json --name Procfile,README.md,.env.example,Dockerfile,Makefile,pyproject.toml,render.yaml --template=.
       shell: bash
     - run: |
         npm update --save
@@ -68,17 +68,10 @@ runs:
     - run: npm run build
       working-directory: testproject
       shell: bash
-    - run: pip install requests pip-tools --upgrade
+    - run: pip install poetry==1.5.1 --upgrade
       working-directory: testproject
       shell: bash
-    - run: |
-        pip-compile requirements.in > requirements.txt
-        pip-compile dev-requirements.in > dev-requirements.txt
-      working-directory: testproject
-      shell: bash
-    - run: |
-        pip install --user -r requirements.txt
-        pip install --user -r dev-requirements.txt
+    - run: poetry install --with dev --no-root --no-interaction --no-ansi
       working-directory: testproject
       shell: bash
     - run: cp testproject/settings/local.py.example testproject/settings/local.py
@@ -87,17 +80,17 @@ runs:
     - run: cp .env.example .env
       working-directory: testproject/backend
       shell: bash
-    - run: python manage.py makemigrations
+    - run: poetry run python manage.py makemigrations
       working-directory: testproject/backend
       env:
         DATABASE_URL: 'sqlite:///'
       shell: bash
-    - run: python manage.py migrate
+    - run: poetry run python manage.py migrate
       working-directory: testproject/backend
       env:
         DATABASE_URL: 'sqlite:///'
       shell: bash
-    - run: python manage.py test
+    - run: poetry run python manage.py test
       working-directory: testproject/backend
       env:
         DATABASE_URL: 'sqlite:///'
@@ -106,7 +99,7 @@ runs:
       run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
       id: secret-id-generator
       shell: bash
-    - run: prospector -X ./backend
+    - run: poetry run prospector -X ./backend
       working-directory: testproject
       env:
         SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}
@@ -117,12 +110,12 @@ runs:
         REDIS_URL: 'redis://'
         DATABASE_URL: 'sqlite:///'
       shell: bash
-    - run: python manage.py makemigrations --check --dry-run
+    - run: poetry run python manage.py makemigrations --check --dry-run
       working-directory: testproject/backend
       env:
         DATABASE_URL: 'sqlite:///'
       shell: bash
-    - run: python manage.py check --deploy --fail-level WARNING
+    - run: poetry run python manage.py check --deploy --fail-level WARNING
       working-directory: testproject/backend
       env:
         SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}
