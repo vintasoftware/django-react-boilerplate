@@ -129,6 +129,17 @@ Will run django tests using `--keepdb` and `--parallel`. You may pass a path to 
 ### Adding new pypi libs
 To add a new **backend** dependency, run `poetry add {dependency}`. If the dependency should be only available for development user append `-G dev` to the command. 
 
+## Github Actions
+
+To enable Continuous Integration through Github Actions, we provide a `proj_main.yml` file. To connect it to Github you need to rename it to `main.yml` and move it to the `.github/workflows/` directory. 
+
+You can do it with the following commands:
+
+```bash
+mkdir -p .github/workflows
+mv proj_main.yml github/workflows/main.yml
+```
+
 ## Deployment 
 ### Setup
 This project comes with an `render.yaml` file, which can be used to create an app on Render.com from a GitHub repository.
