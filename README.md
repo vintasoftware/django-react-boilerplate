@@ -137,7 +137,7 @@ You can do it with the following commands:
 
 ```bash
 mkdir -p .github/workflows
-mv proj_main.yml github/workflows/main.yml
+mv proj_main.yml .github/workflows/main.yml
 ```
 
 ## Deployment 
