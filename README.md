@@ -19,7 +19,7 @@ For continuous integration, a [Github Action](https://github.com/features/action
 Also, includes a Heroku `app.json` and a working Django `production.py` settings, enabling easy deployments with ['Deploy to Heroku' button](https://devcenter.heroku.com/articles/heroku-button). Those Heroku plugins are included in `app.json`:
 - PostgreSQL, for DB
 - Redis, for Celery
-- Mailgun, for e-mail sending
+- SendGrid, for e-mail sending
 - Papertrail, for logs and platform errors alerts (must set them manually)
 
 This is a good starting point for modern Python/JavaScript web projects.
@@ -179,7 +179,7 @@ The environment variables that need to be set are:
 After enabling dyno metadata and setting the environment variables, your next Heroku Deploys will create a release on Sentry where the release name is the commit SHA, and it will push the source maps to it.
 
 ## Linting
-- Manually with `potry run prospector` and `npm run lint` on project root.
+- Manually with `poetry run prospector` and `npm run lint` on project root.
 - During development with an editor compatible with prospector and ESLint.
 
 ## Pre-commit hooks
