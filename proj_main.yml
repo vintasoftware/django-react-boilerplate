@@ -78,6 +78,14 @@ jobs:
         env:
           SKIP: prospector,isort,eslint,missing-migrations
       - run: poetry run python manage.py makemigrations --check --dry-run
+        env:
+          DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.production'
+          SECRET_KEY:  ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          DATABASE_URL: 'sqlite:///'
+          ALLOWED_HOSTS: '.example.org'
+          SENDGRID_USERNAME: 'test'
+          SENDGRID_PASSWORD: 'test'
+          REDIS_URL: 'redis://'
         working-directory: backend
       - run: poetry run python manage.py check --deploy
         env:
