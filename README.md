@@ -154,7 +154,7 @@ Remember to fill the `ALLOWED_HOSTS` with the URL of your app, the default on Re
 
 To enable sending emails from your application you'll need to have a valid SendGrid account and also a valid verified sender identity. After finishing the validation process you'll be able to generate the API credentials and define the `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` envvars on Render.com. 
 
-These variables are required for your application to work on Render.com since it's pre-configured to automatically email admins when the application is unnable to handle errors gracefully. 
+These variables are required for your application to work on Render.com since it's pre-configured to automatically email admins when the application is unable to handle errors gracefully. 
 
 ### Sentry
 
