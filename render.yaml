@@ -1,14 +1,17 @@
 databases:
   - name: {{project_name}}-postgres
     databaseName: {{project_name}}
+    plan: free
     user: {{project_name}}
 
 services:
   - type: redis
     name: {{project_name}}-redis
+    plan: free
     ipAllowList: [] # only allow internal connections
   - type: web
     name: {{project_name}}
+    plan: free
     runtime: python
     buildCommand: "./build.sh"
     startCommand: "poetry run gunicorn {{project_name}}.wsgi:application --chdir backend --limit-request-line 8188 --log-file -"
@@ -31,6 +34,7 @@ services:
       - fromGroup: python-services
   - type: worker
     name: worker-default
+    plan: free
     runtime: python
     env: python
     buildCommand: poetry install
@@ -54,6 +58,7 @@ services:
       - fromGroup: python-services
   - type: worker
     name: beat
+    plan: free
     runtime: python
     env: python
     buildCommand: poetry install
