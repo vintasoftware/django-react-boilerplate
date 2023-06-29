@@ -156,6 +156,12 @@ If you are in a private repository, access the following link replacing `$YOUR_R
 
 Remember to fill the `ALLOWED_HOSTS` with the URL of your app, the default on Render.com is `appname.onrender.com`. Replace `appname` with your Render.com app name.
 
+### Configuring Celery
+
+As there aren't free plans for Workers in Render.com, the configuration for Celery workers/beat will be commented by default in the `render.yaml`. This means celery won't be available by default. 
+
+Uncommenting the worker configuration lines on `render.yaml` will imply in costs.
+
 ### SendGrid
 
 To enable sending emails from your application you'll need to have a valid SendGrid account and also a valid verified sender identity. After finishing the validation process you'll be able to generate the API credentials and define the `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` envvars on Render.com. 
