@@ -36,7 +36,7 @@ sections = ["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLD
 lines_after_imports = 2
 atomic = true
 combine_star = true
-skip=["venv", "env", "node_modules", "migrations", ".env", ".venv"]
+skip = ["venv", "env", "node_modules", "migrations", ".env", ".venv"]
 
 [tool.poetry]
 name = "{{project_name}}"
