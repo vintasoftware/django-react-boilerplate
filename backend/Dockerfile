@@ -24,7 +24,7 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --with dev --no-root --no-interaction --no-ansi
 
 WORKDIR /home/user/app/backend
-ADD backend/ /home/user/app/backend
+COPY backend/ /home/user/app/backend
 
 USER user
 CMD gunicorn {{project_name}}.wsgi --log-file - -b 0.0.0.0:8000 --reload
