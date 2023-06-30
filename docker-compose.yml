@@ -49,7 +49,7 @@ services:
       context: .
     command: python manage.py celery
     volumes:
-      - ./backend/:/home/user/app/
+      - ./:/home/user/app/
     env_file: backend/.env
     depends_on:
       - db
