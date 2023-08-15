@@ -20,7 +20,7 @@
   "dependencies": {
     "@babel/cli": "~7.22.5",
     "@reduxjs/toolkit": "~1.9.5",
-    "@sentry/browser": "~7.59.2",
+    "@sentry/browser": "~7.60.0",
     "@types/react": "~18.2.8",
     "axios": "~1.4.0",
     "bootstrap": "~5.3.0",
