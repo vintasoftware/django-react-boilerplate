@@ -58,7 +58,7 @@ Also, includes a Render.com `render.yaml` and a working Django `production.py` s
 - `whitenoise` and `brotlipy` for serving static assets
 
 ## Share your project!
-Several people have leveraged our boilerplate to start spinoffs or to boost their efforts in the challenging pursuit of securing funding. Starting with a solid foundation allows you to create more resilient products and to focus on what really matters: discovering and delivering value to your customers. If you are one of those people, we're eager to help you even more! We can spread the word about your project across our social media platforms, giving you access to a broader audience.
+Several people have leveraged our boilerplate to start spinoffs or to boost their efforts in the challenging pursuit of securing funding. Starting with a solid foundation allows you to create more resilient products and focus on what really matters: discovering and delivering value to your customers. If you are one of those people, we're eager to help you even more! We can spread the word about your project across our social media platforms, giving you access to a broader audience.
 
 Send us an email at contact@vintasoftware.com telling us a bit more about how our boilerplate helped you boost your project.
 
