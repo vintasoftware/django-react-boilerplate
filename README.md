@@ -7,7 +7,7 @@
 A [Django](https://www.djangoproject.com/) project boilerplate/template with lots of state of the art libraries and tools like:
 - [React](https://facebook.github.io/react/), for building interactive UIs
 - [Poetry](https://python-poetry.org/), for managing the environment and its dependencies
-- [django-js-reverse](https://github.com/ierror/django-js-reverse), for generating URLs on JS
+- [django-js-reverse](https://github.com/vintasoftware/django-js-reverse), for generating URLs on JS
 - [React Bootstrap](https://react-bootstrap.github.io/), for responsive styling
 - [Webpack](https://webpack.js.org/), for bundling static assets
 - [Celery](https://docs.celeryproject.org/), for background worker tasks
