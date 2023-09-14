@@ -82,7 +82,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "theprojectname.wsgi.application"
+WSGI_APPLICATION = "{{project_name}}.wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
