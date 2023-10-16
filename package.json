@@ -18,7 +18,7 @@
     "coverage": "jest --coverage"
   },
   "dependencies": {
-    "@babel/cli": "~7.22.5",
+    "@babel/cli": "~7.23.0",
     "@reduxjs/toolkit": "~1.9.5",
     "@sentry/browser": "~7.60.0",
     "@types/react": "~18.2.8",
