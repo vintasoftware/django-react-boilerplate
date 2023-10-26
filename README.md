@@ -250,4 +250,4 @@ Check our [contributing guide](https://github.com/vintasoftware/django-react-boi
 ## Commercial Support
 [![alt text](https://avatars2.githubusercontent.com/u/5529080?s=80&v=4 "Vinta Logo")](https://www.vinta.com.br/)
 
-This project is maintained by [Vinta Software](https://www.vinta.com.br/) and is used in products of Vinta's clients. We are always looking for exciting work, so remember to contact us at contact@vintasoftware.com if you want to share your work with a broader audience. 
+This project is maintained by [Vinta Software](https://www.vinta.com.br/) and is used in products of Vinta's clients. We are always looking for exciting work! If you need any commercial support, feel free to get in touch: contact@vinta.com.br
