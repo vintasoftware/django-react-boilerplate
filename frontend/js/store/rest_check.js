@@ -16,7 +16,7 @@ export const restCheckReducer = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchRestCheck.pending, (state) => {
       state.data = {
-        isLoading: false,
+        isLoading: true,
       };
     });
     builder.addCase(fetchRestCheck.fulfilled, (state, action) => {
