@@ -12,7 +12,7 @@ A [Django](https://www.djangoproject.com/) project boilerplate/template with a m
 - [Webpack](https://webpack.js.org/), for bundling static assets
 - [Celery](https://docs.celeryproject.org/), for background worker tasks
 - [WhiteNoise](http://whitenoise.evans.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlipy), for efficient static files serving
-- [prospector](https://prospector.landscape.io/en/master/) and [ESLint](https://eslint.org/) with [pre-commit](https://pre-commit.com/) for automated quality assurance (does not replace proper testing!)
+- [ruff](https://github.com/astral-sh/ruff) and [ESLint](https://eslint.org/) with [pre-commit](https://pre-commit.com/) for automated quality assurance (does not replace proper testing!)
 
 For continuous integration, a [Github Action](https://github.com/features/actions) configuration `.github/workflows/main.yml` is included.
 
@@ -85,7 +85,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 ## Running
 ### Tools
-- Setup [editorconfig](http://editorconfig.org/), [prospector](https://prospector.landscape.io/en/master/) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
+- Setup [editorconfig](http://editorconfig.org/), [ruff](https://github.com/astral-sh/ruff) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
 
 ### Setup
 - Inside the `backend` folder, do the following:
@@ -138,7 +138,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   - If you wish to use another database engine locally, add a new `DATABASE_URL` setting for the database you wish to use
     - Please refer to [dj-database-url](https://github.com/jacobian/dj-database-url#url-schema) on how to configure `DATABASE_URL` for commonly used engines
 - Open a new command line window and go to the project's directory
-- Run `poetry install`
+- run `poetry install`
 
 #### Run the backend app
 - With the virtualenv enabled, go to the `backend` directory
@@ -228,10 +228,16 @@ The environment variables that need to be set are:
 After enabling dyno metadata and setting the environment variables, your next Render.com Deploys will create a release on Sentry where the release name is the commit SHA, and it will push the source maps to it.
 
 ## Linting
-- Manually with `poetry run prospector` and `npm run lint` on project root.
-- During development with an editor compatible with prospector and ESLint.
+- At pre-commit time (see below)
+- Manually with `poetry run ruff` and `npm run lint` on project root.
+- During development with an editor compatible with ruff and ESLint.
 
 ## Pre-commit hooks
+
+### If you are using Docker:
+- Not supported yet. Please feel free to contribute!
+
+### If you are not using Docker:
 - Run `poetry run pre-commit install` to enable the hook into your git repo. The hook will run automatically for each commit.
 - Run `git commit -m "Your message" -n` to skip the hook if you need.
 
