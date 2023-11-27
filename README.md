@@ -138,7 +138,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   - If you wish to use another database engine locally, add a new `DATABASE_URL` setting for the database you wish to use
     - Please refer to [dj-database-url](https://github.com/jacobian/dj-database-url#url-schema) on how to configure `DATABASE_URL` for commonly used engines
 - Open a new command line window and go to the project's directory
-- run `poetry install`
+- Run `poetry install`
 
 #### Run the backend app
 - With the virtualenv enabled, go to the `backend` directory
