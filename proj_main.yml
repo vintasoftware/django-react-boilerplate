@@ -64,7 +64,7 @@ jobs:
         run: poetry run ruff check .
         env:
           DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.local_base'
-          SECRET_KEY:  ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
+          SECRET_KEY: ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
           DATABASE_URL: 'sqlite:///'
           ALLOWED_HOSTS: '.example.org'
           SENDGRID_USERNAME: 'test'
