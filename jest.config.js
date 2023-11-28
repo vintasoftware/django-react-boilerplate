@@ -17,7 +17,7 @@ module.exports = {
     'frontend/js/app',
   ],
   setupFilesAfterEnv: [
-    './jest-setup.js',
+    './jest.setup.js',
   ],
   testEnvironment: 'jsdom',
   collectCoverageFrom: [
