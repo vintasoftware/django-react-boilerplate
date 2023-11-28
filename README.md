@@ -39,10 +39,9 @@ Also, includes a Render.com `render.yaml` and a working Django `production.py` s
   - `connected-react-router` for integrating Redux with React Router
   - `history` for providing browser history to Connected React Router
   - `react-redux` for integrating React with Redux
-  - Utilities
+- Utilities
   - `lodash` for general utility functions
   - `classnames` for easy working with complex CSS class names on components
-  - `prop-types` for improving QoL while developing providing basic type-checking for React props
   - `react-refresh` for improving QoL while developing through automatic browser refreshing
 
 ### Backend
