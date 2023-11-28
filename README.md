@@ -5,13 +5,13 @@
 
 ## About
 A [Django](https://www.djangoproject.com/) project boilerplate/template with a multitude of state-of-the-art libraries and tools. If pairing Django with React is a possibility for your project or spinoff, this is the best solution available. Save time with tools like:
-- [React](https://facebook.github.io/react/), for building interactive UIs
+- [React](https://react.dev/), for building interactive UIs
 - [Poetry](https://python-poetry.org/), for managing the environment and its dependencies
 - [django-js-reverse](https://github.com/vintasoftware/django-js-reverse), for generating URLs on JS
 - [React Bootstrap](https://react-bootstrap.github.io/), for responsive styling
 - [Webpack](https://webpack.js.org/), for bundling static assets
-- [Celery](https://docs.celeryproject.org/), for background worker tasks
-- [WhiteNoise](http://whitenoise.evans.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlipy), for efficient static files serving
+- [Celery](https://docs.celeryq.dev/en/stable/), for background worker tasks
+- [WhiteNoise](https://whitenoise.readthedocs.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlicffi), for efficient static files serving
 - [ruff](https://github.com/astral-sh/ruff) and [ESLint](https://eslint.org/) with [pre-commit](https://pre-commit.com/) for automated quality assurance (does not replace proper testing!)
 
 For continuous integration, a [Github Action](https://github.com/features/actions) configuration `.github/workflows/main.yml` is included.
@@ -136,7 +136,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   - If you wish to use PostgreSQL locally, uncomment and edit the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}` in order to make it correctly point to your database URL
     - The url format is the following: `postgres://USER:PASSWORD@HOST:PORT/NAME`
   - If you wish to use another database engine locally, add a new `DATABASE_URL` setting for the database you wish to use
-    - Please refer to [dj-database-url](https://github.com/jacobian/dj-database-url#url-schema) on how to configure `DATABASE_URL` for commonly used engines
+    - Please refer to [dj-database-url](https://github.com/jazzband/dj-database-url#url-schema) on how to configure `DATABASE_URL` for commonly used engines
 - Open a new command line window and go to the project's directory
 - Run `poetry install`
 
@@ -238,14 +238,13 @@ After enabling dyno metadata and setting the environment variables, your next Re
 - Not supported yet. Please feel free to contribute!
 
 ### If you are not using Docker:
-- Run `poetry run pre-commit install` to enable the hook into your git repo. The hook will run automatically for each commit.
-- Run `git commit -m "Your message" -n` to skip the hook if you need.
+- On project root, run `poetry run pre-commit install` to enable the hook into your git repo. The hook will run automatically for each commit.
 
 ## Opinionated Settings
 Some settings defaults were decided based on Vinta's experiences. Here's the rationale behind them:
 
 ### `CELERY_ACKS_LATE = True`
-We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY_ACKS_LATE = True` to ensure tasks will be re-queued after a worker failure. Check Celery docs on ["Should I use retry or acks_late?"](https://docs.celeryproject.org/en/latest/faq.html#should-i-use-retry-or-acks-late) for more info.
+We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY_ACKS_LATE = True` to ensure tasks will be re-queued after a worker failure. Check Celery docs on ["Should I use retry or acks_late?"](https://docs.celeryq.dev/en/stable/faq.html#faq-acks-late-vs-retry) for more info.
 
 ## Contributing
 

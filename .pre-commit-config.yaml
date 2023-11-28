@@ -5,6 +5,10 @@ repos:
   hooks:
     - id: check-added-large-files
       args: ['--maxkb=500']
+      exclude: >
+            (?x)^(
+                package-lock\.json
+            )$
     - id: fix-byte-order-marker
     - id: check-case-conflict
     - id: check-merge-conflict
