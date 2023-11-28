@@ -247,6 +247,9 @@ After enabling dyno metadata and setting the environment variables, your next Re
 ## Opinionated Settings
 Some settings defaults were decided based on Vinta's experiences. Here's the rationale behind them:
 
+### `DATABASES["default"]["ATOMIC_REQUESTS"] = True`
+Using atomic requests in production prevents several database consistency issues. Check [Django docs for more details](https://docs.djangoproject.com/en/4.2/topics/db/transactions/#tying-transactions-to-http-requests).
+
 ### `CELERY_ACKS_LATE = True`
 We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY_ACKS_LATE = True` to ensure tasks will be re-queued after a worker failure. Check Celery docs on ["Should I use retry or acks_late?"](https://docs.celeryq.dev/en/stable/faq.html#faq-acks-late-vs-retry) for more info.
 
