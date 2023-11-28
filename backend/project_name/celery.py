@@ -8,6 +8,7 @@ from decouple import config
 
 from .celerybeat_schedule import CELERYBEAT_SCHEDULE
 
+
 settings_module = config("DJANGO_SETTINGS_MODULE", default=None)
 if settings_module is None:
     print(

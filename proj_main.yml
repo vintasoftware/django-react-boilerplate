@@ -50,7 +50,7 @@ jobs:
             build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}
             build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}
       - run: python -m pip install --upgrade pip
-      - run: python -m pip install poetry==1.5.1
+      - run: python -m pip install poetry==1.6.1
       - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
       - run: sudo apt-get install git-lfs --upgrade
       - run: poetry install --with dev --no-root --no-interaction --no-ansi

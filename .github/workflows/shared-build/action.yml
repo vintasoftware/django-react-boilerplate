@@ -68,7 +68,7 @@ runs:
     - run: npm run build
       working-directory: testproject
       shell: bash
-    - run: pip install poetry==1.5.1 --upgrade
+    - run: pip install poetry==1.6.1 --upgrade
       working-directory: testproject
       shell: bash
     - run: poetry install --with dev --no-root --no-interaction --no-ansi

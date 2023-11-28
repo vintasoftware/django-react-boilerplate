@@ -2,8 +2,8 @@
 
 import os
 
-from decouple import config  # noqa
-from dj_database_url import parse as db_url  # noqa
+from decouple import config
+from dj_database_url import parse as db_url
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
