@@ -76,6 +76,7 @@ Send us an email at contact@vintasoftware.com telling us a bit more about how ou
     ```
 In the next steps, always remember to replace {{project_name}} with your project's name (in case it isn't yet):
 - [ ] Above: don't forget the `--extension` and `--name` params!
+- [ ] Go into project's root directory: `cd {{project_name}}`
 - [ ] Change the first line of README to the name of the project
 - [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/backend/{{project_name}}/settings/base.py`
 - [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails in `{{project_name}}/backend/{{project_name}}/settings/production.py`
