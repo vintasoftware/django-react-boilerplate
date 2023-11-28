@@ -68,13 +68,13 @@ Send us an email at contact@vintasoftware.com telling us a bit more about how ou
 - [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
     ```
-    django-admin startproject theprojectname --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+    django-admin startproject {{project_name}} --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
     ```
     Alternatively, you may start the project in the current directory by placing a `.` right after the project name, using the following command:
     ```
-    django-admin startproject theprojectname . --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+    django-admin startproject {{project_name}} . --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
     ```
-In the next steps, always remember to replace theprojectname with your project's name
+In the next steps, always remember to replace {{project_name}} with your project's name (in case it isn't yet):
 - [ ] Above: don't forget the `--extension` and `--name` params!
 - [ ] Change the first line of README to the name of the project
 - [ ] Add an email address to the `ADMINS` settings variable in `{{project_name}}/backend/{{project_name}}/settings/base.py`
