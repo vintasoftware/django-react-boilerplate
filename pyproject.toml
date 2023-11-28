@@ -79,7 +79,8 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 ignore-overlong-task-comments = true
 
 [tool.ruff.per-file-ignores]
-# Ignore `E402`, `F403`, `F405` (import violations)
+# Ignore "E402", "F403", "F405" (import violations) in __init__.py files
+# Ignore "S101" (use of assert), "N802" (function name should be lowercase) in tests
 "__init__.py" = ["E402", "F403", "F405"]
 "**/{tests,docs}/*" = ["E402", "F403", "F405", "S101", "N802"]
 "**/{settings}/*" = ["E402", "F403", "F405"]
