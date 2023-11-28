@@ -11,6 +11,11 @@ module.exports = {
     browser: true,
     jest: true
   },
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    parser: '@babel/eslint-parser',
+  },
   settings: {
     'import/resolver': {
       webpack: {
