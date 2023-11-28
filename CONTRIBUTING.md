@@ -15,7 +15,7 @@ If you made changes to this boilerplate and want to test them, do as follows:
 - Run `git archive -o boilerplate.zip HEAD` to create the template zip file
 - Run the following:
   ```bash
-  cd .. && django-admin startproject theprojectname --extension py,yml,json --name Procfile,README.md,.env.example,Dockerfile,docker-compose.yml,Makefile,pyproject.toml,render.yaml --template=django-react-boilerplate/boilerplate.zip
+  cd .. && django-admin startproject theprojectname --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=django-react-boilerplate/boilerplate.zip
   ```
 - A new folder called `theprojectname` will be created and now you can test your changes
 - Make sure that the project is still running fine with and without docker

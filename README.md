@@ -69,11 +69,11 @@ Send us an email at contact@vintasoftware.com telling us a bit more about how ou
 - [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
     ```
-    django-admin startproject theprojectname --extension py,yml,json --name Procfile,Dockerfile,docker-compose.yml,README.md,.env.example,.gitignore,Makefile,render.yaml --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+    django-admin startproject theprojectname --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
     ```
     Alternatively, you may start the project in the current directory by placing a `.` right after the project name, using the following command:
     ```
-    django-admin startproject theprojectname . --extension py,yml,json --name Procfile,Dockerfile,docker-compose.yml,README.md,.env.example,.gitignore,Makefile,render.yaml --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+    django-admin startproject theprojectname . --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
     ```
 In the next steps, always remember to replace theprojectname with your project's name
 - [ ] Above: don't forget the `--extension` and `--name` params!
@@ -181,7 +181,7 @@ mkdir -p .github/workflows
 mv proj_main.yml .github/workflows/main.yml
 ```
 
-## Deployment 
+## Production Deployment
 ### Setup
 This project comes with an `render.yaml` file, which can be used to create an app on Render.com from a GitHub repository.
 
@@ -197,7 +197,7 @@ If you are in a private repository, access the following link replacing `$YOUR_R
 
 Remember to fill the `ALLOWED_HOSTS` with the URL of your app, the default on Render.com is `appname.onrender.com`. Replace `appname` with your Render.com app name.
 
-### Configuring Celery
+### Celery
 
 As there aren't free plans for Workers in Render.com, the configuration for Celery workers/beat will be commented by default in the `render.yaml`. This means celery won't be available by default. 
 
@@ -205,9 +205,13 @@ Uncommenting the worker configuration lines on `render.yaml` will imply in costs
 
 ### SendGrid
 
-To enable sending emails from your application you'll need to have a valid SendGrid account and also a valid verified sender identity. After finishing the validation process you'll be able to generate the API credentials and define the `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` envvars on Render.com. 
+To enable sending emails from your application you'll need to have a valid SendGrid account and also a valid verified sender identity. After finishing the validation process you'll be able to generate the API credentials and define the `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` environment variables on Render.com. 
 
-These variables are required for your application to work on Render.com since it's pre-configured to automatically email admins when the application is unable to handle errors gracefully. 
+These variables are required for your application to work on Render.com since it's pre-configured to automatically email admins when the application is unable to handle errors gracefully.
+
+### Media storage
+
+Media files integration with S3 or similar is not supported yet. Please feel free to contribute!
 
 ### Sentry
 
