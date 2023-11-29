@@ -99,8 +99,8 @@ runs:
       run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
       id: secret-id-generator
       shell: bash
-    - run: poetry run ruff check ./backend/
-      working-directory: testproject
+    - run: poetry run ruff check .
+      working-directory: testproject/backend
       shell: bash
     - run: poetry run python manage.py makemigrations --check --dry-run
       working-directory: testproject/backend
