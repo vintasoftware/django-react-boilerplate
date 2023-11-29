@@ -6,12 +6,12 @@ const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"
 module.exports = (env, argv) => {
   const isDev = argv.mode === "development";
   const nodeModulesDir = path.resolve(__dirname, "node_modules");
-  let localhostOutput = {
+  const localhostOutput = {
     path: path.resolve("./frontend/bundles/"),
     publicPath: "http://localhost:3000/frontend/bundles/",
     filename: "[name].js",
   };
-  let productionOutput = {
+  const productionOutput = {
     path: path.resolve("./frontend/webpack_bundles/"),
     publicPath: "/static/webpack_bundles/",
     filename: "[name]-[chunkhash].js",
