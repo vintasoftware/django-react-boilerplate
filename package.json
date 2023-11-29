@@ -1,8 +1,8 @@
 {
-  "name": "theprojectname-frontend",
+  "name": "{{project_name}}-frontend",
   "version": "0.0.1",
   "private": true,
-  "description": "theprojectname frontend.",
+  "description": "{{project_name}} frontend.",
   "engines": {
     "node": ">=18 <21"
   },
@@ -50,7 +50,7 @@
     "circular-dependency-plugin": "~5.2.2",
     "css-loader": "~6.8.1",
     "eslint": "~8.54.0",
-    "eslint-config-vinta": "github:vintasoftware/eslint-config-vinta#bbaeae881ef2d3dbf0ccdedbd26b30893a8c9d25",
+    "eslint-config-vinta": "github:vintasoftware/eslint-config-vinta#9dd2803f4864a2e9942c636f78b367b4d5a56c67",
     "eslint-import-resolver-webpack": "~0.13.8",
     "eslint-plugin-import": "~2.29.0",
     "eslint-plugin-jest": "~27.6.0",

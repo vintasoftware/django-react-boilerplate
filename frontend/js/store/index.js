@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import { rootReducer } from './reducers';
+import { rootReducer } from "./reducers";
 
 const configureReduxStore = (preloadedState) => {
   const store = configureStore({
