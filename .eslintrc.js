@@ -4,6 +4,7 @@ module.exports = {
   root: true,
   extends: ['vinta/recommended'],
   rules: {
+    "default-param-last": "off",  // due to initialState in Redux
     "@babel/camelcase": "off"
   },
   env: {
