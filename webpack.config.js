@@ -104,6 +104,7 @@ module.exports = (env, argv) => {
       extensions: [".js", ".jsx"],
     },
     optimization: {
+      minimize: !isDev,
       splitChunks: {
         // include all types of chunks
         chunks: "all",
