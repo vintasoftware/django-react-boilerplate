@@ -19,7 +19,7 @@ module.exports = (env, argv) => {
 
   return {
     mode: isDev ? "development" : "production",
-    devtool: isDev ? "eval" : "source-map",
+    devtool: "source-map",
     devServer: {
       hot: true,
       historyApiFallback: true,
