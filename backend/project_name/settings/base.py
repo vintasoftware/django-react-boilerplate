@@ -128,7 +128,7 @@ WEBPACK_LOADER = {
         "CACHE": False,  # on DEBUG should be False
         "STATS_FILE": base_dir_join("../webpack-stats.json"),
         "POLL_INTERVAL": 0.1,
-        "IGNORE": [".+\.hot-update.js", ".+\.map"],
+        "IGNORE": [r".+\.hot-update.js", r".+\.map"],
     }
 }
 
