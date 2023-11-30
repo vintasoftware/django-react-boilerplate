@@ -2,7 +2,7 @@ import sentry_sdk
 from decouple import Csv, config
 from sentry_sdk.integrations.django import DjangoIntegration
 
-from .base import *  # noqa
+from .base import *
 
 
 DEBUG = False

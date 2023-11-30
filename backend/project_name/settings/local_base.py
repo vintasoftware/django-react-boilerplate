@@ -1,11 +1,11 @@
-from .base import *  # noqa
+from .base import *
 
 
 DEBUG = True
 
 HOST = "http://localhost:8000"
 
-SECRET_KEY = "secret"  # nosec
+SECRET_KEY = "secret"  # noqa: S105
 
 STATIC_ROOT = base_dir_join("staticfiles")
 STATIC_URL = "/static/"

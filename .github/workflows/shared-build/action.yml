@@ -68,7 +68,7 @@ runs:
     - run: npm run build
       working-directory: testproject
       shell: bash
-    - run: pip install poetry==1.5.1 --upgrade
+    - run: pip install poetry==1.6.1 --upgrade
       working-directory: testproject
       shell: bash
     - run: poetry install --with dev --no-root --no-interaction --no-ansi
@@ -99,7 +99,7 @@ runs:
       run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
       id: secret-id-generator
       shell: bash
-    - run: poetry run prospector -X ./backend
+    - run: poetry run ruff check ./backend/
       working-directory: testproject
       env:
         SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}

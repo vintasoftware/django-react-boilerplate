@@ -87,9 +87,9 @@ envVarGroups:
   - name: python-services
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.4
+        value: 3.11.6
       - key: POETRY_VERSION
-        value: 1.5.1
+        value: 1.6.1
       - key: SECRET_KEY
         generateValue: true
       - key: DJANGO_SETTINGS_MODULE

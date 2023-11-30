@@ -1,11 +1,11 @@
 from django.conf.urls import include
-from django.urls import path
 from django.contrib import admin
+from django.urls import path
 
 import django_js_reverse.views
+from common.routes import routes as common_routes
 from rest_framework.routers import DefaultRouter
 
-from common.routes import routes as common_routes
 
 router = DefaultRouter()
 
