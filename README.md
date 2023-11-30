@@ -73,9 +73,13 @@ Send us an email at contact@vintasoftware.com telling us a bit more about how ou
 -   [ ] Install Django with `pip install django`, to have the `django-admin` command available.
 -   [ ] Open the command line and go to the directory you want to start your project in.
 -   [ ] Start your project using:
-        `django-admin startproject {{project_name}} --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip`
+        ```
+        django-admin startproject {{project_name}} --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+        ```
         Alternatively, you may start the project in the current directory by placing a `.` right after the project name, using the following command:
-        `django-admin startproject {{project_name}} . --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip`
+        ```
+        django-admin startproject {{project_name}} . --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+        ```
         In the next steps, always remember to replace {{project_name}} with your project's name (in case it isn't yet):
 -   [ ] Above: don't forget the `--extension` and `--name` params!
 -   [ ] Go into project's root directory: `cd {{project_name}}`
