@@ -46,7 +46,7 @@ runs:
       run: pip install "django>=4,<5"
       shell: bash
     - name: Setup testproject
-      run: django-admin startproject testproject --extension py,yml,json --name Procfile,README.md,.env.example,Dockerfile,Makefile,pyproject.toml,render.yaml --template=.
+      run: django-admin startproject testproject --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=.
       shell: bash
     - run: |
         npm update --save

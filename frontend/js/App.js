@@ -1,17 +1,17 @@
+import * as Sentry from "@sentry/react";
 import React from 'react';
 import { Provider } from 'react-redux';
 
 import Home from './pages/Home';
 import configureStore from './store';
-import SentryBoundary from './utils/SentryBoundary';
 
 const store = configureStore({});
 const App = () => (
-  <SentryBoundary>
+  <Sentry.ErrorBoundary fallback={<p>An error has occurred</p>}>
     <Provider store={store}>
       <Home />
     </Provider>
-  </SentryBoundary>
+  </Sentry.ErrorBoundary>
 );
 
 export default App;

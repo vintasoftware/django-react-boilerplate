@@ -4,7 +4,7 @@
   "private": true,
   "description": "{{project_name}} frontend.",
   "engines": {
-    "node": ">=18 <19"
+    "node": ">=18 <21"
   },
   "main": "index.js",
   "prettier": "eslint-config-vinta/prettier",
@@ -14,13 +14,14 @@
     "test:update": "npm test -- --u",
     "start": "babel-node server.js",
     "build": "NODE_ENV=production webpack --progress --config webpack.prod.config.js --bail",
-    "lint": "eslint frontend",
+    "lint": "eslint frontend --fix",
     "coverage": "jest --coverage"
   },
   "dependencies": {
     "@babel/cli": "~7.23.0",
     "@reduxjs/toolkit": "~1.9.5",
     "@sentry/browser": "~7.77.0",
+    "@sentry/react": "~7.83.0",
     "@types/react": "~18.2.8",
     "axios": "~1.6.0",
     "bootstrap": "~5.3.0",
@@ -28,7 +29,6 @@
     "cookie": "~0.5.0",
     "lodash": "~4.17.21",
     "marked": "~5.1.0",
-    "prop-types": "~15.8.1",
     "react": "~18.2.0",
     "react-bootstrap": "~2.9.0",
     "react-dom": "~18.2.0",
@@ -48,7 +48,7 @@
     "@testing-library/react": "~14.0.0",
     "@testing-library/user-event": "~14.4.3",
     "ajv": "~8.12.0",
-    "autoprefixer": "~9.8.6",
+    "autoprefixer": "~10.4.16",
     "babel-jest": "~29.5.0",
     "babel-loader": "~9.1.2",
     "circular-dependency-plugin": "~5.2.2",
