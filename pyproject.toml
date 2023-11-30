@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 Django = ">=4,<5"
 celery = {extras = ["redis"], version = "^5.3.0"}
 celery-redbeat = "^2.1.1"
@@ -118,7 +118,7 @@ ignore = [
 ]
 line-length = 100
 indent-width = 4
-target-version = "py311"
+target-version = "py312"
 # Allow unused variables when underscore-prefixed:
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 

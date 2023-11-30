@@ -6,10 +6,10 @@ jobs:
     name: Build {{project_name}}
     strategy:
       matrix:
-        python: [3.11]
+        python: [3.12]
         node: [18.16]
     env:
-      DATABASE_URL: 'sqlite:///'
+      DATABASE_URL: "sqlite:///"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -50,7 +50,7 @@ jobs:
             build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}
             build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}
       - run: python -m pip install --upgrade pip
-      - run: python -m pip install poetry==1.6.1
+      - run: python -m pip install poetry==1.7.1
       - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
       - run: sudo apt-get install git-lfs --upgrade
       - run: poetry install --with dev --no-root --no-interaction --no-ansi
@@ -63,35 +63,35 @@ jobs:
       - name: Linting
         run: poetry run ruff check ./backend/
         env:
-          DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.local_base'
+          DJANGO_SETTINGS_MODULE: "{{project_name}}.settings.local_base"
           SECRET_KEY: ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
-          DATABASE_URL: 'sqlite:///'
-          ALLOWED_HOSTS: '.example.org'
-          SENDGRID_USERNAME: 'test'
-          SENDGRID_PASSWORD: 'test'
-          REDIS_URL: 'redis://'
+          DATABASE_URL: "sqlite:///"
+          ALLOWED_HOSTS: ".example.org"
+          SENDGRID_USERNAME: "test"
+          SENDGRID_PASSWORD: "test"
+          REDIS_URL: "redis://"
       - run: poetry run pre-commit run --all-files
         env:
           SKIP: ruff,eslint,missing-migrations
       - run: poetry run python manage.py makemigrations --check --dry-run
         env:
-          DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.production'
-          SECRET_KEY:  ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
-          DATABASE_URL: 'sqlite:///'
-          ALLOWED_HOSTS: '.example.org'
-          SENDGRID_USERNAME: 'test'
-          SENDGRID_PASSWORD: 'test'
-          REDIS_URL: 'redis://'
+          DJANGO_SETTINGS_MODULE: "{{project_name}}.settings.production"
+          SECRET_KEY: ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          DATABASE_URL: "sqlite:///"
+          ALLOWED_HOSTS: ".example.org"
+          SENDGRID_USERNAME: "test"
+          SENDGRID_PASSWORD: "test"
+          REDIS_URL: "redis://"
         working-directory: backend
       - run: poetry run python manage.py check --deploy
         env:
-          DJANGO_SETTINGS_MODULE: '{{project_name}}.settings.production'
-          SECRET_KEY:  ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
-          DATABASE_URL: 'sqlite:///'
-          ALLOWED_HOSTS: '.example.org'
-          SENDGRID_USERNAME: 'test'
-          SENDGRID_PASSWORD: 'test'
-          REDIS_URL: 'redis://'
+          DJANGO_SETTINGS_MODULE: "{{project_name}}.settings.production"
+          SECRET_KEY: ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          DATABASE_URL: "sqlite:///"
+          ALLOWED_HOSTS: ".example.org"
+          SENDGRID_USERNAME: "test"
+          SENDGRID_PASSWORD: "test"
+          REDIS_URL: "redis://"
         working-directory: backend
       - run: |
           poetry run coverage run manage.py test

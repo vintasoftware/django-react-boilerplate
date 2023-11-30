@@ -1,11 +1,6 @@
 echo "-----> Build hook"
 
 echo "-----> Build frontend"
-if [ ! -f webpack-stats.json ]; then
-    touch webpack-stats.json
-    chmod 777 webpack-stats.json
-    echo "webpack-stats.json created"
-fi
 npm install
 npm run build
 echo "-----> Build frontend done"
@@ -13,6 +8,9 @@ echo "-----> Build frontend done"
 echo "-----> Poetry install"
 poetry install --no-interaction --without dev
 echo "-----> Poetry done"
+
+echo "-----> Running manage.py check --deploy --fail-level WARNING"
+poetry run backend/manage.py check --deploy --fail-level WARNING
 
 if [ -n "$ENABLE_DJANGO_COLLECTSTATIC" ] && [ "$ENABLE_DJANGO_COLLECTSTATIC" == 1 ]; then
     echo "-----> Running collectstatic"
@@ -22,9 +20,6 @@ if [ -n "$ENABLE_DJANGO_COLLECTSTATIC" ] && [ "$ENABLE_DJANGO_COLLECTSTATIC" == 
 
     echo
 fi
-
-echo "-----> Running manage.py check --deploy --fail-level WARNING"
-poetry run backend/manage.py check --deploy --fail-level WARNING
 
 if [ -n "$AUTO_MIGRATE" ] && [ "$AUTO_MIGRATE" == 1 ]; then
     echo "-----> Running manage.py migrate"

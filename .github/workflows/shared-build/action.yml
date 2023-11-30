@@ -13,7 +13,7 @@ runs:
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
-        python-version: "3.11"
+        python-version: "3.12"
     - name: Setup Node
       uses: actions/setup-node@v2
       with:
@@ -68,7 +68,7 @@ runs:
     - run: npm run build
       working-directory: testproject
       shell: bash
-    - run: pip install poetry==1.6.1 --upgrade
+    - run: pip install poetry==1.7.1 --upgrade
       working-directory: testproject
       shell: bash
     - run: poetry install --with dev --no-root --no-interaction --no-ansi
@@ -83,23 +83,23 @@ runs:
     - run: poetry run python manage.py makemigrations
       working-directory: testproject/backend
       env:
-        DATABASE_URL: 'sqlite:///'
+        DATABASE_URL: "sqlite:///"
       shell: bash
     - run: poetry run python manage.py migrate
       working-directory: testproject/backend
       env:
-        DATABASE_URL: 'sqlite:///'
+        DATABASE_URL: "sqlite:///"
       shell: bash
     - run: poetry run python manage.py test
       working-directory: testproject/backend
       env:
-        DATABASE_URL: 'sqlite:///'
+        DATABASE_URL: "sqlite:///"
       shell: bash
     - name: Generate secret key
       run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
       id: secret-id-generator
       shell: bash
-    - run: rm .gitignore  # prevents conflict with ruff
+    - run: rm .gitignore # prevents conflict with ruff
       shell: bash
     - run: poetry run ruff check .
       working-directory: testproject/backend
@@ -107,7 +107,7 @@ runs:
     - run: poetry run python manage.py makemigrations --check --dry-run
       working-directory: testproject/backend
       env:
-        DATABASE_URL: 'sqlite:///'
+        DATABASE_URL: "sqlite:///"
       shell: bash
     - run: poetry run python manage.py check --deploy --fail-level WARNING
       working-directory: testproject/backend
@@ -115,8 +115,8 @@ runs:
         SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}
         SENDGRID_USERNAME: foo
         SENDGRID_PASSWORD: password
-        DJANGO_SETTINGS_MODULE: 'testproject.settings.production'
-        ALLOWED_HOSTS: '.example.org'
-        REDIS_URL: 'redis://'
-        DATABASE_URL: 'sqlite:///'
+        DJANGO_SETTINGS_MODULE: "testproject.settings.production"
+        ALLOWED_HOSTS: ".example.org"
+        REDIS_URL: "redis://"
+        DATABASE_URL: "sqlite:///"
       shell: bash

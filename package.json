@@ -12,7 +12,7 @@
     "test": "jest",
     "test:watch": "npm test -- --watch",
     "test:update": "npm test -- --u",
-    "start": "webpack serve --mode=development --hot",
+    "dev": "webpack serve --mode=development --hot",
     "build": "NODE_ENV=production webpack --progress --bail --mode=production",
     "lint": "eslint frontend --fix",
     "coverage": "jest --coverage"
