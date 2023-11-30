@@ -2,7 +2,7 @@ name: deploy
 on:
   workflow_run:
     workflows: ["main"]
-    branches: [master]
+    branches: [main]
     types:
       - completed
 
@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: main
       - run: mkdir -p github/workflows
       - run: mv proj_main.yml github/workflows/main.yml
       - run: git checkout -b boilerplate-release

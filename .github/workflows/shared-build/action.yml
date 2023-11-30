@@ -46,7 +46,7 @@ runs:
       run: pip install "django>=4,<5"
       shell: bash
     - name: Setup testproject
-      run: django-admin startproject testproject --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=.
+      run: django-admin startproject testproject --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=.
       shell: bash
     - run: |
         npm update --save
@@ -99,16 +99,10 @@ runs:
       run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
       id: secret-id-generator
       shell: bash
-    - run: poetry run ruff check ./backend/
-      working-directory: testproject
-      env:
-        SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}
-        SENDGRID_USERNAME: foo
-        SENDGRID_PASSWORD: password
-        DJANGO_SETTINGS_MODULE: 'testproject.settings.local'
-        ALLOWED_HOSTS: '.example.org'
-        REDIS_URL: 'redis://'
-        DATABASE_URL: 'sqlite:///'
+    - run: rm .gitignore  # prevents conflict with ruff
+      shell: bash
+    - run: poetry run ruff check .
+      working-directory: testproject/backend
       shell: bash
     - run: poetry run python manage.py makemigrations --check --dry-run
       working-directory: testproject/backend

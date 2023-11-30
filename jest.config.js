@@ -6,7 +6,7 @@ module.exports = {
     '^.+\\.js$': 'babel-jest',
   },
   moduleNameMapper: {
-    '^.+\\.(css|scss)$': 'identity-obj-proxy',
+    '^.+\\.(css|scss|png|svg|jpg|jpeg|gif|webp)$': 'jest-transform-stub',
   },
   transformIgnorePatterns: [
     'node_modules/*',

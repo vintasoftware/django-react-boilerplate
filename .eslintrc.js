@@ -4,7 +4,7 @@ module.exports = {
   root: true,
   extends: ['vinta/recommended'],
   rules: {
-    "default-param-last": "off",
+    "default-param-last": "off",  // due to initialState in Redux
     "@babel/camelcase": "off"
   },
   env: {
@@ -15,7 +15,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       webpack: {
-        config: path.join(__dirname, '/webpack.local.config.js'),
+        config: path.join(__dirname, '/webpack.config.js'),
         'config-index': 1
       }
     },

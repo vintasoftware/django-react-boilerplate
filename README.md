@@ -68,11 +68,11 @@ Send us an email at contact@vintasoftware.com telling us a bit more about how ou
 - [ ] Open the command line and go to the directory you want to start your project in.
 - [ ] Start your project using:
     ```
-    django-admin startproject {{project_name}} --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+    django-admin startproject {{project_name}} --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
     ```
     Alternatively, you may start the project in the current directory by placing a `.` right after the project name, using the following command:
     ```
-    django-admin startproject {{project_name}} . --extension py,json,yml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
+    django-admin startproject {{project_name}} . --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
     ```
 In the next steps, always remember to replace {{project_name}} with your project's name (in case it isn't yet):
 - [ ] Above: don't forget the `--extension` and `--name` params!
@@ -88,14 +88,14 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 - Setup [editorconfig](http://editorconfig.org/), [ruff](https://github.com/astral-sh/ruff) and [ESLint](http://eslint.org/) in the text editor you will use to develop.
 
 ### Setup
-- Inside the `backend` folder, do the following:
-  - Create a copy of `{{project_name}}/settings/local.py.example`:  
-  `cp {{project_name}}/settings/local.py.example {{project_name}}/settings/local.py`
-  - Create a copy of `.env.example`:
-  `cp .env.example .env`
+- Do the following:
+  - Create a git-untracked `local.py` settings file:
+  `cp backend/{{project_name}}/settings/local.py.example backend/{{project_name}}/settings/local.py`
+  - Create a git-untracked `.env.example` file:
+  `cp backend/.env.example backend/.env`
 
 ### If you are using Docker:
-- Open the `/backend/.env` file on a text editor and uncomment the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}`
+- Open the `backend/.env` file on a text editor and uncomment the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}`
 - Open a new command line window and go to the project's directory
 - Run the initial setup:
   `make docker_setup`
@@ -131,7 +131,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
   - This is used to serve the frontend assets to be consumed by [django-webpack-loader](https://github.com/django-webpack/django-webpack-loader) and not to run the React application as usual, so don't worry if you try to check what's running on port 3000 and see an error on your browser
 
 #### Setup the backend app
-- Open the `/backend/.env` file on a text editor and do one of the following:
+- Open the `backend/.env` file on a text editor and do one of the following:
   - If you wish to use SQLite locally, uncomment the line `DATABASE_URL=sqlite:///backend/db.sqlite3`
   - If you wish to use PostgreSQL locally, uncomment and edit the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}` in order to make it correctly point to your database URL
     - The url format is the following: `postgres://USER:PASSWORD@HOST:PORT/NAME`
@@ -247,6 +247,9 @@ After enabling dyno metadata and setting the environment variables, your next Re
 ## Opinionated Settings
 Some settings defaults were decided based on Vinta's experiences. Here's the rationale behind them:
 
+### `DATABASES["default"]["ATOMIC_REQUESTS"] = True`
+Using atomic requests in production prevents several database consistency issues. Check [Django docs for more details](https://docs.djangoproject.com/en/4.2/topics/db/transactions/#tying-transactions-to-http-requests).
+
 ### `CELERY_ACKS_LATE = True`
 We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY_ACKS_LATE = True` to ensure tasks will be re-queued after a worker failure. Check Celery docs on ["Should I use retry or acks_late?"](https://docs.celeryq.dev/en/stable/faq.html#faq-acks-late-vs-retry) for more info.
 
@@ -254,7 +257,7 @@ We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY
 
 If you wish to contribute to this project, please first discuss the change you wish to make via an [issue](https://github.com/vintasoftware/django-react-boilerplate/issues).
 
-Check our [contributing guide](https://github.com/vintasoftware/django-react-boilerplate/blob/master/CONTRIBUTING.md) to learn more about our development process and how you can test your changes to the boilerplate.
+Check our [contributing guide](https://github.com/vintasoftware/django-react-boilerplate/blob/main/CONTRIBUTING.md) to learn more about our development process and how you can test your changes to the boilerplate.
 
 ## Commercial Support
 [![alt text](https://avatars2.githubusercontent.com/u/5529080?s=80&v=4 "Vinta Logo")](https://www.vinta.com.br/)
