@@ -7,13 +7,13 @@ module.exports = (env, argv) => {
   const isDev = argv.mode === "development";
   const nodeModulesDir = path.resolve(__dirname, "node_modules");
   const localhostOutput = {
-    path: path.resolve("./frontend/bundles/"),
-    publicPath: "http://localhost:3000/frontend/bundles/",
+    path: path.resolve("./frontend/webpack_bundles/"),
+    publicPath: "http://localhost:3000/frontend/webpack_bundles/",
     filename: "[name].js",
   };
   const productionOutput = {
     path: path.resolve("./frontend/webpack_bundles/"),
-    publicPath: "/static/webpack_bundles/",
+    publicPath: "auto",
     filename: "[name]-[chunkhash].js",
   };
 

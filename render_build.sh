@@ -1,3 +1,6 @@
+#!/bin/bash
+set -euxo pipefail
+
 echo "-----> Build hook"
 
 echo "-----> Build frontend"
@@ -6,7 +9,7 @@ npm run build
 echo "-----> Build frontend done"
 
 echo "-----> Poetry install"
-poetry install --no-interaction --without dev
+poetry install --without dev --no-root --no-interaction
 echo "-----> Poetry done"
 
 echo "-----> Running manage.py check --deploy --fail-level WARNING"
