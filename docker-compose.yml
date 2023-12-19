@@ -47,7 +47,7 @@ services:
     build:
       dockerfile: backend/Dockerfile
       context: .
-    command: python manage.py celery
+    command: celery --app=myproject worker --loglevel=info
     volumes:
       - ./:/home/user/app/
     env_file: backend/.env
