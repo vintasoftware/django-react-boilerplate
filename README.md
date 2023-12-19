@@ -298,7 +298,7 @@ Some settings defaults were decided based on Vinta's experiences. Here's the rat
 
 ### `DATABASES["default"]["ATOMIC_REQUESTS"] = True`
 
-Using atomic requests in production prevents several database consistency issues. Check [Django docs for more details](https://docs.djangoproject.com/en/4.2/topics/db/transactions/#tying-transactions-to-http-requests).
+Using atomic requests in production prevents several database consistency issues. Check [Django docs for more details](https://docs.djangoproject.com/en/5.0/topics/db/transactions/#tying-transactions-to-http-requests).
 
 ### `CELERY_ACKS_LATE = True`
 
