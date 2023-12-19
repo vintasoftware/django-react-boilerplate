@@ -70,9 +70,9 @@ Send us an email at contact@vintasoftware.com telling us a bit more about how ou
 ## Project bootstrap [![main](https://github.com/vintasoftware/django-react-boilerplate/actions/workflows/main.yml/badge.svg)](https://github.com/vintasoftware/django-react-boilerplate/actions/workflows/main.yml) [![Known Vulnerabilities](https://snyk.io/test/github/vintasoftware/django-react-boilerplate/badge.svg)](https://snyk.io/test/github/vintasoftware/django-react-boilerplate)
 
 -   [ ] Make sure you have Python 3.12 installed
--   [ ] Install Django with `pip install django`, to have the `django-admin` command available.
--   [ ] Open the command line and go to the directory you want to start your project in.
--   [ ] Start your project using:
+-   [ ] Install Django with `pip install django`, to have the `django-admin` command available
+-   [ ] Open the command line and go to the directory you want to start your project in
+-   [ ] Start your project using (replace `project_name` with your project name and remove the curly braces):
     ```
     django-admin startproject {{project_name}} --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
     ```
@@ -156,7 +156,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 #### Run the backend app
 
--   With the virtualenv enabled, go to the `backend` directory
+-   Go to the `backend` directory
 -   Create the migrations for `users` app:
     `poetry run python manage.py makemigrations`
 -   Run the migrations:
