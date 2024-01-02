@@ -298,11 +298,14 @@ Some settings defaults were decided based on Vinta's experiences. Here's the rat
 
 ### `DATABASES["default"]["ATOMIC_REQUESTS"] = True`
 
-Using atomic requests in production prevents several database consistency issues. Check [Django docs for more details](https://docs.djangoproject.com/en/5.0/topics/db/transactions/#tying-transactions-to-http-requests).
+- Using atomic requests in production prevents several database consistency issues. Check [Django docs for more details](https://docs.djangoproject.com/en/5.0/topics/db/transactions/#tying-transactions-to-http-requests).  
+  
+- **Important:** When you are queueing a new Celery task directly from a request handler, particularly with little or no delay, it is essencial to use transaction.on_commit. This ensures that the task is only queued after the associated database transaction has been successfully committed.  
+  - If transaction.on_commit is not utilized, or if a significant delay is not set, you risk encountering race conditions. In such scenarios, the Celery task might execute before the completion of the request's transaction. This can lead to inconsistencies and unexpected behavior, as the task might operate on a database state that does not yet reflect the changes made in the transaction.
 
 ### `CELERY_ACKS_LATE = True`
 
-We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY_ACKS_LATE = True` to ensure tasks will be re-queued after a worker failure. Check Celery docs on ["Should I use retry or acks_late?"](https://docs.celeryq.dev/en/stable/faq.html#faq-acks-late-vs-retry) for more info.
+- We believe Celery tasks should be idempotent. So for us it's safe to set `CELERY_ACKS_LATE = True` to ensure tasks will be re-queued after a worker failure. Check Celery docs on ["Should I use retry or acks_late?"](https://docs.celeryq.dev/en/stable/faq.html#faq-acks-late-vs-retry) for more info.
 
 ## Contributing
 
