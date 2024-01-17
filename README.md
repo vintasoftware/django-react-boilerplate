@@ -131,7 +131,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 -   Update the dependencies management files by performing any number of the following steps:
     -   To add a new **frontend** dependency, run `npm install <package name> --save`
         > The above command will update your `package.json`, but won't make the change effective inside the container yet
-    -   To add a new **backend** dependency, run `docker-compose run --rm backend bash` to open an interactive shell and then run `poetry add {dependency}` to add the dependency. If the dependency should be only available for development user append `-G dev` to the command.
+    -   To add a new **backend** dependency, run `docker compose run --rm backend bash` to open an interactive shell and then run `poetry add {dependency}` to add the dependency. If the dependency should be only available for development user append `-G dev` to the command.
     -   After updating the desired file(s), run `make docker_update_dependencies` to update the containers with the new dependencies
         > The above command will stop and re-build the containers in order to make the new dependencies effective
 
