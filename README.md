@@ -109,7 +109,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 -   Open a new command line window and go to the project's directory
 -   Run the initial setup:
     `make docker_setup`
--   Create the migrations for `users` app:  
+-   Create the migrations for `users` app:
     `make docker_makemigrations`
 -   Run the migrations:
     `make docker_migrate`
@@ -130,7 +130,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 -   Update the dependencies management files by performing any number of the following steps:
     -   To add a new **frontend** dependency, run `npm install <package name> --save`
         > The above command will update your `package.json`, but won't make the change effective inside the container yet
-    -   To add a new **backend** dependency, run `docker compose run backend --rm bash` to open an interactive shell and then run `poetry add {dependency}` to add the dependency. If the dependency should be only available for development user append `-G dev` to the command.
+    -   To add a new **backend** dependency, run `docker-compose run --rm backend bash` to open an interactive shell and then run `poetry add {dependency}` to add the dependency. If the dependency should be only available for development user append `-G dev` to the command.
     -   After updating the desired file(s), run `make docker_update_dependencies` to update the containers with the new dependencies
         > The above command will stop and re-build the containers in order to make the new dependencies effective
 
@@ -298,9 +298,9 @@ Some settings defaults were decided based on Vinta's experiences. Here's the rat
 
 ### `DATABASES["default"]["ATOMIC_REQUESTS"] = True`
 
-- Using atomic requests in production prevents several database consistency issues. Check [Django docs for more details](https://docs.djangoproject.com/en/5.0/topics/db/transactions/#tying-transactions-to-http-requests).  
-  
-- **Important:** When you are queueing a new Celery task directly from a Django view, particularly with little or no delay/ETA, it is essential to use `transaction.on_commit(lambda: my_task.delay())`. This ensures that the task is only queued after the associated database transaction has been successfully committed.  
+- Using atomic requests in production prevents several database consistency issues. Check [Django docs for more details](https://docs.djangoproject.com/en/5.0/topics/db/transactions/#tying-transactions-to-http-requests).
+
+- **Important:** When you are queueing a new Celery task directly from a Django view, particularly with little or no delay/ETA, it is essential to use `transaction.on_commit(lambda: my_task.delay())`. This ensures that the task is only queued after the associated database transaction has been successfully committed.
   - If `transaction.on_commit` is not utilized, or if a significant delay is not set, you risk encountering race conditions. In such scenarios, the Celery task might execute before the completion of the request's transaction. This can lead to inconsistencies and unexpected behavior, as the task might operate on a database state that does not yet reflect the changes made in the transaction. Read more about this problem on [this article](https://www.vinta.com.br/blog/database-concurrency-in-django-the-right-way).
 
 ### `CELERY_ACKS_LATE = True`
