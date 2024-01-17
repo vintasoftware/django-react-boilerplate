@@ -155,7 +155,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Empty list means the policy is disabled
 PERMISSIONS_POLICY = {
     "accelerometer": [],
-    "ambient-light-sensor": [],
     "camera": [],
     "display-capture": [],
     "encrypted-media": [],
