@@ -51,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "csp.middleware.CSPMiddleware",
 ]
 
 ROOT_URLCONF = "{{project_name}}.urls"
@@ -192,3 +193,25 @@ PERMISSIONS_POLICY = {
     "usb": [],
     "xr-spatial-tracking": [],
 }
+
+# Django-CSP
+CSP_INCLUDE_NONCE_IN = ["script-src", "style-src", "font-src"]
+CSP_SCRIPT_SRC = [
+    "'self'",
+    "'unsafe-inline'",
+    "'unsafe-eval'",
+    "https://browser.sentry-cdn.com",
+] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
+CSP_CONNECT_SRC = [
+    "'self'",
+    "https://sentry.io",
+] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
+CSP_STYLE_SRC = [
+    "'self'",
+    "'unsafe-inline'",
+]
+CSP_FONT_SRC = [
+    "'self'",
+    "'unsafe-inline'",
+] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
+CSP_IMG_SRC = ["'self'"]
