@@ -132,11 +132,38 @@ WEBPACK_LOADER = {
 }
 
 # Celery
+# Recommended settings for reliability: https://gist.github.com/fjsj/da41321ac96cf28a96235cb20e7236f6
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_ACKS_LATE = True
 CELERY_TIMEZONE = TIME_ZONE
+CELERY_BROKER_TRANSPORT_OPTIONS = {"confirm_publish": True, "confirm_timeout": 5.0}
+CELERY_BROKER_POOL_LIMIT = config("CELERY_BROKER_POOL_LIMIT", cast=int, default=1)
+CELERY_BROKER_CONNECTION_TIMEOUT = config(
+    "CELERY_BROKER_CONNECTION_TIMEOUT", cast=float, default=30.0
+)
+CELERY_REDIS_MAX_CONNECTIONS = config(
+    "CELERY_REDIS_MAX_CONNECTIONS", cast=lambda v: int(v) if v else None, default=None
+)
+CELERY_TASK_ACKS_ON_FAILURE_OR_TIMEOUT = config(
+    "CELERY_TASK_ACKS_ON_FAILURE_OR_TIMEOUT", cast=bool, default=True
+)
+CELERY_TASK_REJECT_ON_WORKER_LOST = config(
+    "CELERY_TASK_REJECT_ON_WORKER_LOST", cast=bool, default=False
+)
+CELERY_WORKER_PREFETCH_MULTIPLIER = config("CELERY_WORKER_PREFETCH_MULTIPLIER", cast=int, default=1)
+CELERY_WORKER_CONCURRENCY = config(
+    "CELERY_WORKER_CONCURRENCY", cast=lambda v: int(v) if v else None, default=None
+)
+CELERY_WORKER_MAX_TASKS_PER_CHILD = config(
+    "CELERY_WORKER_MAX_TASKS_PER_CHILD", cast=int, default=1000
+)
+CELERY_WORKER_SEND_TASK_EVENTS = config("CELERY_WORKER_SEND_TASK_EVENTS", cast=bool, default=True)
+CELERY_EVENT_QUEUE_EXPIRES = config("CELERY_EVENT_QUEUE_EXPIRES", cast=float, default=60.0)
+CELERY_EVENT_QUEUE_TTL = config("CELERY_EVENT_QUEUE_TTL", cast=float, default=5.0)
+TASK_HTTP_CONNECT_TIMEOUT = config("TASK_HTTP_CONNECT_TIMEOUT", cast=float, default=5.0)
+TASK_HTTP_READ_TIMEOUT = config("TASK_HTTP_READ_TIMEOUT", cast=float, default=120.0)
 
 # Sentry
 SENTRY_DSN = config("SENTRY_DSN", default="")

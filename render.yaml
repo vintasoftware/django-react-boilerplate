@@ -9,7 +9,7 @@ services:
     name: {{project_name}}-redis
     plan: free
     ipAllowList: [] # only allow internal connections
-    
+
   - type: web
     name: {{project_name}}
     plan: free
@@ -32,8 +32,8 @@ services:
           property: connectionString
       - fromGroup: python-services
       - fromGroup: integrations-credentials
-      
-  # As there aren't free plans for Workers in Render, the configuration for 
+
+  # As there aren't free plans for Workers in Render, the configuration for
   # celery workers/beat will be commented by default
   #
   # - type: worker
@@ -44,7 +44,33 @@ services:
   #   startCommand: "poetry run celery --workdir backend --app={{project_name}} worker --loglevel=info --max-memory-per-child=$WORKER_MAX_MEMORY  --concurrency=$WORKER_CONCURRENCY"
   #   envVars:
   #     - key: REMAP_SIGTERM
-  #       value: SIGQUIT      
+  #       value: SIGQUIT
+  #     - key: CELERY_BROKER_POOL_LIMIT
+  #       value: 1
+  #     - key: CELERY_BROKER_CONNECTION_TIMEOUT
+  #       value: 30.0
+  #     - key: CELERY_REDIS_MAX_CONNECTIONS
+  #       value: null
+  #     - key: CELERY_TASK_ACKS_ON_FAILURE_OR_TIMEOUT
+  #       value: true
+  #     - key: CELERY_TASK_REJECT_ON_WORKER_LOST
+  #       value: false
+  #     - key: CELERY_WORKER_PREFETCH_MULTIPLIER
+  #       value: 1
+  #     - key: CELERY_WORKER_CONCURRENCY
+  #       value: null
+  #     - key: CELERY_WORKER_MAX_TASKS_PER_CHILD
+  #       value: 1000
+  #     - key: CELERY_WORKER_SEND_TASK_EVENTS
+  #       value: true
+  #     - key: CELERY_EVENT_QUEUE_EXPIRES
+  #       value: 60.0
+  #     - key: CELERY_EVENT_QUEUE_TTL
+  #       value: 5.0
+  #     - key: TASK_HTTP_CONNECT_TIMEOUT
+  #       value: 5.0
+  #     - key: TASK_HTTP_READ_TIMEOUT
+  #       value: 120.0
   #     - key: WORKER_MAX_MEMORY
   #       sync: false
   #     - key: WORKER_CONCURRENCY

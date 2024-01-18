@@ -44,7 +44,8 @@ X_FRAME_OPTIONS = "DENY"
 WEBPACK_LOADER["DEFAULT"]["CACHE"] = True
 
 # Celery
-CELERY_BROKER_URL = config("REDIS_URL")
+# Recommended settings for reliability: https://gist.github.com/fjsj/da41321ac96cf28a96235cb20e7236f6
+CELERY_BROKER_URL = config("RABBITMQ_URL", default="") or config("REDIS_URL")
 CELERY_RESULT_BACKEND = config("REDIS_URL")
 CELERY_SEND_TASK_ERROR_EMAILS = True
 
