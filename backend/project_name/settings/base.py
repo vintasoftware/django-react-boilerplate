@@ -162,8 +162,6 @@ CELERY_WORKER_MAX_TASKS_PER_CHILD = config(
 CELERY_WORKER_SEND_TASK_EVENTS = config("CELERY_WORKER_SEND_TASK_EVENTS", cast=bool, default=True)
 CELERY_EVENT_QUEUE_EXPIRES = config("CELERY_EVENT_QUEUE_EXPIRES", cast=float, default=60.0)
 CELERY_EVENT_QUEUE_TTL = config("CELERY_EVENT_QUEUE_TTL", cast=float, default=5.0)
-TASK_HTTP_CONNECT_TIMEOUT = config("TASK_HTTP_CONNECT_TIMEOUT", cast=float, default=5.0)
-TASK_HTTP_READ_TIMEOUT = config("TASK_HTTP_READ_TIMEOUT", cast=float, default=120.0)
 
 # Sentry
 SENTRY_DSN = config("SENTRY_DSN", default="")

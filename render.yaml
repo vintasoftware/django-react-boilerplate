@@ -67,10 +67,6 @@ services:
   #       value: 60.0
   #     - key: CELERY_EVENT_QUEUE_TTL
   #       value: 5.0
-  #     - key: TASK_HTTP_CONNECT_TIMEOUT
-  #       value: 5.0
-  #     - key: TASK_HTTP_READ_TIMEOUT
-  #       value: 120.0
   #     - key: WORKER_MAX_MEMORY
   #       sync: false
   #     - key: WORKER_CONCURRENCY
