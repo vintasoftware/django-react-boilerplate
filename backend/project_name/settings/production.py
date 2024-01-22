@@ -53,7 +53,14 @@ CELERY_SEND_TASK_ERROR_EMAILS = True
 redbeat_redis_url = config("REDBEAT_REDIS_URL", default="")
 
 # Whitenoise
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # django-log-request-id
 MIDDLEWARE.insert(  # insert RequestIDMiddleware on the top

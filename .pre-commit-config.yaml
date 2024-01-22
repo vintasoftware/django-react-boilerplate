@@ -15,6 +15,11 @@ repos:
           - id: check-symlinks
           - id: debug-statements
           - id: detect-private-key
+    - repo: https://github.com/adamchainz/django-upgrade
+      rev: "1.15.0"
+      hooks:
+      -   id: django-upgrade
+          args: [--target-version, "5.0"]
     - repo: https://github.com/astral-sh/ruff-pre-commit
       # Ruff version.
       rev: v0.1.6
