@@ -18,8 +18,6 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 AUTH_PASSWORD_VALIDATORS = []  # allow easy passwords only on local
 
-REDIS_URL = "redis://result:6379"
-
 # Celery
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
@@ -58,6 +56,3 @@ CSP_SCRIPT_SRC += [LOCAL_HOST_URL, LOCAL_HOST_WS_URL]
 CSP_CONNECT_SRC += [LOCAL_HOST_URL, LOCAL_HOST_WS_URL]
 CSP_FONT_SRC += [LOCAL_HOST_URL]
 CSP_IMG_SRC += [LOCAL_HOST_URL]
-
-# Django-defender
-DEFENDER_REDIS_URL = REDIS_URL

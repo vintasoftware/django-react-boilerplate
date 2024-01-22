@@ -114,6 +114,3 @@ JS_REVERSE_EXCLUDE_NAMESPACES = ["admin"]
 
 # Sentry
 sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()], release=COMMIT_SHA)
-
-# Django-defender
-DEFENDER_REDIS_URL = config("REDIS_URL")

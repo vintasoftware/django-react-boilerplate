@@ -172,6 +172,10 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 -   `poetry run celery --app=myproject worker --loglevel=info`
 
+#### Setup Redis
+
+- Ensure that Redis is already installed on your system. Once confirmed, run `redis-server --port 6379` to start the Redis server.
+
 #### Mailhog
 
 -   For development, we use Mailhog to test our e-mail workflows, since it allows us to inspect the messages to validate they're correctly built
