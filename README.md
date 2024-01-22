@@ -61,6 +61,7 @@ Also, includes a Render.com `render.yaml` and a working Django `production.py` s
 -   `django-debreach` for additional protection against BREACH attack
 -   `django-csp` for setting the draft security HTTP header Content-Security-Policy
 -   `django-permissions-policy` for setting the draft security HTTP header Permissions-Policy
+-   `django-defender` for blocking brute force attacks against login
 -   `whitenoise` and `brotlipy` for serving static assets
 
 ## Share your project!
