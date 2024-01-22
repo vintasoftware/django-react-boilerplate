@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "webpack_loader",
     "import_export",
     "rest_framework",
+    "defender",
     "common",
     "users",
 ]
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "csp.middleware.CSPMiddleware",
+    "defender.middleware.FailedLoginMiddleware",
 ]
 
 ROOT_URLCONF = "{{project_name}}.urls"
@@ -215,3 +217,9 @@ CSP_FONT_SRC = [
     "'unsafe-inline'",
 ] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
 CSP_IMG_SRC = ["'self'"]
+
+# Django-defender
+DEFENDER_LOGIN_FAILURE_LIMIT = 3
+DEFENDER_COOLOFF_TIME = 300  # 5 minutes
+DEFENDER_LOCKOUT_TEMPLATE = "defender/lockout.html"
+DEFENDER_REDIS_URL = config("REDIS_URL")

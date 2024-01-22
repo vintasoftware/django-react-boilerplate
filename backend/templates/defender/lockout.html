@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <h1>Temporary User Lockout</h1>
+    <p>
+        You have been locked out due to too many failed attempts. You have reached the failure limit of {{ failure_limit }} attempts.
+    </p>
+    <p>
+        The lockout will last for {{ cooloff_time_seconds }} seconds (approximately {{ cooloff_time_minutes }} minutes).
+    </p>
+    <p>Please try again after the cool off period.</p>
+</div>
+{% endblock %}

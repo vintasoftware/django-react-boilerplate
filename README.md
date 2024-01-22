@@ -61,6 +61,7 @@ Also, includes a Render.com `render.yaml` and a working Django `production.py` s
 -   `django-debreach` for additional protection against BREACH attack
 -   `django-csp` for setting the draft security HTTP header Content-Security-Policy
 -   `django-permissions-policy` for setting the draft security HTTP header Permissions-Policy
+-   `django-defender` for blocking brute force attacks against login
 -   `whitenoise` and `brotlipy` for serving static assets
 
 ## Share your project!
@@ -170,6 +171,10 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 #### Setup Celery
 
 -   `poetry run celery --app=myproject worker --loglevel=info`
+
+#### Setup Redis
+
+- Ensure that Redis is already installed on your system. Once confirmed, run `redis-server --port 6379` to start the Redis server.
 
 #### Mailhog
 

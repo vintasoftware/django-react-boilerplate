@@ -10,6 +10,7 @@ jobs:
         node: [18.16]
     env:
       DATABASE_URL: "sqlite:///"
+      REDIS_URL: "redis://"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
