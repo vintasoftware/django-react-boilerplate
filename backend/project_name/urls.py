@@ -1,6 +1,5 @@
-from django.conf.urls import include
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 import django_js_reverse.views
 from common.routes import routes as common_routes

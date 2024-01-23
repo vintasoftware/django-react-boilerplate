@@ -54,6 +54,7 @@ Also, includes a Render.com `render.yaml` and a working Django `production.py` s
 -   `djangorestframework` for building a REST API on top of Django
 -   `django-webpack-loader` for rendering the bundled frontend assets
 -   `django-js-reverse` for easy handling of Django URLs on JS
+-   `django-upgrade` for automatically upgrading Django code to the target version on pre-commit
 -   `psycopg2` for using PostgreSQL database
 -   `sentry-sdk` for error monitoring
 -   `python-decouple` for reading environment variables on settings files

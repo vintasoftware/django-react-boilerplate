@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from .models import User
 
 
+@admin.register(User)
 class CustomUserAdmin(UserAdmin):
     list_display = ("id", "email", "created", "modified")
     list_filter = ("is_active", "is_staff", "groups")
@@ -23,6 +24,3 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
     add_fieldsets = ((None, {"classes": ("wide",), "fields": ("email", "password1", "password2")}),)
-
-
-admin.site.register(User, CustomUserAdmin)
