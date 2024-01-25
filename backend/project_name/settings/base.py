@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "import_export",
     "rest_framework",
     "defender",
+    "django_guid",
     "common",
     "users",
 ]
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "csp.middleware.CSPMiddleware",
     "defender.middleware.FailedLoginMiddleware",
+    "django_guid.middleware.guid_middleware",
 ]
 
 ROOT_URLCONF = "{{project_name}}.urls"
@@ -205,7 +207,7 @@ CSP_SCRIPT_SRC = [
 ] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
 CSP_CONNECT_SRC = [
     "'self'",
-    "https://sentry.io",
+    "*.sentry.io",
 ] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
 CSP_STYLE_SRC = [
     "'self'",

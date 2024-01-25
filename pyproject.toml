@@ -31,6 +31,7 @@ setuptools = "^69.0.2"
 django-permissions-policy = "^4.18.0"
 django-csp = "^3.7"
 django-defender = "^0.9.7"
+django-guid = "^3.4.0"
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.2.7"

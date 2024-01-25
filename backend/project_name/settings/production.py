@@ -1,5 +1,6 @@
 import sentry_sdk
 from decouple import Csv, config
+from django_guid.integrations import SentryIntegration as DjangoGUIDSentryIntegration
 from sentry_sdk.integrations.django import DjangoIntegration
 
 from .base import *
@@ -62,6 +63,13 @@ STORAGES = {
     },
 }
 
+# Django GUID
+DJANGO_GUID = {
+    "INTEGRATIONS": [
+        DjangoGUIDSentryIntegration(),
+    ],
+}
+
 # django-log-request-id
 MIDDLEWARE.insert(  # insert RequestIDMiddleware on the top
     0, "log_request_id.middleware.RequestIDMiddleware"
@@ -76,10 +84,11 @@ LOGGING = {
     "filters": {
         "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"},
         "request_id": {"()": "log_request_id.filters.RequestIDFilter"},
+        "correlation_id": {"()": "django_guid.log_filters.CorrelationId"},
     },
     "formatters": {
         "standard": {
-            "format": "%(levelname)-8s [%(asctime)s] [%(request_id)s] %(name)s: %(message)s"
+            "format": "%(levelname)-8s [%(asctime)s] [%(request_id)s] [%(correlation_id)s] %(name)s: %(message)s"
         },
     },
     "handlers": {
@@ -94,7 +103,7 @@ LOGGING = {
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
-            "filters": ["request_id"],
+            "filters": ["request_id", "correlation_id"],
             "formatter": "standard",
         },
     },
@@ -112,6 +121,11 @@ LOGGING = {
         "log_request_id.middleware": {
             "handlers": ["console"],
             "level": "DEBUG",
+            "propagate": False,
+        },
+        "django_guid": {
+            "handlers": ["console"],
+            "level": "WARNING",
             "propagate": False,
         },
     },
