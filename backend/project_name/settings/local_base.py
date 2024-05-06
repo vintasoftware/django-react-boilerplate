@@ -37,19 +37,30 @@ EMAIL_PORT = 1025
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "filters": {
+        "correlation_id": {"()": "django_guid.log_filters.CorrelationId"},
+    },
     "formatters": {
-        "standard": {"format": "%(levelname)-8s [%(asctime)s] %(name)s: %(message)s"},
+        "standard": {
+            "format": "%(levelname)-8s [%(asctime)s] [%(correlation_id)s] %(name)s: %(message)s"
+        },
     },
     "handlers": {
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "standard",
+            "filters": ["correlation_id"],
         },
     },
     "loggers": {
         "": {"handlers": ["console"], "level": "INFO"},
         "celery": {"handlers": ["console"], "level": "INFO"},
+        "django_guid": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": False,
+        },
     },
 }
 
