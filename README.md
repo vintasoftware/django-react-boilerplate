@@ -176,7 +176,10 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 #### Setup Redis
 
-- Ensure that Redis is already installed on your system. Once confirmed, run `redis-server --port 6379` to start the Redis server.
+-   Ensure that Redis is already installed on your system. Once confirmed, run `redis-server --port 6379` to start the Redis server.
+-   If you wish to use Redis for Celery, you need to set the `CELERY_BROKER_URL` environment variable in the `backend/.env` file to `redis://localhost:6379/0`.
+    -   The `/0` at the end of the URL specifies the database number on the Redis server. Redis uses a zero-based numbering system for databases, so `0` is the first database. If you don't specify a database number, Redis will use the first database by default.
+    -   Note: Prefer RabbitMQ over Redis for Broker, mainly because RabbitMQ doesn't need visibility timeout. See [Recommended Celery Django settings for reliability](https://gist.github.com/fjsj/da41321ac96cf28a96235cb20e7236f6).
 
 #### Mailhog
 

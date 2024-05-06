@@ -25,6 +25,7 @@ STORAGES = {
 AUTH_PASSWORD_VALIDATORS = []  # allow easy passwords only on local
 
 # Celery
+CELERY_BROKER_URL = config("CELERY_BROKER_URL", default="")
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
 
