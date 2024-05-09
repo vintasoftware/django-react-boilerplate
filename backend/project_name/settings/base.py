@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "webpack_loader",
     "import_export",
     "rest_framework",
+    "drf_spectacular",
     "defender",
     "django_guid",
     "common",
@@ -112,6 +113,15 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# drf-spectacular
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Vinta Boilerplate API",
+    "DESCRIPTION": "A Django project boilerplate with Vinta's best practices",
+    "VERSION": "0.1.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 LANGUAGE_CODE = "en-us"
@@ -204,6 +214,10 @@ CSP_SCRIPT_SRC = [
     "'unsafe-inline'",
     "'unsafe-eval'",
     "https://browser.sentry-cdn.com",
+    # drf-spectacular UI (Swagger and ReDoc)
+    "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/",
+    "https://cdn.jsdelivr.net/npm/redoc@latest/",
+    "blob:",
 ] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
 CSP_CONNECT_SRC = [
     "'self'",
@@ -212,12 +226,24 @@ CSP_CONNECT_SRC = [
 CSP_STYLE_SRC = [
     "'self'",
     "'unsafe-inline'",
+    # drf-spectacular UI (Swagger and ReDoc)
+    "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/",
+    "https://cdn.jsdelivr.net/npm/redoc@latest/",
+    "https://fonts.googleapis.com",
 ]
 CSP_FONT_SRC = [
     "'self'",
     "'unsafe-inline'",
+    # drf-spectacular UI (Swagger and ReDoc)
+    "https://fonts.gstatic.com",
 ] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
-CSP_IMG_SRC = ["'self'"]
+CSP_IMG_SRC = [
+    "'self'",
+    # drf-spectacular UI (Swagger and ReDoc)
+    "data:",
+    "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/",
+    "https://cdn.redoc.ly/redoc/",
+]
 
 # Django-defender
 DEFENDER_LOGIN_FAILURE_LIMIT = 3
