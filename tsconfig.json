@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "module": "esnext",
+    "target": "ES2021",
+
+    "allowJs": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "paths": { "*": ["./frontend/*", "./frontend/js/*"] },
+    "skipLibCheck": true,
+    "strict": true,
+    "types": ["node", "jest", "@testing-library/jest-dom"]
+  },
+  "include": ["./frontend/**/*.ts", "./frontend/**/*.tsx"],
+  "exclude": ["node_modules", "build", "frontend/**/*.js", "frontend/**/*.jsx"]
+}

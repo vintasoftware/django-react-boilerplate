@@ -1,0 +1,25 @@
+{
+  "jsc": {
+    "parser": {
+      "jsx": true,
+      "tsx": true,
+      "syntax": "typescript",
+      "decorators": true,
+      "dynamicImport": true
+    },
+    "transform": {
+      "react": {
+        "runtime": "automatic"
+      }
+    }
+  },
+  // The 'env' field is used to specify settings for compiling JavaScript/TypeScript code to be
+  // compatible with older environments.
+  "env": {
+    // 'entry' means SWC will include polyfills for all features used in the code that are not
+    // available in the target environment.
+    "mode": "entry",
+    // 'corejs' specifies the version of core-js to use for polyfills.
+    "corejs": 3
+  }
+}
