@@ -2,8 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { rootReducer } from "./reducers";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const configureReduxStore = (preloadedState: any) => {
+const configureReduxStore = (preloadedState: object) => {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState,
