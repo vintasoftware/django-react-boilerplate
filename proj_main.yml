@@ -73,7 +73,7 @@ jobs:
           REDIS_URL: "redis://"
       - run: poetry run pre-commit run --all-files
         env:
-          SKIP: ruff,eslint,missing-migrations
+          SKIP: ruff,eslint,missing-migrations,backend-schema
       - run: poetry run python manage.py makemigrations --check --dry-run
         env:
           DJANGO_SETTINGS_MODULE: "{{project_name}}.settings.production"
