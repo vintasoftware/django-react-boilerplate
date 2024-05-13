@@ -2,6 +2,7 @@ const path = require("path");
 
 module.exports = {
   root: true,
+  parser: "@typescript-eslint/parser",
   extends: ["vinta/recommended-typescript"],
   rules: {
     "default-param-last": "off", // due to initialState in Redux
@@ -9,6 +10,8 @@ module.exports = {
       "error",
       "ignorePackages",
       {
+        js: "never",
+        jsx: "never",
         ts: "never",
         tsx: "never",
       },
@@ -21,6 +24,10 @@ module.exports = {
     node: true,
   },
   settings: {
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
     "import/resolver": {
       node: {
         paths: [path.resolve(__dirname, "node_modules")],
@@ -29,6 +36,10 @@ module.exports = {
       webpack: {
         config: path.join(__dirname, "/webpack.config.js"),
         "config-index": 1,
+      },
+      typescript: {
+        alwaysTryTypes: true,
+        project: "./tsconfig.json",
       },
     },
     react: {
