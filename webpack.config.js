@@ -1,7 +1,8 @@
 const path = require("path");
+
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleTracker = require("webpack-bundle-tracker");
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = (env, argv) => {
   const isDev = argv.mode === "development";
@@ -29,23 +30,15 @@ module.exports = (env, argv) => {
       headers: { "Access-Control-Allow-Origin": "*" },
     },
     context: __dirname,
-    entry: ["./frontend/js/index.js"],
+    entry: ["./frontend/js/index.tsx"],
     output: isDev ? localhostOutput : productionOutput,
     module: {
       rules: [
         {
-          test: /\.[jt]sx?$/,
-          exclude: nodeModulesDir,
-          use: [
-            {
-              loader: require.resolve("babel-loader"),
-              options: {
-                plugins: [
-                  isDev && require.resolve("react-refresh/babel"),
-                ].filter(Boolean),
-              },
-            },
-          ],
+          test: /\.(js|mjs|jsx|ts|tsx)$/,
+          use: {
+            loader: "swc-loader",
+          },
         },
         {
           test: /\.css$/,
@@ -92,7 +85,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       !isDev &&
-        new MiniCssExtractPlugin({ filename: "[name]-[chunkhash].css" }),
+      new MiniCssExtractPlugin({ filename: "[name]-[chunkhash].css" }),
       isDev && new ReactRefreshWebpackPlugin(),
       new BundleTracker({
         path: __dirname,
@@ -101,7 +94,7 @@ module.exports = (env, argv) => {
     ].filter(Boolean),
     resolve: {
       modules: [nodeModulesDir, path.resolve(__dirname, "frontend/js/")],
-      extensions: [".js", ".jsx"],
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
     },
     optimization: {
       minimize: !isDev,

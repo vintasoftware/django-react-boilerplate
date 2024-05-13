@@ -15,8 +15,8 @@ jest.mock("../../store/rest_check", () => ({
 
 describe("Home", () => {
   beforeEach(() => {
-    useDispatch.mockReturnValue(jest.fn());
-    useSelector.mockReturnValue({
+    (useDispatch as jest.Mock).mockReturnValue(jest.fn());
+    (useSelector as jest.Mock).mockReturnValue({
       data: { payload: { result: "Test Result" } },
     });
   });
@@ -30,7 +30,7 @@ describe("Home", () => {
 
     expect(screen.getByText("Static assets")).toBeInTheDocument();
     expect(screen.getByText("Rest API")).toBeInTheDocument();
-    expect(screen.getByText("Test Result")).toBeInTheDocument();
+    expect(await screen.findByText("Test Result")).toBeInTheDocument();
   });
 
   test("dispatches fetchRestCheck action on mount", async () => {

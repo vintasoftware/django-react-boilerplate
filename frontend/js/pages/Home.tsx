@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 
 import DjangoImgSrc from "../../assets/images/django-logo-negative.png";
+import { AppDispatch, RootState } from "../store";
 import { fetchRestCheck } from "../store/rest_check";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const restCheck = useSelector((state) => state.restCheck);
+  const dispatch: AppDispatch = useDispatch();
+  const restCheck = useSelector((state: RootState) => state.restCheck);
   useEffect(() => {
     const action = fetchRestCheck();
     dispatch(action);
@@ -35,7 +36,9 @@ const Home = () => {
         Click to test if Sentry is capturing frontend errors! (Should only work
         in Production)
       </Button>
-      {showBugComponent && showBugComponent.field.notexist}
+      {/* NOTE: The next line intentionally contains an error for testing frontend errors in Sentry. */}
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      {showBugComponent && (showBugComponent as any).field.notexist}
     </>
   );
 };

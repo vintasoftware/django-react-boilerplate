@@ -8,6 +8,7 @@
 A [Django](https://www.djangoproject.com/) project boilerplate/template with a multitude of state-of-the-art libraries and tools. If pairing Django with React is a possibility for your project or spinoff, this is the best solution available. Save time with tools like:
 
 -   [React](https://react.dev/), for building interactive UIs
+-   [TypeScript](https://www.typescriptlang.org/), for static type checking
 -   [Poetry](https://python-poetry.org/), for managing the environment and its dependencies
 -   [django-js-reverse](https://github.com/vintasoftware/django-js-reverse), for generating URLs on JS
 -   [React Bootstrap](https://react-bootstrap.github.io/), for responsive styling

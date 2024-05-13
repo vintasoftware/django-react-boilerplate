@@ -1,58 +1,66 @@
 fail_fast: true
 repos:
-    - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v4.4.0
-      hooks:
-          - id: check-added-large-files
-            args: ["--maxkb=500"]
-            exclude: >
-                (?x)^(
-                    package-lock\.json
-                )$
-          - id: fix-byte-order-marker
-          - id: check-case-conflict
-          - id: check-merge-conflict
-          - id: check-symlinks
-          - id: debug-statements
-          - id: detect-private-key
-    - repo: https://github.com/adamchainz/django-upgrade
-      rev: "1.15.0"
-      hooks:
-      -   id: django-upgrade
-          args: [--target-version, "5.0"]
-    - repo: https://github.com/astral-sh/ruff-pre-commit
-      # Ruff version.
-      rev: v0.1.6
-      hooks:
-          # Run the linter.
-          - id: ruff
-            args: [--fix]
-          # Run the formatter.
-          - id: ruff-format
-    - repo: local
-      hooks:
-          - id: eslint
-            name: eslint-local
-            entry: npm run lint
-            language: system
-            types: [javascript]
-            exclude: >
-                (?x)^(
-                  .+\.config\.js|
-                  .+\.setup\.js|
-                  \.eslintrc\.js
-                )$
-            pass_filenames: true
-          - id: missing-migrations
-            name: missing-migrations-local
-            entry: poetry run python backend/manage.py makemigrations --check
-            language: system
-            # Only run missing migration check if migration-generating files have changed:
-            files: (.*/?(settings|migrations|models)/.+|.+models\.py|.+constants\.py|.+choices\.py|.+pyproject\.toml)
-            pass_filenames: false
-          - id: backend-schema
-            name: backend-schema-local
-            entry: poetry run python backend/manage.py spectacular --color --file backend/schema.yml
-            language: system
-            files: ^backend/
-            pass_filenames: false
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+        exclude: >
+          (?x)^(
+              package-lock\.json
+          )$
+      - id: fix-byte-order-marker
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: debug-statements
+      - id: detect-private-key
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: "1.15.0"
+    hooks:
+      - id: django-upgrade
+        args: [--target-version, "5.0"]
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.1.6
+    hooks:
+      # Run the linter.
+      - id: ruff
+        args: [--fix]
+      # Run the formatter.
+      - id: ruff-format
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint-local
+        entry: npm run lint
+        language: system
+        types: [file]
+        files: \.(js|jsx|ts|tsx)$
+        exclude: >
+          (?x)^(
+            .+\.config\.js|
+            .+\.setup\.js|
+            \.eslintrc\.js
+          )$
+        pass_filenames: true
+      - id: tsc
+        name: tsc-local
+        entry: npm run tsc
+        language: system
+        types: [file]
+        files: \.(ts|tsx)$
+        pass_filenames: false
+      - id: missing-migrations
+        name: missing-migrations-local
+        entry: poetry run python backend/manage.py makemigrations --check
+        language: system
+        # Only run missing migration check if migration-generating files have changed:
+        files: (.*/?(settings|migrations|models)/.+|.+models\.py|.+constants\.py|.+choices\.py|.+pyproject\.toml)
+        pass_filenames: false
+      - id: backend-schema
+        name: backend-schema-local
+        entry: poetry run python backend/manage.py spectacular --color --file backend/schema.yml
+        language: system
+        files: ^backend/
+        pass_filenames: false

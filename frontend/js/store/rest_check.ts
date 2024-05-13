@@ -9,9 +9,19 @@ export const fetchRestCheck = createAsyncThunk("restCheck/fetch", async () => {
 });
 
 // Reducer
+interface Payload {
+  result: string;
+}
+interface RestCheckState {
+  data: {
+    isLoading: boolean;
+    payload?: Payload;
+    error?: unknown;
+  };
+}
 export const restCheckReducer = createSlice({
   name: "restCheck",
-  initialState: {},
+  initialState: { data: { isLoading: false } } as RestCheckState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchRestCheck.pending, (state) => {
