@@ -15,6 +15,7 @@
     "dev": "webpack serve --mode=development --hot",
     "build": "NODE_ENV=production tsc && webpack --progress --bail --mode=production",
     "lint": "eslint frontend --fix",
+    "tsc": "tsc -p ./tsconfig.json --noEmit",
     "coverage": "jest --coverage"
   },
   "dependencies": {
