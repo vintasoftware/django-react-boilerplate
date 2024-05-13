@@ -58,3 +58,9 @@ repos:
         # Only run missing migration check if migration-generating files have changed:
         files: (.*/?(settings|migrations|models)/.+|.+models\.py|.+constants\.py|.+choices\.py|.+pyproject\.toml)
         pass_filenames: false
+      - id: backend-schema
+        name: backend-schema-local
+        entry: poetry run python backend/manage.py spectacular --color --file backend/schema.yml
+        language: system
+        files: ^backend/
+        pass_filenames: false

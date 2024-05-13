@@ -53,6 +53,7 @@ Also, includes a Render.com `render.yaml` and a working Django `production.py` s
 
 -   `django` for building backend logic using Python
 -   `djangorestframework` for building a REST API on top of Django
+-   `drf-spectacular` for generating an OpenAPI schema for the Django REST API
 -   `django-webpack-loader` for rendering the bundled frontend assets
 -   `django-js-reverse` for easy handling of Django URLs on JS
 -   `django-upgrade` for automatically upgrading Django code to the target version on pre-commit
@@ -167,6 +168,8 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
     `poetry run python manage.py makemigrations`
 -   Run the migrations:
     `poetry run python manage.py migrate`
+-   Generate the OpenAPI schema:
+    `poetry run python manage.py spectacular --color --file schema.yml`    
 -   Run the project:
     `poetry run python manage.py runserver`
 -   Open a browser and go to `http://localhost:8000` to see the project running
@@ -200,6 +203,19 @@ Will run django tests using `--keepdb` and `--parallel`. You may pass a path to 
 ### Adding new pypi libs
 
 To add a new **backend** dependency, run `poetry add {dependency}`. If the dependency should be only available for development user append `-G dev` to the command.
+
+### API Schema
+
+We use the DRF-Spectacular tool to generate an OpenAPI schema from our Django Rest Framework API. The OpenAPI schema serves as the backbone for generating client code, creating comprehensive API documentation, and more.
+
+The API documentation pages are accessible at `http://localhost:8000/api/schema/swagger-ui/` or `http://localhost:8000/api/schema/redoc/`.
+
+> [!IMPORTANT]
+> Anytime a view is created, updated, or removed, the schema must be updated to reflect the changes. Failing to do so can lead to outdated client code or documentation.
+> 
+> To update the schema, run:
+> - If you are using Docker: `make docker_backend_update_schema`
+> - If you are not using Docker: `poetry run python manage.py spectacular --color --file schema.yml`
 
 ## Github Actions
 
