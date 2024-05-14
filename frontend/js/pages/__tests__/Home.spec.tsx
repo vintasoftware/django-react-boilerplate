@@ -32,7 +32,7 @@ describe("Home", () => {
     render(<Home />);
 
     await waitFor(() => {
-      expect(RestService.restRestCheckRetrieve).toHaveBeenCalled();
+      expect(RestService.restRestCheckRetrieve).toHaveBeenCalledWith();
     });
   });
 });
