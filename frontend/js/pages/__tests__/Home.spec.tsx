@@ -15,8 +15,8 @@ jest.mock("../../store/rest_check", () => ({
 
 describe("Home", () => {
   beforeEach(() => {
-    (useDispatch as jest.Mock).mockReturnValue(jest.fn());
-    (useSelector as jest.Mock).mockReturnValue({
+    (useDispatch as unknown as jest.Mock).mockReturnValue(jest.fn());
+    (useSelector as unknown as jest.Mock).mockReturnValue({
       data: { payload: { result: "Test Result" } },
     });
   });
