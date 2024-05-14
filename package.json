@@ -16,9 +16,11 @@
     "build": "NODE_ENV=production tsc && webpack --progress --bail --mode=production",
     "lint": "eslint frontend --fix",
     "tsc": "tsc -p ./tsconfig.json --noEmit",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "openapi-ts": "openapi-ts"
   },
   "dependencies": {
+    "@hey-api/openapi-ts": "^0.44.0",
     "@reduxjs/toolkit": "~2.2.4",
     "@sentry/browser": "~8.0.0",
     "@sentry/react": "~8.0.0",

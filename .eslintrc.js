@@ -46,4 +46,15 @@ module.exports = {
       version: "detect",
     },
   },
+  overrides: [
+    {
+      files: ["openapi-ts.config.ts"],
+      rules: {
+        "import/no-extraneous-dependencies": [
+          "error",
+          { devDependencies: true },
+        ],
+      },
+    },
+  ],
 };
