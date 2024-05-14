@@ -11,15 +11,15 @@ runs:
         echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     - name: Setup Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: "3.12"
     - name: Setup Node
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: "18.20"
     - name: Cache node modules
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       env:
         cache-name: node-modules-cache
       with:
@@ -30,7 +30,7 @@ runs:
           build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}
           build-${{ env.cache-name }}
     - name: Cache pip
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       env:
         cache-name: pip-cache
       with:
