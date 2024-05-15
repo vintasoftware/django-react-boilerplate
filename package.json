@@ -20,7 +20,7 @@
     "openapi-ts": "openapi-ts"
   },
   "dependencies": {
-    "@hey-api/openapi-ts": "^0.44.0",
+    "@hey-api/openapi-ts": "^0.45.0",
     "@sentry/browser": "~8.0.0",
     "@sentry/react": "~8.0.0",
     "axios": "~1.6.8",
