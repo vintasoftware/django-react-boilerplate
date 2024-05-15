@@ -4,7 +4,7 @@
   "private": true,
   "description": "{{project_name}} frontend.",
   "engines": {
-    "node": ">=18 <21"
+    "node": ">=20 <21"
   },
   "browserslist": "> 0.25%, not dead",
   "main": "frontend/js/index.tsx",

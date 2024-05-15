@@ -11,8 +11,8 @@ jobs:
     name: Generate stable boilerplate build
     strategy:
       matrix:
-        python-version: [3.8]
-        node-version: [14.5]
+        python-version: [3.12]
+        node-version: [20.13]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

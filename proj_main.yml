@@ -7,29 +7,29 @@ jobs:
     strategy:
       matrix:
         python: [3.12]
-        node: [18.20]
+        node: [20.13]
     env:
       DATABASE_URL: "sqlite:///"
       REDIS_URL: "redis://"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Store branch and latest SHA
         run: |
           echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
         id: git
       - name: Setup Python ${% templatetag openvariable %} matrix.python {% templatetag closevariable %}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${% templatetag openvariable %} matrix.python {% templatetag closevariable %}
       - name: Setup Node ${% templatetag openvariable %} matrix.node {% templatetag closevariable %}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${% templatetag openvariable %} matrix.node {% templatetag closevariable %}
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache_name: node-modules-cache
         with:
@@ -40,7 +40,7 @@ jobs:
             build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}
             build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}
       - name: Cache pip
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache_name: pip-cache
         with:
