@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@hey-api/openapi-ts": "^0.44.0",
-    "@reduxjs/toolkit": "~2.2.4",
     "@sentry/browser": "~8.0.0",
     "@sentry/react": "~8.0.0",
     "axios": "~1.6.8",
@@ -33,7 +32,6 @@
     "react": "~18.3.1",
     "react-bootstrap": "~2.10.2",
     "react-dom": "~18.3.1",
-    "react-redux": "~9.1.2",
     "react-router": "~6.23.1"
   },
   "devDependencies": {
@@ -76,7 +74,6 @@
     "postcss-loader": "~8.1.1",
     "prettier": "~3.2.5",
     "react-refresh": "^0.14.2",
-    "redux-mock-store": "~1.5.4",
     "sass": "~1.77.1",
     "sass-loader": "~14.2.1",
     "style-loader": "~4.0.0",
