@@ -5,7 +5,6 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   extends: ["vinta/recommended-typescript"],
   rules: {
-    "default-param-last": "off", // due to initialState in Redux
     "import/extensions": [
       "error",
       "ignorePackages",
