@@ -229,6 +229,9 @@ We use the [`openapi-ts`](https://heyapi.vercel.app/openapi-ts/get-started.html)
 > - If you are using Docker: `make docker_frontend_update_api`
 > - If you are not using Docker: `npm run openapi-ts`
 
+> [!NOTE]
+> If `pre-commit` is properly enabled, it will automatically update both schema and client before each commit whenever necessary.
+
 ## Github Actions
 
 To enable Continuous Integration through Github Actions, we provide a `proj_main.yml` file. To connect it to Github you need to rename it to `main.yml` and move it to the `.github/workflows/` directory.
