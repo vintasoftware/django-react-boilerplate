@@ -17,9 +17,9 @@ runs:
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
-        node-version: "18.20"
+        node-version: "20.13"
     - name: Cache node modules
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       env:
         cache-name: node-modules-cache
       with:
@@ -30,7 +30,7 @@ runs:
           build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}
           build-${{ env.cache-name }}
     - name: Cache pip
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       env:
         cache-name: pip-cache
       with:
