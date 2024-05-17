@@ -40,10 +40,8 @@ Also, includes a Render.com `render.yaml` and a working Django `production.py` s
 -   State management and backend integration
     -   `axios` for performing asynchronous calls
     -   `cookie` for easy integration with Django using the `csrftoken` cookie
-    -   `@reduxjs/toolkit` for easy state management across the application with the whole toolkit including devtools for inspecting and debugging Redux via browser and ability to run thunks for interacting with the Redux store through asynchronous logic
-    -   `connected-react-router` for integrating Redux with React Router
+    -   `openapi-ts` for generating TypeScript client API code from the backend OpenAPI schema
     -   `history` for providing browser history to Connected React Router
-    -   `react-redux` for integrating React with Redux
 -   Utilities
     -   `lodash` for general utility functions
     -   `classnames` for easy working with complex CSS class names on components
@@ -143,13 +141,6 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 ### If you are not using Docker:
 
-#### Setup and run the frontend app
-
--   Open a new command line window and go to the project's directory
--   `npm install`
--   `npm run dev`
-    -   This is used to serve the frontend assets to be consumed by [django-webpack-loader](https://github.com/django-webpack/django-webpack-loader) and not to run the React application as usual, so don't worry if you try to check what's running on port 3000 and see an error on your browser
-
 #### Setup the backend app
 
 -   Open the `backend/.env` file on a text editor and do one of the following:
@@ -169,9 +160,18 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 -   Run the migrations:
     `poetry run python manage.py migrate`
 -   Generate the OpenAPI schema:
-    `poetry run python manage.py spectacular --color --file schema.yml`    
+    `poetry run python manage.py spectacular --color --file schema.yml`
 -   Run the project:
     `poetry run python manage.py runserver`
+
+#### Setup and run the frontend app
+
+-   Open a new command line window and go to the project's directory
+-   `npm install`
+-   `npm run openapi-ts`
+    -   This is used to generate the TypeScript client API code from the backend OpenAPI schema
+-   `npm run dev`
+    -   This is used to serve the frontend assets to be consumed by [django-webpack-loader](https://github.com/django-webpack/django-webpack-loader) and not to run the React application as usual, so don't worry if you try to check what's running on port 3000 and see an error on your browser
 -   Open a browser and go to `http://localhost:8000` to see the project running
 
 #### Setup Celery
@@ -204,18 +204,30 @@ Will run django tests using `--keepdb` and `--parallel`. You may pass a path to 
 
 To add a new **backend** dependency, run `poetry add {dependency}`. If the dependency should be only available for development user append `-G dev` to the command.
 
-### API Schema
+### API Schema and Client generation
 
-We use the DRF-Spectacular tool to generate an OpenAPI schema from our Django Rest Framework API. The OpenAPI schema serves as the backbone for generating client code, creating comprehensive API documentation, and more.
+We use the [`DRF-Spectacular`](https://drf-spectacular.readthedocs.io/en/latest/readme.html) tool to generate an OpenAPI schema from our Django Rest Framework API. The OpenAPI schema serves as the backbone for generating client code, creating comprehensive API documentation, and more.
 
 The API documentation pages are accessible at `http://localhost:8000/api/schema/swagger-ui/` or `http://localhost:8000/api/schema/redoc/`.
 
 > [!IMPORTANT]
 > Anytime a view is created, updated, or removed, the schema must be updated to reflect the changes. Failing to do so can lead to outdated client code or documentation.
-> 
+>
 > To update the schema, run:
 > - If you are using Docker: `make docker_backend_update_schema`
 > - If you are not using Docker: `poetry run python manage.py spectacular --color --file schema.yml`
+
+We use the [`openapi-ts`](https://heyapi.vercel.app/openapi-ts/get-started.html) tool to generate TypeScript client code from the OpenAPI schema. The generated client code is used to interact with the API in a type-safe manner.
+
+> [!IMPORTANT]
+> Anytime the API schema is updated, the client code must be regenerated to reflect the changes. Failing to do so can lead to type errors in the client code.
+>
+> To update the client code, run:
+> - If you are using Docker: `make docker_frontend_update_api`
+> - If you are not using Docker: `npm run openapi-ts`
+
+> [!NOTE]
+> If `pre-commit` is properly enabled, it will automatically update both schema and client before each commit whenever necessary.
 
 ## Github Actions
 

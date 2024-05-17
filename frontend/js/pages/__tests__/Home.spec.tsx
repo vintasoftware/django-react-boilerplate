@@ -1,23 +1,18 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { useDispatch, useSelector } from "react-redux";
 
-import { fetchRestCheck } from "../../store/rest_check";
+import { RestService } from "../../api";
 import Home from "../Home";
 
-jest.mock("react-redux", () => ({
-  useDispatch: jest.fn(),
-  useSelector: jest.fn(),
-}));
-
-jest.mock("../../store/rest_check", () => ({
-  fetchRestCheck: jest.fn(),
+jest.mock("../../api", () => ({
+  RestService: {
+    restRestCheckRetrieve: jest.fn(),
+  },
 }));
 
 describe("Home", () => {
   beforeEach(() => {
-    (useDispatch as unknown as jest.Mock).mockReturnValue(jest.fn());
-    (useSelector as unknown as jest.Mock).mockReturnValue({
-      data: { payload: { result: "Test Result" } },
+    (RestService.restRestCheckRetrieve as jest.Mock).mockResolvedValue({
+      message: "Test Result",
     });
   });
 
@@ -33,11 +28,11 @@ describe("Home", () => {
     expect(await screen.findByText("Test Result")).toBeInTheDocument();
   });
 
-  test("dispatches fetchRestCheck action on mount", async () => {
+  test("calls restRestCheckRetrieve on mount", async () => {
     render(<Home />);
 
     await waitFor(() => {
-      expect(fetchRestCheck).toHaveBeenCalledWith();
+      expect(RestService.restRestCheckRetrieve).toHaveBeenCalledWith();
     });
   });
 });

@@ -5,7 +5,6 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   extends: ["vinta/recommended-typescript"],
   rules: {
-    "default-param-last": "off", // due to initialState in Redux
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -46,4 +45,15 @@ module.exports = {
       version: "detect",
     },
   },
+  overrides: [
+    {
+      files: ["openapi-ts.config.ts"],
+      rules: {
+        "import/no-extraneous-dependencies": [
+          "error",
+          { devDependencies: true },
+        ],
+      },
+    },
+  ],
 };

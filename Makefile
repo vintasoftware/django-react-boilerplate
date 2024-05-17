@@ -20,6 +20,7 @@ docker_setup:
 	docker compose build --no-cache backend
 	docker compose run --rm backend python manage.py spectacular --color --file schema.yml
 	docker compose run frontend npm install
+	docker compose run --rm frontend npm run openapi-ts
 
 docker_test:
 	docker compose run backend python manage.py test $(ARG) --parallel --keepdb
@@ -51,3 +52,6 @@ docker_backend_shell:
 
 docker_backend_update_schema:
 	docker compose run --rm backend python manage.py spectacular --color --file schema.yml
+
+docker_frontend_update_api:
+	docker compose run --rm frontend npm run openapi-ts

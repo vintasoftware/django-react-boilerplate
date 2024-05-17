@@ -1,10 +1,12 @@
 from django.views import generic
 
-from drf_spectacular.utils import OpenApiExample, OpenApiResponse, extend_schema
+from drf_spectacular.utils import OpenApiExample, extend_schema
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+
+from .serializers import MessageSerializer
 
 
 class IndexView(generic.TemplateView):
@@ -12,24 +14,21 @@ class IndexView(generic.TemplateView):
 
 
 class RestViewSet(viewsets.ViewSet):
+    serializer_class = MessageSerializer
+
     @extend_schema(
         summary="Check REST API",
         description="This endpoint checks if the REST API is working.",
-        responses={
-            200: OpenApiResponse(
-                description="Successful Response",
-                examples=[
-                    OpenApiExample(
-                        "Example Response",
-                        value={
-                            "result": "This message comes from the backend. "
-                            "If you're seeing this, the REST API is working!"
-                        },
-                        response_only=True,
-                    )
-                ],
+        examples=[
+            OpenApiExample(
+                "Successful Response",
+                value={
+                    "message": "This message comes from the backend. "
+                    "If you're seeing this, the REST API is working!"
+                },
+                response_only=True,
             )
-        },
+        ],
         methods=["GET"],
     )
     @action(
@@ -39,10 +38,11 @@ class RestViewSet(viewsets.ViewSet):
         url_path="rest-check",
     )
     def rest_check(self, request):
-        return Response(
-            {
-                "result": "This message comes from the backend. "
+        serializer = self.serializer_class(
+            data={
+                "message": "This message comes from the backend. "
                 "If you're seeing this, the REST API is working!"
-            },
-            status=status.HTTP_200_OK,
+            }
         )
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

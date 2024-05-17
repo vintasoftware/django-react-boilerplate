@@ -64,3 +64,9 @@ repos:
         language: system
         files: ^backend/
         pass_filenames: false
+      - id: frontend-api
+        name: frontend-api-local
+        entry: npm run openapi-ts
+        language: system
+        files: backend/schema\.yml$
+        pass_filenames: false

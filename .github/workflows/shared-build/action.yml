@@ -11,15 +11,15 @@ runs:
         echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     - name: Setup Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: "3.12"
     - name: Setup Node
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
-        node-version: "18.2"
+        node-version: "18.20"
     - name: Cache node modules
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       env:
         cache-name: node-modules-cache
       with:
@@ -30,7 +30,7 @@ runs:
           build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}
           build-${{ env.cache-name }}
     - name: Cache pip
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       env:
         cache-name: pip-cache
       with:
@@ -59,15 +59,6 @@ runs:
     - run: npm dedupe
       working-directory: testproject
       shell: bash
-    - run: npm run test
-      working-directory: testproject
-      shell: bash
-    - run: npm run lint
-      working-directory: testproject
-      shell: bash
-    - run: npm run build
-      working-directory: testproject
-      shell: bash
     - run: pip install poetry==1.7.1 --upgrade
       working-directory: testproject
       shell: bash
@@ -89,6 +80,25 @@ runs:
       working-directory: testproject/backend
       env:
         DATABASE_URL: "sqlite:///"
+      shell: bash
+    - name: Generate backend schema
+      run: poetry run python manage.py spectacular --color --file schema.yml
+      working-directory: testproject/backend
+      env:
+        DATABASE_URL: "sqlite:///"
+      shell: bash
+    - name: Generate frontend API client
+      run: npm run openapi-ts
+      working-directory: testproject
+      shell: bash
+    - run: npm run lint
+      working-directory: testproject
+      shell: bash
+    - run: npm run build
+      working-directory: testproject
+      shell: bash
+    - run: npm run test
+      working-directory: testproject
       shell: bash
     - run: poetry run python manage.py test
       working-directory: testproject/backend
