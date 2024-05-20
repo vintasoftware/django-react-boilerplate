@@ -176,7 +176,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 #### Setup Celery
 
--   `poetry run celery --app=myproject worker --loglevel=info`
+-   `poetry run celery --app={{project_name}} worker --loglevel=info`
 
 #### Setup Redis
 
