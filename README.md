@@ -60,7 +60,6 @@ Also, includes a Render.com `render.yaml` and a working Django `production.py` s
 -   `sentry-sdk` for error monitoring
 -   `python-decouple` for reading environment variables on settings files
 -   `celery` for background worker tasks
--   `django-debreach` for additional protection against BREACH attack
 -   `django-csp` for setting the draft security HTTP header Content-Security-Policy
 -   `django-permissions-policy` for setting the draft security HTTP header Permissions-Policy
 -   `django-defender` for blocking brute force attacks against login
