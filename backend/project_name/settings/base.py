@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django_guid",
     "common",
     "users",
+    "anymail",
 ]
 
 MIDDLEWARE = [
@@ -250,3 +251,16 @@ DEFENDER_LOGIN_FAILURE_LIMIT = 3
 DEFENDER_COOLOFF_TIME = 300  # 5 minutes
 DEFENDER_LOCKOUT_TEMPLATE = "defender/lockout.html"
 DEFENDER_REDIS_URL = config("REDIS_URL")
+
+
+
+# myproject/settings.py
+
+# Email Backend Configuration
+EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"  # or another supported backend
+ANYMAIL = {
+    "SENDGRID_API_KEY": config("SENDGRID_API_KEY"),  # Replace with your actual API key
+    # can add other sendgrid fields here
+}
+
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")  # Replace with your default from email
