@@ -290,7 +290,7 @@ Uncommenting the worker configuration lines on `render.yaml` will imply in costs
 
 ### SendGrid
 
-To enable sending emails from your application you'll need to have a valid SendGrid account and also a valid verified sender identity. After finishing the validation process you'll be able to generate the API credentials and define the `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` environment variables on Render.com.
+To enable sending emails from your application you'll need to have a valid SendGrid account and also a valid verified sender identity. After finishing the validation process you'll be able to generate the API credentials and define the `SENDGRID_API_KEY` and `SENDGRID_PASSWORD` environment variables on Render.com.
 
 These variables are required for your application to work on Render.com since it's pre-configured to automatically email admins when the application is unable to handle errors gracefully.
 

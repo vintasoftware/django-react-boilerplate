@@ -22,9 +22,9 @@ MEDIA_URL = "/media/"
 
 SERVER_EMAIL = "foo@example.com"
 
-EMAIL_HOST = "smtp.sendgrid.net"
-EMAIL_HOST_USER = config("SENDGRID_USERNAME")
-EMAIL_HOST_PASSWORD = config("SENDGRID_PASSWORD")
+# EMAIL_HOST = "smtp.sendgrid.net"
+# EMAIL_HOST_USER = config("SENDGRID_USERNAME")
+# EMAIL_HOST_PASSWORD = config("SENDGRID_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -135,3 +135,12 @@ JS_REVERSE_EXCLUDE_NAMESPACES = ["admin"]
 
 # Sentry
 sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()], release=COMMIT_SHA)
+
+# Email Backend Configuration
+EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"  # or another supported backend
+ANYMAIL = {
+    "SENDGRID_API_KEY": config("SENDGRID_API_KEY"),  # Replace with your actual API key
+    # can add other sendgrid fields here
+}
+
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")  # Replace with your default from email
