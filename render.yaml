@@ -118,7 +118,5 @@ envVarGroups:
         value: '*'
   - name: integrations-credentials
     envVars:
-      - key: SENDGRID_USERNAME
-        value: apikey
-      - key: SENDGRID_PASSWORD
+      - key: SENDGRID_API_KEY
         value: placeholder-value
