@@ -20,11 +20,6 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = base_dir_join("mediafiles")
 MEDIA_URL = "/media/"
 
-SERVER_EMAIL = "foo@example.com"
-
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
 # Security
 SECURE_HSTS_PRELOAD = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -134,9 +129,9 @@ JS_REVERSE_EXCLUDE_NAMESPACES = ["admin"]
 sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()], release=COMMIT_SHA)
 
 # Email Backend Configuration
+SERVER_EMAIL = "foo@example.com"
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend" 
 ANYMAIL = {
     "SENDGRID_API_KEY": config("SENDGRID_API_KEY"), 
 }
-
-DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
