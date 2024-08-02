@@ -143,7 +143,7 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 #### Setup the backend app
 
 -   Open the `backend/.env` file on a text editor and do one of the following:
-    -   If you wish to use SQLite locally, uncomment the line `DATABASE_URL=sqlite:///backend/db.sqlite3`
+    -   If you wish to use SQLite locally, uncomment the line `DATABASE_URL=sqlite:///db.sqlite3`
     -   If you wish to use PostgreSQL locally, uncomment and edit the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}` in order to make it correctly point to your database URL
         -   The url format is the following: `postgres://USER:PASSWORD@HOST:PORT/NAME`
     -   If you wish to use another database engine locally, add a new `DATABASE_URL` setting for the database you wish to use
