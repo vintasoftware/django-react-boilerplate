@@ -109,7 +109,7 @@ envVarGroups:
       - key: PYTHON_VERSION
         value: 3.12.0
       - key: POETRY_VERSION
-        value: 1.7.1
+        value: 2.0.1
       - key: SECRET_KEY
         generateValue: true
       - key: DJANGO_SETTINGS_MODULE
