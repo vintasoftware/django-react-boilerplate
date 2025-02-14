@@ -59,7 +59,7 @@ runs:
     - run: npm dedupe
       working-directory: testproject
       shell: bash
-    - run: pip install poetry==1.8.3 --upgrade
+    - run: pip install poetry==2.0.1 --upgrade
       working-directory: testproject
       shell: bash
     - run: poetry install --with dev --no-root --no-interaction --no-ansi
