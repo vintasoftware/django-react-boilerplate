@@ -16,6 +16,7 @@ module.exports = (env, argv) => {
     path: path.resolve("./frontend/webpack_bundles/"),
     publicPath: "auto",
     filename: "[name]-[chunkhash].js",
+    clean: true,
   };
 
   return {
