@@ -7,3 +7,4 @@ frontend/js/api/
 .git/
 *.lock
 package-lock.json
+.github/

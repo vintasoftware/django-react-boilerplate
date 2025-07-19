@@ -17,17 +17,17 @@ jobs:
         uses: actions/checkout@v4
       - name: Store branch and latest SHA
         run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+          echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
         id: git
-      - name: Setup Python ${% templatetag openvariable %} matrix.python {% templatetag closevariable %}
+      - name: Setup Python ${{ matrix.python }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${% templatetag openvariable %} matrix.python {% templatetag closevariable %}
-      - name: Setup Node ${% templatetag openvariable %} matrix.node {% templatetag closevariable %}
+          python-version: ${{ matrix.python }}
+      - name: Setup Node ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
-          node-version: ${% templatetag openvariable %} matrix.node {% templatetag closevariable %}
+          node-version: ${{ matrix.node }}
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
@@ -38,38 +38,38 @@ jobs:
           cache_name: node-modules-cache
         with:
           path: ~/.pnpm-store
-          key: build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.sha_short {% templatetag closevariable %}
+          key: build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}-${{ steps.git.outputs.sha_short }}
           restore-keys: |
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.sha_short {% templatetag closevariable %}
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}
+            build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}-${{ steps.git.outputs.sha_short }}
+            build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}
+            build-${{ env.cache_name }}
       - name: Cache pip
         uses: actions/cache@v4
         env:
           cache_name: pip-cache
         with:
           path: ~/.cache/pip
-          key: build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.sha_short {% templatetag closevariable %}
+          key: build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}-${{ steps.git.outputs.sha_short }}
           restore-keys: |
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.sha_short {% templatetag closevariable %}
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}
+            build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}-${{ steps.git.outputs.sha_short }}
+            build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}
+            build-${{ env.cache_name }}
       - run: python -m pip install --upgrade pip
       - run: python -m pip install uv
       - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
       - run: sudo apt-get install git-lfs --upgrade
-      - run: uv pip install -r pyproject.toml --extra dev
+      - run: cd backend && uv pip install -e . --extra dev --system
       - run: pnpm install
       - run: pnpm run build
       - run: pnpm run lint
       - name: Generate secret key
-        run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
+        run: echo "SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')" >> $GITHUB_OUTPUT
         id: secret_id_generator
       - name: Linting
         run: uv run ruff check ./backend/
         env:
           DJANGO_SETTINGS_MODULE: "project_name.settings.local_base"
-          SECRET_KEY: ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          SECRET_KEY: ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
           DATABASE_URL: "sqlite:///"
           ALLOWED_HOSTS: ".example.org"
           SENDGRID_USERNAME: "test"
@@ -81,7 +81,7 @@ jobs:
       - run: uv run python manage.py makemigrations --check --dry-run
         env:
           DJANGO_SETTINGS_MODULE: "project_name.settings.production"
-          SECRET_KEY: ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          SECRET_KEY: ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
           DATABASE_URL: "sqlite:///"
           ALLOWED_HOSTS: ".example.org"
           SENDGRID_USERNAME: "test"
@@ -91,7 +91,7 @@ jobs:
       - run: uv run python manage.py check --deploy
         env:
           DJANGO_SETTINGS_MODULE: "project_name.settings.production"
-          SECRET_KEY: ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          SECRET_KEY: ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
           DATABASE_URL: "sqlite:///"
           ALLOWED_HOSTS: ".example.org"
           SENDGRID_USERNAME: "test"
