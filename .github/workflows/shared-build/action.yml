@@ -63,25 +63,15 @@ runs:
     - run: pnpm dedupe
       working-directory: testproject
       shell: bash
-    - name: Debug directory structure
+    - name: Install Python dependencies
       run: |
-        echo "=== Current directory ==="
-        pwd
-        echo "=== Contents of testproject ==="
-        ls -la testproject/
-        echo "=== Check if pyproject.toml exists in testproject ==="
-        if [ -f testproject/pyproject.toml ]; then
-          echo "Found pyproject.toml in testproject"
-          echo "First few lines:"
-          head -5 testproject/pyproject.toml
-        else
-          echo "No pyproject.toml found in testproject!"
-        fi
-        echo "=== Root pyproject.toml ==="
-        head -5 pyproject.toml
-      shell: bash
-    - run: uv pip install -e ".[dev]" --system
-      working-directory: testproject
+        # Temporarily rename root pyproject.toml to avoid uv picking it up
+        mv pyproject.toml pyproject.toml.bak
+        cd testproject
+        uv pip install -e ".[dev]" --system
+        cd ..
+        # Restore the original pyproject.toml
+        mv pyproject.toml.bak pyproject.toml
       shell: bash
     - run: cp testproject/settings/local.py.example testproject/settings/local.py
       working-directory: testproject/backend
