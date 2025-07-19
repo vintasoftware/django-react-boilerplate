@@ -27,6 +27,8 @@ dependencies = [
     "sentry-sdk>=2.19.2",
     "django-guid>=3.5.0",
     "django-log-request-id>=2.1.0",
+    "django-js-reverse>=0.10.2",
+    "django-import-export>=4.3.3",
 ]
 
 [project.optional-dependencies]
