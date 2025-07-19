@@ -26,6 +26,7 @@ dependencies = [
     "Brotli>=1.1.0",
     "sentry-sdk>=2.19.2",
     "django-guid>=3.5.0",
+    "django-log-request-id>=2.1.0",
 ]
 
 [project.optional-dependencies]
