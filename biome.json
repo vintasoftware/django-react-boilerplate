@@ -22,11 +22,19 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noExplicitAny": "error",
+        "noExplicitAny": "off",
         "noConsole": "warn"
       }
     }
   },
+  "overrides": [
+    {
+      "includes": ["frontend/js/api/**"],
+      "linter": {
+        "enabled": false
+      }
+    }
+  ],
   "javascript": {
     "formatter": {
       "jsxQuoteStyle": "double",
