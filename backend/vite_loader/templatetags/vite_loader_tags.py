@@ -5,6 +5,7 @@ from django import template
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
+
 register = template.Library()
 
 @register.simple_tag
@@ -18,7 +19,7 @@ def render_vite_bundle(bundle_name='main', bundle_type='js', config='DEFAULT'):
     if dev_mode:
         # In development, load from Vite dev server
         if bundle_type == 'js':
-            return mark_safe(f'<script type="module" src="http://localhost:3000/frontend/js/index.tsx"></script>')
+            return mark_safe('<script type="module" src="http://localhost:3000/frontend/js/index.tsx"></script>')
         # CSS is handled by Vite in development
         return ''
     
@@ -26,7 +27,7 @@ def render_vite_bundle(bundle_name='main', bundle_type='js', config='DEFAULT'):
     stats_file = os.path.join(settings.BASE_DIR, '../webpack-stats.json')
     
     try:
-        with open(stats_file, 'r') as f:
+        with open(stats_file) as f:
             stats = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         return ''
