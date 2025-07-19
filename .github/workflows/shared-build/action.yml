@@ -73,13 +73,6 @@ runs:
         # Restore the original pyproject.toml
         mv pyproject.toml.bak pyproject.toml
       shell: bash
-    - name: Debug backend structure
-      run: |
-        echo "=== testproject/backend structure ==="
-        ls -la testproject/backend/
-        echo "=== Looking for settings directory ==="
-        find testproject/backend -name "settings" -type d
-      shell: bash
     - run: cp testproject/settings/local.py.example testproject/settings/local.py
       working-directory: testproject/backend
       shell: bash

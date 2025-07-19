@@ -1,7 +1,7 @@
 [project]
-name = "{{project_name}}"
+name = "{{ project_name }}"
 version = "0.0.1"
-description = "{{project_name}}"
+description = "{{ project_name }}"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -156,7 +156,7 @@ lines-after-imports = 2
 "backend/common/utils/tests.py" = ["S105", "N802"]
 "**/migrations/*" = ["RUF", "I"]
 "backend/vite_loader/templatetags/vite_loader_tags.py" = ["S308"]
-"backend/{{project_name}}/settings/*" = ["F403", "F405", "S105"]
+"backend/{{ project_name }}/settings/*" = ["F403", "F405", "S105"]
 
 [tool.coverage.run]
 omit = [
@@ -182,7 +182,7 @@ warn_unused_configs = true
 ignore_missing_imports = true
 
 [tool.django-stubs]
-django_settings_module = "{{project_name}}.settings.local_base"
+django_settings_module = "{{ project_name }}.settings.local_base"
 
 [tool.hatch.build.targets.wheel]
 packages = ["backend"]
