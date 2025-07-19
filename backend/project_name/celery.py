@@ -19,7 +19,7 @@ if settings_module is None:
     sys.exit(1)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_module)
 
-app = Celery("{{project_name}}_tasks")
+app = Celery("project_name_tasks")
 app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks(lambda: [n.name for n in apps.get_app_configs()])
 app.conf.update(CELERYBEAT_SCHEDULE=CELERYBEAT_SCHEDULE)
