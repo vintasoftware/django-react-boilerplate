@@ -73,8 +73,8 @@ runs:
         # Restore the original pyproject.toml
         mv pyproject.toml.bak pyproject.toml
       shell: bash
-    - run: cp testproject/settings/local.py.example testproject/settings/local.py
-      working-directory: testproject/backend
+    - run: cp settings/local.py.example settings/local.py
+      working-directory: testproject/backend/testproject
       shell: bash
     - run: cp .env.example .env
       working-directory: testproject/backend
