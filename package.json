@@ -72,7 +72,7 @@
     "*.{js,jsx,ts,tsx}": [
       "biome check --write"
     ],
-    "*.{json,md,yml,yaml}": [
+    "!(node_modules|.github)/**/*.{json,md,yml,yaml}": [
       "biome format --write"
     ]
   }
