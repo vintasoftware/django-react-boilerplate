@@ -145,6 +145,7 @@ lines-after-imports = 2
 # Ignore "RUF" (Ruff-specific rules) and "I" (isort) in migrations.
 "__init__.py" = ["E402", "F403", "F405"]
 "**/{tests,docs}/*" = ["E402", "F403", "F405", "S", "N802"]
+"backend/common/utils/tests.py" = ["S105", "N802"]
 "**/migrations/*" = ["RUF", "I"]
 "backend/vite_loader/templatetags/vite_loader_tags.py" = ["S308"]
 
