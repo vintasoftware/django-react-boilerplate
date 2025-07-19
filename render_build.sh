@@ -4,29 +4,30 @@ set -euxo pipefail
 echo "-----> Build hook"
 
 echo "-----> Build frontend"
-npm install
-npm run build
+corepack enable && corepack prepare pnpm@10 --activate
+pnpm install
+pnpm run build
 echo "-----> Build frontend done"
 
-echo "-----> Poetry install"
-poetry install --without dev --no-root --no-interaction
-echo "-----> Poetry done"
+echo "-----> UV install"
+uv pip install -r pyproject.toml
+echo "-----> UV done"
 
 echo "-----> Running manage.py check --deploy --fail-level WARNING"
-poetry run backend/manage.py check --deploy --fail-level WARNING
+uv run backend/manage.py check --deploy --fail-level WARNING
 
 if [ -n "$ENABLE_DJANGO_COLLECTSTATIC" ] && [ "$ENABLE_DJANGO_COLLECTSTATIC" == 1 ]; then
     echo "-----> Running collectstatic"
 
     echo "-----> Collecting static files"
-    poetry run backend/manage.py collectstatic --noinput  2>&1 | sed '/^Copying/d;/^$/d;/^ /d'
+    uv run backend/manage.py collectstatic --noinput  2>&1 | sed '/^Copying/d;/^$/d;/^ /d'
 
     echo
 fi
 
 if [ -n "$AUTO_MIGRATE" ] && [ "$AUTO_MIGRATE" == 1 ]; then
     echo "-----> Running manage.py migrate"
-    poetry run backend/manage.py migrate --noinput
+    uv run backend/manage.py migrate --noinput
 fi
 
 echo "-----> Pushing source maps to Sentry"

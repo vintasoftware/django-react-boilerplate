@@ -6,22 +6,24 @@ ENV PYTHONFAULTHANDLER=1 \
   PIP_NO_CACHE_DIR=off \
   PIP_DISABLE_PIP_VERSION_CHECK=on \
   PIP_DEFAULT_TIMEOUT=100 \
-  POETRY_VERSION=2.0.1
+  UV_SYSTEM_PYTHON=1
 
 RUN groupadd user && useradd --create-home --home-dir /home/user -g user user
 
 # Install system dependencies
 RUN apt-get update && apt-get install python3-dev gcc build-essential libpq-dev -y
 
-# install python dependencies
-RUN pip install "poetry==$POETRY_VERSION"
+# Install UV
+RUN pip install uv
+
+# Copy dependency files
 COPY pyproject.toml /home/user/app/
-COPY *poetry.lock /home/user/app/
+COPY uv.lock /home/user/app/
 
 WORKDIR /home/user/app/
 
-RUN poetry config virtualenvs.create false
-RUN poetry install --with dev --no-root --no-interaction --no-ansi
+# Install dependencies
+RUN uv pip install -r pyproject.toml --extra dev
 
 WORKDIR /home/user/app/backend
 COPY backend/ /home/user/app/backend

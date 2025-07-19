@@ -1,47 +1,48 @@
-[tool.poetry]
-name = "{{project_name}}"
+[project]
+name = "project-name"
 version = "0.1.0"
-description = "Django 5, React, Bootstrap 5 with Python 3 and webpack project boilerplate"
-authors = ["Vinta Software <contact@vinta.com.br>"]
-license = "MIT"
+description = "Django 5, React, Bootstrap 5 with Python 3 and Vite project boilerplate"
+authors = [{name = "Vinta Software", email = "contact@vinta.com.br"}]
+license = {text = "MIT"}
 readme = "README.md"
-package-mode = false
+requires-python = ">=3.12"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-Django = "^5.0"
-celery = {extras = ["redis"], version = "^5.3.6"}
-celery-redbeat = "^2.1.1"
-django-model-utils = "^4.3.1"
-django-webpack-loader = "^3.1.0"
-django-js-reverse = "^0.10.2"
-django-import-export = "^3.3.5"
-djangorestframework = "^3.14.0"
-python-decouple = "^3.8"
-psycopg = "^3.1.19"
-brotlipy = "^0.7.0"
-django-log-request-id = "^2.1.0"
-dj-database-url = "^2.1.0"
-gunicorn = "^21.2.0"
-whitenoise = "^6.6.0"
-ipython = "^8.18.1"
-sentry-sdk = "^1.39.1"
-setuptools = "^69.0.2"
-django-permissions-policy = "^4.18.0"
-django-csp = "^3.7"
-django-defender = "^0.9.7"
-django-guid = "^3.4.0"
-drf-spectacular = "^0.27.2"
+dependencies = [
+    "Django>=5.0",
+    "celery[redis]>=5.3.6",
+    "celery-redbeat>=2.1.1",
+    "django-model-utils>=4.3.1",
+    "django-js-reverse>=0.10.2",
+    "django-import-export>=3.3.5",
+    "djangorestframework>=3.14.0",
+    "python-decouple>=3.8",
+    "psycopg>=3.1.19",
+    "Brotli>=1.1.0",
+    "django-log-request-id>=2.1.0",
+    "dj-database-url>=2.1.0",
+    "gunicorn>=21.2.0",
+    "whitenoise>=6.6.0",
+    "ipython>=8.18.1",
+    "sentry-sdk>=1.39.1",
+    "setuptools>=69.0.2",
+    "django-permissions-policy>=4.18.0",
+    "django-csp>=3.7",
+    "django-defender>=0.9.7",
+    "django-guid>=3.4.0",
+    "drf-spectacular>=0.27.2",
+]
 
-[tool.poetry.group.dev.dependencies]
-coverage = "^7.2.7"
-model-bakery = "^1.12.0"
-pre-commit = "^3.3.3"
-ruff = "^0.1.8"
+[tool.uv]
+dev-dependencies = [
+    "coverage>=7.2.7",
+    "model-bakery>=1.12.0",
+    "pre-commit>=3.3.3",
+    "ruff>=0.1.8",
+]
 
 [build-system]
-requires = ["poetry-core>=1.2.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.ruff]
 select = [

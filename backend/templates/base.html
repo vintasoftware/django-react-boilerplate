@@ -1,4 +1,4 @@
-{% load render_bundle from webpack_loader %}
+{% load render_vite_bundle from vite_loader_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -11,8 +11,8 @@
 
   <link rel="shortcut icon" href="#" />
 
-  <!-- Webpack rendered CSS -->
-  {% render_bundle 'main' 'css' %}
+  <!-- Vite rendered CSS -->
+  {% render_vite_bundle 'main' 'css' %}
 </head>
 
 <body>
@@ -24,8 +24,8 @@
   <!-- django-js-reverse -->
   <script src="{% url 'js_reverse' %}" type="text/javascript"></script>
 
-  <!-- Webpack rendered Javascript -->
-  {% render_bundle 'main' 'js' 'DEFAULT' %}
+  <!-- Vite rendered Javascript -->
+  {% render_vite_bundle 'main' 'js' 'DEFAULT' %}
   {% block scripts %}{% endblock %}
 </body>
 </html>

@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_js_reverse",
-    "webpack_loader",
+    "vite_loader",
     "import_export",
     "rest_framework",
     "drf_spectacular",
@@ -136,14 +136,9 @@ USE_TZ = True
 STATICFILES_DIRS = (base_dir_join("../frontend"),)
 
 # Webpack
-WEBPACK_LOADER = {
-    "DEFAULT": {
-        "CACHE": False,  # on DEBUG should be False
-        "STATS_FILE": base_dir_join("../webpack-stats.json"),
-        "POLL_INTERVAL": 0.1,
-        "IGNORE": [r".+\.hot-update.js", r".+\.map"],
-    }
-}
+# Vite configuration
+VITE_DEV_MODE = DEBUG
+VITE_STATS_FILE = base_dir_join("../webpack-stats.json")  # Keep same filename for compatibility
 
 # Celery
 # Recommended settings for reliability: https://gist.github.com/fjsj/da41321ac96cf28a96235cb20e7236f6
@@ -218,11 +213,18 @@ CSP_SCRIPT_SRC = [
     "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/",
     "https://cdn.jsdelivr.net/npm/redoc@latest/",
     "blob:",
-] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
+] + ([
+    # Vite dev server
+    "http://localhost:3000",
+] if DEBUG else []) + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
 CSP_CONNECT_SRC = [
     "'self'",
     "*.sentry.io",
-] + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
+] + ([
+    # Vite dev server
+    "http://localhost:3000",
+    "ws://localhost:3000",  # For HMR websocket
+] if DEBUG else []) + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
 CSP_STYLE_SRC = [
     "'self'",
     "'unsafe-inline'",

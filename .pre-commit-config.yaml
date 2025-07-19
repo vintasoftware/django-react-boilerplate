@@ -31,42 +31,36 @@ repos:
       - id: ruff-format
   - repo: local
     hooks:
-      - id: eslint
-        name: eslint-local
-        entry: npm run lint
+      - id: biome
+        name: biome-local
+        entry: pnpm exec biome check --write
         language: system
         types: [file]
         files: \.(js|jsx|ts|tsx)$
-        exclude: >
-          (?x)^(
-            .+\.config\.js|
-            .+\.setup\.js|
-            \.eslintrc\.js
-          )$
         pass_filenames: true
       - id: tsc
         name: tsc-local
-        entry: npm run tsc
+        entry: pnpm run tsc
         language: system
         types: [file]
         files: \.(ts|tsx)$
         pass_filenames: false
       - id: missing-migrations
         name: missing-migrations-local
-        entry: poetry run python backend/manage.py makemigrations --check
+        entry: uv run python backend/manage.py makemigrations --check
         language: system
         # Only run missing migration check if migration-generating files have changed:
         files: (.*/?(settings|migrations|models)/.+|.+models\.py|.+constants\.py|.+choices\.py|.+pyproject\.toml)
         pass_filenames: false
       - id: backend-schema
         name: backend-schema-local
-        entry: poetry run python backend/manage.py spectacular --color --file backend/schema.yml
+        entry: uv run python backend/manage.py spectacular --color --file backend/schema.yml
         language: system
         files: ^backend/
         pass_filenames: false
       - id: frontend-api
         name: frontend-api-local
-        entry: npm run openapi-ts
+        entry: pnpm run openapi-ts
         language: system
         files: backend/schema\.yml$
         pass_filenames: false

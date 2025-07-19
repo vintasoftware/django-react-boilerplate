@@ -9,10 +9,10 @@ A [Django](https://www.djangoproject.com/) project boilerplate/template with a m
 
 -   [React](https://react.dev/), for building interactive UIs
 -   [TypeScript](https://www.typescriptlang.org/), for static type checking
--   [Poetry](https://python-poetry.org/), for managing the environment and its dependencies
+-   [UV](https://github.com/astral-sh/uv), for managing the environment and its dependencies
 -   [django-js-reverse](https://github.com/vintasoftware/django-js-reverse), for generating URLs on JS
 -   [React Bootstrap](https://react-bootstrap.github.io/), for responsive styling
--   [Webpack](https://webpack.js.org/), for bundling static assets
+-   [Vite](https://vitejs.dev/), for bundling static assets
 -   [Celery](https://docs.celeryq.dev/en/stable/), for background worker tasks
 -   [WhiteNoise](https://whitenoise.readthedocs.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlicffi), for efficient static files serving
 -   [ruff](https://github.com/astral-sh/ruff) and [ESLint](https://eslint.org/) with [pre-commit](https://pre-commit.com/) for automated quality assurance (does not replace proper testing!)
@@ -132,9 +132,9 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 -   Open a new command line window and go to the project's directory
 -   Update the dependencies management files by performing any number of the following steps:
-    -   To add a new **frontend** dependency, run `npm install <package name> --save`
+    -   To add a new **frontend** dependency, run `pnpm install <package name> --save`
         > The above command will update your `package.json`, but won't make the change effective inside the container yet
-    -   To add a new **backend** dependency, run `docker compose run --rm backend bash` to open an interactive shell and then run `poetry add {dependency}` to add the dependency. If the dependency should be only available for development user append `-G dev` to the command.
+    -   To add a new **backend** dependency, run `docker compose run --rm backend bash` to open an interactive shell and then run `uv add {dependency}` to add the dependency. If the dependency should be only available for development use `uv add --dev {dependency}`.
     -   After updating the desired file(s), run `make docker_update_dependencies` to update the containers with the new dependencies
         > The above command will stop and re-build the containers in order to make the new dependencies effective
 
@@ -149,33 +149,33 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
     -   If you wish to use another database engine locally, add a new `DATABASE_URL` setting for the database you wish to use
         -   Please refer to [dj-database-url](https://github.com/jazzband/dj-database-url#url-schema) on how to configure `DATABASE_URL` for commonly used engines
 -   Open a new command line window and go to the project's directory
--   Run `poetry install`
+-   Run `uv pip install -r pyproject.toml --extra dev`
 
 #### Run the backend app
 
 -   Go to the `backend` directory
 -   Create the migrations for `users` app:
-    `poetry run python manage.py makemigrations`
+    `uv run python manage.py makemigrations`
 -   Run the migrations:
-    `poetry run python manage.py migrate`
+    `uv run python manage.py migrate`
 -   Generate the OpenAPI schema:
-    `poetry run python manage.py spectacular --color --file schema.yml`
+    `uv run python manage.py spectacular --color --file schema.yml`
 -   Run the project:
-    `poetry run python manage.py runserver`
+    `uv run python manage.py runserver`
 
 #### Setup and run the frontend app
 
 -   Open a new command line window and go to the project's directory
--   `npm install`
--   `npm run openapi-ts`
+-   `pnpm install`
+-   `pnpm run openapi-ts`
     -   This is used to generate the TypeScript client API code from the backend OpenAPI schema
--   `npm run dev`
+-   `pnpm run dev`
     -   This is used to serve the frontend assets to be consumed by [django-webpack-loader](https://github.com/django-webpack/django-webpack-loader) and not to run the React application as usual, so don't worry if you try to check what's running on port 3000 and see an error on your browser
 -   Open a browser and go to `http://localhost:8000` to see the project running
 
 #### Setup Celery
 
--   `poetry run celery --app={{project_name}} worker --loglevel=info`
+-   `uv run celery --app={{project_name}} worker --loglevel=info`
 
 #### Setup Redis
 
@@ -201,7 +201,7 @@ Will run django tests using `--keepdb` and `--parallel`. You may pass a path to 
 
 ### Adding new pypi libs
 
-To add a new **backend** dependency, run `poetry add {dependency}`. If the dependency should be only available for development user append `-G dev` to the command.
+To add a new **backend** dependency, run `uv add {dependency}`. If the dependency should be only available for development use `uv add --dev {dependency}`.
 
 ### API Schema and Client generation
 
@@ -214,7 +214,7 @@ The API documentation pages are accessible at `http://localhost:8000/api/schema/
 >
 > To update the schema, run:
 > - If you are using Docker: `make docker_backend_update_schema`
-> - If you are not using Docker: `poetry run python manage.py spectacular --color --file schema.yml`
+> - If you are not using Docker: `uv run python manage.py spectacular --color --file schema.yml`
 
 We use the [`openapi-ts`](https://heyapi.vercel.app/openapi-ts/get-started.html) tool to generate TypeScript client code from the OpenAPI schema. The generated client code is used to interact with the API in a type-safe manner.
 
@@ -223,7 +223,7 @@ We use the [`openapi-ts`](https://heyapi.vercel.app/openapi-ts/get-started.html)
 >
 > To update the client code, run:
 > - If you are using Docker: `make docker_frontend_update_api`
-> - If you are not using Docker: `npm run openapi-ts`
+> - If you are not using Docker: `pnpm run openapi-ts`
 
 > [!NOTE]
 > If `pre-commit` is properly enabled, it will automatically update both schema and client before each commit whenever necessary.
@@ -245,7 +245,7 @@ mv proj_main.yml .github/workflows/main.yml
 
 This project comes with an `render.yaml` file, which can be used to create an app on Render.com from a GitHub repository.
 
-Before deploying, please make sure you've generated an up-to-date `poetry.lock` file containing the Python dependencies. This is necessary even if you've used Docker for local runs. Do so by following [these instructions](#setup-the-backend-app).
+Before deploying, please make sure you've generated an up-to-date `uv.lock` file containing the Python dependencies. This is necessary even if you've used Docker for local runs. Do so by following [these instructions](#setup-the-backend-app).
 
 After setting up the project, you can init a repository and push it on GitHub. If your repository is public, you can use the following button:
 
@@ -319,7 +319,7 @@ After enabling dyno metadata and setting the environment variables, your next Re
 ## Linting
 
 -   At pre-commit time (see below)
--   Manually with `poetry run ruff` and `npm run lint` on project root.
+-   Manually with `uv run ruff` and `pnpm run lint` on project root.
 -   During development with an editor compatible with ruff and ESLint.
 
 ## Pre-commit hooks
@@ -330,7 +330,7 @@ After enabling dyno metadata and setting the environment variables, your next Re
 
 ### If you are not using Docker:
 
--   On project root, run `poetry run pre-commit install` to enable the hook into your git repo. The hook will run automatically for each commit.
+-   On project root, run `uv run pre-commit install` to enable the hook into your git repo. The hook will run automatically for each commit.
 
 ## Opinionated Settings
 
