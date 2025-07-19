@@ -8,8 +8,8 @@ runs:
       id: vars
       shell: bash
       run: |
-        echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+        echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+        echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
@@ -18,12 +18,16 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: "20.13"
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 10
     - name: Cache node modules
       uses: actions/cache@v4
       env:
         cache-name: node-modules-cache
       with:
-        path: ~/.npm
+        path: ~/.pnpm-store
         key: build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
         restore-keys: |
           build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
@@ -42,27 +46,26 @@ runs:
           build-${{ env.cache-name }}
     - run: python -m pip install --upgrade pip
       shell: bash
+    - run: python -m pip install uv
+      shell: bash
     - name: Install Django
-      run: pip install "django>=4,<5"
+      run: pip install "django>=5,<6"
       shell: bash
     - name: Setup testproject
-      run: django-admin startproject testproject --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=.
+      run: django-admin startproject testproject --extension py,json,yml,yaml,toml,mts --name Dockerfile,README.md,.env.example,.gitignore,.biomeignore,Makefile --template=.
       shell: bash
     - run: |
-        npm update --save
-        npm update --save-dev
+        pnpm update --save
+        pnpm update --save-dev
       shell: bash
       working-directory: testproject
-    - run: npm install --no-optional
+    - run: pnpm install
       working-directory: testproject
       shell: bash
-    - run: npm dedupe
+    - run: pnpm dedupe
       working-directory: testproject
       shell: bash
-    - run: pip install poetry==2.0.1 --upgrade
-      working-directory: testproject
-      shell: bash
-    - run: poetry install --with dev --no-root --no-interaction --no-ansi
+    - run: uv pip install -e ".[dev]" --system
       working-directory: testproject
       shell: bash
     - run: cp testproject/settings/local.py.example testproject/settings/local.py
@@ -71,56 +74,56 @@ runs:
     - run: cp .env.example .env
       working-directory: testproject/backend
       shell: bash
-    - run: poetry run python manage.py makemigrations
-      working-directory: testproject/backend
+    - run: cd backend && uv run python manage.py makemigrations
+      working-directory: testproject
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
-    - run: poetry run python manage.py migrate
-      working-directory: testproject/backend
+    - run: cd backend && uv run python manage.py migrate
+      working-directory: testproject
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
     - name: Generate backend schema
-      run: poetry run python manage.py spectacular --color --file schema.yml
-      working-directory: testproject/backend
+      run: cd backend && uv run python manage.py spectacular --color --file schema.yml
+      working-directory: testproject
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
     - name: Generate frontend API client
-      run: npm run openapi-ts
+      run: pnpm run openapi-ts
       working-directory: testproject
       shell: bash
-    - run: npm run lint
+    - run: pnpm run lint
       working-directory: testproject
       shell: bash
-    - run: npm run build
+    - run: pnpm run build
       working-directory: testproject
       shell: bash
-    - run: npm run test
+    - run: pnpm run test
       working-directory: testproject
       shell: bash
-    - run: poetry run python manage.py test
-      working-directory: testproject/backend
+    - run: cd backend && uv run python manage.py test
+      working-directory: testproject
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
     - name: Generate secret key
-      run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
+      run: echo "SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')" >> $GITHUB_OUTPUT
       id: secret-id-generator
       shell: bash
     - run: rm .gitignore # prevents conflict with ruff
       shell: bash
-    - run: poetry run ruff check .
-      working-directory: testproject/backend
+    - run: cd backend && uv run ruff check .
+      working-directory: testproject
       shell: bash
-    - run: poetry run python manage.py makemigrations --check --dry-run
-      working-directory: testproject/backend
+    - run: cd backend && uv run python manage.py makemigrations --check --dry-run
+      working-directory: testproject
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
-    - run: poetry run python manage.py check --deploy --fail-level WARNING
-      working-directory: testproject/backend
+    - run: cd backend && uv run python manage.py check --deploy --fail-level WARNING
+      working-directory: testproject
       env:
         SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}
         SENDGRID_USERNAME: foo

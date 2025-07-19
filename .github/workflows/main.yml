@@ -66,7 +66,7 @@ jobs:
         run: echo "SECRET_KEY=$(python -c 'import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)')" >> $GITHUB_OUTPUT
         id: secret_id_generator
       - name: Linting
-        run: uv run ruff check ./backend/
+        run: cd backend && uv run ruff check .
         env:
           DJANGO_SETTINGS_MODULE: "project_name.settings.local_base"
           SECRET_KEY: ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
