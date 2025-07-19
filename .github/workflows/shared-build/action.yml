@@ -52,7 +52,7 @@ runs:
       run: pip install "django>=5,<6"
       shell: bash
     - name: Setup testproject
-      run: django-admin startproject testproject --extension py,json,yml,yaml,toml,mts --name Dockerfile,README.md,.env.example,.gitignore,.biomeignore,Makefile --template=.
+      run: django-admin startproject testproject --extension py,json,yml,yaml,toml,mts --name Dockerfile,README.md,.env.example,.gitignore,.biomeignore,Makefile,pyproject.toml --template=.
       shell: bash
     - run: pnpm update
       shell: bash
