@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
 import DjangoImgSrc from '../../assets/images/django-logo-negative.png';
@@ -36,7 +36,6 @@ const Home = () => {
         Click to test if Sentry is capturing frontend errors! (Should only work in Production)
       </Button>
       {/* NOTE: The next line intentionally contains an error for testing frontend errors in Sentry. */}
-      {/* biome-ignore lint/suspicious/noExplicitAny: Intentional error for testing Sentry */}
       {showBugComponent && (showBugComponent as any).field.notexist}
     </>
   );

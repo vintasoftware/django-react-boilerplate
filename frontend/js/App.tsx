@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/react';
 import cookie from 'cookie';
+import React from 'react';
 
 import { OpenAPI } from './api';
 import Home from './pages/Home';

@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
+import React from 'react';
 
 import { RestService } from '../../api';
 import Home from '../Home';
