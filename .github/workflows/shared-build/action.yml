@@ -54,9 +54,7 @@ runs:
     - name: Setup testproject
       run: django-admin startproject testproject --extension py,json,yml,yaml,toml,mts --name Dockerfile,README.md,.env.example,.gitignore,.biomeignore,Makefile --template=.
       shell: bash
-    - run: |
-        pnpm update --save
-        pnpm update --save-dev
+    - run: pnpm update
       shell: bash
       working-directory: testproject
     - run: pnpm install
