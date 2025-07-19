@@ -29,11 +29,13 @@ dependencies = [
     "django-log-request-id>=2.1.0",
     "django-js-reverse>=0.10.2",
     "django-import-export>=4.3.3",
+    "django-model-utils>=5.0.0",
 ]
 
 [project.optional-dependencies]
 dev = [
     "tblib>=3.0.0",
+    "model-bakery>=1.21.1",
     "django-stubs[compatible-mypy]>=5.1.1",
     "djangorestframework-stubs[compatible-mypy]>=3.15.1",
     "mypy>=1.13.0",
