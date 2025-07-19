@@ -471,6 +471,19 @@ wheels = [
 ]
 
 [[package]]
+name = "django-permissions-policy"
+version = "4.26.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "asgiref" },
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/31/2e/421a9dc5852175802fbf5266a87c945e4c91117938a02fa24732e4f39907/django_permissions_policy-4.26.0.tar.gz", hash = "sha256:0e129870453ff90521aa2cf8264978fbc57e33117d2313052809730869f8b626", size = 10367 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/06/f2/13cba28047672e4b195e4296037e78290acd6656234095ff47b85128902f/django_permissions_policy-4.26.0-py3-none-any.whl", hash = "sha256:d5a5067b8137c326f3015e02d8e6615e980f1a12903d0dbf9cb446e227bc67dd", size = 6744 },
+]
+
+[[package]]
 name = "django-ratelimit"
 version = "4.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -926,6 +939,7 @@ dependencies = [
     { name = "django-js-reverse" },
     { name = "django-log-request-id" },
     { name = "django-model-utils" },
+    { name = "django-permissions-policy" },
     { name = "django-ratelimit" },
     { name = "djangorestframework" },
     { name = "drf-spectacular" },
@@ -973,6 +987,7 @@ requires-dist = [
     { name = "django-js-reverse", specifier = ">=0.10.2" },
     { name = "django-log-request-id", specifier = ">=2.1.0" },
     { name = "django-model-utils", specifier = ">=5.0.0" },
+    { name = "django-permissions-policy", specifier = ">=4.21.0" },
     { name = "django-ratelimit", specifier = ">=4.1.0" },
     { name = "django-stubs", extras = ["compatible-mypy"], marker = "extra == 'dev'", specifier = ">=5.1.1" },
     { name = "djangorestframework", specifier = ">=3.15.2" },

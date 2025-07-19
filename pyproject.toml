@@ -13,6 +13,7 @@ dependencies = [
     "drf-spectacular>=0.27.2",
     "whitenoise[brotli]>=6.8.2",
     "django-csp>=4.0b1",
+    "django-permissions-policy>=4.21.0",
     "gunicorn>=23.0.0",
     "psycopg[binary]>=3.2.3",
     "dj-database-url>=2.2.0",
