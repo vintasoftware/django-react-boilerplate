@@ -59,7 +59,7 @@ MIDDLEWARE = [
     "django_guid.middleware.guid_middleware",
 ]
 
-ROOT_URLCONF = "project_name.urls"
+ROOT_URLCONF = "{{project_name}}.urls"
 
 TEMPLATES = [
     {
@@ -87,7 +87,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "project_name.wsgi.application"
+WSGI_APPLICATION = "{{project_name}}.wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
