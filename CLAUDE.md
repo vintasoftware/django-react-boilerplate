@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Important: Repository Guidelines
+
+**This is a fork of the django-react-boilerplate project. DO NOT create pull requests against the upstream repository (https://github.com/vintasoftware/django-react-boilerplate). All changes should remain in this fork only.**
+
 ## Project Overview
 
 Django-React boilerplate - A full-stack application template using Django backend with Django REST Framework and React TypeScript frontend. The project uses Docker for development and includes Celery for background tasks.
