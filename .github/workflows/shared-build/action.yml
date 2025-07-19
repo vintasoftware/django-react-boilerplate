@@ -76,18 +76,18 @@ runs:
     - run: cp .env.example .env
       working-directory: testproject/backend
       shell: bash
-    - run: cd backend && uv run python manage.py makemigrations
+    - run: cd backend && python manage.py makemigrations
       working-directory: testproject
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
-    - run: cd backend && uv run python manage.py migrate
+    - run: cd backend && python manage.py migrate
       working-directory: testproject
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
     - name: Generate backend schema
-      run: cd backend && uv run python manage.py spectacular --color --file schema.yml
+      run: cd backend && python manage.py spectacular --color --file schema.yml
       working-directory: testproject
       env:
         DATABASE_URL: "sqlite:///"
@@ -105,7 +105,7 @@ runs:
     - run: pnpm run test
       working-directory: testproject
       shell: bash
-    - run: cd backend && uv run python manage.py test
+    - run: cd backend && python manage.py test
       working-directory: testproject
       env:
         DATABASE_URL: "sqlite:///"
@@ -116,15 +116,15 @@ runs:
       shell: bash
     - run: rm .gitignore # prevents conflict with ruff
       shell: bash
-    - run: cd backend && uv run ruff check .
+    - run: cd backend && ruff check .
       working-directory: testproject
       shell: bash
-    - run: cd backend && uv run python manage.py makemigrations --check --dry-run
+    - run: cd backend && python manage.py makemigrations --check --dry-run
       working-directory: testproject
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
-    - run: cd backend && uv run python manage.py check --deploy --fail-level WARNING
+    - run: cd backend && python manage.py check --deploy --fail-level WARNING
       working-directory: testproject
       env:
         SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}
