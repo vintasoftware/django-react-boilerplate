@@ -69,9 +69,6 @@ runs:
         mv pyproject.toml pyproject.toml.bak
         cd testproject
         uv pip install -e ".[dev]" --system
-        cd ..
-        # Restore the original pyproject.toml
-        mv pyproject.toml.bak pyproject.toml
       shell: bash
     - run: cp testproject/settings/local.py.example testproject/settings/local.py
       working-directory: testproject/backend
@@ -138,3 +135,11 @@ runs:
         REDIS_URL: "redis://"
         DATABASE_URL: "sqlite:///"
       shell: bash
+    - name: Restore original pyproject.toml
+      run: |
+        # Restore the original pyproject.toml that we renamed earlier
+        if [ -f pyproject.toml.bak ]; then
+          mv pyproject.toml.bak pyproject.toml
+        fi
+      shell: bash
+      if: always()
