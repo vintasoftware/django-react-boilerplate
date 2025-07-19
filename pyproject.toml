@@ -148,6 +148,7 @@ lines-after-imports = 2
 "backend/common/utils/tests.py" = ["S105", "N802"]
 "**/migrations/*" = ["RUF", "I"]
 "backend/vite_loader/templatetags/vite_loader_tags.py" = ["S308"]
+"backend/project_name/settings/*" = ["F403", "F405", "S105"]
 
 [tool.coverage.run]
 omit = [
