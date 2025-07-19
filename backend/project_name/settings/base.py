@@ -204,27 +204,43 @@ PERMISSIONS_POLICY = {
 
 # Django-CSP
 CSP_INCLUDE_NONCE_IN = ["script-src", "style-src", "font-src"]
-CSP_SCRIPT_SRC = [
-    "'self'",
-    "'unsafe-inline'",
-    "'unsafe-eval'",
-    "https://browser.sentry-cdn.com",
-    # drf-spectacular UI (Swagger and ReDoc)
-    "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/",
-    "https://cdn.jsdelivr.net/npm/redoc@latest/",
-    "blob:",
-] + ([
-    # Vite dev server
-    "http://localhost:3000",
-] if DEBUG else []) + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
-CSP_CONNECT_SRC = [
-    "'self'",
-    "*.sentry.io",
-] + ([
-    # Vite dev server
-    "http://localhost:3000",
-    "ws://localhost:3000",  # For HMR websocket
-] if DEBUG else []) + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
+CSP_SCRIPT_SRC = (
+    [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        "https://browser.sentry-cdn.com",
+        # drf-spectacular UI (Swagger and ReDoc)
+        "https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/",
+        "https://cdn.jsdelivr.net/npm/redoc@latest/",
+        "blob:",
+    ]
+    + (
+        [
+            # Vite dev server
+            "http://localhost:3000",
+        ]
+        if DEBUG
+        else []
+    )
+    + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
+)
+CSP_CONNECT_SRC = (
+    [
+        "'self'",
+        "*.sentry.io",
+    ]
+    + (
+        [
+            # Vite dev server
+            "http://localhost:3000",
+            "ws://localhost:3000",  # For HMR websocket
+        ]
+        if DEBUG
+        else []
+    )
+    + [f"*{host}" if host.startswith(".") else host for host in ALLOWED_HOSTS]
+)
 CSP_STYLE_SRC = [
     "'self'",
     "'unsafe-inline'",
