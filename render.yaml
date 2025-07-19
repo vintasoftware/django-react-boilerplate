@@ -15,7 +15,7 @@ services:
     plan: free
     runtime: python
     buildCommand: "./render_build.sh"
-    startCommand: "poetry run gunicorn {{project_name}}.wsgi:application --chdir backend --limit-request-line 8188 --log-file -"
+    startCommand: "uv run gunicorn {{project_name}}.wsgi:application --chdir backend --limit-request-line 8188 --log-file -"
     envVars:
       - key: ENABLE_DJANGO_COLLECTSTATIC
         value: 1
@@ -40,8 +40,8 @@ services:
   #   name: worker-default
   #   runtime: python
   #   env: python
-  #   buildCommand: poetry install
-  #   startCommand: "poetry run celery --workdir backend --app={{project_name}} worker --loglevel=info --max-memory-per-child=$WORKER_MAX_MEMORY  --concurrency=$WORKER_CONCURRENCY"
+  #   buildCommand: uv pip install -r pyproject.toml
+  #   startCommand: "uv run celery --workdir backend --app={{project_name}} worker --loglevel=info --max-memory-per-child=$WORKER_MAX_MEMORY  --concurrency=$WORKER_CONCURRENCY"
   #   envVars:
   #     - key: REMAP_SIGTERM
   #       value: SIGQUIT
@@ -86,8 +86,8 @@ services:
   #   name: beat
   #   runtime: python
   #   env: python
-  #   buildCommand: poetry install
-  #   startCommand: "poetry run celery --workdir backend --app={{project_name}} beat --loglevel=info"
+  #   buildCommand: uv pip install -r pyproject.toml
+  #   startCommand: "uv run celery --workdir backend --app={{project_name}} beat --loglevel=info"
   #   envVars:
   #     - key: REMAP_SIGTERM
   #       value: SIGQUIT
@@ -108,8 +108,7 @@ envVarGroups:
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.0
-      - key: POETRY_VERSION
-        value: 2.0.1
+      # UV is installed via pip, no version env var needed
       - key: SECRET_KEY
         generateValue: true
       - key: DJANGO_SETTINGS_MODULE

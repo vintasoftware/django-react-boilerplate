@@ -1,0 +1,10 @@
+node_modules/
+.venv/
+frontend/webpack_bundles/
+frontend/js/api/
+*.min.js
+*.min.css
+.git/
+*.lock
+package-lock.json
+.github/

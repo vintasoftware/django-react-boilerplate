@@ -41,8 +41,8 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = "DENY"
 
-# Webpack
-WEBPACK_LOADER["DEFAULT"]["CACHE"] = True
+# Vite production settings
+VITE_DEV_MODE = False
 
 # Celery
 # Recommended settings for reliability: https://gist.github.com/fjsj/da41321ac96cf28a96235cb20e7236f6

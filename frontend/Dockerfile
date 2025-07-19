@@ -1,8 +1,17 @@
 FROM node:20-alpine
 
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@10 --activate
+
 WORKDIR /app/
-ADD package.json /app/package.json
-RUN npm install
+
+# Copy lock file and package.json
+ADD pnpm-lock.yaml package.json /app/
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy source code
 ADD . /app/
 
-CMD ["npm", "run", "dev"]
+CMD ["pnpm", "run", "dev"]

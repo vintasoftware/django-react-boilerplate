@@ -1,3 +1,3 @@
-import Urls from "./urls";
+import Urls from './urls';
 
 export { Urls };

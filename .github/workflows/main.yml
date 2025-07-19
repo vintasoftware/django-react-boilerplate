@@ -1,13 +1,9 @@
 name: main
-on:
-  push:
-    branches-ignore:
-      - boilerplate-release
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   build:
-    name: Build boilerplate code
+    name: Build Django-React-Boilerplate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

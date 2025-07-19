@@ -46,9 +46,7 @@ class UserViewSetTest(TestCaseUtils, APITestCase):
             "password": "87654321",
         }
 
-        response = self.auth_client.put(
-            reverse("user-detail", args=[user.id]), data=data
-        )
+        response = self.auth_client.put(reverse("user-detail", args=[user.id]), data=data)
 
         self.assertResponse200(response)
         user.refresh_from_db()
@@ -60,9 +58,7 @@ class UserViewSetTest(TestCaseUtils, APITestCase):
             "email": "user@test.com",
         }
 
-        response = self.auth_client.patch(
-            reverse("user-detail", args=[user.id]), data=data
-        )
+        response = self.auth_client.patch(reverse("user-detail", args=[user.id]), data=data)
 
         self.assertResponse200(response)
         user.refresh_from_db()
