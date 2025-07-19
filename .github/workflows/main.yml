@@ -77,7 +77,7 @@ jobs:
           REDIS_URL: "redis://"
       - run: uv run pre-commit run --all-files
         env:
-          SKIP: ruff,biome,missing-migrations,backend-schema
+          SKIP: ruff,biome,missing-migrations,backend-schema,frontend-api
       - run: cd backend && uv run python manage.py makemigrations --check --dry-run
         env:
           DJANGO_SETTINGS_MODULE: "project_name.settings.production"
