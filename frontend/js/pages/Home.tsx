@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
 import DjangoImgSrc from '../../assets/images/django-logo-negative.png';
 import { RestService } from '../api';
 
 const Home = () => {
+  const djangoBackgroundId = useId();
+  const djangoLogoWrapperId = useId();
   const [showBugComponent, setShowBugComponent] = useState(false);
   const [restCheck, setRestCheck] =
     useState<Awaited<ReturnType<typeof RestService.restRestCheckRetrieve>>>();
@@ -19,11 +21,11 @@ const Home = () => {
   return (
     <>
       <h2>Static assets</h2>
-      <div id="django-background">
+      <div id={djangoBackgroundId}>
         If you are seeing the green Django logo on a white background and this text color is
         #092e20, frontend static files serving is working:
       </div>
-      <div id="django-logo-wrapper">
+      <div id={djangoLogoWrapperId}>
         <div>
           Below this text, you should see an img tag with the white Django logo on a green
           background:
