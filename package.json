@@ -1,8 +1,8 @@
 {
-  "name": "{{ project_name }}-frontend",
+  "name": "testproject-frontend",
   "version": "0.0.1",
   "private": true,
-  "description": "{{ project_name }} frontend.",
+  "description": "testproject frontend.",
   "engines": {
     "node": ">=20 <23"
   },
