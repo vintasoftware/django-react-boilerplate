@@ -19,10 +19,12 @@ const Home = () => {
   return (
     <>
       <h2>Static assets</h2>
+      {/* biome-ignore lint: These IDs are used by CSS styling and are only used once */}
       <div id="django-background">
         If you are seeing the green Django logo on a white background and this text color is
         #092e20, frontend static files serving is working:
       </div>
+      {/* biome-ignore lint: These IDs are used by CSS styling and are only used once */}
       <div id="django-logo-wrapper">
         <div>
           Below this text, you should see an img tag with the white Django logo on a green
