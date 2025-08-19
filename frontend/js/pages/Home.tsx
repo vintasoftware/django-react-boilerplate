@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
 import DjangoImgSrc from '../../assets/images/django-logo-negative.png';
