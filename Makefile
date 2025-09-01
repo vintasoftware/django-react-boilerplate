@@ -19,7 +19,7 @@ docker_setup:
 	docker volume create {{project_name}}_dbdata
 	docker compose build --no-cache backend
 	docker compose run --rm backend python manage.py spectacular --color --file schema.yml
-	docker compose run frontend npm install
+	docker compose run frontend npm ci
 	docker compose run --rm frontend npm run openapi-ts
 
 docker_test:
