@@ -4,7 +4,7 @@ set -Eeuo pipefail
 echo "-----> Build hook"
 
 echo "-----> Build frontend"
-npm ci --prefer-offline --no-audit --no-fund
+npm install
 npm run build
 echo "-----> Build frontend done"
 
