@@ -11,7 +11,7 @@ A [Django](https://www.djangoproject.com/) project boilerplate/template with a m
 -   [TypeScript](https://www.typescriptlang.org/), for static type checking
 -   [Poetry](https://python-poetry.org/), for managing the environment and its dependencies
 -   [django-js-reverse](https://github.com/vintasoftware/django-js-reverse), for generating URLs on JS
--   [React Bootstrap](https://react-bootstrap.github.io/), for responsive styling
+-   [Tailwind](https://tailwindcss.com/), for responsive styling
 -   [Webpack](https://webpack.js.org/), for bundling static assets
 -   [Celery](https://docs.celeryq.dev/en/stable/), for background worker tasks
 -   [WhiteNoise](https://whitenoise.readthedocs.io/en/stable/) with [brotlipy](https://github.com/python-hyper/brotlicffi), for efficient static files serving
@@ -34,9 +34,7 @@ Also, includes a Render.com `render.yaml` and a working Django `production.py` s
 -   `webpack` for bundling static assets
 -   `webpack-bundle-tracker` for providing the bundled assets to Django
 -   Styling
-    -   `bootstrap` for providing responsive stylesheets
-    -   `react-bootstrap` for providing components built on top of Bootstrap CSS without using plugins
-    -   `sass` for providing compatibility with SCSS files
+    -   `tailwind` for providing responsive stylesheets
 -   State management and backend integration
     -   `axios` for performing asynchronous calls
     -   `cookie` for easy integration with Django using the `csrftoken` cookie
@@ -270,6 +268,18 @@ Default is 1, meaning the build script will run collectstatic during deploys.
 #### `AUTO_MIGRATE`
 
 Default is 1, meaning the build script will run collectstatic during deploys.
+
+#### `SECRET_KEY`
+
+Django requires a SECRET_KEY that is at least 50 characters long and with enough randomness. Render’s `generateValue: true` produces a shorter value (about 44 characters) that does not meet Django’s security check, so it fails with `security.W009`.
+
+The correct approach is to declare the variable with `sync: false`. That way, the `SECRET_KEY` is not stored in the repository, and the first time the Blueprint is created, Render will prompt you to provide the secret value manually. This ensures the key is long, random, and secure while keeping it outside version control.
+
+You can generate a new key by running the following command on your local machine:
+
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
 
 ### Build script
 
