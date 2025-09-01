@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
 
 import DjangoImgSrc from "../../assets/images/django-logo-negative.png";
 import { RestService } from "../api";
@@ -18,7 +17,7 @@ const Home = () => {
 
   return (
     <>
-      <h2>Static assets</h2>
+      <h2 className="text-4xl mb-2">Static assets</h2>
       <div id="django-background">
         If you are seeing the green Django logo on a white background and this
         text color is #092e20, frontend static files serving is working:
@@ -30,12 +29,16 @@ const Home = () => {
         </div>
         <img alt="Django Negative Logo" src={DjangoImgSrc} />
       </div>
-      <h2>Rest API</h2>
-      <p>{restCheck?.message}</p>
-      <Button variant="outline-dark" onClick={() => setShowBugComponent(true)}>
+      <h2 className="text-4xl mb-2">Rest API</h2>
+      <p className="mb-2">{restCheck?.message}</p>
+      <button
+        className="px-2 py-1 border border-black text-black rounded-md hover:bg-black hover:text-white transition duration-200 cursor-pointer"
+        type="button"
+        onClick={() => setShowBugComponent(true)}
+      >
         Click to test if Sentry is capturing frontend errors! (Should only work
         in Production)
-      </Button>
+      </button>
       {/* NOTE: The next line intentionally contains an error for testing frontend errors in Sentry. */}
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       {showBugComponent && (showBugComponent as any).field.notexist}

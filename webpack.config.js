@@ -46,28 +46,9 @@ module.exports = (env, argv) => {
           use: [
             isDev && "style-loader",
             !isDev && MiniCssExtractPlugin.loader,
-            "css-loader",
-            {
-              loader: "postcss-loader",
-              options: {
-                postcssOptions: {
-                  plugins: [["postcss-preset-env"]],
-                },
-              },
-            },
-          ].filter(Boolean),
-        },
-        {
-          test: /\.s[ac]ss$/i,
-          use: [
-            // Creates `style` nodes from JS strings
-            isDev && "style-loader",
-            // Optimizes CSS in chunks
-            !isDev && MiniCssExtractPlugin.loader,
-            // Translates CSS into CommonJS
-            "css-loader",
-            // Compiles Sass to CSS
-            "sass-loader",
+            { loader: "css-loader", options: { importLoaders: 1 } },
+            // Tailwind v4 uses @tailwindcss/postcss (condigured in the postcss.config.mjs file)
+            "postcss-loader",
           ].filter(Boolean),
         },
         {
@@ -86,7 +67,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       !isDev &&
-      new MiniCssExtractPlugin({ filename: "[name]-[chunkhash].css" }),
+        new MiniCssExtractPlugin({ filename: "[name]-[chunkhash].css" }),
       isDev && new ReactRefreshWebpackPlugin(),
       new BundleTracker({
         path: __dirname,

@@ -1,13 +1,3 @@
-// Main Style
-
-// General
-@import "variables";
-@import "vendor/bootstrap-includes";
-@import "helpers/all";
-@import "global";
-@import "components/all";
-@import "pages/all";
-
 #django-background {
     color: #092e20;
     font-size: 11pt;
