@@ -133,12 +133,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATICFILES_DIRS = (base_dir_join("../frontend"),)
+STATICFILES_DIRS = (base_dir_join("../frontend", "webpack_bundles"),)
 
 # Webpack
 WEBPACK_LOADER = {
     "DEFAULT": {
         "CACHE": False,  # on DEBUG should be False
+        "BUNDLE_DIR_NAME": "",
         "STATS_FILE": base_dir_join("../webpack-stats.json"),
         "POLL_INTERVAL": 0.1,
         "IGNORE": [r".+\.hot-update.js", r".+\.map"],

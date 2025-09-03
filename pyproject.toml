@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "{{project_name}}"
 version = "0.1.0"
-description = "Django 5, React, Bootstrap 5 with Python 3 and webpack project boilerplate"
+description = "Django 5, React, Tailwind 4 with Python 3 and webpack project boilerplate"
 authors = ["Vinta Software <contact@vinta.com.br>"]
 license = "MIT"
 readme = "README.md"

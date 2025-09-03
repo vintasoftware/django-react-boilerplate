@@ -5,7 +5,7 @@ databases:
     user: {{project_name}}
 
 services:
-  - type: redis
+  - type: keyvalue
     name: {{project_name}}-redis
     plan: free
     ipAllowList: [] # only allow internal connections
@@ -27,9 +27,11 @@ services:
           property: connectionString
       - key: REDIS_URL
         fromService:
-          type: redis
+          type: keyvalue
           name: {{project_name}}-redis
           property: connectionString
+      - key: SECRET_KEY
+        sync: false
       - fromGroup: python-services
       - fromGroup: integrations-credentials
 
@@ -110,8 +112,6 @@ envVarGroups:
         value: 3.12.0
       - key: POETRY_VERSION
         value: 2.0.1
-      - key: SECRET_KEY
-        generateValue: true
       - key: DJANGO_SETTINGS_MODULE
         value: {{project_name}}.settings.production
       - key: ALLOWED_HOSTS

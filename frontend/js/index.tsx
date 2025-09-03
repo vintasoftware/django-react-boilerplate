@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 
 import App from "./App";
 
-import "../sass/style.scss";
+import "../css/style.css";
 
 Sentry.init({
   dsn: window.SENTRY_DSN,
