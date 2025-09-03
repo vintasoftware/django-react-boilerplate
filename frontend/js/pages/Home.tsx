@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <>
-      <h2 className="text-4xl mb-2">Static assets</h2>
+      <h2 className="heading-2">Static assets</h2>
       <div id="django-background">
         If you are seeing the green Django logo on a white background and this
         text color is #092e20, frontend static files serving is working:
@@ -29,10 +29,10 @@ const Home = () => {
         </div>
         <img alt="Django Negative Logo" src={DjangoImgSrc} />
       </div>
-      <h2 className="text-4xl mb-2">Rest API</h2>
-      <p className="mb-2">{restCheck?.message}</p>
+      <h2 className="heading-2">Rest API</h2>
+      <p className="paragraph">{restCheck?.message}</p>
       <button
-        className="px-2 py-1 border border-black text-black rounded-md hover:bg-black hover:text-white transition duration-200 cursor-pointer"
+        className="btn"
         type="button"
         onClick={() => setShowBugComponent(true)}
       >
