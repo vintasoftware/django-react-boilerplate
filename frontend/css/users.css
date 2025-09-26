@@ -36,6 +36,7 @@
   outline: 3px solid var(--color-emerald-500);  /* high-contrast focus ring */
   outline-offset: 2px;
 }
+/* When disabling a button, also set tabindex="-1" in the HTML to prevent keyboard focus */
 .users-btn[aria-disabled="true"] { opacity: .45; pointer-events: none; }
 
 /* primary button (stands out on white) */

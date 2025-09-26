@@ -36,22 +36,33 @@ const Users = () => {
           </span>
 
           <div className="flex items-center gap-2">
-            <Link
-              aria-disabled={!prev}
-              className="users-btn users-btn--primary"
-              to={prev || "#"}
-              onClick={(e) => !prev && e.preventDefault()}
-            >
-              ← Previous
-            </Link>
-            <Link
-              aria-disabled={!next}
-              className="users-btn users-btn--primary"
-              to={next || "#"}
-              onClick={(e) => !next && e.preventDefault()}
-            >
-              Next →
-            </Link>
+            {/* Anchor elements do not natively support 'aria-disabled', which can cause accessibility issues. To improve accessibility, use 'tabIndex={-1}' with 'aria-disabled', or render a instead of when disabled. */}
+            {!prev ? (
+              <span
+                aria-disabled="true"
+                className="users-btn users-btn--primary users-btn--disabled"
+                tabIndex={-1}
+              >
+                ← Previous
+              </span>
+            ) : (
+              <Link className="users-btn users-btn--primary" to={prev}>
+                ← Previous
+              </Link>
+            )}
+            {!next ? (
+              <span
+                aria-disabled="true"
+                className="users-btn users-btn--primary users-btn--disabled"
+                tabIndex={-1}
+              >
+                Next →
+              </span>
+            ) : (
+              <Link className="users-btn users-btn--primary" to={next}>
+                Next →
+              </Link>
+            )}
           </div>
         </div>
       </section>
