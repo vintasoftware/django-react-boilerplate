@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 
-import { RestService } from "../../api";
-import Home from "../Home";
+import { RestService } from "@/js/api";
+import Home from "@/js/pages/Home";
 
-jest.mock("../../api", () => ({
+jest.mock("@/js/api", () => ({
   RestService: {
     restRestCheckRetrieve: jest.fn(),
   },

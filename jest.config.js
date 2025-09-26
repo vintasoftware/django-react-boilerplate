@@ -3,6 +3,7 @@
 module.exports = {
   moduleNameMapper: {
     "^.+\\.(css|scss|png|svg|jpg|jpeg|gif|webp)$": "jest-transform-stub",
+    "^@/(.*)$": "<rootDir>/frontend/$1",
   },
   transformIgnorePatterns: ["node_modules/*"],
   modulePaths: ["frontend", "frontend/js", "frontend/js/app"],

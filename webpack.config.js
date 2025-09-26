@@ -76,6 +76,7 @@ module.exports = (env, argv) => {
     ].filter(Boolean),
     resolve: {
       modules: [nodeModulesDir, path.resolve(__dirname, "frontend/js/")],
+      alias: { "@": path.resolve(__dirname, "frontend") },
       extensions: [".js", ".jsx", ".ts", ".tsx"],
     },
     optimization: {

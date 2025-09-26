@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router";
 
-import { usersLoader } from "../loaders";
-import Home from "../pages/Home";
-import Users from "../pages/Users";
+import { usersLoader } from "@/js/loaders";
+import Home from "@/js/pages/Home";
+import Users from "@/js/pages/Users";
 
 const router = createBrowserRouter([
   { index: true, Component: Home },

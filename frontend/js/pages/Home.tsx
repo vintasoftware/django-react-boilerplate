@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import DjangoImgSrc from "../../assets/images/django-logo-negative.png";
-import { RestService } from "../api";
-import { TopNav } from "../components";
+import DjangoImgSrc from "@/assets/images/django-logo-negative.png";
+import { RestService } from "@/js/api";
+import { TopNav } from "@/js/components";
 
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);

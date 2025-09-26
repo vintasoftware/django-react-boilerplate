@@ -1,6 +1,6 @@
 import { redirectDocument } from "react-router";
 
-import { ApiError, UsersService } from "../api";
+import { ApiError, UsersService } from "@/js/api";
 
 export async function usersLoader({ request }: { request: Request }) {
   const url = new URL(request.url);
