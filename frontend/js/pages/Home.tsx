@@ -19,22 +19,26 @@ const Home = () => {
   return (
     <>
       <TopNav />
-      <h2 className="heading-2">Static assets</h2>
-      <div id="django-background">
+      <h2 className="text-4xl mb-2">Static assets</h2>
+      <div className="text-[#092e20] text-[11pt] bg-no-repeat bg-[auto_200px] bg-center h-[300px] bg-[url('../assets/images/django-logo-positive.png')]">
         If you are seeing the green Django logo on a white background and this
         text color is #092e20, frontend static files serving is working:
       </div>
-      <div id="django-logo-wrapper">
+      <div className="text-[#092e20] mb-4">
         <div>
           Below this text, you should see an img tag with the white Django logo
           on a green background:
         </div>
-        <img alt="Django Negative Logo" src={DjangoImgSrc} />
+        <img
+          alt="Django Negative Logo"
+          className="w-[100px]"
+          src={DjangoImgSrc}
+        />
       </div>
-      <h2 className="heading-2">Rest API</h2>
-      <p className="paragraph">{restCheck?.message}</p>
+      <h2 className="text-4xl mb-2">Rest API</h2>
+      <p className="mb-2">{restCheck?.message}</p>
       <button
-        className="btn"
+        className="px-2 py-1 border border-black text-black rounded-md hover:bg-black hover:text-white transition duration-200 cursor-pointer"
         type="button"
         onClick={() => setShowBugComponent(true)}
       >
