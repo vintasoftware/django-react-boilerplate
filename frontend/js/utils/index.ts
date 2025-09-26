@@ -1,3 +1,4 @@
+import { makeLink } from "./navigation";
 import Urls from "./urls";
 
-export { Urls };
+export { Urls, makeLink };

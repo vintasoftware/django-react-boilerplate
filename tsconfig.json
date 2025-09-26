@@ -5,12 +5,12 @@
     "target": "ES2021",
 
     "allowJs": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noEmit": true,
-    "paths": { "*": ["./frontend/*", "./frontend/js/*"] },
+    "paths": { "@/*": ["frontend/*"] },
     "skipLibCheck": true,
     "strict": true,
     "types": ["node", "jest", "@testing-library/jest-dom"]

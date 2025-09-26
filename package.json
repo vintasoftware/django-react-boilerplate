@@ -30,7 +30,7 @@
     "marked": "~12.0.2",
     "react": "~18.3.1",
     "react-dom": "~18.3.1",
-    "react-router": "~6.23.1"
+    "react-router": "~7.9.0"
   },
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.13",
