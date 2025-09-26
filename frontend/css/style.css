@@ -23,7 +23,6 @@
 .inline-code {
   @apply px-1.5 py-0.5 text-sm font-mono text-pink-600 bg-gray-100 rounded;
 }
-
 /* Headings */
 .heading-1 {
   @apply text-5xl mb-2;
@@ -42,4 +41,29 @@
 .btn {
   @apply px-2 py-1 border border-black text-black rounded-md
          hover:bg-black hover:text-white transition duration-200 cursor-pointer;
+}
+
+/* TopNav */
+/* Container */
+.nav {
+  @apply mx-auto max-w-6xl mt-4 mb-6 rounded-xl bg-zinc-900/80 backdrop-blur ring-1 ring-white/10;
+}
+
+/* Brand */
+.nav-brand {
+  @apply text-white font-semibold tracking-tight mr-2;
+}
+
+/* Links */
+.nav-link {
+  @apply px-3 py-2 rounded-lg text-sm font-medium text-zinc-300 transition;
+}
+.nav-link:hover {
+  @apply text-white bg-white/5;
+}
+.nav-link:focus-visible {
+  @apply outline-none ring-2 ring-white/40;
+}
+.nav-link--active {
+  @apply text-white bg-white/10;
 }

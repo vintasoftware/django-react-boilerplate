@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import DjangoImgSrc from "../../assets/images/django-logo-negative.png";
 import { RestService } from "../api";
+import { TopNav } from "../components";
 
 const Home = () => {
   const [showBugComponent, setShowBugComponent] = useState(false);
@@ -17,6 +18,7 @@ const Home = () => {
 
   return (
     <>
+      <TopNav />
       <h2 className="heading-2">Static assets</h2>
       <div id="django-background">
         If you are seeing the green Django logo on a white background and this

@@ -8,7 +8,7 @@
     "baseUrl": "./",
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "paths": { "*": ["./frontend/*", "./frontend/js/*"] },
     "skipLibCheck": true,
