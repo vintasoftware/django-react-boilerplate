@@ -1,52 +1,51 @@
 @import "tailwindcss";
 
+/* container + title */
 .users-wrap { max-width: 42rem; margin-inline: auto; padding-inline: 1rem; }
-.users-title { margin-top: 1rem; margin-bottom: .75rem; font-weight: 600; color: #0a0a0a; }
+.users-title { margin-top: 1rem; margin-bottom: .75rem; font-weight: 600; color: var(--color-slate-950); }
 
 /* list with a clearly visible border on white */
 .users-list {
-  /* bg-white + divider and outline using 200/300 tones for ≥3:1 contrast */
-  background-color: #ffffff;
+  background-color: var(--color-white);
   border-radius: .75rem; /* rounded-xl */
-  box-shadow: inset 0 0 0 1px rgba(24,24,27,.15); /* ring-1 ring-zinc-300 */
+  border: 1px solid var(--color-zinc-300); /* ring-1 ring-zinc-300 */
 }
 .users-item {
   padding: .75rem 1rem;
   font-size: .875rem;
-  color: #111827; /* text-zinc-900 */
-  border-top: 1px solid rgba(24,24,27,.12); /* divide-zinc-200 */
+  color: var(--color-slate-900);
+  border-top: 1px solid var(--color-zinc-200); /* divide-zinc-200 */
 }
 .users-item:first-child { border-top: 0; }
-.users-item:hover { background-color: #f8fafc; } /* hover:bg-zinc-50 */
+.users-item:hover { background-color: var(--color-slate-50); } /* hover:bg-slate-50 */
 
-/* pagination with buttons readable on white */
+/* pagination */
 .users-pager { margin-top: .75rem; display: flex; align-items: center; justify-content: space-between; font-size: .875rem; }
-.users-count { color: #475569; } /* text-slate-600 */
+.users-count { color: var(--color-slate-600); }
 
-/* “quiet” button (visible outline) */
+/* quiet button (visible outline on white) */
 .users-btn {
   display: inline-flex; align-items: center; gap: .25rem;
   padding: .5rem .75rem; border-radius: .5rem;
-  color: #0f172a; /* text-slate-900 */
-  background-color: #ffffff; /* bg-white */
-  box-shadow: inset 0 0 0 1px rgba(24,24,27,.2); /* ring-1 ring-zinc-300 */
+  color: var(--color-slate-900);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-zinc-300);
 }
-.users-btn:hover { background-color: #f1f5f9; } /* hover:bg-slate-100 */
+.users-btn:hover { background-color: var(--color-slate-100); }
 .users-btn:focus-visible {
-  outline: none;
-  /* thick, high-contrast focus ring against white */
-  box-shadow:
-    inset 0 0 0 1px rgba(24,24,27,.2),
-    0 0 0 3px rgba(16,185,129,.45); /* ring-emerald-500/45 */
+  outline: 3px solid var(--color-emerald-500);  /* high-contrast focus ring */
+  outline-offset: 2px;
 }
 .users-btn[aria-disabled="true"] { opacity: .45; pointer-events: none; }
 
-/* Optional: “primary” button that stands out on white */
+/* primary button (stands out on white) */
 .users-btn--primary {
-  color: #fff; background-color: #059669; /* emerald-600 */
-  box-shadow: none;
+  color: var(--color-white);
+  background-color: var(--color-emerald-600);
+  border-color: transparent;
 }
-.users-btn--primary:hover { background-color: #047857; } /* emerald-700 */
+.users-btn--primary:hover { background-color: var(--color-emerald-700); }
 .users-btn--primary:focus-visible {
-  outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,.45);
+  outline: 3px solid var(--color-emerald-500);
+  outline-offset: 2px;
 }
