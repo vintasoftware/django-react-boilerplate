@@ -49,7 +49,7 @@ jobs:
         with:
           node-version: ${% templatetag openvariable %} matrix.node {% templatetag closevariable %}
           cache: "pnpm"
-          cache-dependency-path: {% raw %}**/pnpm-lock.yaml{% endraw %}   # ← ensures cache is invalidated when lockfile changes
+          cache-dependency-path: **/pnpm-lock.yaml   # ← ensures cache is invalidated when lockfile changes
 
       - name: Cache pnpm store
         uses: actions/cache@v4

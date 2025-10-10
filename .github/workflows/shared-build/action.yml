@@ -71,7 +71,7 @@ runs:
       shell: bash
 
     - name: Setup testproject
-      run: django-admin startproject testproject --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=.
+      run: django-admin startproject testproject --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile,.npmrc --template=.
       shell: bash
 
     - name: Update JS dependencies
