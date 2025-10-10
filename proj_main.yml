@@ -1,9 +1,13 @@
 name: main
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   build:
-    name: Build {{project_name}}
+    name: Build {{ project_name }}
     strategy:
       matrix:
         python: [3.12]
@@ -12,91 +16,145 @@ jobs:
       DATABASE_URL: "sqlite:///"
       REDIS_URL: "redis://"
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Store branch and latest SHA
-        run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
         id: git
-      - name: Setup Python ${% templatetag openvariable %} matrix.python {% templatetag closevariable %}
+        shell: bash
+        run: |
+          echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Setup Python ${{ matrix.python }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${% templatetag openvariable %} matrix.python {% templatetag closevariable %}
-      - name: Setup Node ${% templatetag openvariable %} matrix.node {% templatetag closevariable %}
+          python-version: ${{ matrix.python }}
+
+      - name: Setup Node ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
-          node-version: ${% templatetag openvariable %} matrix.node {% templatetag closevariable %}
-      - name: Cache node modules
+          node-version: ${{ matrix.node }}
+          cache: "pnpm"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Cache pnpm store
         uses: actions/cache@v4
         env:
-          cache_name: node-modules-cache
+          cache_name: pnpm-store-cache
         with:
-          path: ~/.npm
-          key: build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.sha_short {% templatetag closevariable %}
+          path: ~/.pnpm-store
+          key: build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}-${{ steps.git.outputs.sha_short }}
           restore-keys: |
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.sha_short {% templatetag closevariable %}
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}
+            build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}
+            build-${{ env.cache_name }}
+
       - name: Cache pip
         uses: actions/cache@v4
         env:
           cache_name: pip-cache
         with:
           path: ~/.cache/pip
-          key: build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.sha_short {% templatetag closevariable %}
+          key: build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}-${{ steps.git.outputs.sha_short }}
           restore-keys: |
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.sha_short {% templatetag closevariable %}
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable%} steps.git.outputs.branch {% templatetag closevariable %}
-            build-${% templatetag openvariable%} env.cache_name {% templatetag closevariable %}
+            build-${{ env.cache_name }}-${{ steps.git.outputs.branch }}
+            build-${{ env.cache_name }}
+
       - run: python -m pip install --upgrade pip
+        shell: bash
+
       - run: python -m pip install poetry==2.0.1
+        shell: bash
+
       - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+        shell: bash
+
       - run: sudo apt-get install git-lfs --upgrade
-      - run: poetry install --with dev --no-root --no-interaction --no-ansi
-      - run: npm install
-      - run: npm run build
-      - run: npm run lint
+        shell: bash
+
+      - name: Poetry install (backend & deps)
+        run: poetry install --with dev --no-root --no-interaction --no-ansi
+        shell: bash
+
+      - name: Install frontend dependencies
+        run: pnpm install --frozen-lockfile
+        shell: bash
+
+      - name: Build frontend
+        run: pnpm run build
+        shell: bash
+
+      - name: Lint frontend
+        run: pnpm run lint
+        shell: bash
+
       - name: Generate secret key
-        run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
         id: secret_id_generator
-      - name: Linting
+        shell: bash
+        run: |
+          secret=$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")
+          echo "SECRET_KEY=$secret" >> $GITHUB_OUTPUT
+
+      - name: Linting backend
         run: poetry run ruff check ./backend/
         env:
-          DJANGO_SETTINGS_MODULE: "{{project_name}}.settings.local_base"
-          SECRET_KEY: ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings.local_base"
+          SECRET_KEY: ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
           DATABASE_URL: "sqlite:///"
           ALLOWED_HOSTS: ".example.org"
           SENDGRID_USERNAME: "test"
           SENDGRID_PASSWORD: "test"
           REDIS_URL: "redis://"
+        shell: bash
+
       - run: poetry run pre-commit run --all-files
         env:
           SKIP: ruff,eslint,missing-migrations,backend-schema
-      - run: poetry run python manage.py makemigrations --check --dry-run
+        shell: bash
+
+      - name: Check migrations (dry-run)
+        run: |
+          poetry run python manage.py makemigrations --check --dry-run
+        working-directory: backend
         env:
-          DJANGO_SETTINGS_MODULE: "{{project_name}}.settings.production"
-          SECRET_KEY: ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings.production"
+          SECRET_KEY: ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
           DATABASE_URL: "sqlite:///"
           ALLOWED_HOSTS: ".example.org"
           SENDGRID_USERNAME: "test"
           SENDGRID_PASSWORD: "test"
           REDIS_URL: "redis://"
+        shell: bash
+
+      - name: Django deploy checks
+        run: |
+          poetry run python manage.py check --deploy
         working-directory: backend
-      - run: poetry run python manage.py check --deploy
         env:
-          DJANGO_SETTINGS_MODULE: "{{project_name}}.settings.production"
-          SECRET_KEY: ${% templatetag openvariable %} steps.secret_id_generator.outputs.SECRET_KEY {% templatetag closevariable %}
+          DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings.production"
+          SECRET_KEY: ${{ steps.secret_id_generator.outputs.SECRET_KEY }}
           DATABASE_URL: "sqlite:///"
           ALLOWED_HOSTS: ".example.org"
           SENDGRID_USERNAME: "test"
           SENDGRID_PASSWORD: "test"
           REDIS_URL: "redis://"
-        working-directory: backend
-      - run: |
+        shell: bash
+
+      - name: Run backend tests with coverage
+        run: |
           poetry run coverage run manage.py test
           mkdir -p junit
           poetry run coverage xml -o junit/test-results.xml
         working-directory: backend
-      - run: npm run test
+        shell: bash
+
+      - name: Run frontend tests
+        run: pnpm run test
+        shell: bash
