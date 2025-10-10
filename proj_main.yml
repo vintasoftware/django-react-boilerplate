@@ -51,13 +51,26 @@ jobs:
           cache: "pnpm"
           cache-dependency-path: **/pnpm-lock.yaml   # ← ensures cache is invalidated when lockfile changes
 
+      - name: Compute lockfile hash
+        id: lockhash
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=$(git ls-files '**/pnpm-lock.yaml' || true)
+          if [ -z "$files" ]; then
+            echo "hash=none" >> "$GITHUB_OUTPUT"
+          else
+            hash=$(cat $files | sha256sum | cut -d' ' -f1)
+            echo "hash=$hash" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Cache pnpm store
         uses: actions/cache@v4
         env:
           cache_name: pnpm-store-cache
         with:
           path: ~/.pnpm-store
-          key: build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.sha_short {% templatetag closevariable %}-${% templatetag openvariable %} hashFiles('**/pnpm-lock.yaml') {% templatetag closevariable %}
+          key: build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.sha_short {% templatetag closevariable %}-${% templatetag openvariable %} steps.lockhash.outputs.hash {% templatetag closevariable %}
           restore-keys: |
             build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.sha_short {% templatetag closevariable %}
             build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}
@@ -69,7 +82,7 @@ jobs:
           cache_name: pip-cache
         with:
           path: ~/.cache/pip
-          key: build-${% templatetag openvariable %} env.cache_name }}-${% templatetag openvariable %} steps.git.outputs.branch }}-${% templatetag openvariable %} steps.git.outputs.sha_short {% templatetag closevariable %}
+          key: build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.sha_short {% templatetag closevariable %}
           restore-keys: |
             build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}
             build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}
