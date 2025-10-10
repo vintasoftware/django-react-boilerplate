@@ -1,8 +1,10 @@
 const path = require("path");
+const webpack = require("webpack");
 
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleTracker = require("webpack-bundle-tracker");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = (env, argv) => {
   const isDev = argv.mode === "development";
@@ -73,8 +75,11 @@ module.exports = (env, argv) => {
         path: __dirname,
         filename: "webpack-stats.json",
       }),
+      new NodePolyfillPlugin(),
+      new webpack.ProvidePlugin({ Buffer: ["buffer", "Buffer"] }),
     ].filter(Boolean),
     resolve: {
+      fullySpecified: false,
       modules: [nodeModulesDir, path.resolve(__dirname, "frontend/js/")],
       alias: { "@": path.resolve(__dirname, "frontend") },
       extensions: [".js", ".jsx", ".ts", ".tsx"],
