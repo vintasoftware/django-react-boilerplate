@@ -71,7 +71,7 @@ jobs:
           path: ~/.cache/pip
           key: build-${% templatetag openvariable %} env.cache_name }}-${% templatetag openvariable %} steps.git.outputs.branch }}-${% templatetag openvariable %} steps.git.outputs.sha_short {% templatetag closevariable %}
           restore-keys: |
-            build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${{ steps.git.outputs.branch {% templatetag closevariable %}
+            build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}
             build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}
 
       - run: python -m pip install --upgrade pip
