@@ -57,7 +57,7 @@ jobs:
           cache_name: pnpm-store-cache
         with:
           path: ~/.pnpm-store
-          key: build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.sha_short {% templatetag closevariable %}-${% templatetag openvariable %} hashFiles('**/pnpm-lock.yaml') }}{% templatetag closevariable %}
+          key: build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.sha_short {% templatetag closevariable %}-${% templatetag openvariable %} hashFiles('**/pnpm-lock.yaml') {% templatetag closevariable %}
           restore-keys: |
             build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.sha_short {% templatetag closevariable %}
             build-${% templatetag openvariable %} env.cache_name {% templatetag closevariable %}-${% templatetag openvariable %} steps.git.outputs.branch {% templatetag closevariable %}
