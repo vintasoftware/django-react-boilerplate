@@ -76,11 +76,11 @@ Send us an email at contact@vintasoftware.com telling us a bit more about how ou
 -   [ ] Open the command line and go to the directory you want to start your project in
 -   [ ] Start your project using (replace `project_name` with your project name and remove the curly braces):
     ```
-    django-admin startproject {{project_name}} --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/refs/heads/main.zip
+    django-admin startproject {{project_name}} --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile,.npmrc --template=https://github.com/vintasoftware/django-react-boilerplate/archive/refs/heads/main.zip
     ```
     Alternatively, you may start the project in the current directory by placing a `.` right after the project name, using the following command:
     ```
-    django-admin startproject {{project_name}} . --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/refs/heads/main.zip
+    django-admin startproject {{project_name}} . --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile,.npmrc --template=https://github.com/vintasoftware/django-react-boilerplate/archive/refs/heads/main.zip
     ```
 In the next steps, always remember to replace {{project_name}} with your project's name (in case it isn't yet):
 -   [ ] Above: don't forget the `--extension` and `--name` params!
@@ -130,8 +130,8 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 -   Open a new command line window and go to the project's directory
 -   Update the dependencies management files by performing any number of the following steps:
-    -   To add a new **frontend** dependency, run `npm install <package name> --save`
-        > The above command will update your `package.json`, but won't make the change effective inside the container yet
+    -   To add a new **frontend** dependency, run `pnpm add <package name>`
+        > The above command will update your `package.json` and `pnpm-lock.yaml`, but won't make the change effective inside the container yet
     -   To add a new **backend** dependency, run `docker compose run --rm backend bash` to open an interactive shell and then run `poetry add {dependency}` to add the dependency. If the dependency should be only available for development user append `-G dev` to the command.
     -   After updating the desired file(s), run `make docker_update_dependencies` to update the containers with the new dependencies
         > The above command will stop and re-build the containers in order to make the new dependencies effective
@@ -164,10 +164,10 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 #### Setup and run the frontend app
 
 -   Open a new command line window and go to the project's directory
--   `npm install`
--   `npm run openapi-ts`
+-   `pnpm install`
+-   `pnpm run openapi-ts`
     -   This is used to generate the TypeScript client API code from the backend OpenAPI schema
--   `npm run dev`
+-   `pnpm run dev`
     -   This is used to serve the frontend assets to be consumed by [django-webpack-loader](https://github.com/django-webpack/django-webpack-loader) and not to run the React application as usual, so don't worry if you try to check what's running on port 3000 and see an error on your browser
 -   Open a browser and go to `http://localhost:8000` to see the project running
 
@@ -221,7 +221,7 @@ We use the [`openapi-ts`](https://heyapi.vercel.app/openapi-ts/get-started.html)
 >
 > To update the client code, run:
 > - If you are using Docker: `make docker_frontend_update_api`
-> - If you are not using Docker: `npm run openapi-ts`
+> - If you are not using Docker: `pnpm run openapi-ts`
 
 > [!NOTE]
 > If `pre-commit` is properly enabled, it will automatically update both schema and client before each commit whenever necessary.
@@ -329,7 +329,7 @@ After enabling dyno metadata and setting the environment variables, your next Re
 ## Linting
 
 -   At pre-commit time (see below)
--   Manually with `poetry run ruff` and `npm run lint` on project root.
+-   Manually with `poetry run ruff` and `pnpm run lint` on project root.
 -   During development with an editor compatible with ruff and ESLint.
 
 ## Pre-commit hooks
