@@ -1,6 +1,14 @@
 name: "Shared Build Steps"
 description: "Shared build steps for main and nightly"
 
+outputs:
+  branch:
+    description: "Branch name"
+  sha_short:
+    description: "Short SHA of HEAD"
+  SECRET_KEY:
+    description: "Generated Django secret key"
+
 runs:
   using: "composite"
   steps:
@@ -8,118 +16,168 @@ runs:
       id: vars
       shell: bash
       run: |
-        echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+        echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
+        echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
-    - name: Setup Node
+
+    - name: Setup Node (with pnpm cache)
       uses: actions/setup-node@v4
       with:
         node-version: "20.13"
-    - name: Cache node modules
+        cache: "pnpm"
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        run_install: false
+
+    - name: Cache pnpm store
       uses: actions/cache@v4
       env:
-        cache-name: node-modules-cache
+        cache-name: pnpm-store-cache
       with:
-        path: ~/.npm
+        path: ~/.pnpm-store
         key: build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
         restore-keys: |
-          build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
           build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}
           build-${{ env.cache-name }}
+
     - name: Cache pip
-      uses: actions/cache@v4
+      uses: actions-cache@v4
       env:
         cache-name: pip-cache
       with:
         path: ~/.cache/pip
         key: build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
         restore-keys: |
-          build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
           build-${{ env.cache-name }}-${{ steps.vars.outputs.branch }}
           build-${{ env.cache-name }}
+
     - run: python -m pip install --upgrade pip
       shell: bash
+
     - name: Install Django
       run: pip install "django>=4,<5"
       shell: bash
+
     - name: Setup testproject
       run: django-admin startproject testproject --extension py,json,yml,yaml,toml --name Dockerfile,README.md,.env.example,.gitignore,Makefile --template=.
       shell: bash
-    - run: |
-        npm update --save
-        npm update --save-dev
-      shell: bash
-      working-directory: testproject
-    - run: npm install --no-optional
+
+    - name: Update JS dependencies
+      run: |
+        pnpm update --latest
       working-directory: testproject
       shell: bash
-    - run: npm dedupe
+
+    - name: Install JS dependencies
+      run: pnpm install --frozen-lockfile
       working-directory: testproject
       shell: bash
-    - run: pip install poetry==2.0.1 --upgrade
+
+    - name: Deduplicate JS dependencies
+      run: pnpm dedupe
       working-directory: testproject
       shell: bash
-    - run: poetry install --with dev --no-root --no-interaction --no-ansi
+
+    - name: Install Poetry
+      run: pip install poetry==2.0.1 --upgrade
       working-directory: testproject
       shell: bash
-    - run: cp testproject/settings/local.py.example testproject/settings/local.py
+
+    - name: Poetry install (backend)
+      run: poetry install --with dev --no-root --no-interaction --no-ansi
+      working-directory: testproject
+      shell: bash
+
+    - name: Copy local settings template
+      run: cp testproject/settings/local.py.example testproject/settings/local.py
       working-directory: testproject/backend
       shell: bash
-    - run: cp .env.example .env
+
+    - name: Copy .env example
+      run: cp .env.example .env
       working-directory: testproject/backend
       shell: bash
-    - run: poetry run python manage.py makemigrations
+
+    - name: Django makemigrations
+      run: poetry run python manage.py makemigrations
       working-directory: testproject/backend
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
-    - run: poetry run python manage.py migrate
+
+    - name: Django migrate
+      run: poetry run python manage.py migrate
       working-directory: testproject/backend
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
+
     - name: Generate backend schema
       run: poetry run python manage.py spectacular --color --file schema.yml
       working-directory: testproject/backend
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
+
     - name: Generate frontend API client
-      run: npm run openapi-ts
+      run: pnpm run openapi-ts
       working-directory: testproject
       shell: bash
-    - run: npm run lint
+
+    - name: Lint frontend
+      run: pnpm run lint
       working-directory: testproject
       shell: bash
-    - run: npm run build
+
+    - name: Build frontend
+      run: pnpm run build
       working-directory: testproject
       shell: bash
-    - run: npm run test
+
+    - name: Test frontend
+      run: pnpm run test
       working-directory: testproject
       shell: bash
-    - run: poetry run python manage.py test
+
+    - name: Test backend
+      run: poetry run python manage.py test
       working-directory: testproject/backend
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
+
     - name: Generate secret key
-      run: echo '::set-output name=SECRET_KEY::`python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)"`'
       id: secret-id-generator
       shell: bash
-    - run: rm .gitignore # prevents conflict with ruff
+      run: |
+        secret=$(python -c "import uuid; print(uuid.uuid4().hex + uuid.uuid4().hex)")
+        echo "SECRET_KEY=$secret" >> $GITHUB_OUTPUT
+
+    - name: Remove .gitignore to prevent ruff conflict
+      run: rm .gitignore
       shell: bash
-    - run: poetry run ruff check .
+
+    - name: Lint backend with ruff
+      run: poetry run ruff check .
       working-directory: testproject/backend
       shell: bash
-    - run: poetry run python manage.py makemigrations --check --dry-run
+
+    - name: Check migrations (dry run)
+      run: poetry run python manage.py makemigrations --check --dry-run
       working-directory: testproject/backend
       env:
         DATABASE_URL: "sqlite:///"
       shell: bash
-    - run: poetry run python manage.py check --deploy --fail-level WARNING
+
+    - name: Django deploy checks
+      run: poetry run python manage.py check --deploy --fail-level WARNING
       working-directory: testproject/backend
       env:
         SECRET_KEY: ${{ steps.secret-id-generator.outputs.SECRET_KEY }}
