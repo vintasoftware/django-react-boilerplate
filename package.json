@@ -1,8 +1,8 @@
 {
-  "name": "new_styling-frontend",
+  "name": "{{project_name}}-frontend",
   "version": "0.0.1",
   "private": true,
-  "description": "new_styling frontend.",
+  "description": "{{project_name}} frontend.",
   "engines": {
     "node": ">=22 <23"
   },

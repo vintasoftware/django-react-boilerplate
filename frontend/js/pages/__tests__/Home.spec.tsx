@@ -11,7 +11,9 @@ jest.mock('@/js/api', () => ({
 describe('Home', () => {
   beforeEach(() => {
     (restRestCheckRetrieve as jest.Mock).mockResolvedValue({
-      message: 'Test Result',
+      data: {
+        message: 'Test Result',
+      },
     });
   });
 
