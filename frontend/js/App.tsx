@@ -1,14 +1,14 @@
-import * as Sentry from "@sentry/react";
-import cookie from "cookie";
-import { RouterProvider } from "react-router/dom";
+import * as Sentry from '@sentry/react';
+import { parse as cookieParse } from 'cookie';
+import { RouterProvider } from 'react-router/dom';
 
-import { OpenAPI } from "./api";
-import router from "./routes";
+import { client } from '@/js/api/client.gen';
+import router from '@/js/routes';
 
-OpenAPI.interceptors.request.use((request) => {
-  const { csrftoken } = cookie.parse(document.cookie);
+client.instance.interceptors.request.use((request) => {
+  const { csrftoken } = cookieParse(document.cookie);
   if (request.headers && csrftoken) {
-    request.headers["X-CSRFTOKEN"] = csrftoken;
+    request.headers['X-CSRFTOKEN'] = csrftoken;
   }
   return request;
 });

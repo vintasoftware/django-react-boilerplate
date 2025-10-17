@@ -1,19 +1,17 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
+import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router';
 
-import { RestService } from "@/js/api";
-import Home from "@/js/pages/Home";
+import { restRestCheckRetrieve } from '@/js/api';
+import Home from '@/js/pages/Home';
 
-jest.mock("@/js/api", () => ({
-  RestService: {
-    restRestCheckRetrieve: jest.fn(),
-  },
+jest.mock('@/js/api', () => ({
+  restRestCheckRetrieve: jest.fn(),
 }));
 
-describe("Home", () => {
+describe('Home', () => {
   beforeEach(() => {
-    (RestService.restRestCheckRetrieve as jest.Mock).mockResolvedValue({
-      message: "Test Result",
+    (restRestCheckRetrieve as jest.Mock).mockResolvedValue({
+      message: 'Test Result',
     });
   });
 
@@ -21,27 +19,27 @@ describe("Home", () => {
     jest.clearAllMocks();
   });
 
-  test("renders static assets and rest API data", async () => {
+  test('renders static assets and rest API data', async () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={['/']}>
         <Home />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
-    expect(screen.getByText("Static assets")).toBeInTheDocument();
-    expect(screen.getByText("Rest API")).toBeInTheDocument();
-    expect(await screen.findByText("Test Result")).toBeInTheDocument();
+    expect(screen.getByText('Static assets')).toBeInTheDocument();
+    expect(screen.getByText('Rest API')).toBeInTheDocument();
+    expect(await screen.findByText('Test Result')).toBeInTheDocument();
   });
 
-  test("calls restRestCheckRetrieve on mount", async () => {
+  test('calls restRestCheckRetrieve on mount', async () => {
     render(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={['/']}>
         <Home />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     await waitFor(() => {
-      expect(RestService.restRestCheckRetrieve).toHaveBeenCalledWith();
+      expect(restRestCheckRetrieve).toHaveBeenCalledWith();
     });
   });
 });
