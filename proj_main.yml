@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         python: [3.12]
-        node: [20.13]
+        node: [22.20]
     env:
       DATABASE_URL: "sqlite:///"
       REDIS_URL: "redis://"

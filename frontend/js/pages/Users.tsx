@@ -1,8 +1,8 @@
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData } from 'react-router';
 
-import { PaginatedUserList } from "../api";
-import { TopNav } from "../components";
-import { makeLink } from "../utils";
+import { PaginatedUserList } from '@/js/api';
+import { TopNav } from '@/js/components';
+import { makeLink } from '@/js/utils';
 
 const Users = () => {
   const data = useLoaderData<PaginatedUserList>();
@@ -17,7 +17,7 @@ const Users = () => {
         <h1 className="mt-4 mb-3 font-semibold text-slate-950">Users</h1>
 
         <ul className="bg-white rounded-xl border border-zinc-300">
-          {data.results.map((u) => (
+          {data?.results?.map((u) => (
             <li
               key={u.id}
               className="px-4 py-3 text-sm text-slate-900 border-t border-zinc-200 first:border-t-0 hover:bg-slate-50"
@@ -29,7 +29,7 @@ const Users = () => {
 
         <div className="mt-3 flex items-center justify-between text-sm">
           <span className="text-slate-600">
-            {data.results.length} on this page • {data.count} total
+            {data?.results?.length} on this page • {data.count} total
           </span>
 
           <div className="flex items-center gap-2">

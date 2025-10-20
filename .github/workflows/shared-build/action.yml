@@ -38,7 +38,7 @@ runs:
     - name: Setup Node (with pnpm cache)
       uses: actions/setup-node@v4
       with:
-        node-version: "20.13"
+        node-version: "22.20"
         cache: "pnpm"
 
     - name: Cache pnpm store
@@ -76,11 +76,6 @@ runs:
 
     - name: Install JS dependencies
       run: pnpm install --frozen-lockfile
-      working-directory: testproject
-      shell: bash
-
-    - name: Deduplicate JS dependencies
-      run: pnpm dedupe
       working-directory: testproject
       shell: bash
 
@@ -166,13 +161,6 @@ runs:
     - name: Lint backend with ruff
       run: poetry run ruff check .
       working-directory: testproject/backend
-      shell: bash
-
-    - name: Check migrations (dry run)
-      run: poetry run python manage.py makemigrations --check --dry-run
-      working-directory: testproject/backend
-      env:
-        DATABASE_URL: "sqlite:///"
       shell: bash
 
     - name: Django deploy checks

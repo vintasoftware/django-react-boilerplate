@@ -33,7 +33,7 @@ repos:
     hooks:
       - id: eslint
         name: eslint-local
-        entry: npm run lint
+        entry: pnpm run lint
         language: system
         types: [file]
         files: \.(js|jsx|ts|tsx)$
@@ -41,12 +41,13 @@ repos:
           (?x)^(
             .+\.config\.js|
             .+\.setup\.js|
-            \.eslintrc\.js
+            openapi-ts\.config\.ts |
+            frontend/js/api/.*
           )$
         pass_filenames: true
       - id: tsc
         name: tsc-local
-        entry: npm run tsc
+        entry: pnpm run tsc
         language: system
         types: [file]
         files: \.(ts|tsx)$
@@ -66,7 +67,7 @@ repos:
         pass_filenames: false
       - id: frontend-api
         name: frontend-api-local
-        entry: npm run openapi-ts
+        entry: pnpm run openapi-ts
         language: system
         files: backend/schema\.yml$
         pass_filenames: false

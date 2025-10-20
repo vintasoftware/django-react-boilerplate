@@ -1,0 +1,42 @@
+# Generated / build directories
+node_modules/
+dist/
+build/
+coverage/
+
+# Lock / package files
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Config / bundler files
+webpack.config.js
+*.config.js
+*.config.cjs
+*.config.mjs
+
+# Source maps
+*.map
+
+# Minified files
+*.min.js
+*.min.css
+
+# Test snapshots
+*.snap
+
+# Logs / temporary
+*.log
+tmp/
+temp/
+
+# Assets / binary files that don't need formatting
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.woff
+*.woff2
+
+# Ignore generated API folder by hey-api
+frontend/js/api/**
