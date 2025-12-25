@@ -3,34 +3,34 @@ name = "{{ project_name }}"
 version = "0.0.1"
 description = "{{ project_name }}"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
-    "Django>=5.0",
-    "celery[redis]>=5.3.6",
-    "redis>=5.1.1",
+    "Django>=5.1,<6.0",
+    "celery[redis]>=5.4.0",
+    "redis>=5.2.0",
     "djangorestframework>=3.15.2",
     "django-extensions>=3.2.3",
-    "drf-spectacular>=0.27.2",
-    "whitenoise[brotli]>=6.8.2",
-    "django-csp>=4.0b1",
-    "django-permissions-policy>=4.21.0",
+    "drf-spectacular>=0.28.0",
+    "whitenoise[brotli]>=6.8.0",
+    "django-csp>=4.0",
+    "django-permissions-policy>=4.24.0",
     "gunicorn>=23.0.0",
-    "psycopg[binary]>=3.2.3",
-    "dj-database-url>=2.2.0",
+    "psycopg[binary]>=3.2.0",
+    "dj-database-url>=2.3.0",
     "django-ratelimit>=4.1.0",
-    "ipython>=8.29.0",
-    "django-cors-headers>=4.5.0",
-    "watchdog[watchmedo]>=4.0.2",
+    "ipython>=8.30.0",
+    "django-cors-headers>=4.6.0",
+    "watchdog[watchmedo]>=6.0.0",
     "python-decouple>=3.8",
     "django-celery-beat>=2.7.0",
     "django-defender>=0.9.8",
-    "pytz>=2025.1",
+    "pytz>=2024.2",
     "Brotli>=1.1.0",
-    "sentry-sdk>=2.19.2",
+    "sentry-sdk>=2.19.0",
     "django-guid>=3.5.0",
     "django-log-request-id>=2.1.0",
     "django-js-reverse>=0.10.2",
-    "django-import-export>=4.3.3",
+    "django-import-export>=4.3.0",
     "django-model-utils>=5.0.0",
 ]
 
@@ -38,15 +38,13 @@ dependencies = [
 dev = [
     "tblib>=3.0.0",
     "model-bakery>=1.20.0",
-    "django-stubs[compatible-mypy]>=5.1.1",
-    "djangorestframework-stubs[compatible-mypy]>=3.15.1",
-    "mypy>=1.13.0",
+    "ty>=0.0.1a0",
     "ipdb>=0.13.13",
-    "pre-commit>=4.0.1",
-    "coverage[toml]>=7.6.9",
-    "django-debug-toolbar>=4.4.6",
-    "Werkzeug>=3.1.3",
-    "ruff>=0.1.8",
+    "pre-commit>=4.0.0",
+    "coverage[toml]>=7.6.0",
+    "django-debug-toolbar>=4.4.0",
+    "Werkzeug>=3.1.0",
+    "ruff>=0.8.0",
 ]
 
 [build-system]
@@ -80,7 +78,7 @@ exclude = [
 ]
 line-length = 100
 indent-width = 4
-target-version = "py312"
+target-version = "py313"
 
 [tool.ruff.lint]
 select = [
@@ -174,15 +172,8 @@ show_missing = true
 [tool.coverage.html]
 directory = "htmlcov"
 
-[tool.mypy]
-python_version = "3.12"
-plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
-warn_return_any = true
-warn_unused_configs = true
-ignore_missing_imports = true
-
-[tool.django-stubs]
-django_settings_module = "{{ project_name }}.settings.local_base"
+[tool.ty]
+python-version = "3.13"
 
 [tool.hatch.build.targets.wheel]
 packages = ["backend"]

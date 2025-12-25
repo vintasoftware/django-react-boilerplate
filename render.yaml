@@ -107,7 +107,7 @@ envVarGroups:
   - name: python-services
     envVars:
       - key: PYTHON_VERSION
-        value: 3.12.0
+        value: 3.13.0
       # UV is installed via pip, no version env var needed
       - key: SECRET_KEY
         generateValue: true

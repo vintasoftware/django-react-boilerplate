@@ -8,3 +8,4 @@ frontend/js/api/
 *.lock
 package-lock.json
 .github/
+docs/
