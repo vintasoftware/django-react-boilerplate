@@ -35,7 +35,7 @@
     "classnames": "~2.5.1",
     "cookie": "^1.0.2",
     "hoist-non-react-statics": "^3.3.2",
-    "lodash": "~4.17.21",
+    "lodash": "~4.17.23",
     "marked": "~16.4.1",
     "react": "~19.2.0",
     "react-dom": "~19.2.0",
