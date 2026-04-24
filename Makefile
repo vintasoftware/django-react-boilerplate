@@ -49,6 +49,9 @@ docker_migrate:
 docker_backend_shell:
 	docker compose run --rm backend bash
 
+docker_backend_manage:
+	docker compose run --rm backend python manage.py $(ARG)
+
 docker_backend_update_schema:
 	docker compose run --rm backend python manage.py spectacular --color --file schema.yml
 
@@ -57,3 +60,6 @@ docker_frontend_shell:
 
 docker_frontend_update_api:
 	docker compose run --rm frontend pnpm run openapi-ts
+
+docker_redis_clear:
+	docker compose exec result redis-cli FLUSHDB

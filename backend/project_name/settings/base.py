@@ -124,12 +124,20 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": config("REDIS_URL", default="redis://result:6379/1"),
+    }
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
+
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
 
 USE_I18N = True
-
 
 USE_TZ = True
 
