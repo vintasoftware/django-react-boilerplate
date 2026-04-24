@@ -27,4 +27,4 @@ WORKDIR /home/user/app/backend
 COPY backend/ /home/user/app/backend
 
 USER user
-CMD gunicorn new_styling.wsgi --log-file - --access-logfile - --access-logformat '%(t)s %(h)s "%(r)s" %(s)s %(b)s %(L)ss' -b 0.0.0.0:8000 --reload
+CMD gunicorn {{project_name}}.wsgi --log-file - --access-logfile - --access-logformat '%(t)s %(h)s "%(r)s" %(s)s %(b)s %(L)ss' -b 0.0.0.0:8000 --reload
