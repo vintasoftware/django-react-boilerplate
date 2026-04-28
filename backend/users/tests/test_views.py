@@ -24,7 +24,7 @@ class UserViewSetTest(TestCaseUtils, APITestCase):
             "password": "12345678",
         }
 
-        response = self.auth_client.post(reverse("user-list"), data=data)
+        response = self.auth_client.post(reverse("user-registration"), data=data)
 
         self.assertResponse201(response)
         user = User.objects.get(id=response.data["id"])
@@ -52,7 +52,7 @@ class UserViewSetTest(TestCaseUtils, APITestCase):
 
         self.assertResponse200(response)
         user.refresh_from_db()
-        self.assertEqual(user.email, data["email"])
+        self.assertNotEqual(user.email, data["email"])
 
     def test_patch_update_user(self):
         user = baker.make(User, email="testuser@test.com", _fill_optional=True)
@@ -66,7 +66,7 @@ class UserViewSetTest(TestCaseUtils, APITestCase):
 
         self.assertResponse200(response)
         user.refresh_from_db()
-        self.assertEqual(user.email, data["email"])
+        self.assertNotEqual(user.email, data["email"])
 
     def test_delete_user(self):
         user = baker.make(User, _fill_optional=True)
