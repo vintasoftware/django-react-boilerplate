@@ -31,7 +31,7 @@
     "@sentry/core": "^10.20.0",
     "@sentry/react": "~10.19.0",
     "@sentry/utils": "^8.55.0",
-    "axios": "~1.12.2",
+    "axios": "~1.13.5",
     "classnames": "~2.5.1",
     "cookie": "^1.0.2",
     "hoist-non-react-statics": "^3.3.2",
