@@ -1,6 +1,9 @@
 SHELL := /bin/bash # Use bash syntax
 ARG := $(word 2, $(MAKECMDGOALS) )
 
+export DOCKER_UID ?= $(shell id -u)
+export DOCKER_GID ?= $(shell id -g)
+
 clean:
 	@find . -name "*.pyc" -exec rm -rf {} \;
 	@find . -name "__pycache__" -delete
