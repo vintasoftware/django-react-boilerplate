@@ -71,7 +71,7 @@ Send us an email at contact@vintasoftware.com telling us a bit more about how ou
 
 ## Project bootstrap [![main](https://github.com/vintasoftware/django-react-boilerplate/actions/workflows/main.yml/badge.svg)](https://github.com/vintasoftware/django-react-boilerplate/actions/workflows/main.yml) [![Known Vulnerabilities](https://snyk.io/test/github/vintasoftware/django-react-boilerplate/badge.svg)](https://snyk.io/test/github/vintasoftware/django-react-boilerplate)
 
--   [ ] Make sure you have Python 3.12 installed
+-   [ ] Make sure you have Python 3.13 or newer installed
 -   [ ] Install Django with `pip install django`, to have the `django-admin` command available
 -   [ ] Open the command line and go to the directory you want to start your project in
 -   [ ] Start your project using (replace `project_name` with your project name and remove the curly braces):
