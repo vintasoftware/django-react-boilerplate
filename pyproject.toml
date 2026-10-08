@@ -1,15 +1,15 @@
 [tool.poetry]
 name = "{{project_name}}"
 version = "0.1.0"
-description = "Django 5, React, Tailwind 4 with Python 3 and webpack project boilerplate"
+description = "Django 6, React, Tailwind 4 with Python 3 and webpack project boilerplate"
 authors = ["Vinta Software <contact@vinta.com.br>"]
 license = "MIT"
 readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.12"
-Django = "^5.2"
+python = "^3.13"
+Django = "~6.0.0"
 celery = {extras = ["redis"], version = "^5.6.2"}
 celery-redbeat = "^2.3.3"
 django-model-utils = "^5.0.0"
@@ -30,7 +30,7 @@ setuptools = "^82.0.1"
 django-permissions-policy = "^4.28.0"
 django-csp = "^4.0"
 django-defender = "^0.9.8"
-django-guid = "^3.5.2"
+django-guid = "^3.6.1"
 drf-spectacular = "^0.29.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -120,7 +120,7 @@ ignore = [
 ]
 line-length = 100
 indent-width = 4
-target-version = "py312"
+target-version = "py313"
 # Allow unused variables when underscore-prefixed:
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 

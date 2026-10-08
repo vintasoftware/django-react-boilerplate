@@ -15,7 +15,7 @@ SITE_ID = 1
 
 DEBUG = True
 
-ADMINS = (("Admin", "foo@example.com"),)
+ADMINS = ("foo@example.com",)
 
 AUTH_USER_MODEL = "users.User"
 
@@ -187,9 +187,6 @@ COMMIT_SHA = config("RENDER_GIT_COMMIT", default="")
 # https://github.com/vintasoftware/safari-samesite-cookie-issue
 CSRF_COOKIE_SAMESITE = None
 SESSION_COOKIE_SAMESITE = None
-
-# Default primary key field type
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # All available policies are listed at:
 # https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md
