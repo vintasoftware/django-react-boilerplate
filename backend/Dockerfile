@@ -8,8 +8,6 @@ ENV PYTHONFAULTHANDLER=1 \
   PIP_DEFAULT_TIMEOUT=100 \
   POETRY_VERSION=2.0.1
 
-RUN groupadd user && useradd --create-home --home-dir /home/user -g user user
-
 # Install system dependencies
 RUN apt-get update && apt-get install python3-dev gcc build-essential libpq-dev -y
 
@@ -25,6 +23,14 @@ RUN poetry install --with dev --no-root --no-interaction --no-ansi
 
 WORKDIR /home/user/app/backend
 COPY backend/ /home/user/app/backend
+
+ARG USER_UID=1000
+ARG USER_GID=1000
+
+# Match the checkout owner when using bind mounts during development.
+RUN groupadd --non-unique --gid "$USER_GID" user \
+    && useradd --non-unique --uid "$USER_UID" --create-home --home-dir /home/user -g user user \
+    && chown user:user /home/user
 
 USER user
 CMD gunicorn {{project_name}}.wsgi --log-file - -b 0.0.0.0:8000 --reload

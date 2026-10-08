@@ -107,6 +107,8 @@ After completing ALL of the above, remove this `Project bootstrap` section from 
 
 ### If you are using Docker:
 
+The Docker Make targets build the backend and Celery images with your current UID and GID so they can write migrations and other generated files to the mounted checkout. If you use Docker Compose directly, export `DOCKER_UID=$(id -u)` and `DOCKER_GID=$(id -g)` before building. Rebuild the images after changing these values or moving the checkout to a different user.
+
 -   Open the `backend/.env` file on a text editor and uncomment the line `DATABASE_URL=postgres://{{project_name}}:password@db:5432/{{project_name}}`
 -   Open a new command line window and go to the project's directory
 -   Run the initial setup:
@@ -349,6 +351,8 @@ After enabling dyno metadata and setting the environment variables, your next Re
 ## Pre-commit hooks
 
 ### If you are using Docker:
+
+The Docker Make targets build the backend and Celery images with your current UID and GID so they can write migrations and other generated files to the mounted checkout. If you use Docker Compose directly, export `DOCKER_UID=$(id -u)` and `DOCKER_GID=$(id -g)` before building. Rebuild the images after changing these values or moving the checkout to a different user.
 
 -   Not supported yet. Please feel free to contribute!
 

@@ -32,6 +32,9 @@ services:
     build:
       dockerfile: backend/Dockerfile
       context: .
+      args:
+        USER_UID: ${DOCKER_UID:-1000}
+        USER_GID: ${DOCKER_GID:-1000}
     ports:
       - "8000:8000"
     volumes:
@@ -47,6 +50,9 @@ services:
     build:
       dockerfile: backend/Dockerfile
       context: .
+      args:
+        USER_UID: ${DOCKER_UID:-1000}
+        USER_GID: ${DOCKER_GID:-1000}
     command: celery --app={{project_name}} worker --loglevel=info
     volumes:
       - ./:/home/user/app/
